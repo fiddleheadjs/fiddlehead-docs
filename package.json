@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "fiddlehead": "^1.6.3",
+    "history": "^5.3.0",
     "marked": "^4.1.1",
     "prismjs": "^1.29.0"
   },
