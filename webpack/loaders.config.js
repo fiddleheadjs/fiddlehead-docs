@@ -1,5 +1,6 @@
-const autoprefixer = require('autoprefixer');
-const postcssInitial = require('postcss-initial');
+let path = require('path');
+let autoprefixer = require('autoprefixer');
+let postcssInitial = require('postcss-initial');
 
 function getJsLoaders() {
     return [
@@ -21,7 +22,8 @@ function getJsLoaders() {
                     }],
                 ],
             }
-        }
+        },
+        path.resolve(__dirname, 'custom-loaders/auto-import-jsx/index.js')
     ];
 }
 
@@ -56,7 +58,7 @@ function getLessLoaders() {
 
 function getMarkdownLoaders() {
     return [
-        path.resolve(__dirname, 'markdown/loader.js')
+        path.resolve(__dirname, 'custom-loaders/markdown/index.js')
     ];
 }
 

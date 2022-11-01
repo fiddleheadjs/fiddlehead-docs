@@ -1,5 +1,4 @@
 import './Intro.less';
-import {jsx} from 'core.pkg';
 
 export let Intro = () => {
     return (

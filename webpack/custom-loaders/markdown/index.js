@@ -1,22 +1,22 @@
-const fs = require('fs');
-const path = require('path');
-const getContents = require('./getContents');
-const getMetadata = require('./getMetadata');
+let fs = require('fs');
+let path = require('path');
+let getContents = require('./getContents');
+let getMetadata = require('./getMetadata');
 
 module.exports = function (source) {
-    const contents = getContents(source);
+    let contents = getContents(source);
 
-    const demoIds = [];
-    const demoPaths = {};
-    const demoCodes = {};
+    let demoIds = [];
+    let demoPaths = {};
+    let demoCodes = {};
 
     contents.forEach(content => {
         if (typeof content === 'string') {
             return;
         }
 
-        const demoId = content.demo;
-        const filePath = path.join(path.dirname(this.resourcePath), demoId + '.js');
+        let demoId = content.demo;
+        let filePath = path.join(path.dirname(this.resourcePath), demoId + '.js');
 
         demoIds.push(demoId);
         demoPaths[demoId] = filePath.split(path.sep).join('/');
@@ -28,7 +28,7 @@ module.exports = function (source) {
         this.addDependency(filePath);
     });
 
-    const {title, description, headings} = getMetadata(source);
+    let {title, description, headings} = getMetadata(source);
 
     return [
         // Import demo components
@@ -37,14 +37,14 @@ module.exports = function (source) {
         ).join('\n'),
 
         // Export demos: Array.<{ Component, code }>
-        `export const demos = {${demoIds.map(id =>
+        `export let demos = {${demoIds.map(id =>
             `${id}: { Component: ${id}, code: ${JSON.stringify(demoCodes[id])} },`
         ).join('\n')}};`,
 
         // Export ...
-        `export const title = ${JSON.stringify(title, null, 4)};`,
-        `export const description = ${JSON.stringify(description, null, 4)};`,
-        `export const headings = ${JSON.stringify(headings, null, 4)};`,
-        `export const contents = ${JSON.stringify(contents, null, 4)};`,
+        `export let title = ${JSON.stringify(title, null, 4)};`,
+        `export let description = ${JSON.stringify(description, null, 4)};`,
+        `export let headings = ${JSON.stringify(headings, null, 4)};`,
+        `export let contents = ${JSON.stringify(contents, null, 4)};`,
     ].join('\n\n');
-}
+};

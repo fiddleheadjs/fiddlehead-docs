@@ -1,5 +1,4 @@
 import './Home.less';
-import {jsx} from 'core.pkg';
 import {Intro} from './intro/Intro';
 
 export let Home = () => {

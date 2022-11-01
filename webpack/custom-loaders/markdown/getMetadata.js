@@ -1,11 +1,11 @@
-const marked = require('marked');
-const generateHeadingId = require('./generateHeadingId');
+let marked = require('marked');
+let generateHeadingId = require('./generateHeadingId');
 
 module.exports = function getMetadata(markdown) {
     let title = null;
     let description = null;
-    const headings = [];
-    const headingChain = [0, 0, 0, 0, 0, 0];
+    let headings = [];
+    let headingChain = [0, 0, 0, 0, 0, 0];
 
     marked.use({
         walkTokens(token) {
@@ -15,7 +15,7 @@ module.exports = function getMetadata(markdown) {
                         title = token.text;
                     }
                 } else {
-                    const posInChain = token.depth - 1;
+                    let posInChain = token.depth - 1;
 
                     // Replace the heading locates in the chain at the position corresponding to current heading level
                     headingChain[posInChain] = token.text;

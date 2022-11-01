@@ -4,11 +4,11 @@
   "description": "Fiddlehead documentation website",
   "scripts": {
     "start": "http-server -p 8080",
-    "build": "webpack",
-    "watch": "webpack -w"
+    "build": "webpack --config webpack/webpack.config.js",
+    "watch": "webpack --config webpack/webpack.config.js --watch"
   },
   "dependencies": {
-    "fiddlehead": "^1.6.2",
+    "fiddlehead": "^1.6.3",
     "marked": "^4.1.1",
     "prismjs": "^1.29.0"
   },
