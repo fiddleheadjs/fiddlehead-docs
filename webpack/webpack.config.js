@@ -2,7 +2,7 @@ let path = require('path');
 let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getLsLoaders} = require('./loaders.config');
+let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getLsLoaders, getCssLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
 let configs = [];
@@ -39,6 +39,10 @@ fs.readdirSync(entriesDir).map(filename => {
                     test: /\.less$/,
                     use: getLessLoaders(),
                     exclude: /[\\/]node_modules[\\/]/
+                },
+                {
+                    test: /\.css$/,
+                    use: getCssLoaders(),
                 },
                 {
                     test: /\.md$/,

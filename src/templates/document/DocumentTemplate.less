@@ -1,0 +1,90 @@
+@import '../../css/theme.less';
+
+.DocumentTemplate {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    & > main {
+        padding-right: 2em;
+        width: calc(100% - 12em);
+
+        .contents {
+            max-width: 132ch;
+            margin: auto;
+
+            & > :not(:first-child) {
+                margin-top: 1em;
+            }
+        }
+    }
+
+    & > nav {
+        width: 12em;
+        position: sticky;
+        top: 0;
+        bottom: 0;
+        max-height: calc(100vh);
+        display: flex;
+        flex-direction: column;
+
+        & > .table-of-contents {
+            height: 100%;
+            overflow: auto;
+
+            .title {
+                .font-h4();
+                padding: @space-tiny-2 0;
+            }
+
+            .list {
+                li {
+                    &[data-level="3"] {
+                        padding-left: @space-tiny-4;
+                    }
+
+                    &[data-level="4"] {
+                        padding-left: @space-tiny-4 * 2;
+                    }
+
+                    &[data-level="5"] {
+                        padding-left: @space-tiny-4 * 3;
+                    }
+
+                    &[data-level="6"] {
+                        padding-left: @space-tiny-4 * 4;
+                    }
+
+                    a {
+                        display: block;
+                        padding: @space-tiny-2;
+                        border-left: 2px solid transparent;
+                        color: @gray-twilight;
+
+                        &:hover {
+                            opacity: 0.8;
+                        }
+
+                        &:active {
+                            opacity: 0.6;
+                        }
+                    }
+
+                    &[data-active="true"] {
+                        a {
+                            border-left-color: @gray-light-A2;
+                        }
+                    }
+
+                    &[data-focused="true"] {
+                        a {
+                            border-left-color: @gray-light-A1;
+                            background: @gray-light-A4;
+                            color: @gray-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

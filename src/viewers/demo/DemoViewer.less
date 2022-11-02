@@ -1,0 +1,26 @@
+@import '../../css/theme.less';
+
+.DemoViewer {
+    border: 1px solid @gray-light-A2;
+    overflow: hidden;
+
+    .component-box {
+        padding: @space-small-4;
+    }
+
+    .action-bar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background: @gray-light-A4;
+        padding: @space-tiny-2 @space-small-4;
+
+        & > :not(:last-child) {
+            margin-right: @space-small-4;
+        }
+    }
+
+    .code-box {
+        padding: @space-small-4;
+    }
+}

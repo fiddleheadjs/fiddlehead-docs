@@ -1,5 +1,5 @@
-import './Article.less';
 import {useState, useEffect} from 'fiddlehead';
+import {DocumentTemplate} from '../../templates/document/DocumentTemplate';
 
 export let createArticle = (filename) => {
     let Article = () => {
@@ -13,12 +13,15 @@ export let createArticle = (filename) => {
         if (data === null) {
             return null;
         }
+
+        let {headings, contents, demos} = data;
     
         return (
-            <div class="Article">
-                <h1>{data.title}</h1>
-                <strong>{data.description}</strong>
-            </div>
+            <DocumentTemplate
+                headings={headings}
+                contents={contents}
+                demos={demos}
+            />
         );
     };
 

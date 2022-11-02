@@ -1,0 +1,109 @@
+@import '../../css/theme.less';
+
+.MarkdownViewer {
+    & > :not(:first-child) {
+        margin-top: 1em;
+    }
+
+    h1 {
+        color: @color-primary;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        a {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+            visibility: hidden;
+            text-decoration: none;
+            color: @gray-twilight;
+            right: 100%;
+            padding: 0 0.2em;
+
+            &:hover {
+                visibility: visible;
+                text-decoration: underline;
+            }
+        }
+
+        &:hover {
+            a {
+                visibility: visible;
+            }
+        }
+    }
+
+    h2, h3, h4, h5, h6 {
+        padding-top: 1em;
+    }
+
+    ul, ol {
+        padding: 0 0 0 2em;
+
+        & > li {
+            &:not(:first-child) {
+                margin-top: 0.5em;
+            }
+        }
+    }
+
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+
+    b {
+        font-weight: bold;
+    }
+
+    i {
+        font-style: italic;
+    }
+
+    u {
+        text-decoration: underline;
+    }
+
+    a {
+        color: @color-primary;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    pre {
+        width: 100%;
+        padding: @space-small-4;
+        border: 1px solid @gray-light-A3;
+        overflow: auto;
+    }
+
+    table {
+        border-collapse: collapse;
+
+        tr {
+            th, td {
+                text-align: left;
+                padding: @space-tiny-4;
+                vertical-align: top;
+            }
+
+            th {
+                .font-body-semibold();
+            }
+
+            td {
+                border-top: 1px solid @gray-light-A3;
+            }
+
+            &:hover td {
+                background: @gray-light-A4;
+            }
+        }
+    }
+}

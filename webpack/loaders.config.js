@@ -56,6 +56,18 @@ function getLessLoaders() {
     ];
 }
 
+function getCssLoaders() {
+    return [
+        'style-loader',
+        {
+            loader: 'css-loader',
+            options: {
+                url: false,
+            }
+        },
+    ];
+}
+
 function getMarkdownLoaders() {
     return [
         path.resolve(__dirname, 'custom-loaders/markdown')
@@ -71,6 +83,7 @@ function getLsLoaders() {
 module.exports = {
     getJsLoaders,
     getLessLoaders,
+    getCssLoaders,
     getMarkdownLoaders,
     getLsLoaders,
 };
