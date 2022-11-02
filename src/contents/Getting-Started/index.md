@@ -34,7 +34,7 @@ Fiddlehead transforms your JavaScript codes into DOM nodes and display them on t
 Thanks to JSX syntax, the code above can be written as:
 
 ```jsx
-import {jsx, render} from 'fiddlehead';
+import {render} from 'fiddlehead';
 
 function MyApp() {
     return <div class="my-app">Hello world!</div>;
@@ -49,7 +49,7 @@ Fiddlehead can work without JSX syntax, but we highly recommend you to try it.
 Firstly, we need to install some packages to transform JSX codes in to JS codes:
 
 ```bash
-npm install webpack babel-loader @babel/core @babel/preset-env @babel/plugin-transform-react-jsx
+npm install webpack babel-loader @babel/core @babel/preset-env @babel/plugin-transform-react-jsx babel-plugin-auto-import
 ```
 
 Let's create a babel config file:
@@ -64,7 +64,13 @@ Let's create a babel config file:
             "pragma": "jsx",
             "pragmaFrag": "'['"
         }],
-    ],
+        ["babel-plugin-auto-import", {
+            "declarations": [{
+                "members": ["jsx"],
+                "path": "fiddlehead"
+            }]
+        }]
+    ]
 }
 ```
 
