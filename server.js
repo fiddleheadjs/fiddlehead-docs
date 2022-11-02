@@ -7,7 +7,7 @@ let port = 3022;
 app.use(express.static('public'));
 
 app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public/index.html'));
+    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
 });
 
 app.listen(port, () => {

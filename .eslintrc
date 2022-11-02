@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [],
+    "rules": {
+        "object-curly-spacing": "off",
+        "no-constant-condition": "off",
+        "no-unused-vars": "off",
+        "eol-last": ["warn", "always"],
+        "semi": ["error", "always"]
+    },
+    "ignorePatterns": [],
+    "globals": {
+        "__DEV__": true
+    }
+}

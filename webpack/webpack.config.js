@@ -3,6 +3,7 @@ let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders} = require('./loaders.config');
+let pkg = require('../package.json');
 
 let configs = [];
 let isDev = process.env.NODE_ENV !== 'production';
@@ -12,6 +13,15 @@ fs.readdirSync(path.resolve(rootDir, 'src/pages')).map(pathname => {
     let extension = path.extname(pathname);  
     let basename = path.basename(pathname);
     let filename = basename.substring(0, basename.length - extension.length);
+    
+    let title = pkg.description;
+    let content = fs.readFileSync(
+        path.resolve(rootDir, `src/pages/${pathname}`),
+        {encoding: 'utf-8'}
+    );
+    if (content.startsWith('//')) {
+        title = content.split(/\r\n|\n|\r/, 1)[0].substring(2).trim();
+    }
 
     configs.push({
         mode: isDev ? 'development' : 'production',
@@ -45,9 +55,10 @@ fs.readdirSync(path.resolve(rootDir, 'src/pages')).map(pathname => {
                 __DEV__: isDev
             }),
             new HtmlWebpackPlugin({
-                title: filename,
-                filename: `../${filename}.html`,
+                title: title,
                 template: path.resolve(rootDir, 'src/template.html'),
+                filename: path.resolve(rootDir, `dist/${filename}.html`),
+                publicPath: '/assets/',
             }),
         ],
     });

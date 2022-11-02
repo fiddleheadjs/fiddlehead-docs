@@ -1,3 +1,5 @@
+// Fiddlehead documentation
+
 import {render} from 'fiddlehead';
 import {About} from '../contents/about/About';
 import {Home} from '../contents/home/Home';
