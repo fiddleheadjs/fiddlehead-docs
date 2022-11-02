@@ -20,10 +20,15 @@ function getJsLoaders() {
                         'pragma': 'jsx',
                         'pragmaFrag': "'['",
                     }],
+                    ['babel-plugin-auto-import', {
+                        declarations: [{
+                            members: ['jsx'],
+                            path: 'fiddlehead'
+                        }]
+                    }]
                 ],
             }
-        },
-        path.resolve(__dirname, 'custom-loaders/auto-import-jsx')
+        }
     ];
 }
 
