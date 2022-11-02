@@ -46,15 +46,20 @@ render(<App/>, document.getElementById('root'));
 It is much better!
 
 Fiddlehead can work without JSX syntax, but we highly recommend you to try it.
-Firstly, we need to install some packages to transform JSX codes in to JS codes:
+Firstly, we need to install some babel packages to transform JSX codes in to JS codes:
 
 ```bash
-npm install webpack babel-loader @babel/core @babel/preset-env @babel/plugin-transform-react-jsx babel-plugin-auto-import
+npm install --save-dev \
+    babel-loader \
+    @babel/core \
+    @babel/preset-env \
+    @babel/plugin-transform-react-jsx \
+    babel-plugin-auto-import
 ```
 
 Let's create a babel config file:
 
-`./babel.config.json`
+`.babelrc`
 
 ```json
 {
@@ -76,7 +81,7 @@ Let's create a babel config file:
 
 Then, setup JSX loaders in your webpack config:
 
-`./webpack.config.js`
+`webpack.config.js`
 
 ```js
 module.exports = {
@@ -85,12 +90,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: require('./babel.config.json')
-                    }
-                ]
+                use: ['babel-loader']
             },
             //...
         ],
