@@ -94,4 +94,3 @@ module.exports = {
 
 _Note: We made an assumption that you are using webpack to build your codes.
 You also can use other bundling tools to use JSX syntax, if they support Babel loaders._
-

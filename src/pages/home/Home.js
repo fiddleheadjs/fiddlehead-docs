@@ -1,4 +1,5 @@
 import './Home.less';
+import {Demo} from './demo/Demo';
 import {Intro} from './intro/Intro';
 
 export let Home = () => {
@@ -6,6 +7,7 @@ export let Home = () => {
         <div className="Home">
             <h1>Fiddlehead</h1>
             <Intro/>
+            <Demo/>
         </div>
     );
 };
