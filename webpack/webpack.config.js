@@ -63,6 +63,11 @@ fs.readdirSync(entriesDir).map(filename => {
                 publicPath: '/assets/',
             }),
         ],
+        resolve: {
+            alias: {
+                '@contents': path.resolve(rootDir, 'src/contents')
+            }
+        }
     });
 });
 

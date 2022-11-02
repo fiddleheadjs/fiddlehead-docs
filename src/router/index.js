@@ -1,5 +1,5 @@
 import history from 'history/browser';
-import {useCallback, useLayoutEffect, useState} from 'fiddlehead';
+import {useState, useEffect} from 'fiddlehead';
 
 export let useHistory = () => {
     return history;
@@ -8,7 +8,7 @@ export let useHistory = () => {
 export let useLocation = () => {
     let [, setKey] = useState();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         return history.listen(() => {
             setKey(history.location.key);
         });
@@ -21,27 +21,31 @@ export let navigate = (path, state) => {
     history.push(path, state);
 };
 
-export let useRouter = (routes) => {
-    let [Component, setComponent] = useState(null);
+export let pathsEqual = (p1, p2) => (
+    p1.toLowerCase() === p2.toLowerCase()
+);
 
-    let onChange = useCallback(() => {
-        for (let i = 0; i < routes.length; i++) {
-            if (routes[i].path === history.location.pathname) {
-                setComponent(() => routes[i].Component);
-                return;
-            }
+let selectRoute = (routes) => {
+    for (let i = 0; i < routes.length; i++) {
+        if (pathsEqual(routes[i].path, history.location.pathname)) {
+            return routes[i];
         }
-        setComponent(() => routes.length > 0 ? routes[routes.length - 1]?.Component : null);
-    }, []);
+    }
+    return routes.length > 0 
+        ? routes[routes.length - 1]
+        : null;
+};
 
-    useLayoutEffect(() => {
-        onChange();
+export let useRouter = (routes) => {
+    let [route, setRoute] = useState(selectRoute(routes));
 
+    useEffect(() => {
         return history.listen(() => {
-            onChange();
+            setRoute(selectRoute(routes));
         });
-    }, [onChange]);
+    }, [routes]);
 
+    let Component = route.Component;
     if (Component !== null) {
         return <Component/>;
     }

@@ -1,30 +1,26 @@
-import contents from './contents.ls';
+import listOfContents from './listOfContents.ls';
 import {About} from './pages/about/About';
 import {Home} from './pages/home/Home';
 import {NotFound} from './pages/not-found/NotFound';
-import {useState, useLayoutEffect} from 'fiddlehead';
+import {createArticle} from './pages/article/Article';
 
 export let routes = [
-    {path: '/', label: 'Home', Component: Home},
-    {path: '/about', label: 'About', Component: About},
-    ...contents.map(filename => ({
+    {
+        path: '/',
+        label: 'Home',
+        Component: Home
+    },
+    {
+        path: '/about',
+        label: 'About',
+        Component: About
+    },
+    ...listOfContents.map(filename => ({
         path: '/' + filename,
-        label: filename,
-        Component: () => {
-            let [data, setData] = useState(null);
-            useLayoutEffect(() => {
-                import('./contents/' + filename + '/index.md').then(setData);
-            }, []);
-            if (data === null) {
-                return 'Loading...';
-            }
-            return (
-                <div>
-                    <h1>{data.title}</h1>
-                    <strong>{data.description}</strong>
-                </div>
-            );
-        }
+        label: filename.replace(/-/g, ' '),
+        Component: createArticle(filename)
     })),
-    {Component: NotFound},
+    {
+        Component: NotFound
+    }
 ];
