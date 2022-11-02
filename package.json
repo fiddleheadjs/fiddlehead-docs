@@ -16,9 +16,9 @@
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.10",
-    "@babel/plugin-transform-react-jsx": "^7.17.3",
-    "@babel/preset-env": "^7.17.10",
+    "@babel/core": "^7.19.6",
+    "@babel/plugin-transform-react-jsx": "^7.19.0",
+    "@babel/preset-env": "^7.19.4",
     "autoprefixer": "^10.4.12",
     "babel-loader": "^8.2.5",
     "babel-plugin-auto-import": "^1.1.0",
