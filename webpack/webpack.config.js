@@ -26,17 +26,17 @@ fs.readdirSync(path.resolve(rootDir, 'src/pages')).map(pathname => {
                 {
                     test: /\.js$/,
                     use: getJsLoaders(),
-                    exclude: /\/node_modules\//
+                    exclude: /[\\/]node_modules[\\/]/
                 },
                 {
                     test: /\.less$/,
                     use: getLessLoaders(),
-                    exclude: /\/node_modules\//
+                    exclude: /[\\/]node_modules[\\/]/
                 },
                 {
                     test: /\.md$/,
                     use: getMarkdownLoaders(),
-                    exclude: /\/node_modules\//
+                    exclude: /[\\/]node_modules[\\/]/
                 },
             ]
         },
