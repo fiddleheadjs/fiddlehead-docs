@@ -42,7 +42,7 @@ module.exports = function getMetadata(markdown) {
         }
     });
 
-    marked(markdown);
+    marked.marked(markdown);
 
     return {title, description, headings};
 }

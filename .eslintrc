@@ -18,6 +18,7 @@
         "object-curly-spacing": "off",
         "no-constant-condition": "off",
         "no-unused-vars": "off",
+        "no-empty": "off",
         "eol-last": ["warn", "always"],
         "semi": ["error", "always"]
     },

@@ -23,7 +23,7 @@ function getJsLoaders() {
                 ],
             }
         },
-        path.resolve(__dirname, 'custom-loaders/auto-import-jsx/index.js')
+        path.resolve(__dirname, 'custom-loaders/auto-import-jsx')
     ];
 }
 
@@ -58,7 +58,13 @@ function getLessLoaders() {
 
 function getMarkdownLoaders() {
     return [
-        path.resolve(__dirname, 'custom-loaders/markdown/index.js')
+        path.resolve(__dirname, 'custom-loaders/markdown')
+    ];
+}
+
+function getLsLoaders() {
+    return [
+        path.resolve(__dirname, 'custom-loaders/ls')
     ];
 }
 
@@ -66,4 +72,5 @@ module.exports = {
     getJsLoaders,
     getLessLoaders,
     getMarkdownLoaders,
+    getLsLoaders,
 };
