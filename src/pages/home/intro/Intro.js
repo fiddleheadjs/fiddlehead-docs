@@ -2,7 +2,7 @@ import './Intro.less';
 
 export let Intro = () => {
     return (
-        <section className="Intro">
+        <section class="Intro">
             <p>
                 Fiddlehead is a lightweight library which allows you to develop your web frontend easier.
                 If you are familiar with React, then you can see Fiddlehead's APIs are similar.

@@ -171,18 +171,18 @@ export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
         });
     };
 
-    return <div className="DocumentTemplate">
+    return <div class="DocumentTemplate">
         <main>
-            <div className="contents" ref={contentsRef}>
+            <div class="contents" ref={contentsRef}>
                 {
                     getContents()
                 }
             </div>
         </main>
         <nav>
-            <div className="table-of-contents" ref={tocRef}>
-                <div className="title">{__('Table of contents')}</div>
-                <ul className="list">
+            <div class="table-of-contents" ref={tocRef}>
+                <div class="title">{__('Table of contents')}</div>
+                <ul class="list">
                     {
                         headings.map(({text, level, id}) => {
                             return <li key={id} data-id={id} data-level={level}>

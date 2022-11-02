@@ -5,10 +5,10 @@ export let CodeViewer = ({code, language}) => {
     const highlightedCode = highlight(code, language);
 
     return (
-        <div className="CodeViewer">
+        <div class="CodeViewer">
             <pre>
                 <code
-                    className={`language-${language}`} // keep the same format with Marked
+                    class={`language-${language}`} // keep the same format with Marked
                     dangerouslySetInnerHTML={{__html: highlightedCode}}
                 />
             </pre>

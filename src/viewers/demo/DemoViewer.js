@@ -6,11 +6,11 @@ export let DemoViewer = ({Component, code}) => {
     const [showsCode, setShowsCode] = useState(false);
 
     return (
-        <div className="DemoViewer">
-            <div className="component-box">
+        <div class="DemoViewer">
+            <div class="component-box">
                 <Component/>
             </div>
-            <div className="action-bar">
+            <div class="action-bar">
                 <button
                     type="button"
                     onClick={() => setShowsCode(t => !t)}
@@ -20,7 +20,7 @@ export let DemoViewer = ({Component, code}) => {
             </div>
             {
                 showsCode &&
-                <div className="code-box">
+                <div class="code-box">
                     <CodeViewer
                         code={code}
                         language="jsx"

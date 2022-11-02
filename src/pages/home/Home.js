@@ -4,7 +4,7 @@ import {Intro} from './intro/Intro';
 
 export let Home = () => {
     return (
-        <div className="Home">
+        <div class="Home">
             <h1>Fiddlehead</h1>
             <Intro/>
             <Demo/>
