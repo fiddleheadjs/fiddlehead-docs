@@ -54,7 +54,6 @@ contentMap.forEach(item => {
 export let routes = [
     {
         path: '/',
-        label: 'Home',
         Component: Home
     },
     ...contentRoutes,
