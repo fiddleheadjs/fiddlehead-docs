@@ -13,6 +13,7 @@ function getJsLoaders() {
                 plugins: [
                     ['prismjs', {
                         'languages': ['markup', 'jsx', 'json', 'css', 'bash'],
+                        'plugins': ['line-highlight', 'line-numbers'],
                         'theme': 'default',
                         'css': true,
                     }],

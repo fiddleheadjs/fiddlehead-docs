@@ -2,13 +2,88 @@
 
 **Setup your workspace to start coding with Fiddlehead.**
 
-## Installation
+## Setup your project
 
-Install Fiddlehead
+### Installation
 
-```bash
+#### Fiddlehead
+
+```
 npm install fiddlehead
 ```
+
+#### JSX syntax
+
+Though this is optional, we highly recommend you to use it. We all love it!
+
+First step, install some Babel packages:
+
+```bash
+npm install -D \
+    babel-loader \
+    @babel/core \
+    @babel/preset-env \
+    @babel/plugin-transform-react-jsx \
+    babel-plugin-auto-import
+```
+
+Next step, let's create a Babel config file:
+
+`.babelrc`
+
+```json
+{
+    "presets": ["@babel/preset-env"],
+    "plugins": [
+        ["@babel/plugin-transform-react-jsx", {
+            "pragma": "jsx",
+            "pragmaFrag": "'['"
+        }],
+        ["babel-plugin-auto-import", {
+            "declarations": [{
+                "members": ["jsx"],
+                "path": "fiddlehead"
+            }]
+        }]
+    ]
+}
+```
+
+#### Build tool
+
+In this instruction, we choose Webpack, but you also can use other build tools which support Babel transformers.
+
+```bash
+npm install -D webpack webpack-cli
+```
+
+Next step, config Webpack to accept the Babel config we created above.
+
+`webpack.config.js`
+
+```js{"data-line":"10-17"}
+const path = require('path');
+
+module.exports = {
+    mode: 'development',
+    entry: './foo.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'foo.bundle.js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: ['babel-loader'],
+            }
+        ],
+    },
+};
+```
+
+In the configuration above, we inherit from the [Webpack introductory configuration](https://webpack.js.org/concepts/configuration/#introductory-configuration), and adding the `module` block to support JSX syntax.
+
 
 Now, you can start coding:
 

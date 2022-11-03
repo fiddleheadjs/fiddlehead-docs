@@ -22,6 +22,7 @@ fs.readdirSync(entriesDir).map(filename => {
 
     configs.push({
         mode: isDev ? 'development' : 'production',
+        devtool: 'cheap-module-source-map',
         entry: path.resolve(entriesDir, filename),
         output: {
             path: path.resolve(rootDir, 'public/assets'),
@@ -33,12 +34,12 @@ fs.readdirSync(entriesDir).map(filename => {
                 {
                     test: /\.js$/,
                     use: getJsLoaders(),
-                    exclude: /[\\/]node_modules[\\/]/
+                    // exclude: /[\\/]node_modules[\\/]/
                 },
                 {
                     test: /\.less$/,
                     use: getLessLoaders(),
-                    exclude: /[\\/]node_modules[\\/]/
+                    // exclude: /[\\/]node_modules[\\/]/
                 },
                 {
                     test: /\.css$/,
