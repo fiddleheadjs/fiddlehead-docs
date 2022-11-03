@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'fiddlehead';
 import {DocumentTemplate} from '../../templates/document/DocumentTemplate';
 
-export let createArticle = (filename) => {
+export let createArticle = (path) => {
     let Article = () => {
         let [data, setData] = useState(null);
     
         useEffect(() => {
-            import('@contents/' + filename + '/index.md')
+            import('@contents/' + path + '/index.md')
                 .then(setData);
         }, []);
     

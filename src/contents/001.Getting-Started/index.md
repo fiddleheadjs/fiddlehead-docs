@@ -19,12 +19,7 @@ Though this is optional, we highly recommend you to use it. We all love it!
 First step, install some Babel packages:
 
 ```bash
-npm install -D \
-    babel-loader \
-    @babel/core \
-    @babel/preset-env \
-    @babel/plugin-transform-react-jsx \
-    babel-plugin-auto-import
+npm install -D babel-preset-fiddlehead
 ```
 
 Next step, let's create a Babel config file:
@@ -33,19 +28,7 @@ Next step, let's create a Babel config file:
 
 ```json
 {
-    "presets": ["@babel/preset-env"],
-    "plugins": [
-        ["@babel/plugin-transform-react-jsx", {
-            "pragma": "jsx",
-            "pragmaFrag": "'['"
-        }],
-        ["babel-plugin-auto-import", {
-            "declarations": [{
-                "members": ["jsx"],
-                "path": "fiddlehead"
-            }]
-        }]
-    ]
+    "presets": ["babel-preset-fiddlehead"]
 }
 ```
 
@@ -54,7 +37,7 @@ Next step, let's create a Babel config file:
 In this instruction, we choose Webpack, but you also can use other build tools which support Babel transformers.
 
 ```bash
-npm install -D webpack webpack-cli
+npm install -D webpack webpack-cli babel-loader
 ```
 
 Next step, config Webpack to accept the Babel config we created above.

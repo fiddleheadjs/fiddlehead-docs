@@ -70,9 +70,9 @@ function getMarkdownLoaders() {
     ];
 }
 
-function getLsLoaders() {
+function getScandirLoaders() {
     return [
-        path.resolve(__dirname, 'custom-loaders/ls')
+        path.resolve(__dirname, 'custom-loaders/scandir')
     ];
 }
 
@@ -81,5 +81,5 @@ module.exports = {
     getLessLoaders,
     getCssLoaders,
     getMarkdownLoaders,
-    getLsLoaders,
+    getScandirLoaders,
 };

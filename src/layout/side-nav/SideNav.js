@@ -1,19 +1,28 @@
 import './SideNav.less';
 import {navigate, useLocation, pathsEqual} from '../../modules/router';
-import {routes} from '../../routes';
+import {navItems} from '../../contentMap';
+
+let renderItems = (navItems, currentPath) => {
+    return (
+        <ul>
+            {navItems.map(item => (
+                <li key={item.path} class={pathsEqual(currentPath, item.path) ? 'active' : null}>
+                    <a onClick={() => navigate(item.path)}>{item.label}</a>
+                    {item.children.length > 0 && (
+                        renderItems(item.children, currentPath)
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+};
 
 export let SideNav = () => {
     let location = useLocation();
 
     return (
         <div class="SideNav">
-            <ul>
-                {routes.filter(t => t.label != null).map(t => (
-                    <li key={t.path} class={pathsEqual(location.pathname, t.path) ? 'active' : ''}>
-                        <a onClick={() => navigate(t.path)}>{t.label}</a>
-                    </li>
-                ))}
-            </ul>
+            {renderItems(navItems, location.pathname)}
         </div>
     );
 };

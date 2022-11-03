@@ -3,7 +3,7 @@
 import {render} from 'fiddlehead';
 import {Layout} from '../layout/Layout';
 import {useRouter} from '../modules/router';
-import {routes} from '../routes';
+import {routes} from '../contentMap';
 import {useStore} from '../modules/store';
 
 let App = () => {

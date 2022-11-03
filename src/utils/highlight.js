@@ -1,4 +1,5 @@
 import Prism from 'prismjs';
+import './highlight.css';
 
 Prism.manual = true;
 
