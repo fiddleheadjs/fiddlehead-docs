@@ -8,24 +8,14 @@ function getJsLoaders() {
             loader: 'babel-loader',
             options: {
                 presets: [
-                    '@babel/preset-env',
+                    'babel-preset-fiddlehead',
                 ],
                 plugins: [
                     ['prismjs', {
                         languages: ['markup', 'jsx', 'json', 'css', 'bash'],
                         plugins: ['line-highlight', 'line-numbers'],
-                        theme: 'default',
+                        theme: 'okaidia',
                         css: true,
-                    }],
-                    ['@babel/plugin-transform-react-jsx', {
-                        pragma: 'jsx',
-                        pragmaFrag: "'['",
-                    }],
-                    ['babel-plugin-auto-import', {
-                        declarations: [{
-                            members: ['jsx'],
-                            path: 'fiddlehead',
-                        }]
                     }]
                 ],
             }
