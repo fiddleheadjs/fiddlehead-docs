@@ -12,19 +12,19 @@ function getJsLoaders() {
                 ],
                 plugins: [
                     ['prismjs', {
-                        'languages': ['markup', 'jsx', 'json', 'css', 'bash'],
-                        'plugins': ['line-highlight', 'line-numbers'],
-                        'theme': 'default',
-                        'css': true,
+                        languages: ['markup', 'jsx', 'json', 'css', 'bash'],
+                        plugins: ['line-highlight', 'line-numbers'],
+                        theme: 'default',
+                        css: true,
                     }],
                     ['@babel/plugin-transform-react-jsx', {
-                        'pragma': 'jsx',
-                        'pragmaFrag': "'['",
+                        pragma: 'jsx',
+                        pragmaFrag: "'['",
                     }],
                     ['babel-plugin-auto-import', {
                         declarations: [{
                             members: ['jsx'],
-                            path: 'fiddlehead'
+                            path: 'fiddlehead',
                         }]
                     }]
                 ],
