@@ -9,7 +9,7 @@ export let CodeViewer = ({code, language}) => {
             <pre>
                 <code
                     class={`language-${language}`} // keep the same format with Marked
-                    dangerouslySetInnerHTML={{__html: highlightedCode}}
+                    innerHTML={highlightedCode}
                 />
             </pre>
         </div>

@@ -2,9 +2,9 @@ import './DocumentTemplate.less';
 import {useEffect, useRef} from 'fiddlehead';
 import {MarkdownViewer} from '../../viewers/markdown/MarkdownViewer';
 import {DemoViewer} from '../../viewers/demo/DemoViewer';
-import {__} from '../../i18n';
+import {__} from '../../modules/i18n';
 import * as marked from 'marked';
-import {useSelect} from '../../store';
+import {useSelect} from '../../modules/store';
 
 export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
     let tocRef = useRef(null);

@@ -1,5 +1,5 @@
 import './SideNav.less';
-import {navigate, useLocation, pathsEqual} from '../../router';
+import {navigate, useLocation, pathsEqual} from '../../modules/router';
 import {routes} from '../../routes';
 
 export let SideNav = () => {

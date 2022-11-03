@@ -1,6 +1,6 @@
 import './MainContent';
 import {useEffect, useRef} from 'fiddlehead';
-import {useDispatch} from '../../store';
+import {useDispatch} from '../../modules/store';
 
 export let MainContent = ({children}) => {
     let ref = useRef(null);
