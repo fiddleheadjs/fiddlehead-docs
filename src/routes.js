@@ -49,8 +49,6 @@ let walk = (dirItem, navItems) => {
     });
 };
 
-console.log(contents)
-
 contents.forEach(item => {
     walk(item, contentNavItems);
 });
