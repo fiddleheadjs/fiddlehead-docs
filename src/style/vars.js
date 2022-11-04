@@ -13,7 +13,7 @@ let gray = {
 };
 
 let color = {
-    primary: '#4ABA69',
+    primary: '#0000FE',
     accent: '#F2994A',
     success: '#4ABA69',
     danger: '#EF5858',
