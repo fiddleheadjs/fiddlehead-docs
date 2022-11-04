@@ -11,8 +11,8 @@
 @screen-mobile-large: ~'screen and (max-width: 499px) and (min-width: 350px)';
 @screen-mobile-small: ~'screen and (max-width: 349px)';
 
-@screens-desktop-tablet: @screen-desktop, @screen-tablet;
-@screens-tablet-mobile: @screen-tablet, @screen-mobile;
+@screen-non-mobile: @screen-desktop, @screen-tablet;
+@screen-non-desktop: @screen-tablet, @screen-mobile;
 
 .media-current(@query, @rules) {
     @media @query {

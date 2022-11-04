@@ -1,0 +1,38 @@
+@import '../../style/mixin.less';
+
+.Top {
+    width: 100%;
+    height: @top-height;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid @gray-light-A2;
+    background: @gray-white;
+
+    > .inner {
+        width: 100%;
+        max-width: 160ch;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: @space-medium-2;
+
+        .logo {
+            img {
+                width: 3em;
+                height: 3em;
+            }
+
+            span {
+                .font-body-bold();
+            }
+        }
+
+        .nav-toggle {
+            .media-current(@screen-desktop, {
+                display: none;
+            });
+        }
+    }
+}

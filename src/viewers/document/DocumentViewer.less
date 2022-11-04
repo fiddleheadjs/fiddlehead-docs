@@ -5,9 +5,13 @@
     flex-direction: row;
     align-items: flex-start;
 
-    & > main {
-        padding-right: 2em;
-        width: calc(100% - 12em);
+    @nav-width: 22ch;
+
+    > main {
+        .media-current(@screen-desktop, {
+            padding-right: 2em;
+            width: calc(100% - @nav-width);
+        });
 
         .contents {
             max-width: 90ch;
@@ -19,14 +23,18 @@
         }
     }
 
-    & > nav {
-        width: 12em;
+    > nav {
+        width: @nav-width;
         position: sticky;
-        top: 0;
+        top: @top-height;
         bottom: 0;
-        max-height: calc(100vh);
+        max-height: calc(100vh - @top-height);
         display: flex;
         flex-direction: column;
+
+        .media-current(@screen-non-desktop, {
+            display: none;
+        });
 
         & > .table-of-contents {
             height: 100%;
