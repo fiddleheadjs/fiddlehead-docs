@@ -6,6 +6,8 @@ import {__} from '../../modules/i18n';
 import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
 
+const MinTocSizeToShow = 2;
+
 export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
     let tocRef = useRef(null);
     let contentsRef = useRef(null);
@@ -181,7 +183,13 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
             </div>
         </main>
         <nav>
-            <div class="table-of-contents" ref={tocRef}>
+            <div
+                class={[
+                    'table-of-contents',
+                    headings.length < MinTocSizeToShow && 'hidden',
+                ].filter(Boolean).join(' ')}
+                ref={tocRef}
+            >
                 <div class="title">{__('Table of contents')}</div>
                 <ul class="list">
                     {
