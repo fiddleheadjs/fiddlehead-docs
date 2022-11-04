@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack --config webpack/webpack.config.js",
+    "watch": "webpack --config webpack/webpack.config.js --watch",
     "dev": "concurrently \"node server.js\" \"webpack --config webpack/webpack.config.js --watch\"",
     "lint": "eslint ./src --config .eslintrc"
   },

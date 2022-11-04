@@ -25,6 +25,10 @@ export let pathsEqual = (p1, p2) => (
     p1.toLowerCase() === p2.toLowerCase()
 );
 
+export let pathsTest = (p1, p2) => (
+    (p1.toLowerCase() + '/').startsWith(p2.toLowerCase() + '/')
+);
+
 let selectRoute = (routes) => {
     for (let i = 0; i < routes.length; i++) {
         if (pathsEqual(routes[i].path, history.location.pathname)) {
