@@ -33,13 +33,11 @@ fs.readdirSync(entriesDir).map(filename => {
             rules: [
                 {
                     test: /\.js$/,
-                    use: getJsLoaders(),
-                    // exclude: /[\\/]node_modules[\\/]/
+                    use: getJsLoaders()
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders(),
-                    // exclude: /[\\/]node_modules[\\/]/
+                    use: getLessLoaders()
                 },
                 {
                     test: /\.css$/,
