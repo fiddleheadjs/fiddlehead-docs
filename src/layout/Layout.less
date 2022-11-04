@@ -33,7 +33,6 @@
 
             > main {
                 flex-grow: 1;
-                overflow-x: auto;
             }
 
             &:not(.shows-nav-on-non-desktop) {
@@ -41,6 +40,12 @@
                     .media-current(@screen-non-desktop, {
                         display: none;
                     });
+                }  
+            }
+            
+            &.shows-nav-on-non-desktop {
+                > main {
+                    overflow-x: auto;
                 }
             }
         }
