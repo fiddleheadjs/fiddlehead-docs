@@ -69,7 +69,8 @@ export let navItems = [
     {
         path: '/',
         label: 'Home',
-        children: []
+        children: [],
+        hasTarget: true,
     },
     ...contentNavItems,
 ];

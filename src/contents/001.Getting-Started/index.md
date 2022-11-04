@@ -8,7 +8,7 @@
 
 #### Fiddlehead
 
-```
+```bash
 npm install fiddlehead
 ```
 
@@ -44,7 +44,9 @@ Next step, config Webpack to accept the Babel config we created above.
 
 `webpack.config.js`
 
-```js{"data-line":"10-17"}
+```js
+// {"data-line": "10-17"}
+
 const path = require('path');
 
 module.exports = {

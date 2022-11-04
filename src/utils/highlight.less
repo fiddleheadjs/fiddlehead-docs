@@ -1,0 +1,27 @@
+@import '../style/mixin.less';
+
+pre[class*="language-"] {
+    background: @gray-white !important;
+    padding: 0 !important;
+
+    > code {
+        display: block !important;
+        padding: 1em;
+    }
+}
+
+code:not([class^="language-"]) {
+    background: @color-primary-light-A3;
+    border-radius: 2px;
+}
+
+.line-highlight:before,
+.line-highlight[data-end]:after {
+    content: "" !important;
+}
+
+.line-highlight {
+    width: 100% !important;
+    background: fade(@color-primary, 10%) !important;
+    .box-shadow(1);
+}

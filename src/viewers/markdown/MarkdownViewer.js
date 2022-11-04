@@ -1,7 +1,7 @@
 import './MarkdownViewer.less';
 import {useLayoutEffect, useRef} from 'fiddlehead';
 import * as marked from 'marked';
-import {highlightAllUnder, parseLanguageNotation} from '../../utils/highlight';
+import {highlightAllUnder} from '../../utils/highlight';
 
 export let MarkdownViewer = ({content, headings, headingPosRef}) => {
     let elementRef = useRef(null);
@@ -25,8 +25,18 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         return `<h${level} id="${id}"><a href="#${id}">&para;</a>${text}</h${level}>`;
     };
 
-    renderer.code = (code, languageNotation) => {
-        let [language, options] = parseLanguageNotation(languageNotation);
+    renderer.code = (code, language) => {
+        let options = null;
+
+        let firstLine = code.split('\n', 1)[0].trim();
+        if (firstLine.startsWith('//')) {
+            try {
+                options = JSON.parse(firstLine.substring(2));
+                code = code.substring(firstLine.length);
+            } catch (error) {}
+        }
+
+        code = code.trim();
         
         let preAttrs = '';
         if (options !== null) {

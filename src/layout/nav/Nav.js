@@ -1,6 +1,16 @@
-import './SideNav.less';
+import './Nav.less';
 import {navigate, useLocation, pathsTest} from '../../modules/router';
 import {navItems} from '../../routes';
+
+export let SideNav = () => {
+    let location = useLocation();
+    
+    return (
+        <div class="Nav">
+            {renderItems(navItems, location.pathname)}
+        </div>
+    );
+};
 
 let renderItems = (navItems, currentPath) => {
     return (
@@ -25,15 +35,5 @@ let renderItems = (navItems, currentPath) => {
                 </li>
             ))}
         </ul>
-    );
-};
-
-export let SideNav = () => {
-    let location = useLocation();
-
-    return (
-        <div class="SideNav">
-            {renderItems(navItems, location.pathname)}
-        </div>
     );
 };

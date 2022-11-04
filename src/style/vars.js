@@ -51,9 +51,9 @@ let border_radius = {
 };
 
 let box_shadow = {
-    level_1: '0px 2px 4px rgba(0, 0, 0, 0.15)',
-    level_2: '0px 4px 12px rgba(0, 0, 0, 0.15)',
-    level_3: '0px 12px 18px rgba(0, 0, 0, 0.15)',
+    level_1: '0px 1px 4px rgba(0, 0, 0, 0.15)',
+    level_2: '0px 3px 12px rgba(0, 0, 0, 0.15)',
+    level_3: '0px 9px 36px rgba(0, 0, 0, 0.15)',
 };
 
 let z_index = {
@@ -90,18 +90,18 @@ let line_height = {
 };
 
 let font_size = {
-    h1: 24,
-    h2: 18,
-    h3: 15,
-    h4: 13,
-    body: 12,
-    body_bold: 12,
-    body_semibold: 12,
-    body_small: 11,
-    button: 12,
-    button_small: 11,
-    button_large: 13,
-    code: 12,
+    h1: 28,
+    h2: 22,
+    h3: 18,
+    h4: 16,
+    body: 14,
+    body_bold: 14,
+    body_semibold: 14,
+    body_small: 13,
+    button: 14,
+    button_small: 13,
+    button_large: 15,
+    code: 14,
 };
 
 let font_weight = {

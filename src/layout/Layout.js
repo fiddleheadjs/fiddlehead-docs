@@ -1,5 +1,5 @@
 import './Layout.less';
-import {SideNav} from './side-nav/SideNav';
+import {SideNav} from './nav/Nav';
 import {MainContent} from './main-content/MainContent';
 
 export let Layout = ({children}) => {

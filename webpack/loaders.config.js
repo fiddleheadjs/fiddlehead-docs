@@ -13,8 +13,8 @@ function getJsLoaders() {
                 plugins: [
                     ['prismjs', {
                         languages: ['markup', 'jsx', 'json', 'css', 'bash'],
-                        plugins: ['line-highlight', 'line-numbers'],
-                        theme: 'okaidia',
+                        plugins: ['line-highlight'],
+                        theme: 'default', // 'okaidia',
                         css: true,
                     }]
                 ],

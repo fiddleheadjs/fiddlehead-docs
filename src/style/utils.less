@@ -1,0 +1,23 @@
+// MEDIA QUERY
+@screen-desktop: ~'screen and (min-width: 900px)';
+@screen-desktop-large: ~'screen and (min-width: 1200px)';
+@screen-desktop-small: ~'screen and (max-width: 1199px) and (min-width: 900px)';
+
+@screen-tablet: ~'screen and (max-width: 899px) and (min-width: 500px)';
+@screen-tablet-large: ~'screen and (max-width: 899px) and (min-width: 700px)';
+@screen-tablet-small: ~'screen and (max-width: 699px) and (min-width: 500px)';
+
+@screen-mobile: ~'screen and (max-width: 499px)';
+@screen-mobile-large: ~'screen and (max-width: 499px) and (min-width: 350px)';
+@screen-mobile-small: ~'screen and (max-width: 349px)';
+
+@screens-desktop-tablet: @screen-desktop, @screen-tablet;
+@screens-tablet-mobile: @screen-tablet, @screen-mobile;
+
+.media-current(@query, @rules) {
+    @media @query {
+        & {
+            @rules();
+        }
+    }
+}
