@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'fiddlehead';
-import {DocumentTemplate} from '../../templates/document/DocumentTemplate';
+import {DocumentViewer} from '../../viewers/document/DocumentViewer';
 
 export let createArticle = (path) => {
     let Article = () => {
@@ -7,7 +7,13 @@ export let createArticle = (path) => {
     
         useEffect(() => {
             import('@contents/' + path + '/index.md')
-                .then(setData);
+                .then((data) => {
+                    // Update the document title
+                    document.title = data.title;
+
+                    // Update the data state
+                    setData(data);
+                });
         }, []);
     
         if (data === null) {
@@ -17,7 +23,7 @@ export let createArticle = (path) => {
         let {headings, contents, demos} = data;
     
         return (
-            <DocumentTemplate
+            <DocumentViewer
                 headings={headings}
                 contents={contents}
                 demos={demos}

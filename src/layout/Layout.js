@@ -1,14 +1,26 @@
 import './Layout.less';
-import {SideNav} from './nav/Nav';
-import {MainContent} from './main-content/MainContent';
+import {useEffect} from 'fiddlehead';
+import {Nav} from './nav/Nav';
+import {useDispatch} from '../modules/store';
 
 export let Layout = ({children}) => {
+    let setLayoutScrollElement = useDispatch((data) => {
+        data.layoutScrollElement = document.documentElement;
+        data.layoutScrollObject = window;
+    });
+
+    useEffect(() => {
+        setLayoutScrollElement();
+    }, []);
+
     return (
         <div class="Layout">
-            <SideNav/>
-            <MainContent>
-                {children}
-            </MainContent>
+            <div class="inner">
+                <Nav/>
+                <main>
+                    {children}
+                </main>
+            </div>
         </div>
     );
 };

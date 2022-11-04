@@ -1,15 +1,16 @@
 import contents from './contents.scandir';
-import {Home} from './pages/home/Home';
 import {NotFound} from './pages/not-found/NotFound';
 import {createArticle} from './pages/article/createArticle';
 
-let stripFilenameNotations = (fname) => fname.replace(/(^\d+\.)/g, '');
+let stripFilenameNotations = (filename) => filename.replace(/(^\d+\.)/g, '');
 
 let stripPathnameNotations = (pathname) => pathname.split('/').map(
     fname => stripFilenameNotations(fname)
 ).join('/');
 
 let isFileItem = (item) => typeof item === 'string';
+
+let isHomepageFilename = (filename) => /^0+\./.test(filename);
 
 let contentRoutes = [];
 let contentNavItems = [];
@@ -20,21 +21,24 @@ let walk = (dirItem, navItems) => {
     }
     
     let [pathname, dirChildren] = dirItem;
-
+    let filename = pathname.split('/').pop();
+    
     let publicPath = '/' + stripPathnameNotations(pathname);
-    let hasTarget = false;
+    if (isHomepageFilename(filename)) {
+        publicPath = '/';
+    }
 
+    let hasTarget = false;
+    
     if (dirChildren.some(isFileItem)) {
-        hasTarget = true;
         contentRoutes.push({
             path: publicPath,
             Component: createArticle(pathname),
         });
+        hasTarget = true;
     }
-
-    let fname = pathname.split('/').pop();
-    let label = stripFilenameNotations(fname).replace(/\-/g, ' ');
-
+    
+    let label = stripFilenameNotations(filename).replace(/\-/g, ' ');
     let navChildren = [];
     
     navItems.push({
@@ -54,10 +58,6 @@ contents.forEach(item => {
 });
 
 export let routes = [
-    {
-        path: '/',
-        Component: Home
-    },
     ...contentRoutes,
     {
         path: '*',
@@ -66,11 +66,5 @@ export let routes = [
 ];
 
 export let navItems = [
-    {
-        path: '/',
-        label: 'Home',
-        children: [],
-        hasTarget: true,
-    },
     ...contentNavItems,
 ];

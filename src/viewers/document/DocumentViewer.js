@@ -1,16 +1,17 @@
-import './DocumentTemplate.less';
+import './DocumentViewer.less';
 import {useEffect, useRef} from 'fiddlehead';
-import {MarkdownViewer} from '../../viewers/markdown/MarkdownViewer';
-import {DemoViewer} from '../../viewers/demo/DemoViewer';
+import {MarkdownViewer} from '../markdown/MarkdownViewer';
+import {DemoViewer} from '../demo/DemoViewer';
 import {__} from '../../modules/i18n';
 import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
 
-export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
+export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
     let tocRef = useRef(null);
     let contentsRef = useRef(null);
 
-    let scroller = useSelect(data => data.layoutScrollElement);
+    let scrollee = useSelect(data => data.layoutScrollElement);
+    let scroller = useSelect(data => data.layoutScrollObject);
 
     // Scroll into the heading which matches the requested hash
     useEffect(() => {
@@ -27,14 +28,14 @@ export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
     // table-of-contents needs to indicate what contents are displaying in the viewport
     useEffect(() => {
         let getScrolling = () => {
-            if (scroller !== null) {
-                let scrollerRect = scroller.getBoundingClientRect();
+            if (scrollee !== null) {
+                let scrolleeRect = scrollee.getBoundingClientRect();
 
                 return {
-                    height: scrollerRect.height,
-                    top: scrollerRect.top,
-                    scrollHeight: scroller.scrollHeight,
-                    scrollTop: scroller.scrollTop,
+                    height: scrolleeRect.height,
+                    top: scrolleeRect.top,
+                    scrollHeight: scrollee.scrollHeight,
+                    scrollTop: scrollee.scrollTop,
                 };
             }
 
@@ -83,7 +84,7 @@ export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
                 // We expect the content appear at the center area of the screen
                 // not too close to top or bottom
                 // so 30% of viewport height at top and bottom will be ignore
-                // except the case it reaches the top or bottom of scroller
+                // except the case it reaches the top or bottom of scrollee
                 let marginTop = Math.min(
                     0.3 * scrolling.height,
                     scrolling.scrollTop
@@ -147,7 +148,7 @@ export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
             scroller.removeEventListener('scroll', handler);
             window.removeEventListener('resize', handler);
         };
-    }, [scroller]);
+    }, [scrollee, scroller]);
 
     let getContents = () => {
         let headingPosRef = {current: -1};
@@ -171,7 +172,7 @@ export let DocumentTemplate = ({headings = [], contents = [], demos = {}}) => {
         });
     };
 
-    return <div class="DocumentTemplate">
+    return <div class="DocumentViewer">
         <main>
             <div class="contents" ref={contentsRef}>
                 {

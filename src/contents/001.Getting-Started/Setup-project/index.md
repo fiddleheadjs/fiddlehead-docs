@@ -1,18 +1,16 @@
-# Getting Started
+# Setup project
 
-**Setup your workspace to start coding with Fiddlehead.**
+**Setup your project workspace to start coding with Fiddlehead.**
 
-## Setup your project
+## Installation
 
-### Installation
-
-#### Fiddlehead
+### Fiddlehead
 
 ```bash
 npm install fiddlehead
 ```
 
-#### JSX syntax
+### JSX syntax
 
 Though this is optional, we highly recommend you to use it. We all love it!
 
@@ -32,7 +30,7 @@ Next step, let's create a Babel config file:
 }
 ```
 
-#### Build tool
+### Build tool
 
 In this instruction, we choose Webpack, but you also can use other build tools which support Babel transformers.
 

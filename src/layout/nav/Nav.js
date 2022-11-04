@@ -1,14 +1,14 @@
 import './Nav.less';
-import {navigate, useLocation, pathsTest} from '../../modules/router';
+import {navigate, useLocation, pathsTest, pathsEqual} from '../../modules/router';
 import {navItems} from '../../routes';
 
-export let SideNav = () => {
+export let Nav = () => {
     let location = useLocation();
     
     return (
-        <div class="Nav">
+        <nav class="Nav">
             {renderItems(navItems, location.pathname)}
-        </div>
+        </nav>
     );
 };
 
@@ -16,16 +16,17 @@ let renderItems = (navItems, currentPath) => {
     return (
         <ul>
             {navItems.map(item => (
-                <li
-                    key={item.path}
-                    class={pathsTest(currentPath, item.path) ? 'active' : null}
-                >
+                <li key={item.path}>
                     <a
                         href={item.hasTarget ? item.path : null}
                         onClick={item.hasTarget ? (event) => {
                             event.preventDefault();
                             navigate(item.path);
                         } : null}
+                        class={[
+                            pathsEqual(currentPath, item.path) && 'active',
+                            pathsTest(currentPath, item.path) && 'selected',
+                        ].filter(Boolean).join(' ')}
                     >
                         {item.label}
                     </a>
