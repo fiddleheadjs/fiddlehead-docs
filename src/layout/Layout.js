@@ -19,6 +19,15 @@ export let Layout = ({children}) => {
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShowsNavOnNonDesktop(false);
+            
+            // Wait a bit before closing,
+            // then the user can perceive the touch feedback
+        }, 50);
+    }, [location.key]);
+
     return (
         <div class="Layout">
                 <Top
