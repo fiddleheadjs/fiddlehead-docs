@@ -14,10 +14,21 @@ fs.readdirSync(entriesDir).map(filename => {
     let extension = path.extname(filename);
     let fname = filename.substring(0, filename.length - extension.length);
     
-    let title = pkg.description;
     let content = fs.readFileSync(path.resolve(entriesDir, filename), 'utf-8');
+    content = content.trim();
+
+    let title = pkg.description;
     if (content.startsWith('//')) {
-        title = content.split('\n', 1)[0].substring(2).trim();
+        let firstLine = content.split('\n', 1)[0];
+        title = firstLine.substring(2).trim();
+        content = content.substring(firstLine.length).trim();
+    }
+
+    let description = title;
+    if (content.startsWith('//')) {
+        let firstLine = content.split('\n', 1)[0];
+        description = firstLine.substring(2).trim();
+        content = content.substring(firstLine.length).trim();
     }
 
     configs.push({
@@ -61,7 +72,8 @@ fs.readdirSync(entriesDir).map(filename => {
             }),
             new HtmlWebpackPlugin({
                 title: title,
-                template: path.resolve(rootDir, 'src/template.html'),
+                description: description,
+                template: path.resolve(rootDir, 'src/template.ejs'),
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
             }),

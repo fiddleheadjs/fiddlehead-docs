@@ -8,10 +8,12 @@
     @nav-width: 22ch;
 
     > main {
-        .media-current(@screen-desktop, {
-            padding-right: 2em;
-            width: calc(100% - @nav-width);
-        });
+        &:not(.toc-hidden) {
+            .media-current(@screen-desktop, {
+                padding-right: 2em;
+                width: calc(100% - @nav-width);
+            });
+        }
 
         .contents {
             max-width: 90ch;
@@ -32,6 +34,10 @@
         display: flex;
         flex-direction: column;
 
+        &.toc-hidden {
+            display: none;
+        }
+
         .media-current(@screen-non-desktop, {
             display: none;
         });
@@ -39,10 +45,6 @@
         & > .table-of-contents {
             height: 100%;
             overflow: auto;
-
-            &.hidden {
-                display: none;
-            }
 
             .title {
                 .font-h4();

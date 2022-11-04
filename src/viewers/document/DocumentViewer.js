@@ -174,20 +174,19 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
         });
     };
 
+    let tocHidden = headings.length < MinTocSizeToShow;
+
     return <div class="DocumentViewer">
-        <main>
+        <main class={tocHidden ? 'toc-hidden' : null}>
             <div class="contents" ref={contentsRef}>
                 {
                     getContents()
                 }
             </div>
         </main>
-        <nav>
+        <nav class={tocHidden ? 'toc-hidden' : null}>
             <div
-                class={[
-                    'table-of-contents',
-                    headings.length < MinTocSizeToShow && 'hidden',
-                ].filter(Boolean).join(' ')}
+                class="table-of-contents"
                 ref={tocRef}
             >
                 <div class="title">{__('Table of contents')}</div>
