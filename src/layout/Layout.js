@@ -22,7 +22,7 @@ export let Layout = ({children}) => {
     useEffect(() => {
         setTimeout(() => {
             setShowsNavOnNonDesktop(false);
-            
+
             // Wait a bit before closing,
             // then the user can perceive the touch feedback
         }, 50);
@@ -30,10 +30,10 @@ export let Layout = ({children}) => {
 
     return (
         <div class="Layout">
-                <Top
-                    toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
-                    navShown={showsNavOnNonDesktop}
-                />
+            <Top
+                toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
+                navShown={showsNavOnNonDesktop}
+            />
             <div class="inner">
                 <div
                     class={[
