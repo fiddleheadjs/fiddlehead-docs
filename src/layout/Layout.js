@@ -26,7 +26,7 @@ export let Layout = ({children}) => {
             // Wait a bit before closing,
             // then the user can perceive the touch feedback
         }, 50);
-    }, [location.key]);
+    }, [location.pathname]);
 
     return (
         <div class="Layout">
