@@ -1,5 +1,5 @@
 import './MarkdownViewer.less';
-import {useLayoutEffect, useRef} from 'fiddlehead';
+import {useCallback, useLayoutEffect, useRef} from 'fiddlehead';
 import * as marked from 'marked';
 import {highlightAllUnder} from '../../utils/highlight';
 
@@ -11,11 +11,19 @@ const linkSvg = `<svg width="1em" height="1em" viewBox="0 0 14 14" fill="current
 export let MarkdownViewer = ({content, headings, headingPosRef}) => {
     let elementRef = useRef(null);
 
-    useLayoutEffect(() => {
+    let highlight = useCallback(() => {
         if (elementRef.current !== null) {
             highlightAllUnder(elementRef.current);
         }
     }, []);
+
+    useLayoutEffect(() => {
+        highlight();
+        window.addEventListener('resize', highlight);
+        return () => {
+            window.removeEventListener('resize', highlight);
+        };
+    }, [highlight]);
 
     const renderer = new marked.Renderer();
 
