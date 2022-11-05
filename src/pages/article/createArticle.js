@@ -1,12 +1,22 @@
-import {useState, useEffect} from 'fiddlehead';
+import {useState, useEffect, useRef} from 'fiddlehead';
 import {DocumentViewer} from '../../viewers/document/DocumentViewer';
 
 export let createArticle = (path) => {
     let Article = () => {
         let [data, setData] = useState(null);
+
+        let isUnmounted = useRef(false);
     
         useEffect(() => {
-            import('@contents/' + path + '/index.md').then(setData);
+            import('@contents/' + path + '/index.md').then(data => {
+                if (!isUnmounted.current) {
+                    setData(data);
+                }
+            });
+
+            return () => {
+                isUnmounted.current = true;
+            };
         }, []);
 
         useEffect(() => {
