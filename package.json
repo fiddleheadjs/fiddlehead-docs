@@ -7,6 +7,7 @@
     "build": "webpack --config webpack/webpack.config.js",
     "watch": "webpack --config webpack/webpack.config.js --watch",
     "dev": "concurrently \"node server.js\" \"webpack --config webpack/webpack.config.js --watch\"",
+    "deploy": "git checkout master && git pull && cross-env NODE_ENV=production npm run build",
     "lint": "eslint ./src --config .eslintrc"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "babel-plugin-prismjs": "^2.1.0",
     "babel-preset-fiddlehead": "^1.0.2",
     "concurrently": "^7.5.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "eslint": "^8.26.0",
     "html-webpack-plugin": "^5.5.0",
