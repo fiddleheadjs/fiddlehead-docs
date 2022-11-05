@@ -10,18 +10,16 @@
     > main {
         max-width: 100%;
 
-        &:not(.toc-hidden) {
-            .media-current(@screen-desktop, {
-                padding-right: 2em;
-                width: calc(100% - @nav-width);
-            });
-        }
+        .media-current(@screen-desktop, {
+            padding-right: 2em;
+            width: calc(100% - @nav-width);
+        });
 
-        .contents {
+        > .contents {
             max-width: 90ch;
-            margin: auto;
+            margin: 0 auto;
 
-            & > :not(:first-child) {
+            > :not(:first-child) {
                 margin-top: 1em;
             }
         }
@@ -44,7 +42,7 @@
             display: none;
         });
 
-        & > .table-of-contents {
+        > .table-of-contents {
             height: 100%;
             overflow: auto;
 
