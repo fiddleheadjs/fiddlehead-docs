@@ -8,24 +8,20 @@ import {useLocation} from '../modules/router';
 export let Layout = ({children}) => {
     let location = useLocation();
 
-    let setLayoutScrollElement = useDispatch((data) => {
-        data.layoutScrollViewport = {
-            height: window.innerHeight + 33,
-            top: -33,
-        };
-        data.layoutScrollElement = document.documentElement;
+    let setLayoutScroll = useDispatch((data) => {
         data.layoutScrollObject = window;
+        data.layoutScrollElement = document.documentElement;
     });
 
     useEffect(() => {
-        setLayoutScrollElement();
+        setLayoutScroll();
 
-        window.addEventListener('resize', setLayoutScrollElement);
+        window.addEventListener('resize', setLayoutScroll);
 
         return () => {
-            window.removeEventListener('resize', setLayoutScrollElement);
+            window.removeEventListener('resize', setLayoutScroll);
         };
-    }, [setLayoutScrollElement]);
+    }, []);
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 

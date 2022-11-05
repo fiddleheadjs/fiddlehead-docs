@@ -1,12 +1,12 @@
 import './DocumentViewer.less';
-import {useEffect, useRef} from 'fiddlehead';
+import {useCallback, useEffect, useRef} from 'fiddlehead';
 import {MarkdownViewer} from '../markdown/MarkdownViewer';
 import {DemoViewer} from '../demo/DemoViewer';
 import {__} from '../../modules/i18n';
 import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
 
-const MinTocSizeToShow = 2;
+const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
 export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
     let tocRef = useRef(null);
@@ -14,12 +14,13 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
 
     let scrollee = useSelect(data => data.layoutScrollElement);
     let scroller = useSelect(data => data.layoutScrollObject);
-    let scrollViewport = useSelect(data => data.layoutScrollViewport);
 
     // Scroll into the heading which matches the requested hash
     useEffect(() => {
         if (window.location.hash) {
-            let heading = document.getElementById(window.location.hash.slice(1));
+            let heading = document.getElementById(
+                window.location.hash.slice(1)
+            );
 
             if (heading) {
                 heading.scrollIntoView();
@@ -27,34 +28,36 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
         }
     }, []);
 
-    // When the user is scrolling contents,
-    // table-of-contents needs to indicate what contents are displaying in the viewport
-    useEffect(() => {
-        let getScrolling = () => {
-            if (scrollee !== null) {
-                return {
-                    height: scrollViewport.height,
-                    top: scrollViewport.top,
-                    scrollHeight: scrollee.scrollHeight,
-                    scrollTop: scrollee.scrollTop,
-                };
-            }
-
+    let getScrolling = useCallback(() => {
+        if (scrollee === document.documentElement) {
             return {
                 height: window.innerHeight,
                 top: 0,
-                scrollHeight: document.body.offsetHeight,
+                scrollHeight: document.documentElement.offsetHeight,
                 scrollTop: window.scrollY,
             };
+        }
+        
+        let scrolleeRect = scrollee.getBoundingClientRect();
+        
+        return {
+            height: scrolleeRect.height,
+            top: scrolleeRect.top,
+            scrollHeight: scrollee.scrollHeight,
+            scrollTop: scrollee.scrollTop,
         };
+    }, [scrollee, scroller]);
 
+    // When the user is scrolling contents,
+    // table-of-contents needs to indicate what contents are displaying in the viewport
+    useEffect(() => {
         let mixins = headings.map(({id, level}) => ({
             heading: document.getElementById(id),
             tocItem: tocRef.current.querySelector(`li[data-id="${id}"]`),
             level: level,
         })).filter(({id, heading}) => {
             if (heading === null) {
-                console.log('Missing heading: ', id);
+                console.error('Heading not found: ', id);
                 return false;
             }
 
@@ -101,7 +104,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
                 // If there is next heading, we will use the top of the next heading as the bottom border of current section
                 if (nextHeading) {
                     let nextHeadingRect = nextHeading.getBoundingClientRect();
-                    sectionHeight = nextHeadingRect.top - headingRect.top - 1;
+                    sectionHeight = nextHeadingRect.top - headingRect.top;
                     active = (
                         headingRect.bottom < scrolling.height + scrolling.top - Math.min(marginBottom, sectionHeight)
                         && nextHeadingRect.top > scrolling.top + Math.min(marginTop, sectionHeight)
@@ -110,7 +113,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
                 // If no next heading, we will use the bottom of whole content area instead
                 else {
                     let contentsRect = contentsRef.current.getBoundingClientRect();
-                    sectionHeight = contentsRect.bottom - headingRect.top - 1;
+                    sectionHeight = contentsRect.bottom - headingRect.top + 1;
                     active = (
                         headingRect.bottom < scrolling.height + scrolling.top - Math.min(marginBottom, sectionHeight)
                         && contentsRect.bottom > scrolling.top + Math.min(marginTop, sectionHeight)
@@ -149,7 +152,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
             scroller.removeEventListener('scroll', handler);
             window.removeEventListener('resize', handler);
         };
-    }, [scrollee, scroller, scrollViewport]);
+    }, [scrollee, scroller, getScrolling]);
 
     let getContents = () => {
         let headingPosRef = {current: -1};
@@ -173,7 +176,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
         });
     };
 
-    let tocHidden = headings.length < MinTocSizeToShow;
+    let tocHidden = headings.length < MIN_HEADINGS_TO_SHOW_TOC;
 
     return <div class="DocumentViewer">
         <main class={tocHidden ? 'toc-hidden' : null}>
