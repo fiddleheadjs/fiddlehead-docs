@@ -25,27 +25,17 @@
             align-items: stretch;
             justify-content: flex-start;
 
-            > .Nav {
-                position: sticky;
-                top: @top-height;
-                height: calc(100vh - @top-height);
-
-                .media-current(@screen-desktop, {
-                    padding-right: @space-tiny-4;
-                });
-            }
-
-            > main {
-                flex-grow: 1;
-                max-width: 100%;
-            }
-
             &:not(.shows-nav-on-non-desktop) {
                 > .Nav {
                     .media-current(@screen-non-desktop, {
                         display: none;
                     });
                 }  
+            }
+
+            > main {
+                flex-grow: 1;
+                max-width: 100%;
             }
 
             &.shows-nav-on-non-desktop {
