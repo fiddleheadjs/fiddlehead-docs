@@ -1,5 +1,5 @@
-// Fiddlehead documentation
-// fdfd
+// Fiddlehead
+// Fiddlehead - building UI with JSX and hooks
 
 import {render} from 'fiddlehead';
 import {Layout} from '../layout/Layout';

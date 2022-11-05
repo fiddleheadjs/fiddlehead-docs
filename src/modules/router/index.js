@@ -54,3 +54,16 @@ export let useRouter = (routes) => {
         return <Component/>;
     }
 };
+
+export let Link = ({href, children, ...rest}) => (
+    <a
+        {...rest}
+        href={href}
+        onClick={href != null ? (event) => {
+            event.preventDefault();
+            navigate(href);
+        } : null}
+    >
+        {children}
+    </a>
+);

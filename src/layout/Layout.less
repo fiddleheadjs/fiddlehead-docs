@@ -29,6 +29,10 @@
                 position: sticky;
                 top: @top-height;
                 height: calc(100vh - @top-height);
+
+                .media-current(@screen-desktop, {
+                    padding-right: @space-tiny-4;
+                });
             }
 
             > main {

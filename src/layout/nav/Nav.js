@@ -1,5 +1,5 @@
 import './Nav.less';
-import {navigate, useLocation, pathsTest, pathsEqual} from '../../modules/router';
+import {useLocation, pathsTest, pathsEqual, Link} from '../../modules/router';
 import {navItems} from '../../routes';
 
 export let Nav = () => {
@@ -17,19 +17,15 @@ let renderItems = (navItems, currentPath) => {
         <ul>
             {navItems.map(item => (
                 <li key={item.path}>
-                    <a
+                    <Link
                         href={item.hasTarget ? item.path : null}
-                        onClick={item.hasTarget ? (event) => {
-                            event.preventDefault();
-                            navigate(item.path);
-                        } : null}
                         class={[
                             pathsEqual(currentPath, item.path) && 'active',
                             pathsTest(currentPath, item.path) && 'selected',
                         ].filter(Boolean).join(' ')}
                     >
                         {item.label}
-                    </a>
+                    </Link>
                     {item.children.length > 0 && (
                         renderItems(item.children, currentPath)
                     )}

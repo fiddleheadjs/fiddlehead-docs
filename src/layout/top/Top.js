@@ -1,25 +1,24 @@
 import './Top.less';
 import {__} from '../../modules/i18n';
-import {navigate} from '../../modules/router';
+import {Link} from '../../modules/router';
 
 export let Top = ({toggleNav, navShown}) => {
     return (
         <div class="Top">
             <div class="inner">
-                <a
-                    class="logo"
-                    href="/"
-                    onClick={() => navigate('/')}
-                >
-                    <img src="/img/Fiddlehead_320x320.png"/>
+                <Link class="logo" href="/">
+                    <img 
+                        src="/img/Fiddlehead_320x320.png" 
+                        alt={__('Fiddlehead logo')}
+                    />
                     <span>Fiddlehead</span>
-                </a>
+                </Link>
                 <button
                     class="nav-toggle"
                     type="button"
                     onClick={toggleNav}
                 >
-                    {navShown ? 'Hide Navigation' : 'Show Navigation'}
+                    {navShown ? __('Hide Navigation') : __('Show Navigation')}
                 </button>
             </div>
         </div>

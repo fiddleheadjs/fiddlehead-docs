@@ -1,8 +1,19 @@
-@import '../../style/theme.less';
+@import '../../style/mixin.less';
 
 .MarkdownViewer {
-    & > :not(:first-child) {
-        margin-top: 1em;
+    // Relate to passing the top bar when scroll-into-view.
+    // Keep all children not overlapping outside elements.
+    z-index: 1;
+
+    > * {
+        // Relate to passing the top bar when scroll-into-view.
+        // Headings use padding-top to make space above them,
+        // So other elements need to have a higher z-index to not be overlapped.
+        z-index: 1000;
+    }
+
+    > :not(:last-child) {
+        margin-bottom: 0.5em;
     }
 
     h1 {
@@ -10,15 +21,20 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
+        // Pass the top bar when scroll-into-view
+        padding-top: @top-height;
+        margin-top: -@top-height;
+
         a {
-            display: block;
-            position: absolute;
-            cursor: pointer;
             visibility: hidden;
-            text-decoration: none;
-            color: @gray-twilight;
-            right: 100%;
-            padding: 0 0.2em;
+            margin: 0 0 0 0.5em;
+            width: 1.6em;
+            height: 1.6em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            .color-tinge-interactive(@color-primary);
+            .border-radius(2);
 
             &:hover {
                 visibility: visible;
@@ -33,16 +49,12 @@
         }
     }
 
-    h2, h3, h4, h5, h6 {
-        padding-top: 1em;
-    }
-
     ul, ol {
         padding: 0 0 0 2em;
 
         & > li {
-            &:not(:first-child) {
-                margin-top: 0.5em;
+            &:not(:last-child) {
+                margin-bottom: 0.5em;
             }
         }
     }
