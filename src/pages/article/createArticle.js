@@ -6,15 +6,17 @@ export let createArticle = (path) => {
         let [data, setData] = useState(null);
     
         useEffect(() => {
-            import('@contents/' + path + '/index.md')
-                .then((data) => {
-                    // Update the document title
-                    document.title = data.title;
-
-                    // Update the data state
-                    setData(data);
-                });
+            import('@contents/' + path + '/index.md').then(setData);
         }, []);
+
+        useEffect(() => {
+            // Update the document title
+            // This should be done after every render
+            // not only after importing
+            if (data !== null) {
+                document.title = data.title;
+            }
+        }, [data]);
     
         if (data === null) {
             return null;
