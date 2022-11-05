@@ -19,9 +19,9 @@ export let Layout = ({children}) => {
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
-    useEffect(() => {
-        setShowsNavOnNonDesktop(false);
-    }, [location.pathname]);
+    // useEffect(() => {
+    //     setShowsNavOnNonDesktop(false);
+    // }, [location.pathname]);
 
     return (
         <div class="Layout">
@@ -36,7 +36,9 @@ export let Layout = ({children}) => {
                         showsNavOnNonDesktop && 'shows-nav-on-non-desktop',
                     ].filter(Boolean).join(' ')}
                 >
-                    <Nav/>
+                    <nav>
+                        <Nav/>
+                    </nav>
                     <main key={location.key}>
                         {children}
                     </main>

@@ -15,7 +15,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: @viewport-padding;
 
         > .middle {
             width: 100%;
@@ -26,7 +25,9 @@
             justify-content: flex-start;
 
             &:not(.shows-nav-on-non-desktop) {
-                > .Nav {
+                > nav {
+                    height: calc(100vh - @top-height);
+
                     .media-current(@screen-non-desktop, {
                         display: none;
                     });
@@ -36,6 +37,7 @@
             > main {
                 flex-grow: 1;
                 max-width: 100%;
+                padding: @viewport-padding;
             }
 
             &.shows-nav-on-non-desktop {

@@ -3,8 +3,9 @@
 .Nav {
     position: sticky;
     top: @top-height;
-    height: calc(100vh - @top-height);
-    padding-right: @space-small-4;
+    max-height: calc(100vh - @top-height);
+    overflow: auto;
+    padding: @viewport-padding 0 @viewport-padding @viewport-padding;
     min-width: 22ch;
 
     .media-current(@screen-mobile, {
@@ -19,12 +20,14 @@
         li {
             a {
                 display: block;
-                padding: @space-tiny-4 @space-tiny-2;
+                padding: @space-tiny-4 0;
                 cursor: pointer;
-                white-space: nowrap;
                 .border-radius(2);
 
-                &:hover {
+                &:hover,
+                &.active {
+                    padding-left: @space-tiny-3;
+                    margin-left: -@space-tiny-3;
                     background: @color-primary-light-A4;
                 }
                 
@@ -35,7 +38,6 @@
                 &.selected {
                     color: @color-primary;
                 }
-                
             }
         }
     }

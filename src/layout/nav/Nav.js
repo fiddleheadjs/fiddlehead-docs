@@ -6,9 +6,9 @@ export let Nav = () => {
     let location = useLocation();
     
     return (
-        <nav class="Nav">
+        <div class="Nav">
             {renderItems(navItems, location.pathname)}
-        </nav>
+        </div>
     );
 };
 
