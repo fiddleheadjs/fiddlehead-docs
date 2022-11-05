@@ -22,8 +22,8 @@
 
     h1, h2, h3, h4, h5, h6 {
         // Pass the top bar when scroll-into-view
-        padding-top: @top-height;
-        margin-top: -@top-height;
+        padding-top: @top-height + @viewport-padding;
+        margin-top: -@top-height - @viewport-padding;
 
         a {
             visibility: hidden;

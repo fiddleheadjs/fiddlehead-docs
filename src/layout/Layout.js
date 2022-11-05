@@ -9,13 +9,23 @@ export let Layout = ({children}) => {
     let location = useLocation();
 
     let setLayoutScrollElement = useDispatch((data) => {
+        data.layoutScrollViewport = {
+            height: window.innerHeight + 33,
+            top: -33,
+        };
         data.layoutScrollElement = document.documentElement;
         data.layoutScrollObject = window;
     });
 
     useEffect(() => {
         setLayoutScrollElement();
-    }, []);
+
+        window.addEventListener('resize', setLayoutScrollElement);
+
+        return () => {
+            window.removeEventListener('resize', setLayoutScrollElement);
+        };
+    }, [setLayoutScrollElement]);
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 

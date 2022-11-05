@@ -14,6 +14,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
 
     let scrollee = useSelect(data => data.layoutScrollElement);
     let scroller = useSelect(data => data.layoutScrollObject);
+    let scrollViewport = useSelect(data => data.layoutScrollViewport);
 
     // Scroll into the heading which matches the requested hash
     useEffect(() => {
@@ -31,11 +32,9 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
     useEffect(() => {
         let getScrolling = () => {
             if (scrollee !== null) {
-                let scrolleeRect = scrollee.getBoundingClientRect();
-
                 return {
-                    height: scrolleeRect.height,
-                    top: scrolleeRect.top,
+                    height: scrollViewport.height,
+                    top: scrollViewport.top,
                     scrollHeight: scrollee.scrollHeight,
                     scrollTop: scrollee.scrollTop,
                 };
@@ -150,7 +149,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
             scroller.removeEventListener('scroll', handler);
             window.removeEventListener('resize', handler);
         };
-    }, [scrollee, scroller]);
+    }, [scrollee, scroller, scrollViewport]);
 
     let getContents = () => {
         let headingPosRef = {current: -1};
