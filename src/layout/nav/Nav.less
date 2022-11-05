@@ -4,12 +4,11 @@
     position: sticky;
     top: @top-height;
     height: calc(100vh - @top-height);
-    padding-right: @space-tiny-4;
+    padding-right: @space-small-4;
     min-width: 22ch;
-    max-width: 22ch;
 
     .media-current(@screen-mobile, {
-        min-width: 16ch;
+        min-width: 18ch;
     });
 
     ul {
@@ -22,18 +21,21 @@
                 display: block;
                 padding: @space-tiny-4 @space-tiny-2;
                 cursor: pointer;
-
-                &.selected {
-                    color: @color-primary;
-                }
-
-                &.active {
-                    text-decoration: underline;
-                }
+                white-space: nowrap;
+                .border-radius(2);
 
                 &:hover {
                     background: @color-primary-light-A4;
                 }
+                
+                &.active {
+                    background: @color-primary-light-A3;
+                }
+                
+                &.selected {
+                    color: @color-primary;
+                }
+                
             }
         }
     }
