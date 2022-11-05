@@ -19,10 +19,6 @@ export let Layout = ({children}) => {
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
-    // useEffect(() => {
-    //     setShowsNavOnNonDesktop(false);
-    // }, [location.pathname]);
-
     return (
         <div class="Layout">
             <Top
