@@ -9,9 +9,9 @@ export let createArticle = (path) => {
     
         useEffect(() => {
             import('@contents/' + path + '/index.md').then(data => {
-                if (!isUnmounted.current) {
+                // if (!isUnmounted.current) {
                     setData(data);
-                }
+                // }
             });
 
             return () => {
