@@ -26,8 +26,12 @@ jobs:
         port: 22
         script: |
           cd /var/www/fiddleheadjs.com
+          echo "> git checkout master"
           git checkout master
+          echo "> git pull"
           git pull
+          echo "> npm install"
           npm install
+          echo "> npm run dist"
           npm run dist
-          pm2 restart fiddleheadjs.com
+
