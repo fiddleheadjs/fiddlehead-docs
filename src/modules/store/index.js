@@ -2,8 +2,14 @@ import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 
 const scope = {};
 
+const data = {
+    layoutScroll: {}
+};
+
+Object.seal(data);
+
 export let useStore = () => {
-    useStoreInit(scope, {});
+    useStoreInit(scope, data);
 };
 
 export let useSelect = (readFn, compareFn) => {

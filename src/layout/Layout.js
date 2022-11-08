@@ -9,8 +9,8 @@ export let Layout = ({children}) => {
     let location = useLocation();
 
     let setLayoutScroll = useDispatch((data) => {
-        data.layoutScrollObject = window;
-        data.layoutScrollElement = document.documentElement;
+        data.layoutScroll.element = document.documentElement;
+        data.layoutScroll.object = window;
     });
 
     useEffect(() => {

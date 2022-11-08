@@ -12,8 +12,8 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
     let tocRef = useRef(null);
     let contentsRef = useRef(null);
 
-    let scrollee = useSelect(data => data.layoutScrollElement);
-    let scroller = useSelect(data => data.layoutScrollObject);
+    let scrollee = useSelect(data => data.layoutScroll.element);
+    let scroller = useSelect(data => data.layoutScroll.object);
 
     // Scroll into the heading which matches the requested hash
     useEffect(() => {

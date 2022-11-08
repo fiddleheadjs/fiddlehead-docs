@@ -82,6 +82,7 @@ fs.readdirSync(entriesDir).map(filename => {
             alias: {
                 '@contents': path.resolve(rootDir, 'src/contents'),
                 '@components': path.resolve(rootDir, 'src/components'),
+                '@modules': path.resolve(rootDir, 'src/modules'),
             }
         }
     });
