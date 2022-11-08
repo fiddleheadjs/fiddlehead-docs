@@ -18,12 +18,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Deploy using ssh
-      uses: fifsky/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        user: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
-        command: |
+        port: 22
+        script: |
           cd /var/www/fiddleheadjs.com
           npm run dist
           pm2 restart fiddleheadjs.com
