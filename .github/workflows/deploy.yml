@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Node.js CD
+name: Deploy CD
 
 # Controls when the action will run. 
 on:
@@ -26,5 +26,8 @@ jobs:
         port: 22
         script: |
           cd /var/www/fiddleheadjs.com
+          git checkout master
+          git pull
+          npm install
           npm run dist
           pm2 restart fiddleheadjs.com
