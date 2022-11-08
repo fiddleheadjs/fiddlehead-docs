@@ -6,6 +6,7 @@
     align-items: flex-start;
 
     @nav-width: 28ch;
+    @nav-width-small: 22ch;
 
     > main {
         max-width: 100%;
@@ -13,6 +14,10 @@
         .media-current(@screen-desktop, {
             padding-right: 2em;
             width: calc(100% - @nav-width);
+        });
+
+        .media-current(@screen-desktop-small, {
+            width: calc(100% - @nav-width-small);
         });
 
         > .contents {
@@ -37,6 +42,10 @@
         &.toc-hidden {
             display: none;
         }
+
+        .media-current(@screen-desktop-small, {
+            width: @nav-width-small;
+        });
 
         .media-current(@screen-non-desktop, {
             display: none;
