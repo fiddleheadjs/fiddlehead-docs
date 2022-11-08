@@ -80,7 +80,8 @@ fs.readdirSync(entriesDir).map(filename => {
         ],
         resolve: {
             alias: {
-                '@contents': path.resolve(rootDir, 'src/contents')
+                '@contents': path.resolve(rootDir, 'src/contents'),
+                '@components': path.resolve(rootDir, 'src/components'),
             }
         }
     });

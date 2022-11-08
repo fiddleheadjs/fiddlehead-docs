@@ -34,4 +34,3 @@ jobs:
           npm install
           echo "> npm run dist"
           npm run dist
-

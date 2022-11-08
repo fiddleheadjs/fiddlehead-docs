@@ -168,6 +168,7 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
             }
 
             let {Component, code} = demos[content.demo];
+            
             return <DemoViewer
                 key={index}
                 Component={Component}

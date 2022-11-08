@@ -1,6 +1,7 @@
 import './Top.less';
 import {__} from '../../modules/i18n';
 import {Link} from '../../modules/router';
+import {Button} from '../../components/button/Button';
 
 export let Top = ({toggleNav, navShown}) => {
     return (
@@ -13,13 +14,12 @@ export let Top = ({toggleNav, navShown}) => {
                     />
                     <span>Fiddlehead</span>
                 </Link>
-                <button
+                <Button
                     class="nav-toggle"
-                    type="button"
                     onClick={toggleNav}
                 >
                     {navShown ? __('Hide Navigation') : __('Show Navigation')}
-                </button>
+                </Button>
             </div>
         </div>
     );
