@@ -9,7 +9,6 @@ export default function Counter() {
             <h2>Count: {count}</h2>
             <br/>
             <Button
-                type="button"
                 onClick={() => {
                     setCount(count => count + 1);
                 }}
