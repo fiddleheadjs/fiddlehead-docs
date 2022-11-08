@@ -1,7 +1,7 @@
 import {useState} from 'fiddlehead';
 import {Button} from '@components/button/Button';
 
-export default function Counter() {
+export default function Counter({console}) {
     let [count, setCount] = useState(0);
     
     return (
@@ -10,7 +10,8 @@ export default function Counter() {
             <br/>
             <Button
                 onClick={() => {
-                    setCount(count => count + 1);
+                    setCount(count + 1);
+                    console.log('count', count);
                 }}
             >
                 Increase

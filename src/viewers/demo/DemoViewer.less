@@ -4,11 +4,7 @@
     border: 1px solid @gray-light-A2;
     overflow: hidden;
 
-    .component-box {
-        padding: @space-small-4;
-    }
-
-    .action-bar {
+    > .action-bar {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -20,7 +16,27 @@
         }
     }
 
-    .code-box {
+    > .code-box {
         
+    }
+    
+    > .output-box {
+        > .ui {
+            padding: @space-small-4;
+        }
+
+        > .console {
+            > .heading {
+                .font-code();
+                font-size: @font-size-body-bold;
+                padding: @space-tiny-4 @space-small-4;
+                border-top: 1px solid @gray-light-A2;
+                border-bottom: 1px solid @gray-light-A4;
+            }
+            
+            > .body {
+                padding: @space-small-4;
+            }
+        }
     }
 }

@@ -25,25 +25,25 @@ export let DemoViewer = ({Component, code}) => {
             </div>
             {
                 showsOutput &&
-                <div class="component-box">
-                    <Component logger={logger} />
-                </div>
-            }
-            {
-                showsOutput &&
-                logger.lines.length > 0 &&
-                <div class="console">
-                    <pre>
-                        <code>
-                            {logger.lines.map(([level, chunks]) => {
-                                console.log(chunks); return (
-                                    <div class={level}>
-                                        {chunks.join(' ')}
-                                    </div>
-                                )
-                            })}
-                        </code>
-                    </pre>
+                <div class="output-box">
+                    <div class="ui">
+                        <Component console={logger} />
+                    </div>
+                    {
+                        logger.lines.length > 0 &&
+                        <div class="console">
+                            <div class="heading">Console</div>
+                            <pre class="body">
+                                <code>
+                                    {logger.lines.map(([level, chunks]) => (
+                                        <div class={level}>
+                                            {chunks.join(' ')}
+                                        </div>
+                                    ))}
+                                </code>
+                            </pre>
+                        </div>
+                    }
                 </div>
             }
         </div>
