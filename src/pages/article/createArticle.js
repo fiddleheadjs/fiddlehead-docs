@@ -46,19 +46,18 @@ export let createArticle = (path, currentNavItem) => {
                 previousButton={
                     <Link href={currentNavItem.previous?.path}>
                         <Button disabled={currentNavItem.previous === null}>
-                            <span>{__('Previous: ')}</span>
-                            <strong>{currentNavItem.previous?.label}</strong>
+                            <span>{__('Previous')}</span>
                         </Button>
                     </Link>
                 }
-                nextButton={
-                    <Link href={currentNavItem.next?.path}>
-                        <Button disabled={currentNavItem.next === null}>
+                nextButton={currentNavItem.next !== null && (
+                    <Link href={currentNavItem.next.path}> 
+                        <Button>
                             <span>{__('Next: ')}</span>
-                            <strong>{currentNavItem.next?.label}</strong>
+                            <strong>{currentNavItem.next.label}</strong>
                         </Button>
                     </Link>
-                }
+                )}
             />
         );
     };
