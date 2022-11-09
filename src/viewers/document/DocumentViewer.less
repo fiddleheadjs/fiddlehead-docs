@@ -9,6 +9,7 @@
     @nav-width-small: 22ch;
 
     > main {
+        width: 100%;
         max-width: 100%;
 
         .media-current(@screen-desktop, {
@@ -34,9 +35,32 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
+                margin-top: @space-medium-4;
+            }
+
+            > .footer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: @space-large-4;
+
+                > .links {
+                    a {
+                        display: inline-flex;
+                        align-items: center;
+                        padding: @space-tiny-2 @space-tiny-4;
+                        .border-radius(2);
+                        .color-tinge-interactive(@gray-dark);
+                        .font-code();
+
+                        > :not(:last-child) {
+                            margin-right: @space-tiny-4;
+                        }
+                    }
+                }
             }
         }
-
     }
 
     > nav {

@@ -5,10 +5,22 @@ import {DemoViewer} from '../demo/DemoViewer';
 import {__} from '../../modules/i18n';
 import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
+import {Link} from '../../modules/router';
+import {Button} from '../../components/button/Button';
+import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
+import {RightArrowIcon} from '../../icons/RightArrowIcon';
+import {GithubIcon} from '../../icons/GithubIcon';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
-export let DocumentViewer = ({headings = [], contents = [], demos = {}, previousButton, nextButton}) => {
+export let DocumentViewer = ({
+    headings = [],
+    contents = [],
+    demos = {},
+    contentPath,
+    previous,
+    next,
+}) => {
     let tocRef = useRef(null);
     let contentsRef = useRef(null);
 
@@ -185,9 +197,38 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}, previous
                 {
                     getContents()
                 }
-                <div class="quick-nav">
-                    {previousButton}
-                    {nextButton}
+                {(previous !== null || next !== null) && (
+                    <div class="quick-nav">
+                        {previous !== null && (
+                            <Link href={previous.path}>
+                                <Button>
+                                    <LeftArrowIcon/>
+                                    <span>{previous.label}</span>
+                                </Button>
+                            </Link>
+                        )}
+                        <div/>
+                        {next !== null && (
+                            <Link href={next.path}>
+                                <Button>
+                                    <span>{next.label}</span>
+                                    <RightArrowIcon/>
+                                </Button>
+                            </Link>
+                        )}
+                    </div>
+                )}
+                <div class="footer">
+                    <div class="copyright">
+                        &copy; {new Date().getFullYear()} Cốc Cốc Ad Platform.
+                    </div>
+                    <div class="links">
+                        <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
+                            <span>{__('edit this page on')}</span>
+                            <GithubIcon size="1.8em"/>
+                            <span>{__('GitHub')}</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
