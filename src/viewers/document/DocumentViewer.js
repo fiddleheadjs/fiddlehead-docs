@@ -220,7 +220,7 @@ export let DocumentViewer = ({
                 )}
                 <div class="footer">
                     <div class="copyright">
-                        &copy; {new Date().getFullYear()} Cốc Cốc Ad Platform.
+                        &copy; {new Date().getFullYear()} Cốc Cốc, Inc.
                     </div>
                     <div class="links">
                         <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
