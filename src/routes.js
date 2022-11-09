@@ -14,6 +14,7 @@ let isHomepageFilename = (filename) => /^0+\./.test(filename);
 
 let contentRoutes = [];
 let contentNavItems = [];
+let lastNavItem = null;
 
 let walk = (dirItem, navItems) => {
     if (isFileItem(dirItem)) {
@@ -28,25 +29,31 @@ let walk = (dirItem, navItems) => {
         publicPath = '/';
     }
 
-    let hasTarget = false;
-    
-    if (dirChildren.some(isFileItem)) {
-        contentRoutes.push({
-            path: publicPath,
-            Component: createArticle(pathname),
-        });
-        hasTarget = true;
-    }
+    let hasTarget = dirChildren.some(isFileItem);
     
     let label = stripFilenameNotations(filename).replace(/\-/g, ' ');
     let navChildren = [];
     
-    navItems.push({
+    let currentNavItem = {
         path: publicPath,
         label: label,
         children: navChildren,
         hasTarget: hasTarget,
-    });
+        previous: lastNavItem,
+        next: null,
+    };
+    navItems.push(currentNavItem);
+    if (lastNavItem !== null) {
+        lastNavItem.next = currentNavItem;
+    }
+    lastNavItem = currentNavItem;
+
+    if (hasTarget) {
+        contentRoutes.push({
+            path: publicPath,
+            Component: createArticle(pathname, currentNavItem),
+        });
+    }
 
     dirChildren.forEach(child => {
         walk(child, navChildren);

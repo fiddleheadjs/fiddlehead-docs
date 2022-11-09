@@ -8,7 +8,7 @@ import {useSelect} from '../../modules/store';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
-export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
+export let DocumentViewer = ({headings = [], contents = [], demos = {}, previousButton, nextButton}) => {
     let tocRef = useRef(null);
     let contentsRef = useRef(null);
 
@@ -185,6 +185,10 @@ export let DocumentViewer = ({headings = [], contents = [], demos = {}}) => {
                 {
                     getContents()
                 }
+                <div class="quick-nav">
+                    {previousButton}
+                    {nextButton}
+                </div>
             </div>
         </main>
         <nav class={tocHidden ? 'toc-hidden' : null}>

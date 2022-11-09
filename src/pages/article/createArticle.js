@@ -1,7 +1,11 @@
 import {useState, useEffect, useRef} from 'fiddlehead';
+import {Button} from '../../components/button/Button';
+import {__} from '../../modules/i18n';
 import {DocumentViewer} from '../../viewers/document/DocumentViewer';
+import {Link} from '../../modules/router';
 
-export let createArticle = (path) => {
+export let createArticle = (path, currentNavItem) => {
+    console.log(currentNavItem)
     let Article = () => {
         let [data, setData] = useState(null);
 
@@ -9,9 +13,9 @@ export let createArticle = (path) => {
     
         useEffect(() => {
             import('@contents/' + path + '/index.md').then(data => {
-                // if (!isUnmounted.current) {
+                if (!isUnmounted.current) {
                     setData(data);
-                // }
+                }
             });
 
             return () => {
@@ -39,6 +43,22 @@ export let createArticle = (path) => {
                 headings={headings}
                 contents={contents}
                 demos={demos}
+                previousButton={
+                    <Link href={currentNavItem.previous?.path}>
+                        <Button disabled={currentNavItem.previous === null}>
+                            <span>{__('Previous: ')}</span>
+                            <strong>{currentNavItem.previous?.label}</strong>
+                        </Button>
+                    </Link>
+                }
+                nextButton={
+                    <Link href={currentNavItem.next?.path}>
+                        <Button disabled={currentNavItem.next === null}>
+                            <span>{__('Next: ')}</span>
+                            <strong>{currentNavItem.next?.label}</strong>
+                        </Button>
+                    </Link>
+                }
             />
         );
     };
