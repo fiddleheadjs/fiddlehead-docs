@@ -64,7 +64,7 @@ module.exports = {
 
 Here we refer to the [Webpack introductory configuration](https://webpack.js.org/concepts/configuration/#introductory-configuration)
 and add `babel-loader` to support JSX syntax.
-If you get confused about Webpack loaders, [click here](https://webpack.js.org/concepts/loaders/).
+If you get confused about Webpack loaders, checkout this [document](https://webpack.js.org/concepts/loaders/) for more information.
 
 ## Build your code
 
