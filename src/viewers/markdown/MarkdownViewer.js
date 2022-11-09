@@ -54,7 +54,9 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         }
 
         return (
-            `<pre${options && ' ' + options}><code class="language-${language}">${code}</code></pre>`
+            `<pre${options && ' ' + options}><code class="language-${language}">${
+                code.replace(/&/, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            }</code></pre>`
         );
     };
 
