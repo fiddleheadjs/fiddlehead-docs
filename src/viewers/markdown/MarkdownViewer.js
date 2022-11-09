@@ -45,27 +45,16 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
     };
 
     renderer.code = (code, language) => {
-        let options = null;
-
-        let firstLine = code.split('\n', 1)[0].trim();
-        if (firstLine.startsWith('//')) {
-            try {
-                options = JSON.parse(firstLine.substring(2));
-                code = code.substring(firstLine.length);
-            } catch (error) {}
-        }
-
-        code = code.trim();
+        let options = '';
+        let firstLine = code.split(/\n|\r/, 1)[0];
         
-        let preAttrs = '';
-        if (options !== null) {
-            preAttrs = ' ' + Object.keys(options).map(
-                key => `${key}="${options[key]}"`
-            ).join(' ');
+        if (firstLine.startsWith('//')) {
+            options = firstLine.substring(2).trim();
+            code = code.substring(firstLine.length + 1);
         }
 
         return (
-            `<pre${preAttrs}><code class="language-${language}">${code}</code></pre>`
+            `<pre${options && ' ' + options}><code class="language-${language}">${code}</code></pre>`
         );
     };
 

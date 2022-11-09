@@ -26,7 +26,7 @@ export let CodeViewer = ({code, language, options = {}}) => {
                     ref={codeElementRef}
                     class={`language-${language}`} // keep the same format with Marked
                 >
-                    {code.trim()}
+                    {code}
                 </code>
             </pre>
         </div>
