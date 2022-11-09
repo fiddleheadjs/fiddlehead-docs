@@ -224,7 +224,7 @@ export let DocumentViewer = ({
                     </div>
                     <div class="links">
                         <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
-                            <span>{__('edit this page on')}</span>
+                            <span>{__('Edit this page on')}</span>
                             <GithubIcon size="1.8em"/>
                         </a>
                     </div>
