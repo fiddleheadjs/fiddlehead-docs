@@ -225,7 +225,7 @@ export let DocumentViewer = ({
                 >
                     <Button variant="textual" size="small">
                         <span>{__('Edit this page')}</span>
-                        <AltGithubIcon/>
+                        <AltGithubIcon size="1.2em"/>
                     </Button>
                 </a>
             </div>
