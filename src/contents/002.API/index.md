@@ -11,3 +11,4 @@ _Fiddlehead APIs_
 - [useMemo](/API/useMemo)
 - [useCatch](/API/useCatch)
 - [createPortal](/API/createPortal)
+- [/store](/API/store)
