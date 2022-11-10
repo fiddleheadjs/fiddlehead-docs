@@ -1,6 +1,7 @@
 // Fiddlehead
 // Fiddlehead - building UI with JSX and hooks
 
+import '../style/common.less';
 import {render} from 'fiddlehead';
 import {Layout} from '../layout/Layout';
 import {useRouter} from '../modules/router';

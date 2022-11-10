@@ -57,10 +57,10 @@ let box_shadow = {
 };
 
 let z_index = {
-    layout_portal: 100100,
-    dropdown: 100200,
-    tooltip: 100300,
-    toast: 100400,
+    layout_portal: 1100,
+    dropdown: 1200,
+    tooltip: 1300,
+    toast: 1400,
 };
 
 let duration = {
@@ -83,9 +83,9 @@ let line_height = {
     body_bold: 1.4,
     body_semibold: 1.4,
     body_small: 1.4,
-    button: 2.5,
-    button_small: 2.3,
-    button_large: 2.7,
+    button: 2.3,
+    button_small: 2.1,
+    button_large: 2.5,
     code: 1.4,
 };
 
@@ -113,9 +113,9 @@ let font_weight = {
     body_bold: 700,
     body_semibold: 600,
     body_small: 400,
-    button: 600,
-    button_small: 600,
-    button_large: 600,
+    button: 400,
+    button_small: 400,
+    button_large: 400,
     code: 400,
 };
 
@@ -135,7 +135,7 @@ let font_family = {
 };
 
 let text_color = {
-    default: gray.dark,
+    default: gray.midnight,
 };
 
 let action_color = {

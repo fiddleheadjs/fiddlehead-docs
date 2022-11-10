@@ -18,7 +18,13 @@
         align-items: center;
         padding: @viewport-padding;
 
-        .logo {
+        > :not(:last-child) {
+            margin-right: @space-small-4;
+        }
+
+        > .logo {
+            white-space: nowrap;
+
             img {
                 width: 3em;
                 height: 3em;
@@ -29,10 +35,25 @@
             }
         }
 
-        .nav-toggle {
-            .media-current(@screen-desktop, {
-                display: none;
-            });
+        > .right {
+            display: flex;
+            align-items: center;
+
+            .github {
+                display: inline-block;
+                padding: @space-tiny-2 @space-tiny-4;
+                .border-radius(2);
+                .color-tinge-interactive(@text-color-default);
+            }
+            
+            .nav-toggle {
+                margin-left: @space-small-2;
+                .font-button-small();
+
+                .media-current(@screen-desktop, {
+                    display: none;
+                });
+            }
         }
     }
 }

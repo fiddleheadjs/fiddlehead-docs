@@ -2,6 +2,7 @@ import './Top.less';
 import {__} from '../../modules/i18n';
 import {Link} from '../../modules/router';
 import {Button} from '../../components/button/Button';
+import {GithubIcon} from '../../icons/GithubIcon';
 
 export let Top = ({toggleNav, navShown}) => {
     return (
@@ -14,12 +15,21 @@ export let Top = ({toggleNav, navShown}) => {
                     />
                     <span>Fiddlehead</span>
                 </Link>
-                <Button
-                    class="nav-toggle"
-                    onClick={toggleNav}
-                >
-                    {navShown ? __('Hide Navigation') : __('Show Navigation')}
-                </Button>
+                <div class="right">
+                    <a
+                        class="github"
+                        href="https://github.com/CocCoc-Ad-Platform/fiddlehead"
+                        title="Fiddlehead repository on GitHub"
+                    >
+                        <GithubIcon size="1.6em"/>
+                    </a>
+                    <Button
+                        class="nav-toggle"
+                        onClick={toggleNav}
+                    >
+                        {navShown ? __('Hide Navigation') : __('Show Navigation')}
+                    </Button>
+                </div>
             </div>
         </div>
     );

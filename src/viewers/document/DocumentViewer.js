@@ -199,36 +199,30 @@ export let DocumentViewer = ({
                 }
                 {(previous !== null || next !== null) && (
                     <div class="quick-nav">
-                        {previous !== null && (
+                        {previous !== null ? (
                             <Link href={previous.path}>
                                 <Button>
                                     <LeftArrowIcon/>
                                     <span>{previous.label}</span>
                                 </Button>
                             </Link>
-                        )}
-                        <div/>
-                        {next !== null && (
+                        ) : <span/>}
+                        {next !== null ? (
                             <Link href={next.path}>
                                 <Button>
                                     <span>{next.label}</span>
                                     <RightArrowIcon/>
                                 </Button>
                             </Link>
-                        )}
+                        ) : <span/>}
                     </div>
                 )}
-                <div class="footer">
-                    <div class="copyright">
-                        &copy; {new Date().getFullYear()} Cốc Cốc, Inc.
-                    </div>
-                    <div class="links">
-                        <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
-                            <span>{__('Edit this page on')}</span>
-                            <GithubIcon size="1.8em"/>
-                        </a>
-                    </div>
-                </div>
+            </div>
+            <div class="bottom">
+                <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
+                    <span>{__('Edit this page on')}</span>
+                    <GithubIcon size="1.3em"/>
+                </a>
             </div>
         </main>
         <nav class={tocHidden ? 'toc-hidden' : null}>

@@ -32,12 +32,7 @@ export let Layout = ({children}) => {
                 navShown={showsNavOnNonDesktop}
             />
             <div class="inner">
-                <div
-                    class={[
-                        'middle',
-                        showsNavOnNonDesktop && 'shows-nav-on-non-desktop',
-                    ].filter(Boolean).join(' ')}
-                >
+                <div class={`middle${showsNavOnNonDesktop ? ' shows-nav-on-non-desktop' : ''}`}>
                     <nav>
                         <Nav/>
                     </nav>
