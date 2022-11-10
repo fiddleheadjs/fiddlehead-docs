@@ -1,5 +1,7 @@
 # /store
 
+_This package allows you to share global state everywhere in your application._
+
 Store is a separated package. It is helpful when you want to use some global states, which can be read/written from anywhere in the DOM tree, with no need to pass props through all levels of elements.
 
 Let's checkout this example:
