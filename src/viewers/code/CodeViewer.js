@@ -1,6 +1,6 @@
 import './CodeViewer.less';
 import {useRef, useLayoutEffect, useCallback} from 'fiddlehead';
-import {highlightElement} from '../../utils/highlight';
+import {highlightElement} from '../../modules/highlight';
 
 export let CodeViewer = ({code, language, options = {}}) => {
     let codeElementRef = useRef(null);

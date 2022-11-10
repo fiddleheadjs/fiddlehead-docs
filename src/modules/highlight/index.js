@@ -1,5 +1,5 @@
+import './index.less';
 import Prism from 'prismjs';
-import './highlight.less';
 
 Prism.manual = true;
 
