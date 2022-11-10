@@ -9,7 +9,7 @@ import {Link} from '../../modules/router';
 import {Button} from '../../components/button/Button';
 import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
 import {RightArrowIcon} from '../../icons/RightArrowIcon';
-import {ExternalLinkIcon} from '../../icons/ExternalLinkIcon';
+import {AltGithubIcon} from '../../icons/AltGithubIcon';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
@@ -225,7 +225,7 @@ export let DocumentViewer = ({
                 >
                     <Button variant="textual" size="small">
                         <span>{__('Edit this page')}</span>
-                        <ExternalLinkIcon/>
+                        <AltGithubIcon/>
                     </Button>
                 </a>
             </div>
