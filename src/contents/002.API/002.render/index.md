@@ -1,6 +1,6 @@
 # render
 
-_Render your app into a HTML element._
+_Render your app into an HTML element._
 
 ```jsx
 import {render} from 'fiddlehead';
