@@ -2,12 +2,12 @@
 
 _Fiddlehead APIs_
 
-- [render](render)
-- [useState](useState)
-- [useEffect](useEffect)
-- [useLayoutEffect](useLayoutEffect)
-- [useRef](useRef)
-- [useCallback](useCallback)
-- [useMemo](useMemo)
-- [useCatch](useCatch)
-- [createPortal](createPortal)
+- [render](/API/render)
+- [useState](/API/useState)
+- [useEffect](/API/useEffect)
+- [useLayoutEffect](/API/useLayoutEffect)
+- [useRef](/API/useRef)
+- [useCallback](/API/useCallback)
+- [useMemo](/API/useMemo)
+- [useCatch](/API/useCatch)
+- [createPortal](/API/createPortal)
