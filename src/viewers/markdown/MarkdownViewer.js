@@ -1,7 +1,8 @@
 import './MarkdownViewer.less';
-import {useCallback, useLayoutEffect, useRef} from 'fiddlehead';
+import {useEffect, useLayoutEffect, useRef} from 'fiddlehead';
 import * as marked from 'marked';
 import {highlightAllUnder} from '../../modules/highlight';
+import {navigate} from '../../modules/router';
 
 const linkSvg = (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="1em" fill="currentColor">`
@@ -12,19 +13,31 @@ const linkSvg = (
 export let MarkdownViewer = ({content, headings, headingPosRef}) => {
     let elementRef = useRef(null);
 
-    let highlight = useCallback(() => {
-        if (elementRef.current !== null) {
-            highlightAllUnder(elementRef.current);
-        }
-    }, []);
-
     useLayoutEffect(() => {
+        let highlight = () => {
+            if (elementRef.current !== null) {
+                highlightAllUnder(elementRef.current);
+            }
+        };
         highlight();
         window.addEventListener('resize', highlight);
         return () => {
             window.removeEventListener('resize', highlight);
         };
-    }, [highlight]);
+    }, []);
+
+    useEffect(() => {
+        if (elementRef.current === null) {
+            return;
+        }
+        let links = elementRef.current.querySelectorAll('a[href^="/"]');
+        [].forEach.call(links, (link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                navigate(link.href);
+            });
+        });
+    }, []);
 
     const renderer = new marked.Renderer();
 
@@ -56,7 +69,9 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
 
         return (
             `<pre${options && ' ' + options}><code class="language-${language}">${
-                code.replace(/&/, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                code.replace(/&/, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
             }</code></pre>`
         );
     };

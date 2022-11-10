@@ -1,23 +1,22 @@
 import './CodeViewer.less';
-import {useRef, useLayoutEffect, useCallback} from 'fiddlehead';
+import {useRef, useLayoutEffect} from 'fiddlehead';
 import {highlightElement} from '../../modules/highlight';
 
 export let CodeViewer = ({code, language, options = {}}) => {
     let codeElementRef = useRef(null);
 
-    let highlight = useCallback(() => {
-        if (codeElementRef.current !== null) {
-            highlightElement(codeElementRef.current);
-        }
-    }, []);
-
     useLayoutEffect(() => {
+        let highlight = () => {
+            if (codeElementRef.current !== null) {
+                highlightElement(codeElementRef.current);
+            }
+        };
         highlight();
         window.addEventListener('resize', highlight);
         return () => {
             window.removeEventListener('resize', highlight);
         };
-    }, [highlight]);
+    }, []);
 
     return (
         <div class="CodeViewer">
