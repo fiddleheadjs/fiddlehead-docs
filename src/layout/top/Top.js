@@ -26,6 +26,7 @@ export let Top = ({toggleNav, navShown}) => {
                     <Button
                         class="nav-toggle"
                         onClick={toggleNav}
+                        size="small"
                     >
                         {navShown ? __('Hide Navigation') : __('Show Navigation')}
                     </Button>

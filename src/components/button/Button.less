@@ -6,8 +6,8 @@
     align-items: center;
     justify-content: center;
     background: @gray-white;
-    padding: 0 @space-tiny-4;
-    border: 1px solid @gray-light-A2;
+    padding: 0 0.6em;
+    border: 1px solid transparent;
     white-space: nowrap;
     .border-radius(2);
     .font-button();
@@ -20,7 +20,23 @@
         color: @gray-twilight;
     }
 
+    &.variant-outlined {
+        border-color: @gray-light-A2;
+    }
+
+    &.variant-textual {
+        border-color: none;
+    }
+
+    &.size-small {
+        .font-button-small();
+    }
+
+    &.size-large {
+        .font-button-large();
+    }
+
     > :not(:last-child) {
-        margin-right: @space-small-2;
+        margin-right: 0.8em;
     }
 }
