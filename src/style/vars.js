@@ -83,9 +83,9 @@ let line_height = {
     body_bold: 1.4,
     body_semibold: 1.4,
     body_small: 1.4,
-    button: 2.3,
-    button_small: 2.1,
-    button_large: 2.5,
+    button: 1.4,
+    button_small: 1.2,
+    button_large: 1.5,
     code: 1.4,
 };
 
