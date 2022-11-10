@@ -20,6 +20,7 @@ export let Top = ({toggleNav, navShown}) => {
                         class="github"
                         href="https://github.com/CocCoc-Ad-Platform/fiddlehead"
                         title="Fiddlehead repository on GitHub"
+                        target="_blank"
                     >
                         <GithubIcon size="1.7em"/>
                     </a>

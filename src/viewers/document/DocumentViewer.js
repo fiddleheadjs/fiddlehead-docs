@@ -9,7 +9,7 @@ import {Link} from '../../modules/router';
 import {Button} from '../../components/button/Button';
 import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
 import {RightArrowIcon} from '../../icons/RightArrowIcon';
-import {GithubIcon} from '../../icons/GithubIcon';
+import {ExternalLinkIcon} from '../../icons/ExternalLinkIcon';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
@@ -219,10 +219,13 @@ export let DocumentViewer = ({
                 )}
             </div>
             <div class="bottom">
-                <a href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}>
+                <a
+                    href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
+                    target="_blank"
+                >
                     <Button variant="textual" size="small">
-                        <span>{__('Edit this page on')}</span>
-                        <GithubIcon size="1.3em"/>
+                        <span>{__('Edit this page')}</span>
+                        <ExternalLinkIcon/>
                     </Button>
                 </a>
             </div>
