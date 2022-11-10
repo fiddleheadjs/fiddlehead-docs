@@ -66,7 +66,7 @@ Here we refer to the [Webpack introductory configuration](https://webpack.js.org
 and add `babel-loader` to support JSX syntax.
 If you get confused about Webpack loaders, checkout this [document](https://webpack.js.org/concepts/loaders/) for more information.
 
-## Build your code
+## Compile your code
 
 Now, let's start with a tiny piece of code!
 
