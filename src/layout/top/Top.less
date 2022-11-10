@@ -40,14 +40,18 @@
             align-items: center;
 
             .github {
-                display: inline-block;
-                padding: @space-tiny-2 @space-tiny-4;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 2.5em;
+                min-height: 2.5em;
                 .border-radius(2);
                 .color-tinge-interactive(@text-color-default);
             }
             
             .nav-toggle {
                 margin-left: @space-small-2;
+                min-width: 9.2em;
                 .font-button-small();
 
                 .media-current(@screen-desktop, {
