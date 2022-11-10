@@ -3,7 +3,6 @@ import {__} from '../../modules/i18n';
 import {DocumentViewer} from '../../viewers/document/DocumentViewer';
 
 export let createArticle = (contentPath, currentNavItem) => {
-    console.log(currentNavItem)
     let Article = () => {
         let [data, setData] = useState(null);
 
