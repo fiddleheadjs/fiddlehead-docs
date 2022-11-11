@@ -5,9 +5,12 @@
     top: @top-height;
     max-height: calc(100vh - @top-height);
     overflow: auto;
-    padding: @viewport-padding 0 @viewport-padding @viewport-padding;
+    padding:
+        @viewport-padding
+        0
+        @viewport-padding
+        @viewport-padding - @space-tiny-3;
     min-width: 22ch;
-    max-width: 22ch;
 
     .media-current(@screen-mobile, {
         min-width: 18ch;
@@ -21,17 +24,12 @@
         li {
             a {
                 display: block;
-                padding: @space-tiny-4 0;
+                padding: @space-tiny-4 @space-tiny-3;
+                white-space: nowrap;
                 cursor: pointer;
                 .border-radius(2);
 
                 &:hover,
-                &.active {
-                    padding-left: @space-tiny-3;
-                    margin-left: -@space-tiny-3;
-                    background: @color-primary-light-A4;
-                }
-                
                 &.active {
                     background: @color-primary-light-A4;
                 }
