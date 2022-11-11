@@ -30,12 +30,13 @@ export let createArticle = (contentPath, currentNavItem) => {
         }, [data]);
     
         if (data === null) {
-            return null;
+            return <div class="Article"/>;
         }
 
         let {headings, contents, demos} = data;
     
         return (
+            <div class="Article">
             <DocumentViewer
                 headings={headings}
                 contents={contents}
@@ -44,6 +45,7 @@ export let createArticle = (contentPath, currentNavItem) => {
                 next={currentNavItem.next}
                 previous={currentNavItem.previous}
             />
+            </div>
         );
     };
 
