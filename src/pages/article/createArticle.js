@@ -30,7 +30,7 @@ export let createArticle = (contentPath, currentNavItem) => {
         }, [data]);
     
         if (data === null) {
-            return <div class="Article"/>;
+            return <div class="Article" style={{width: '100%'}/>;
         }
 
         let {headings, contents, demos} = data;
