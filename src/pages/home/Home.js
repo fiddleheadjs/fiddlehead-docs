@@ -7,7 +7,7 @@ export let Home = () => {
         <div class="Home">
             <h1>Fiddlehead</h1>
             <Intro/>
-            {/* <Demo/> */}
+            <Demo/>
         </div>
     );
 };

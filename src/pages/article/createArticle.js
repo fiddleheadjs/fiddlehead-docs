@@ -1,5 +1,4 @@
 import {useState, useEffect, useRef} from 'fiddlehead';
-import {__} from '../../modules/i18n';
 import {DocumentViewer} from '../../viewers/document/DocumentViewer';
 
 export let createArticle = (contentPath, currentNavItem) => {
