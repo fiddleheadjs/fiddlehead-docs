@@ -40,7 +40,7 @@ function Form() {
     let title = useStoreRead(App, (data) => data.title);
     let setTitle = useStoreWrite(
         App, // Scope
-        (data, value) => data.title = value // Writer
+        (value, data) => data.title = value // Writer
     );
 
     return (
