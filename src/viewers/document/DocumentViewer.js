@@ -220,7 +220,7 @@ export let DocumentViewer = ({
             </div>
             <div class="bottom">
                 <a
-                    href={`https://github.com/CocCoc-Ad-Platform/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
+                    href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
                     target="_blank"
                 >
                     <Button variant="textual" size="small">

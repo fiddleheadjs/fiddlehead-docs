@@ -2,7 +2,7 @@
 
 _A lightweight library to build user interfaces with JSX and hooks._
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?logo=github)](https://github.com/CocCoc-Ad-Platform/fiddlehead/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/fiddlehead.svg?color=green&logo=npm)](https://www.npmjs.com/package/fiddlehead) [![bundle size](https://img.shields.io/github/size/CocCoc-Ad-Platform/fiddlehead/lib/core/esm.production.js?color=green)](https://github.com/CocCoc-Ad-Platform/fiddlehead/blob/master/lib/core/esm.production.js)
+[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?logo=github)](https://github.com/fiddleheadjs/fiddlehead/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/fiddlehead.svg?color=green&logo=npm)](https://www.npmjs.com/package/fiddlehead) [![bundle size](https://img.shields.io/github/size/fiddleheadjs/fiddlehead/lib/core/esm.production.js?color=green)](https://github.com/fiddleheadjs/fiddlehead/blob/master/lib/core/esm.production.js)
 
 Fiddlehead is a UI library that allows you to develop web apps in the declarative style,
 component-based - these make your lines of code more predictable and maintainable.

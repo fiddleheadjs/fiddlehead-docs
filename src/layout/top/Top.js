@@ -18,7 +18,7 @@ export let Top = ({toggleNav, navShown}) => {
                 <div class="right">
                     <a
                         class="github"
-                        href="https://github.com/CocCoc-Ad-Platform/fiddlehead"
+                        href="https://github.com/fiddleheadjs/fiddlehead"
                         title="Fiddlehead repository on GitHub"
                         target="_blank"
                     >
