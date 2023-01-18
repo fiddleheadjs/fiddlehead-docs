@@ -12,20 +12,29 @@ module.exports = function (source) {
 
     contents.forEach(content => {
         if (typeof content === 'string') {
+            // Do nothing
             return;
         }
 
-        let demoId = content.demo;
-        let filePath = path.join(path.dirname(this.resourcePath), demoId + '.js');
+        if (content.demo !== undefined) {
+            let demoId = content.demo;
+            let filePath = path.join(path.dirname(this.resourcePath), demoId + '.js');
+    
+            demoIds.push(demoId);
+            demoPaths[demoId] = filePath.split(path.sep).join('/');
+            demoCodes[demoId] = fs.readFileSync(filePath, 'utf-8');
+    
+            // If a loader uses external resources (i.e. by reading from filesystem), they must indicate it.
+            // This information is used to invalidate cacheable loaders and recompile in watch mode.
+            // https://webpack.js.org/contribute/writing-a-loader/#loader-dependencies
+            this.addDependency(filePath);
+            return;
+        }
 
-        demoIds.push(demoId);
-        demoPaths[demoId] = filePath.split(path.sep).join('/');
-        demoCodes[demoId] = fs.readFileSync(filePath, 'utf-8');
-
-        // If a loader uses external resources (i.e. by reading from filesystem), they must indicate it.
-        // This information is used to invalidate cacheable loaders and recompile in watch mode.
-        // https://webpack.js.org/contribute/writing-a-loader/#loader-dependencies
-        this.addDependency(filePath);
+        if (content.playground !== undefined) {
+            // Do nothing
+            return;
+        }
     });
 
     let {title, description, headings} = getMetadata(source);

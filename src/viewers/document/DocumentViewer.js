@@ -10,6 +10,7 @@ import {Button} from '../../components/button/Button';
 import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
 import {RightArrowIcon} from '../../icons/RightArrowIcon';
 import {AltGithubIcon} from '../../icons/AltGithubIcon';
+import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
@@ -49,9 +50,9 @@ export let DocumentViewer = ({
                 scrollTop: window.scrollY,
             };
         }
-        
+
         let scrolleeRect = scrollee.getBoundingClientRect();
-        
+
         return {
             height: scrolleeRect.height,
             top: scrolleeRect.top,
@@ -171,81 +172,101 @@ export let DocumentViewer = ({
 
         return contents.map((content, index) => {
             if (typeof content === 'string') {
-                return <MarkdownViewer
-                    key={index}
-                    content={content}
-                    headings={headings}
-                    headingPosRef={headingPosRef}
-                />;
+                return (
+                    <MarkdownViewer
+                        key={index}
+                        content={content}
+                        headings={headings}
+                        headingPosRef={headingPosRef}
+                    />
+                );
             }
 
-            let {Component, code} = demos[content.demo];
-            
-            return <DemoViewer
-                key={index}
-                Component={Component}
-                code={code}
-            />;
+            if (content.demo !== undefined) {
+                let {Component, code} = demos[content.demo];
+
+                return (
+                    <DemoViewer
+                        key={index}
+                        Component={Component}
+                        code={code}
+                    />
+                );
+            }
+
+            if (content.playground !== undefined) {
+                const {modules} = content.playground;
+
+                return (
+                    <PlaygroundViewer
+                        modules={modules}
+                    />
+                );
+            }
         });
     };
 
     let tocHidden = headings.length < MIN_HEADINGS_TO_SHOW_TOC;
 
-    return <div class="DocumentViewer">
-        <main class={tocHidden ? 'toc-hidden' : null}>
-            <div class="contents" ref={contentsRef}>
-                {
-                    getContents()
-                }
-                {(previous !== null || next !== null) && (
-                    <div class="quick-nav">
-                        {previous !== null ? (
-                            <Link href={previous.path}>
-                                <Button>
-                                    <LeftArrowIcon/>
-                                    <span>{previous.label}</span>
-                                </Button>
-                            </Link>
-                        ) : <span/>}
-                        {next !== null ? (
-                            <Link href={next.path}>
-                                <Button>
-                                    <span>{next.label}</span>
-                                    <RightArrowIcon/>
-                                </Button>
-                            </Link>
-                        ) : <span/>}
-                    </div>
-                )}
-            </div>
-            <div class="bottom">
-                <a
-                    href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
-                    target="_blank"
-                >
-                    <Button variant="textual" size="small">
-                        <span>{__('Edit this page')}</span>
-                        <AltGithubIcon size="1.2em"/>
-                    </Button>
-                </a>
-            </div>
-        </main>
-        <nav class={tocHidden ? 'toc-hidden' : null}>
-            <div
-                class="table-of-contents"
-                ref={tocRef}
-            >
-                <div class="title">{__('Table of contents')}</div>
-                <ul class="list">
+    return (
+        <div class="DocumentViewer">
+            <main class={tocHidden ? 'toc-hidden' : null}>
+                <div class="contents" ref={contentsRef}>
                     {
-                        headings.map(({text, level, id}) => {
-                            return <li key={id} data-id={id} data-level={level}>
-                                <a href={'#'.concat(id)} innerHTML={marked.parseInline(text)}/>
-                            </li>;
-                        })
+                        getContents()
                     }
-                </ul>
-            </div>
-        </nav>
-    </div>;
+                    {(previous !== null || next !== null) && (
+                        <div class="quick-nav">
+                            {previous !== null ? (
+                                <Link href={previous.path}>
+                                    <Button>
+                                        <LeftArrowIcon />
+                                        <span>{previous.label}</span>
+                                    </Button>
+                                </Link>
+                            ) : <span />}
+                            {next !== null ? (
+                                <Link href={next.path}>
+                                    <Button>
+                                        <span>{next.label}</span>
+                                        <RightArrowIcon />
+                                    </Button>
+                                </Link>
+                            ) : <span />}
+                        </div>
+                    )}
+                </div>
+                <div class="bottom">
+                    <a
+                        href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
+                        target="_blank"
+                    >
+                        <Button variant="textual" size="small">
+                            <span>{__('Edit this page')}</span>
+                            <AltGithubIcon size="1.2em" />
+                        </Button>
+                    </a>
+                </div>
+            </main>
+            <nav class={tocHidden ? 'toc-hidden' : null}>
+                <div
+                    class="table-of-contents"
+                    ref={tocRef}
+                >
+                    <div class="title">{__('Table of contents')}</div>
+                    <ul class="list">
+                        {
+                            headings.map(({text, level, id}) => {
+                                return (
+                                    <li key={id} data-id={id} data-level={level}>
+                                        <a href={'#'.concat(id)} innerHTML={marked.parseInline(text)} />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    );
 }

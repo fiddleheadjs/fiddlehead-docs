@@ -5,6 +5,7 @@ export let useLogger = () => {
     
     return {
         log: (...chunks) => {
+            console.log(...chunks);
             setLines(lines => {
                 let value = [
                     ...lines,
