@@ -19,9 +19,39 @@ With such criteria in mind, we made it some benefits:
 
 #### Try it now
 
-<iframe src="https://codesandbox.io/embed/fiddlehead-stateful-component-d5pg76?autoresize=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark&view=editor"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="Fiddlehead - Stateful Component"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+<Sandbox>
+
+```jsx
+// data-module="App.js"
+import {useState} from 'fiddlehead';
+import Button from './Button';
+
+export default function App() {
+  let [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <Button
+        title="Increase count"
+        onClick={() => setCount(count + 1)}
+      />
+    </div>
+  );
+}
+```
+
+```jsx
+// data-module="./Button.js"
+
+export default function Button({title, onClick}) {
+
+  return (
+    <button type="button" onClick={onClick}>
+      {title}
+    </button>
+  );
+}
+```
+
+</Sandbox>
