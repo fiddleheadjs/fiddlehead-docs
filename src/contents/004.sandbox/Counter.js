@@ -1,19 +1,10 @@
-import {useEffect, useState} from 'fiddlehead';
+import {useEffect} from 'fiddlehead';
 import * as fiddlehead from 'fiddlehead';
-import {Button} from '@components/button/Button';
 import {transform, availablePresets, availablePlugins} from '@babel/standalone';
 
 console.log({availablePresets, availablePlugins})
 
-function appendScript(code) {
-    const script = document.createElement('script');
-    script.innerText = code;
-    document.head.appendChild(script);
-}
-
 export default function Counter({console}) {
-    let [count, setCount] = useState(0);
-    
     const displayCode = `
     import {render, useEffect} from 'fiddlehead';
 

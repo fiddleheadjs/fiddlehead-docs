@@ -19,10 +19,10 @@ With such criteria in mind, we made it some benefits:
 
 #### Try it now
 
-<Sandbox>
+<playground>
 
 ```jsx
-// data-module="App.js"
+// data-file="App.js"
 import {useState} from 'fiddlehead';
 import Button from './Button';
 
@@ -42,7 +42,7 @@ export default function App() {
 ```
 
 ```jsx
-// data-module="./Button.js"
+// data-file="./Button.js"
 
 export default function Button({title, onClick}) {
 
@@ -54,4 +54,4 @@ export default function Button({title, onClick}) {
 }
 ```
 
-</Sandbox>
+</playground>
