@@ -27,6 +27,7 @@ export let PlaygroundViewer = ({modules}) => {
                                         [filename]: event.target.value
                                     }));
                                 }}
+                                spellcheck="false"
                             />
                         </div>
                     );
