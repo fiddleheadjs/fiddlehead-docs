@@ -25,16 +25,20 @@ export let FiddleheadPlayer = ({entryFilename, codes}) => {
             return fiddleheadStore;
         }
 
-        if (codes[moduleName] !== undefined) {
-            return runModule(codes[moduleName]);
-        }
+        if (moduleName.startsWith('./')) {
+            let fname = moduleName.substring(2);
 
-        let skippableExtensions = ['js', 'jsx', 'ts', 'tsx'];
-
-        for (let extension of skippableExtensions) {
-            let filename = moduleName + '.' + extension;
-            if (codes[filename] !== undefined) {
-                return runModule(codes[filename]);
+            if (codes[fname] !== undefined) {
+                return runModule(codes[fname]);
+            }
+    
+            let skippableExtensions = ['js', 'jsx', 'ts', 'tsx'];
+    
+            for (let extension of skippableExtensions) {
+                let filename = fname + '.' + extension;
+                if (codes[filename] !== undefined) {
+                    return runModule(codes[filename]);
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 import './PlaygroundViewer.less';
 import {useState} from 'fiddlehead';
 import {FiddleheadPlayer} from './FiddleheadPlayer';
+import {TextArea} from '../../components/text-area/TextArea';
 
 export let PlaygroundViewer = ({modules}) => {
     const [codes, setCodes] = useState(() => {
@@ -18,8 +19,8 @@ export let PlaygroundViewer = ({modules}) => {
                     return (
                         <div key={filename}>
                             <code>{filename}</code>
-                            <textarea
-                                value={codes[filename]}
+                            <TextArea
+                                defaultValue={codes[filename]}
                                 onInput={(event) => {
                                     setCodes((prevCodes) => ({
                                         ...prevCodes,

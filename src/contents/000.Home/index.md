@@ -31,10 +31,14 @@ export default function App() {
 
   return (
     <div>
-      <p>Count: {count}</p>
+      <h4>Count: {count}</h4>
       <Button
-        title="Increase count"
+        title="Increase"
         onClick={() => setCount(count + 1)}
+      />
+      <Button
+        title="Decrease"
+        onClick={() => setCount(count - 1)}
       />
     </div>
   );
@@ -42,12 +46,21 @@ export default function App() {
 ```
 
 ```jsx
-// data-file="./Button.js"
+// data-file="Button.js"
 
 export default function Button({title, onClick}) {
 
   return (
-    <button type="button" onClick={onClick}>
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        padding: '3px 6px',
+        border: '1px solid #aaa',
+        borderRadius: '3px',
+        margin: '2px',
+      }}
+    >
       {title}
     </button>
   );
