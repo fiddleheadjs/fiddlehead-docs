@@ -33,7 +33,7 @@ export let FiddleheadPlayer = ({entryFilename, codes}) => {
                 'fiddlehead/store': fiddleheadStore,
             };
 
-            if (win.document.readyState === 'complete') {
+            if (win.playground !== undefined) {
                 win.playground.run();
             } else {
                 win.addEventListener('DOMContentLoaded', () => {
