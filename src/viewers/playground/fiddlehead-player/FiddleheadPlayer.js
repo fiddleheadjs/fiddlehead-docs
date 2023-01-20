@@ -9,7 +9,7 @@ import * as fiddleheadStore from 'fiddlehead/lib/store/esm.development';
 
 let waitForBabel = import('@babel/standalone');
 
-export let FiddleheadPlayer = ({entryFilename, codes}) => {
+export let FiddleheadPlayer = ({entryFilename, files}) => {
     let iframeRef = useRef(null);
 
     const play = () => {
@@ -24,7 +24,7 @@ export let FiddleheadPlayer = ({entryFilename, codes}) => {
 
             win.playground_src = {
                 entryFilename,
-                codes,
+                files,
             };
 
             win.playground_modules = {

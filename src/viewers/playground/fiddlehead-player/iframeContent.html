@@ -5,6 +5,8 @@
     <script type="text/javascript">
         window.playground = {};
 
+        var cache = new Map();
+
         playground.require = function (moduleName) {
             if (playground_modules[moduleName] !== undefined) {
                 return playground_modules[moduleName];
@@ -13,16 +15,16 @@
             if (moduleName.startsWith('./')) {
                 var fname = moduleName.substring(2);
 
-                if (playground_src.codes[fname] !== undefined) {
-                    return playground.runModule(playground_src.codes[fname]);
+                if (playground_src.files[fname] !== undefined) {
+                    return playground.runFile(playground_src.files[fname]);
                 }
 
                 var skippableExtensions = ['js', 'jsx', 'ts', 'tsx'];
                 var i, filename;
                 for (i = 0; i < skippableExtensions.length; i++) {
                     filename = fname + '.' + skippableExtensions[i];
-                    if (playground_src.codes[filename] !== undefined) {
-                        return playground.runModule(playground_src.codes[filename]);
+                    if (playground_src.files[filename] !== undefined) {
+                        return playground.runFile(playground_src.files[filename]);
                     }
                 }
             }
@@ -30,49 +32,61 @@
             throw new Error('Module not found: ' + moduleName);
         };
 
-        playground.runModule = function (displayCode) {
-            var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
-
-            var inputCode = jsxImportCode + '\r\n' + displayCode;
-
-            var outputCode = playground_modules.babel.transform(inputCode, {
-                sourceType: 'module',
-                presets: [
-                    'env',
-                ],
-                plugins: [
-                    ['transform-react-jsx', {
-                        pragma: '_jsx',
-                        pragmaFrag: '"["',
-                    }]
-                ],
-            }).code;
-
-            var execute = new Function('require', 'exports', outputCode);
+        playground.runFile = function (file) {
+            if (cache.has(file.filename)) {
+                return cache.get(file.filename);
+            }
 
             var exports = {};
 
-            execute(playground.require, exports);
+            if (file.language === 'css') {
+                var style = document.createElement('style');
+                style.textContent = file.code;
+                document.body.appendChild(style);
+            } else {
+                var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
+                var inputCode = jsxImportCode + '\r\n' + file.code;
+                var outputCode = playground_modules.babel.transform(inputCode, {
+                    sourceType: 'module',
+                    presets: [
+                        'env',
+                    ],
+                    plugins: [
+                        ['transform-react-jsx', {
+                            pragma: '_jsx',
+                            pragmaFrag: '"["',
+                        }]
+                    ],
+                }).code;
+    
+                var execute = new Function('require', 'exports', outputCode);
+                execute(playground.require, exports);
+            }
+            
+            cache.set(file.filename, exports);
 
             return exports;
         };
 
         playground.run = function () {
-            var entryCode = playground_src.codes[playground_src.entryFilename];
-
-            var exports = playground.runModule(entryCode);
-            
-            var jsxElement = playground_modules.fiddlehead.jsx(exports.default, null);
-
-            var rootNative = document.createElement('div');
-
-            playground_modules.fiddlehead.render(jsxElement, rootNative);
+            // Clear
 
             while (document.body.firstChild !== null) {
                 document.body.removeChild(document.body.firstChild);
             }
 
+            cache.clear();
+
+            // Create
+
+            var rootNative = document.createElement('div');
+            rootNative.className = 'root';
             document.body.appendChild(rootNative);
+            
+            var entry = playground_src.files[playground_src.entryFilename];
+            var exports = playground.runFile(entry);
+            var jsxElement = playground_modules.fiddlehead.jsx(exports.default, null);
+            playground_modules.fiddlehead.render(jsxElement, rootNative);
         };
     </script>
 </head>

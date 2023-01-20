@@ -4,10 +4,10 @@ import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
 import {TextArea} from '../../components/text-area/TextArea';
 
 export let PlaygroundViewer = ({modules}) => {
-    const [codes, setCodes] = useState(() => {
+    const [files, setFiles] = useState(() => {
         const initial = {};
-        modules.forEach(({filename, code}) => {
-            initial[filename] = code;
+        modules.forEach(({language, filename, code}) => {
+            initial[filename] = {language, filename, code};
         });
         return initial;
     });
@@ -15,16 +15,20 @@ export let PlaygroundViewer = ({modules}) => {
     return (
         <div class="PlaygroundViewer">
             <div class="editor">
-                {modules.map(({filename}) => {
+                {modules.map(({language, filename}) => {
                     return (
-                        <div key={filename}>
+                        <div key={filename} class="file">
                             <code>{filename}</code>
                             <TextArea
-                                defaultValue={codes[filename]}
+                                defaultValue={files[filename].code}
                                 onInput={(event) => {
-                                    setCodes((prevCodes) => ({
-                                        ...prevCodes,
-                                        [filename]: event.target.value
+                                    setFiles((prevFiles) => ({
+                                        ...prevFiles,
+                                        [filename]: {
+                                            language: language,
+                                            filename: filename,
+                                            code: event.target.value
+                                        }
                                     }));
                                 }}
                                 spellcheck="false"
@@ -37,7 +41,7 @@ export let PlaygroundViewer = ({modules}) => {
                 {modules.length > 0 &&
                     <FiddleheadPlayer
                         entryFilename={modules[0].filename}
-                        codes={codes}
+                        files={files}
                     />
                 }
             </div>

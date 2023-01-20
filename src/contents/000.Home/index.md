@@ -22,7 +22,7 @@ With such criteria in mind, we made it some benefits:
 <playground>
 
 ```jsx
-// data-file="App.js"
+/** filename="App.js" */
 import {useState} from 'fiddlehead';
 import Button from './Button';
 
@@ -30,7 +30,7 @@ export default function App() {
   let [count, setCount] = useState(0);
 
   return (
-    <div>
+    <div class="App">
       <h4>Count: {count}</h4>
       <Button
         title="Increase"
@@ -46,24 +46,42 @@ export default function App() {
 ```
 
 ```jsx
-// data-file="Button.js"
+/** filename="Button.js" */
+import './Button.css';
 
 export default function Button({title, onClick}) {
 
   return (
     <button
+      class="Button"
       type="button"
       onClick={onClick}
-      style={{
-        padding: '3px 6px',
-        border: '1px solid #aaa',
-        borderRadius: '3px',
-        margin: '2px',
-      }}
     >
       {title}
     </button>
   );
+}
+```
+
+```css
+/** filename="Button.css" */
+
+.Button {
+  padding: 6px 8px;
+  border: 1px solid #AAA;
+  border-radius: 3px;
+  margin: 2px;
+  background: #FFF;
+  cursor: pointer;
+}
+
+.Button:hover {
+  border-color: #888;
+  background: #EEE;
+}
+
+.Button:active {
+  background: #DDD;
 }
 ```
 
