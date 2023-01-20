@@ -1,13 +1,17 @@
 @import '../../../style/mixin.less';
 
 .FiddleheadPlayer {
+    border: 1px solid @gray-light-A1;
+    padding: @space-tiny-4;
+
     > .actions {
-        padding: @space-tiny-4 0;
         display: flex;
         flex-direction: row;
     }
 
     > .container {
+        margin-top: @space-tiny-4;
+        display: block;
         width: 100%;
         border: 1px solid @gray-twilight;
         box-shadow: none;

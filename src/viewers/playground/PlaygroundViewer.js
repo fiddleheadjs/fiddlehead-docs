@@ -1,7 +1,7 @@
 import './PlaygroundViewer.less';
 import {useState} from 'fiddlehead';
 import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
-import {TextArea} from '../../components/text-area/TextArea';
+import {FileView} from './file-view/FileView';
 
 export let PlaygroundViewer = ({modules}) => {
     const [files, setFiles] = useState(() => {
@@ -12,35 +12,31 @@ export let PlaygroundViewer = ({modules}) => {
         return initial;
     });
 
+    const entryFilename = modules.length > 0 ? modules[0].filename : null;
+
     return (
         <div class="PlaygroundViewer">
             <div class="editor">
-                {modules.map(({language, filename}) => {
+                {modules.map(({filename}) => {
                     return (
-                        <div key={filename} class="file">
-                            <code>{filename}</code>
-                            <TextArea
-                                defaultValue={files[filename].code}
-                                onInput={(event) => {
-                                    setFiles((prevFiles) => ({
-                                        ...prevFiles,
-                                        [filename]: {
-                                            language: language,
-                                            filename: filename,
-                                            code: event.target.value
-                                        }
-                                    }));
-                                }}
-                                spellcheck="false"
-                            />
-                        </div>
+                        <FileView
+                            key={filename}
+                            file={files[filename]}
+                            onChange={(updatedFile) => {
+                                setFiles((prevFiles) => ({
+                                    ...prevFiles,
+                                    [filename]: updatedFile
+                                }));
+                            }}
+                            defaultCollapsed={filename !== entryFilename}
+                        />
                     );
                 })}
             </div>
             <div class="player">
                 {modules.length > 0 &&
                     <FiddleheadPlayer
-                        entryFilename={modules[0].filename}
+                        entryFilename={entryFilename}
                         files={files}
                     />
                 }
