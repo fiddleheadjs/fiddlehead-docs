@@ -33,7 +33,7 @@
         playground.runModule = function (displayCode) {
             var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
 
-            var inputCode = jsxImportCode + displayCode;
+            var inputCode = jsxImportCode + '\r\n' + displayCode;
 
             var outputCode = playground_modules.babel.transform(inputCode, {
                 sourceType: 'module',
@@ -61,16 +61,18 @@
             var entryCode = playground_src.codes[playground_src.entryFilename];
 
             var exports = playground.runModule(entryCode);
+            
+            var jsxElement = playground_modules.fiddlehead.jsx(exports.default, null);
 
-            var rootEl = document.createElement('div');
+            var rootNative = document.createElement('div');
 
-            playground_modules.fiddlehead.render(playground_modules.fiddlehead.jsx(exports.default, null), rootEl);
+            playground_modules.fiddlehead.render(jsxElement, rootNative);
 
             while (document.body.firstChild !== null) {
                 document.body.removeChild(document.body.firstChild);
             }
 
-            document.body.appendChild(rootEl);
+            document.body.appendChild(rootNative);
         };
     </script>
 </head>
