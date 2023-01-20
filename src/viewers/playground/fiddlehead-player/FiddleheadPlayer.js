@@ -1,9 +1,9 @@
 import './FiddleheadPlayer.less';
 import {useEffect, useRef} from 'fiddlehead';
-import {Button} from '../../components/button/Button';
-import {__} from '../../modules/i18n';
-import {PlayIcon} from '../../icons/PlayIcon';
-import iframeContent from './fiddleheadPlayerIframe.html';
+import {Button} from '../../../components/button/Button';
+import {__} from '../../../modules/i18n';
+import {PlayIcon} from '../../../icons/PlayIcon';
+import iframeContent from './iframeContent.html';
 import * as fiddlehead from 'fiddlehead/lib/core/esm.development';
 import * as fiddleheadStore from 'fiddlehead/lib/store/esm.development';
 

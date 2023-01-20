@@ -1,6 +1,6 @@
 import './PlaygroundViewer.less';
 import {useState} from 'fiddlehead';
-import {FiddleheadPlayer} from './FiddleheadPlayer';
+import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
 import {TextArea} from '../../components/text-area/TextArea';
 
 export let PlaygroundViewer = ({modules}) => {
