@@ -8,7 +8,7 @@ import {useLocation} from '../modules/router';
 export let Layout = ({children}) => {
     let location = useLocation();
 
-    let setLayoutScroll = useDispatch((data) => {
+    let setLayoutScroll = useDispatch((value, data) => {
         data.layoutScroll.element = document.documentElement;
         data.layoutScroll.object = window;
     });

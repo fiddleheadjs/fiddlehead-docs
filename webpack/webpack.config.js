@@ -2,7 +2,7 @@ let path = require('path');
 let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders} = require('./loaders.config');
+let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
 let configs = [];
@@ -58,6 +58,10 @@ fs.readdirSync(entriesDir).map(filename => {
                     test: /\.md$/,
                     use: getMarkdownLoaders(),
                     exclude: /[\\/]node_modules[\\/]/
+                },
+                {
+                    test: /\.html$/,
+                    use: getHtmlLoaders(),
                 },
                 {
                     test: /\.scandir$/,
