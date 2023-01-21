@@ -195,11 +195,11 @@ export let DocumentViewer = ({
             }
 
             if (content.playground !== undefined) {
-                const {modules} = content.playground;
+                const {fileList} = content.playground;
 
                 return (
                     <PlaygroundViewer
-                        modules={modules}
+                        fileList={fileList}
                     />
                 );
             }

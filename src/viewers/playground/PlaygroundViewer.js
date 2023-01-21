@@ -3,21 +3,21 @@ import {useState} from 'fiddlehead';
 import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
 import {FileView} from './file-view/FileView';
 
-export let PlaygroundViewer = ({modules}) => {
+export let PlaygroundViewer = ({fileList}) => {
     const [files, setFiles] = useState(() => {
         const initial = {};
-        modules.forEach(({language, filename, code}) => {
-            initial[filename] = {language, filename, code};
+        fileList.forEach((file) => {
+            initial[file.filename] = file;
         });
         return initial;
     });
 
-    const entryFilename = modules.length > 0 ? modules[0].filename : null;
+    const entryFilename = fileList.length > 0 ? fileList[0].filename : null;
 
     return (
         <div class="PlaygroundViewer">
             <div class="editor">
-                {modules.map(({filename}) => {
+                {fileList.map(({filename}) => {
                     return (
                         <FileView
                             key={filename}
@@ -34,7 +34,7 @@ export let PlaygroundViewer = ({modules}) => {
                 })}
             </div>
             <div class="player">
-                {modules.length > 0 &&
+                {fileList.length > 0 &&
                     <FiddleheadPlayer
                         entryFilename={entryFilename}
                         files={files}

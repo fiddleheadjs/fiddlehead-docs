@@ -19,23 +19,23 @@ module.exports = function getContents(markdown) {
             }
             
             if (/^<playground>[\S\s]*<\/playground>$/.test(content)) {
-                const modules = [];
+                const fileList = [];
                 const regex = /\r?\n```(.*)\r?\n(?:\/\*\*\s*filename="(.+)"\s*\*\/\s*\r?\n)?([\S\s]+?\r?\n)```\r?\n/gm;
                 let match;
 
                 while ((match = regex.exec(content)) !== null) {
                     const [ , language, filename, code] = match;
 
-                    modules.push({
-                        language,
+                    fileList.push({
                         filename,
+                        language,
                         code,
                     });
                 }
 
                 return {
                     playground: {
-                        modules
+                        fileList
                     }
                 };
             }

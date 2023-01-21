@@ -27,7 +27,7 @@ export let FiddleheadPlayer = ({entryFilename, files}) => {
                 files,
             };
 
-            win.playground_modules = {
+            win.playground_deps = {
                 'babel': babel,
                 'fiddlehead': fiddlehead,
                 'fiddlehead/store': fiddleheadStore,

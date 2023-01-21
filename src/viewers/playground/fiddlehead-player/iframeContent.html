@@ -8,8 +8,8 @@
         var cache = new Map();
 
         playground.require = function (moduleName) {
-            if (playground_modules[moduleName] !== undefined) {
-                return playground_modules[moduleName];
+            if (playground_deps[moduleName] !== undefined) {
+                return playground_deps[moduleName];
             }
 
             if (moduleName.startsWith('./')) {
@@ -46,7 +46,7 @@
             } else {
                 var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
                 var inputCode = jsxImportCode + '\r\n' + file.code;
-                var outputCode = playground_modules.babel.transform(inputCode, {
+                var outputCode = playground_deps.babel.transform(inputCode, {
                     sourceType: 'module',
                     presets: [
                         'env',
@@ -85,8 +85,8 @@
             
             var entry = playground_src.files[playground_src.entryFilename];
             var exports = playground.runFile(entry);
-            var jsxElement = playground_modules.fiddlehead.jsx(exports.default, null);
-            playground_modules.fiddlehead.render(jsxElement, rootNative);
+            var jsxElement = playground_deps.fiddlehead.jsx(exports.default, null);
+            playground_deps.fiddlehead.render(jsxElement, rootNative);
         };
     </script>
 </head>

@@ -19,8 +19,8 @@ export let FileView = ({file, onChange, defaultCollapsed}) => {
                     defaultValue={file.code}
                     onInput={(event) => {
                         onChange({
-                            language: file.language,
                             filename: file.filename,
+                            language: file.language,
                             code: event.target.value
                         });
                     }}
