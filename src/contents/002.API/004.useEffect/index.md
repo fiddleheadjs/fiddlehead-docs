@@ -6,7 +6,7 @@ _Do side-effect tasks after the browser paints the output of the rendering proce
 
 ```jsx
 /** filename="PointerTracking.js" */
-import {useEffect, useState} from "fiddlehead";
+import {useEffect, useState} from 'fiddlehead';
 
 export default function PointerTracking() {
     let [clientX, setClientX] = useState(0);
