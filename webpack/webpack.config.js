@@ -10,6 +10,9 @@ let isDev = process.env.NODE_ENV !== 'production';
 let rootDir = path.resolve(__dirname, '..');
 let entriesDir = path.resolve(rootDir, 'src/entries');
 
+let srcFiddlehead = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/core/cjs.development.js'), 'utf-8');
+let srcFiddleheadStore = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/store/cjs.development.js'), 'utf-8');
+
 fs.readdirSync(entriesDir).map(filename => {
     let extension = path.extname(filename);
     let fname = filename.substring(0, filename.length - extension.length);
@@ -72,7 +75,9 @@ fs.readdirSync(entriesDir).map(filename => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                __DEV__: isDev
+                __DEV__: isDev,
+                __srcFiddlehead__: JSON.stringify(srcFiddlehead),
+                __srcFiddleheadStore__: JSON.stringify(srcFiddleheadStore),
             }),
             new HtmlWebpackPlugin({
                 title: title,

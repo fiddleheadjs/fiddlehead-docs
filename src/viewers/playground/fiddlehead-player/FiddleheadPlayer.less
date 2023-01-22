@@ -4,16 +4,42 @@
     border: 1px solid @gray-light-A1;
     padding: @space-tiny-4;
 
-    > .actions {
+    > .heading {
         display: flex;
         flex-direction: row;
+        align-items: center;
+
+        > :not(:last-child) {
+            margin-right: @space-tiny-4;
+        }
     }
 
-    > .container {
+    > .body {
         margin-top: @space-tiny-4;
-        display: block;
-        width: 100%;
         border: 1px solid @gray-twilight;
-        box-shadow: none;
+        height: 200px;
+
+        iframe,
+        .error {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        iframe {
+            display: block;
+            width: 100%;
+            box-shadow: none;
+            border: none;
+        }
+
+        .error {
+            background: @gray-white;
+            padding: @space-tiny-4;
+            color: @color-danger;
+            overflow: auto;
+        }
     }
 }

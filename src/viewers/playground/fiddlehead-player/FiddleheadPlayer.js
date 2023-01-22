@@ -1,19 +1,20 @@
 import './FiddleheadPlayer.less';
-import {useEffect, useRef} from 'fiddlehead';
-import {Button} from '../../../components/button/Button';
+import {useEffect, useRef, useState} from 'fiddlehead';
 import {__} from '../../../modules/i18n';
-import {PlayIcon} from '../../../icons/PlayIcon';
 import iframeContent from './iframeContent.html';
-import * as fiddlehead from 'fiddlehead/lib/core/esm.development';
-import * as fiddleheadStore from 'fiddlehead/lib/store/esm.development';
+import {CautionIcon} from '../../../icons/CautionIcon';
+import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 
 let waitForBabel = import('@babel/standalone');
 
 export let FiddleheadPlayer = ({entryFilename, files}) => {
     let iframeRef = useRef(null);
 
-    const play = () => {
+    let [error, setError] = useState(null);
+
+    useEffect(() => {
         waitForBabel.then((babel) => {
+            console.log(babel.availablePlugins, babel.availablePresets);
             let iframe = iframeRef.current;
 
             if (iframe === null) {
@@ -27,39 +28,99 @@ export let FiddleheadPlayer = ({entryFilename, files}) => {
                 files,
             };
 
+            let makeModule = (source, deps) => {
+                let fn = new win.Function('require', 'exports', source);
+                let require = (depName) => deps[depName];
+                let exports = {};
+                fn(require, exports);
+                return exports;
+            };
+
+            let fiddlehead = makeModule(__srcFiddlehead__);
+
+            let fiddleheadStore = makeModule(__srcFiddleheadStore__, {
+                'fiddlehead': fiddlehead
+            });
+
             win.playground_deps = {
                 'babel': babel,
                 'fiddlehead': fiddlehead,
                 'fiddlehead/store': fiddleheadStore,
             };
 
-            if (win.playground !== undefined) {
-                win.playground.run();
+            win.addEventListener('error', function (event) {
+                setError(event.error);
+            });
+
+            if (win.playground_run !== undefined) {
+                win.playground_run();
             } else {
                 win.addEventListener('DOMContentLoaded', () => {
-                    win.playground.run();
+                    win.playground_run();
                 });
             }
         });
-    };
+    }, []);
 
     useEffect(() => {
-        play();
-    }, []);
+        let iframe = iframeRef.current;
+
+        if (iframe === null) {
+            return;
+        }
+
+        let win = iframe.contentWindow;
+
+        if (win.playground_mounted !== true) {
+            return;
+        }
+
+        let timeoutId = setTimeout(() => {
+            setError(null);
+
+            win.playground_src = {
+                entryFilename,
+                files,
+            };
+
+            win.playground_run();
+        }, 500);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [entryFilename, files]);
 
     return (
         <div class="FiddleheadPlayer">
-            <div class="actions">
-                <Button onClick={play}>
-                    <PlayIcon />
-                    <span>{__('Compile')}</span>
-                </Button>
+            <div class="heading">
+                {
+                    error === null &&
+                    <>
+                        <CircleCheckIcon />
+                        <span>{__('Result')}</span>
+                    </>
+                }
+                {
+                    error !== null &&
+                    <>
+                        <CautionIcon />
+                        <span>{__('Error')}</span>
+                    </>
+                }
             </div>
-            <iframe
-                class="container"
-                srcDoc={iframeContent}
-                ref={iframeRef}
-            />
+            <div class="body">
+                <iframe
+                    srcdoc={iframeContent}
+                    ref={iframeRef}
+                />
+                {
+                    error !== null &&
+                    <pre class="error">
+                        {`${error.name}: ${error.message}`}
+                    </pre>
+                }
+            </div>
         </div>
     );
 };

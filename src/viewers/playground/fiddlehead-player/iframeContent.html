@@ -3,36 +3,66 @@
 
 <head>
     <script type="text/javascript">
-        window.playground = {};
-
         var cache = new Map();
 
-        playground.require = function (moduleName) {
-            if (playground_deps[moduleName] !== undefined) {
-                return playground_deps[moduleName];
+        var clear = function () {
+            cache.clear();
+
+            // Clear UI
+            while (document.body.firstChild !== null) {
+                document.body.removeChild(document.body.firstChild);
+            }
+        };
+
+        var resolvePath = function (pathname, context) {
+            var absoluteParts = [];
+            var i, part;
+
+            var contextParts = context.split('/');
+            for (i = 0; i < contextParts.length - 1; i++) {
+                // Do not include the last context part
+                absoluteParts.push(contextParts[i]);
             }
 
-            if (moduleName.startsWith('./')) {
-                var fname = moduleName.substring(2);
-
-                if (playground_src.files[fname] !== undefined) {
-                    return playground.runFile(playground_src.files[fname]);
+            var pathnameParts = pathname.split('/').filter(t => t !== '.');
+            for (i = 0; i < pathnameParts.length; i++) {
+                part = pathnameParts[i];
+                if (part === '.') {
+                    continue;
                 }
+                if (part === '..') {
+                    absoluteParts.pop();
+                    continue;
+                }
+                absoluteParts.push(part);
+            }
 
-                var skippableExtensions = ['js', 'jsx', 'ts', 'tsx'];
-                var i, filename;
-                for (i = 0; i < skippableExtensions.length; i++) {
-                    filename = fname + '.' + skippableExtensions[i];
-                    if (playground_src.files[filename] !== undefined) {
-                        return playground.runFile(playground_src.files[filename]);
+            return absoluteParts.join('/');
+        };
+
+        var requireFromContext = function (pathname, context) {
+            if (playground_deps[pathname] !== undefined) {
+                return playground_deps[pathname];
+            }
+
+            if (/^\.?\.\//.test(pathname)) {
+                var absolute = resolvePath(pathname, context);
+
+                var possibleEndings = ['', '.js', '.jsx', '.ts', '.tsx', '/index.js', '/index.jsx', '/index.ts', '/index.tsx'];
+                var i, file;
+
+                for (i = 0; i < possibleEndings.length; i++) {
+                    file = playground_src.files[absolute + possibleEndings[i]];
+                    if (file !== undefined) {
+                        return exec(file);
                     }
                 }
             }
 
-            throw new Error('Module not found: ' + moduleName);
+            throw new Error("Cannot find module '" + pathname + "' from '" + context + "'");
         };
 
-        playground.runFile = function (file) {
+        var exec = function (file) {
             if (cache.has(file.filename)) {
                 return cache.get(file.filename);
             }
@@ -58,35 +88,39 @@
                         }]
                     ],
                 }).code;
-    
-                var execute = new Function('require', 'exports', outputCode);
-                execute(playground.require, exports);
+
+                var require = (pathname) => requireFromContext(pathname, file.filename);
+
+                var func = new Function('require', 'exports', outputCode);
+
+                func(require, exports);
             }
-            
+
             cache.set(file.filename, exports);
 
             return exports;
         };
 
-        playground.run = function () {
-            // Clear
-
-            while (document.body.firstChild !== null) {
-                document.body.removeChild(document.body.firstChild);
+        window.playground_run = function () {
+            if (window.playground_mounted === true) {
+                clear();
             }
 
-            cache.clear();
-
             // Create
-
             var rootNative = document.createElement('div');
             rootNative.className = 'root';
             document.body.appendChild(rootNative);
-            
-            var entry = playground_src.files[playground_src.entryFilename];
-            var exports = playground.runFile(entry);
-            var jsxElement = playground_deps.fiddlehead.jsx(exports.default, null);
-            playground_deps.fiddlehead.render(jsxElement, rootNative);
+
+            // Use timeout to wait for window.onerror
+            setTimeout(() => {
+                var entry = playground_src.files[playground_src.entryFilename];
+                var exports = exec(entry);
+                var jsxElement = playground_deps.fiddlehead.jsx(exports.default, null);
+                playground_deps.fiddlehead.render(jsxElement, rootNative);
+
+                // Flag
+                window.playground_mounted = true;
+            });
         };
     </script>
 </head>
