@@ -24,7 +24,7 @@ With such criteria in mind, we made it some benefits:
 ```jsx
 /** filename="App.js" */
 import {useState} from 'fiddlehead';
-import Button from './button';
+import {Button} from './button';
 
 export default function App() {
   let [count, setCount] = useState(0);
@@ -49,7 +49,7 @@ export default function App() {
 /** filename="button/index.js" */
 import './index.css';
 
-export default function Button({title, onClick}) {
+export function Button({title, onClick}) {
 
   return (
     <button
