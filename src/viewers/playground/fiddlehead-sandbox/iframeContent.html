@@ -74,7 +74,7 @@
                 style.textContent = file.code;
                 document.body.appendChild(style);
             } else {
-                var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
+                var jsxImportCode = "import {jsx as _jsx$, Fragment as _frag$} from 'fiddlehead';";
                 var inputCode = jsxImportCode + '\r\n' + file.code;
                 var transformOptions = {
                     sourceType: 'module',
@@ -83,8 +83,8 @@
                     ],
                     plugins: [
                         ['transform-react-jsx', {
-                            pragma: '_jsx',
-                            pragmaFrag: '"["',
+                            pragma: '_jsx$',
+                            pragmaFrag: '_frag$',
                         }]
                     ],
                 };

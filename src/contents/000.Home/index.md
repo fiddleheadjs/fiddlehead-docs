@@ -31,7 +31,7 @@ export default function App() {
   let [count, setCount] = useState(0);
 
   return (
-    <div class="App">
+    <>
       <h4>Count: {count}</h4>
       <Button
         title="Increase"
@@ -41,7 +41,7 @@ export default function App() {
         title="Decrease"
         onClick={() => setCount(count - 1)}
       />
-    </div>
+    </>
   );
 }
 ```
