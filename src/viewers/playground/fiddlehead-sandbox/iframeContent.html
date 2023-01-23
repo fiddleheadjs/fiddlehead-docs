@@ -73,20 +73,18 @@
                 var style = document.createElement('style');
                 style.textContent = file.code;
                 document.body.appendChild(style);
-            } else {
+            } else if (/^(js|ts)x?$/.test(file.language)) {
                 var jsxImportCode = "import {jsx as _jsx$, Fragment as _frag$} from 'fiddlehead';";
                 var inputCode = jsxImportCode + '\r\n' + file.code;
                 var transformOptions = {
                     sourceType: 'module',
-                    presets: [
-                        'env',
-                    ],
+                    presets: ['env'],
                     plugins: [
                         ['transform-react-jsx', {
                             pragma: '_jsx$',
-                            pragmaFrag: '_frag$',
+                            pragmaFrag: '_frag$'
                         }]
-                    ],
+                    ]
                 };
                 var outputCode = playground_exec.babelTransform(inputCode, transformOptions).code;
                 var require = (pathname) => requireFromContext(pathname, file.filename);
