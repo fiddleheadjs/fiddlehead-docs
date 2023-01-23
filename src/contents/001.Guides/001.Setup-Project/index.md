@@ -37,6 +37,8 @@ Create the Webpack configuration file:
 
 ```js
 /** filename="webpack.config.js" data-line="12-20" */
+
+
 let path = require('path');
 
 module.exports = {
