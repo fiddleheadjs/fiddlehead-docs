@@ -14,7 +14,6 @@ export let FiddleheadPlayer = ({entryFilename, files}) => {
 
     useEffect(() => {
         waitForBabel.then((babel) => {
-            console.log(babel.availablePlugins, babel.availablePresets);
             let iframe = iframeRef.current;
 
             if (iframe === null) {

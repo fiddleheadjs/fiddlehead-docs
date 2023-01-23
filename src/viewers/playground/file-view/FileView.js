@@ -1,6 +1,6 @@
 import './FileView.less';
 import {useState} from 'fiddlehead';
-import {TextArea} from './../../../components/text-area/TextArea';
+import {CodeArea} from '../../../components/code-area/CodeArea';
 
 export let FileView = ({file, onChange, defaultCollapsed}) => {
     let [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -15,16 +15,16 @@ export let FileView = ({file, onChange, defaultCollapsed}) => {
             </div>
             {
                 !collapsed &&
-                <TextArea
+                <CodeArea
                     defaultValue={file.code}
-                    onInput={(event) => {
+                    onChange={(value) => {
                         onChange({
                             filename: file.filename,
                             language: file.language,
-                            code: event.target.value
+                            code: value
                         });
                     }}
-                    spellcheck="false"
+                    language={file.language}
                 />
             }
         </div>
