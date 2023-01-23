@@ -76,7 +76,7 @@
             } else {
                 var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
                 var inputCode = jsxImportCode + '\r\n' + file.code;
-                var outputCode = playground_exec.babelTransform(inputCode, {
+                var transformOptions = {
                     sourceType: 'module',
                     presets: [
                         'env',
@@ -87,12 +87,10 @@
                             pragmaFrag: '"["',
                         }]
                     ],
-                }).code;
-
+                };
+                var outputCode = playground_exec.babelTransform(inputCode, transformOptions).code;
                 var require = (pathname) => requireFromContext(pathname, file.filename);
-
                 var func = new Function('require', 'exports', outputCode);
-
                 func(require, exports);
             }
 
