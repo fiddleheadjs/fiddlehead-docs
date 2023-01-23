@@ -1,8 +1,8 @@
 import './CodeArea.less';
 import {useLayoutEffect, useRef} from 'fiddlehead';
-import {EditorState, Compartment} from "@codemirror/state";
-import {EditorView, keymap} from "@codemirror/view";
-import {defaultKeymap, historyKeymap, history, indentWithTab} from "@codemirror/commands";
+import {EditorState, Compartment} from '@codemirror/state';
+import {EditorView, keymap} from '@codemirror/view';
+import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
 import {syntaxHighlighting, defaultHighlightStyle} from '@codemirror/language';
 import {javascript, autoCloseTags} from '@codemirror/lang-javascript';
 import {css} from '@codemirror/lang-css';
