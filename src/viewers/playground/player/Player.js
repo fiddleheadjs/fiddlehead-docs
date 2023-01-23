@@ -6,8 +6,8 @@ import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 import {PlayIcon} from '../../../icons/PlayIcon';
 
 export let Player = ({entryFilename, files}) => {
-    let [Sandbox, setSandbox] = useState(null);
-    
+    let Sandbox = useRef();
+
     let [isLoading, setIsLoading] = useState(false);
 
     let [error, setError] = useState(null);
@@ -20,7 +20,7 @@ export let Player = ({entryFilename, files}) => {
 
         import('../fiddlehead-sandbox/FiddleheadSandbox')
             .then((exports) => {
-                setSandbox(() => exports.FiddleheadSandbox);
+                Sandbox.current = exports.FiddleheadSandbox;
             })
             .catch((error) => {
                 setError(error);
@@ -47,7 +47,7 @@ export let Player = ({entryFilename, files}) => {
         });
 
         observer.observe(playerRef.current);
-        
+
         return () => observer.disconnect();
     }, []);
 
@@ -60,10 +60,10 @@ export let Player = ({entryFilename, files}) => {
             return [<PlayIcon />, __('Loading...')];
         }
 
-        if (Sandbox === null) {
+        if (Sandbox.current === null) {
             return [<PlayIcon />, __('Compile')];
         }
-        
+
         return [<CircleCheckIcon />, __('Result')];
     })();
 
@@ -77,13 +77,14 @@ export let Player = ({entryFilename, files}) => {
                 <span>{title}</span>
             </div>
             <div class="body">
-                {Sandbox !== null &&
-                    <Sandbox
+                {Sandbox.current !== null &&
+                    <Sandbox.current
                         entryFilename={entryFilename}
                         files={files}
                         setError={setError}
                     />
                 }
+                {''}
                 {
                     error !== null &&
                     <pre class="error">

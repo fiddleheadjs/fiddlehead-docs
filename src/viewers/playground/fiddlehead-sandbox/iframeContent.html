@@ -90,6 +90,9 @@
                 var require = (pathname) => requireFromContext(pathname, file.filename);
                 var func = new Function('require', 'exports', outputCode);
                 func(require, exports);
+            } else {
+                throw new Error("Language is not supported: '" + file.language
+                    + "' when trying to execute '" + file.filename + "'");
             }
 
             cache.set(file.filename, exports);
