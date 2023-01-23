@@ -1,8 +1,9 @@
 @import '../../../style/mixin.less';
 
-.FiddleheadPlayer {
-    border: 1px solid @gray-light-A1;
+.Player {
+    width: 100%;
     padding: @space-tiny-4;
+    border: 1px solid @gray-light-A1;
 
     > .heading {
         display: flex;
@@ -19,7 +20,7 @@
         border: 1px solid @gray-twilight;
         height: 200px;
 
-        iframe,
+        .FiddleheadSandbox,
         .error {
             position: absolute;
             top: 0;
@@ -28,13 +29,6 @@
             right: 0;
         }
         
-        iframe {
-            display: block;
-            width: 100%;
-            box-shadow: none;
-            border: none;
-        }
-
         .error {
             background: @gray-white;
             padding: @space-tiny-4;

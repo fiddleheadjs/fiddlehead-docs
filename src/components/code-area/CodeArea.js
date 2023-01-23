@@ -37,9 +37,9 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
     let containerRef = useRef();
 
     useLayoutEffect(() => {
-        let editorState, editorView;
+        let initialState, editorView;
 
-        editorState = EditorState.create({
+        initialState = EditorState.create({
             doc: defaultValue,
             extensions: [
                 EditorView.updateListener.of(update => {
@@ -57,7 +57,7 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
         });
 
         editorView = new EditorView({
-            state: editorState,
+            state: initialState,
             parent: containerRef.current
         });
     }, []);

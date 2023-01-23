@@ -1,38 +1,36 @@
 import './PlaygroundViewer.less';
 import {useState} from 'fiddlehead';
-import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
 import {FileEditor} from './file-editor/FileEditor';
+import {Player} from './player/Player';
 
 export let PlaygroundViewer = ({fileList}) => {
-    const [files, setFiles] = useState(() => {
-        const initial = {};
+    let [files, setFiles] = useState(() => {
+        let initial = {};
         fileList.forEach((file) => {
             initial[file.filename] = file;
         });
         return initial;
     });
 
-    const entryFilename = fileList.length > 0 ? fileList[0].filename : null;
+    let entryFilename = fileList.length > 0 ? fileList[0].filename : null;
 
     return (
         <div class="PlaygroundViewer">
-            {fileList.map(({filename}) => {
-                return (
-                    <FileEditor
-                        key={filename}
-                        file={files[filename]}
-                        onChange={(updatedFile) => {
-                            setFiles((prevFiles) => ({
-                                ...prevFiles,
-                                [filename]: updatedFile
-                            }));
-                        }}
-                        defaultCollapsed={filename !== entryFilename}
-                    />
-                );
-            })}
+            {fileList.map(({filename}) => (
+                <FileEditor
+                    key={filename}
+                    file={files[filename]}
+                    onChange={(updatedFile) => {
+                        setFiles((prevFiles) => ({
+                            ...prevFiles,
+                            [filename]: updatedFile
+                        }));
+                    }}
+                    defaultCollapsed={filename !== entryFilename}
+                />
+            ))}
             {fileList.length > 0 &&
-                <FiddleheadPlayer
+                <Player
                     entryFilename={entryFilename}
                     files={files}
                 />

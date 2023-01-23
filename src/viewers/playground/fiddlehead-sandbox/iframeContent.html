@@ -76,7 +76,7 @@
             } else {
                 var jsxImportCode = "import {jsx as _jsx} from 'fiddlehead';";
                 var inputCode = jsxImportCode + '\r\n' + file.code;
-                var outputCode = playground_deps.babel.transform(inputCode, {
+                var outputCode = playground_exec.babelTransform(inputCode, {
                     sourceType: 'module',
                     presets: [
                         'env',
@@ -101,8 +101,8 @@
             return exports;
         };
 
-        window.playground_run = function () {
-            if (window.playground_mounted === true) {
+        window.playground_run = function (onDone) {
+            if (window.playground_started === 1) {
                 clear();
             }
 
@@ -115,11 +115,11 @@
             setTimeout(() => {
                 var entry = playground_src.files[playground_src.entryFilename];
                 var exports = exec(entry);
-                var jsxElement = playground_deps.fiddlehead.jsx(exports.default, null);
-                playground_deps.fiddlehead.render(jsxElement, rootNative);
+                var jsxElement = playground_exec.fiddlehead.jsx(exports.default, null);
+                playground_exec.fiddlehead.render(jsxElement, rootNative);
 
                 // Flag
-                window.playground_mounted = true;
+                window.playground_started = 1;
             });
         };
     </script>
