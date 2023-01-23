@@ -36,10 +36,7 @@ npm install -D webpack webpack-cli babel-loader
 Create the Webpack configuration file:
 
 ```js
-
 /** filename="webpack.config.js" data-line="12-20" */
-
-
 let path = require('path');
 
 module.exports = {
@@ -98,7 +95,7 @@ Your code will be transform to something like this:
 ```js
 /** filename="dist/bundle.js" */
 // This import line is not the real output, just for illustration
-import {jsx, render} from 'fiddlehead';
+var {jsx, render} = require('fiddlehead');
 
 function MyApp() {
     return jsx(
