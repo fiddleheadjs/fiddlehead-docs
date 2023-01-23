@@ -1,12 +1,12 @@
-import './FileView.less';
+import './FileEditor.less';
 import {useState} from 'fiddlehead';
 import {CodeArea} from '../../../components/code-area/CodeArea';
 
-export let FileView = ({file, onChange, defaultCollapsed}) => {
+export let FileEditor = ({file, onChange, defaultCollapsed}) => {
     let [collapsed, setCollapsed] = useState(defaultCollapsed);
 
     return (
-        <div class="FileView">
+        <div class="FileEditor">
             <div
                 class="filename"
                 onClick={() => setCollapsed(t => !t)}

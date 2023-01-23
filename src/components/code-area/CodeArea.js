@@ -36,12 +36,14 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
     let containerRef = useRef();
 
     useLayoutEffect(() => {
-        let state = EditorState.create({
+        let editorState, editorView;
+
+        editorState = EditorState.create({
             doc: defaultValue,
             extensions: [
                 EditorView.updateListener.of(update => {
                     if (update.docChanged) {
-                        onChange(view.state.doc.toString());
+                        onChange(editorView.state.doc.toString());
                     }
                 }),
                 keymap.of(defaultKeymap),
@@ -52,8 +54,8 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
             ].filter(t => t !== null)
         });
 
-        new EditorView({
-            state: state,
+        editorView = new EditorView({
+            state: editorState,
             parent: containerRef.current
         });
     }, []);

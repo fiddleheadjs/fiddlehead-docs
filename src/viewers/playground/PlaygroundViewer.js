@@ -1,7 +1,7 @@
 import './PlaygroundViewer.less';
 import {useState} from 'fiddlehead';
 import {FiddleheadPlayer} from './fiddlehead-player/FiddleheadPlayer';
-import {FileView} from './file-view/FileView';
+import {FileEditor} from './file-editor/FileEditor';
 
 export let PlaygroundViewer = ({fileList}) => {
     const [files, setFiles] = useState(() => {
@@ -16,31 +16,27 @@ export let PlaygroundViewer = ({fileList}) => {
 
     return (
         <div class="PlaygroundViewer">
-            <div class="editor">
-                {fileList.map(({filename}) => {
-                    return (
-                        <FileView
-                            key={filename}
-                            file={files[filename]}
-                            onChange={(updatedFile) => {
-                                setFiles((prevFiles) => ({
-                                    ...prevFiles,
-                                    [filename]: updatedFile
-                                }));
-                            }}
-                            defaultCollapsed={filename !== entryFilename}
-                        />
-                    );
-                })}
-            </div>
-            <div class="player">
-                {fileList.length > 0 &&
-                    <FiddleheadPlayer
-                        entryFilename={entryFilename}
-                        files={files}
+            {fileList.map(({filename}) => {
+                return (
+                    <FileEditor
+                        key={filename}
+                        file={files[filename]}
+                        onChange={(updatedFile) => {
+                            setFiles((prevFiles) => ({
+                                ...prevFiles,
+                                [filename]: updatedFile
+                            }));
+                        }}
+                        defaultCollapsed={filename !== entryFilename}
                     />
-                }
-            </div>
+                );
+            })}
+            {fileList.length > 0 &&
+                <FiddleheadPlayer
+                    entryFilename={entryFilename}
+                    files={files}
+                />
+            }
         </div>
     );
 };
