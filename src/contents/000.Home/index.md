@@ -48,6 +48,7 @@ export default function App() {
 
 ```jsx
 /** filename="Button/index.js" */
+
 import './index.css';
 
 export function Button({title, onClick}) {
@@ -66,7 +67,6 @@ export function Button({title, onClick}) {
 
 ```css
 /** filename="Button/index.css" */
-
 
 .Button {
   padding: 6px 8px;
