@@ -1,9 +1,10 @@
+import './CodeArea.less';
 import {useLayoutEffect, useRef} from 'fiddlehead';
 import {EditorState, Compartment} from "@codemirror/state";
 import {EditorView, keymap} from "@codemirror/view";
 import {defaultKeymap, historyKeymap, history} from "@codemirror/commands";
 import {syntaxHighlighting, defaultHighlightStyle} from '@codemirror/language';
-import {javascript} from '@codemirror/lang-javascript';
+import {javascript, autoCloseTags} from '@codemirror/lang-javascript';
 import {css} from '@codemirror/lang-css';
 
 let getLanguageSupport = (language) => {
@@ -48,6 +49,7 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
                 }),
                 keymap.of(defaultKeymap),
                 keymap.of(historyKeymap),
+                autoCloseTags,
                 history(),
                 syntaxHighlighting(defaultHighlightStyle),
                 getLanguageExtension(language),
