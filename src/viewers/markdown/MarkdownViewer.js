@@ -61,10 +61,10 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
     renderer.code = (code, language) => {
         let options = '';
         
-        let match = code.match(/^\/\*\*\s*(.*?)\s*\*\/\s*\r?\n/m)
+        let match = code.match(/^\/\*\*\s*(.*?)\s*\*\/\s*\r?\n/m);
         if (match !== null) {
             options = match[1];
-            code = code.substring(match[0].length + 1);
+            code = code.substring(match[0].length);
         }
 
         return (
