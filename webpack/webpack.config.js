@@ -10,8 +10,8 @@ let isDev = process.env.NODE_ENV !== 'production';
 let rootDir = path.resolve(__dirname, '..');
 let entriesDir = path.resolve(rootDir, 'src/entries');
 
-let srcFiddlehead = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/core/cjs.development.min.js'), 'utf-8');
-let srcFiddleheadStore = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/store/cjs.development.min.js'), 'utf-8');
+let srcFiddlehead = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/core/cjs.development.legacy.min.js'), 'utf-8');
+let srcFiddleheadStore = fs.readFileSync(path.resolve(rootDir, 'node_modules/fiddlehead/lib/store/cjs.development.legacy.min.js'), 'utf-8');
 
 fs.readdirSync(entriesDir).map(filename => {
     let extension = path.extname(filename);
