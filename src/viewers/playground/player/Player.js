@@ -84,7 +84,6 @@ export let Player = ({entryFilename, files}) => {
                         setError={setError}
                     />
                 }
-                {''}
                 {
                     error !== null &&
                     <pre class="error">
