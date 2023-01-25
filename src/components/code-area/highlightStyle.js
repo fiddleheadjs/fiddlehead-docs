@@ -4,7 +4,7 @@ import {tags} from '@lezer/highlight';
 let jsHighlightStyle = HighlightStyle.define([
     {
         tag: [tags.comment, tags.meta],
-        color: '#708090'
+        color: '#90A0B0'
     },
     {
         tag: tags.punctuation,
