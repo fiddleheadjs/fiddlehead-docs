@@ -20,7 +20,7 @@ module.exports = function getContents(markdown) {
             
             if (/^<playground>[\S\s]*<\/playground>$/.test(content)) {
                 const fileList = [];
-                const regex = /\r?\n```(.*)\r?\n(?:\s*\/\*\*\s*filename="(.+)"\s*\*\/\s*\r?\n)?([\S\s]+?\r?\n)```\r?\n/gm;
+                const regex = /\r?\n```(.*)\r?\n(?:\s*\/\*\*\s*filename="(.+)"\s*\*\/\s*\r?\n)?([\S\s]+?)\s*```\r?\n/gm;
                 let match;
 
                 while ((match = regex.exec(content)) !== null) {

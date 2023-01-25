@@ -1,59 +1,34 @@
-import './CodeArea.less';
-import {useLayoutEffect, useRef} from 'fiddlehead';
-import {EditorState, Compartment} from '@codemirror/state';
+import {useRef, useEffect} from 'fiddlehead';
+import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
-import {syntaxHighlighting, defaultHighlightStyle} from '@codemirror/language';
-import {javascript, autoCloseTags} from '@codemirror/lang-javascript';
-import {css} from '@codemirror/lang-css';
-
-let getLanguageSupport = (language) => {
-    if (language === 'css') {
-        return css();
-    }
-
-    if (language === 'js' || language === 'jsx') {
-        return javascript({jsx: true});
-    }
-    
-    if (language === 'ts' || language === 'tsx') {
-        return javascript({jsx: true, typescript: true});
-    }
-
-    return null;
-};
-
-let getLanguageExtension = (language) => {
-    let languageSupport = getLanguageSupport(language);
-    
-    if (languageSupport !== null) {
-        return new Compartment().of(languageSupport);
-    }
-    
-    return null;
-};
+import {autoCloseTags} from '@codemirror/lang-javascript';
+import {getSyntaxHighlighting} from './highlightStyle';
+import {getLanguageCompartment} from './languageSupport';
+import {editorTheme} from './editorTheme';
 
 export let CodeArea = ({defaultValue, onChange, language}) => {
     let containerRef = useRef();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let initialState, editorView;
 
         initialState = EditorState.create({
             doc: defaultValue,
             extensions: [
-                EditorView.updateListener.of(update => {
+                EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
                         onChange(editorView.state.doc.toString());
                     }
                 }),
+                editorTheme,
                 keymap.of(defaultKeymap),
                 keymap.of(indentWithTab),
                 keymap.of(historyKeymap),
                 autoCloseTags,
                 history(),
-                syntaxHighlighting(defaultHighlightStyle),
-                getLanguageExtension(language),
+                getSyntaxHighlighting(language),
+                getLanguageCompartment(language),
             ].filter(t => t !== null)
         });
 
