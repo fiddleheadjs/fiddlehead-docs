@@ -14,8 +14,8 @@ function getJsLoaders() {
                     ['prismjs', {
                         languages: ['markup', 'jsx', 'json', 'css', 'bash'],
                         plugins: ['line-highlight'],
-                        theme: 'default', // 'okaidia',
-                        css: true,
+                        theme: 'default',
+                        css: false,
                     }]
                 ],
             }
