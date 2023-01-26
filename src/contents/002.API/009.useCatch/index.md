@@ -49,7 +49,11 @@ function ErrorBoundary({children}) {
     let [error, clearError] = useCatch();
 
     if (error !== null) {
-        return `${error.name}: ${error.message}`;
+        if (error instanceof Error) {
+            return `${error.name}: ${error.message}`;
+        }
+
+        return 'Oops... Something went wrong!';
     }
 
     return children;
