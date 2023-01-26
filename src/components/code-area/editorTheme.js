@@ -1,5 +1,5 @@
 import {EditorView} from '@codemirror/view';
-import {font_family, font_size, font_weight, line_height, space} from '../../style/theme';
+import {font_family, font_size, font_weight, gray, line_height, space} from '../../style/theme';
 
 export let editorTheme = EditorView.theme({
     '&.cm-focused': {
@@ -13,6 +13,7 @@ export let editorTheme = EditorView.theme({
     },
     '.cm-content': {
         padding: `${space.tiny_4}px 0`,
+        caretColor: gray.black,
     },
     '.cm-line': {
         padding: `0 ${space.tiny_4}px`,

@@ -1,11 +1,13 @@
 import {useRef, useLayoutEffect} from 'fiddlehead';
 import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
+import {indentUnit} from '@codemirror/language';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
 import {autoCloseTags} from '@codemirror/lang-javascript';
 import {getSyntaxHighlighting} from './highlightStyle';
 import {getLanguageCompartment} from './languageSupport';
 import {editorTheme} from './editorTheme';
+import {TAB_SIZE} from './tabSize';
 
 export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, language}) => {
     let containerRef = useRef(null);
@@ -17,6 +19,7 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
             doc: defaultValue,
             extensions: [
                 editorTheme,
+                indentUnit.of(' '.repeat(TAB_SIZE)),
                 keymap.of(defaultKeymap),
                 keymap.of(indentWithTab),
                 keymap.of(historyKeymap),
@@ -24,13 +27,14 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
                 history(),
                 getSyntaxHighlighting(language),
                 getLanguageCompartment(language),
+                EditorState.tabSize.of(TAB_SIZE),
+                EditorView.contentAttributes.of({
+                    'data-gramm': 'false', // disable Grammarly
+                }),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
                         onChange(editorView.state.doc.toString());
                     }
-                }),
-                EditorView.contentAttributes.of({
-                    'data-gramm': 'false', // disable Grammarly
                 }),
             ].filter(t => t !== null)
         });
@@ -52,8 +56,8 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
                 }
             });
 
-            // Auto focus so the user don't need to click twice to edit
-            // - the first click is on the Mask
+            // Auto focus so the user don't need to click twice to edit -
+            // the first click is on the Mask
             editorView.focus();
         }
     }, []);

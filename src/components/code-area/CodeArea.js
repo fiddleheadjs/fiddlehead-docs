@@ -3,7 +3,7 @@ import {Mask} from './Mask';
 
 let Mirror = null;
 
-export let CodeArea = ({defaultValue, onChange, language}) => {
+export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {
     let [loadsMirror, setLoadsMirror] = useState(false);
     let defaultSelection = useRef(null);
 
@@ -11,9 +11,26 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
         if (!(loadsMirror && Mirror === null)) {
             return;
         }
+
+        onLoadingStateChange({
+            inProgress: true,
+            error: null
+        });
+
         import('./Mirror').then((exports) => {
             Mirror = exports.Mirror;
+
             setLoadsMirror(false);
+            onLoadingStateChange({
+                inProgress: false,
+                error: null
+            });
+        }).catch((error) => {
+            setLoadsMirror(false);
+            onLoadingStateChange({
+                inProgress: false,
+                error: error.message
+            });
         });
     }, [loadsMirror]);
 

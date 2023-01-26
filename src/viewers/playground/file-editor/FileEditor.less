@@ -3,12 +3,23 @@
 .FileEditor {
     border: 1px solid @gray-light-A1;
 
-    .filename {
+    .heading {
         padding: @space-tiny-4;
-        .font-body-semibold();
         cursor: pointer;
         user-select: none;
         .color-tinge-interactive(@text-color-default);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        .filename {
+            flex-grow: 1;
+            .font-body-semibold();
+        }
+
+        .status {
+            color: @gray-twilight;
+        }
     }
 
     .CodeArea {
