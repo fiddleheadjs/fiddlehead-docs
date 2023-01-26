@@ -37,4 +37,4 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
             }
         </div>
     );
-}
+};

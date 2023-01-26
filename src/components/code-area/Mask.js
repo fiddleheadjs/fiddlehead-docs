@@ -38,4 +38,4 @@ export let Mask = ({content, onSelect, language}) => {
             </code>
         </pre>
     );
-}
+};
