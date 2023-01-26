@@ -63,7 +63,6 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         
         // Pattern: /** options go here */
         let match = code.match(/^\s*\/\*\*\s*(.*?)\s*\*\/\s*\r?\n/);
-        console.log(match);
         if (match !== null) {
             options = match[1];
             code = code.substring(match[0].length);
