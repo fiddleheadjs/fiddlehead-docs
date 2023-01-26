@@ -11,6 +11,11 @@ function node_walk(node, func) {
 // getCaretPosition: return [start, end] as offsets to elem.textContent that
 //   correspond to the selected portion of text
 //   (if start == end, caret is at given position and no text is selected)
+/**
+ * 
+ * @param {number[]|null} elem 
+ * @returns 
+ */
 export function getCaretPosition(elem) {
     var sel = window.getSelection();
     var cum_length = [0, 0];
@@ -20,7 +25,7 @@ export function getCaretPosition(elem) {
     else {
         var nodes_to_find = [sel.anchorNode, sel.extentNode];
         if (!elem.contains(sel.anchorNode) || !elem.contains(sel.extentNode))
-            return [null, null];
+            return null;
         else {
             var found = [0, 0];
             var i;
