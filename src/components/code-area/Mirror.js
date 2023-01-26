@@ -15,16 +15,7 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
 
         initialState = EditorState.create({
             doc: defaultValue,
-            selection: defaultSelection !== null ? {
-                anchor: defaultSelection[0],
-                head: defaultSelection[1]
-            } : null,
             extensions: [
-                EditorView.updateListener.of((update) => {
-                    if (update.docChanged) {
-                        onChange(editorView.state.doc.toString());
-                    }
-                }),
                 editorTheme,
                 keymap.of(defaultKeymap),
                 keymap.of(indentWithTab),
@@ -33,6 +24,14 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
                 history(),
                 getSyntaxHighlighting(language),
                 getLanguageCompartment(language),
+                EditorView.updateListener.of((update) => {
+                    if (update.docChanged) {
+                        onChange(editorView.state.doc.toString());
+                    }
+                }),
+                EditorView.contentAttributes.of({
+                    'data-gramm': 'false', // disable Grammarly
+                }),
             ].filter(t => t !== null)
         });
 
@@ -42,6 +41,19 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
         });
 
         if (defaultSelection !== null) {
+            // Handle max selectable position to avoid
+            // RangeError: Selection points outside of document
+            let maxSelectablePosition = editorView.state.doc.length;
+
+            editorView.dispatch({
+                selection: {
+                    anchor: Math.min(defaultSelection[0], maxSelectablePosition),
+                    head: Math.min(defaultSelection[1], maxSelectablePosition)
+                }
+            });
+
+            // Auto focus so the user don't need to click twice to edit
+            // - the first click is on the Mask
             editorView.focus();
         }
     }, []);

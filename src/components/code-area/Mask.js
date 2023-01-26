@@ -31,6 +31,7 @@ export let Mask = ({content, onSelectionChange, language}) => {
                 autocorrect="off"
                 autocapitalize="off"
                 translate="no"
+                data-gramm="false" // disable Grammarly
                 style={{tabSize: 4}}
                 ref={codeElementRef}
             >

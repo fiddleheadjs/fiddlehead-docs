@@ -13,48 +13,44 @@ export let FiddleheadSandbox = ({entryFilename, files, setError}) => {
             return;
         }
 
-        let win = iframe.contentWindow;
+        iframe.addEventListener('load', () => {
+            let win = iframe.contentWindow;
 
-        win.playground_src = {
-            entryFilename,
-            files,
-        };
+            win.playground_src = {
+                entryFilename,
+                files,
+            };
 
-        let makeModule = (source, deps) => {
-            let fn = new win.Function('require', 'exports', source);
-            let require = (depName) => deps[depName];
-            let exports = {};
-            fn(require, exports);
-            return exports;
-        };
+            let makeModule = (source, deps) => {
+                let fn = new win.Function('require', 'exports', source);
+                let require = (depName) => deps[depName];
+                let exports = {};
+                fn(require, exports);
+                return exports;
+            };
 
-        let fiddlehead = makeModule(__srcFiddlehead__);
+            let fiddlehead = makeModule(__srcFiddlehead__);
 
-        let fiddleheadStore = makeModule(__srcFiddleheadStore__, {
-            'fiddlehead': fiddlehead
-        });
-
-        win.playground_deps = {
-            'fiddlehead': fiddlehead,
-            'fiddlehead/store': fiddleheadStore,
-        };
-
-        win.playground_exec = {
-            fiddlehead,
-            babelTransform,
-        };
-
-        win.addEventListener('error', function (event) {
-            setError(event.error);
-        });
-
-        if (win.playground_run !== undefined) {
-            win.playground_run();
-        } else {
-            win.addEventListener('DOMContentLoaded', () => {
-                win.playground_run();
+            let fiddleheadStore = makeModule(__srcFiddleheadStore__, {
+                'fiddlehead': fiddlehead,
             });
-        }
+
+            win.playground_deps = {
+                'fiddlehead': fiddlehead,
+                'fiddlehead/store': fiddleheadStore,
+            };
+
+            win.playground_exec = {
+                fiddlehead,
+                babelTransform,
+            };
+
+            win.addEventListener('error', function (event) {
+                setError(event.error);
+            });
+
+            win.playground_run();
+        });
     }, []);
 
     useEffect(() => {
