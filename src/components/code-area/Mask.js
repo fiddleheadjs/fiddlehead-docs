@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'fiddlehead';
 import {highlightElement} from '../../modules/highlight';
 import {getCaretPosition} from '../../utils/getCaretPosition';
 
-export let Mask = ({content, onSelect, language}) => {
+export let Mask = ({content, onSelectionChange, language}) => {
     let codeElementRef = useRef(null);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export let Mask = ({content, onSelect, language}) => {
                     requestAnimationFrame(() => {
                         // Call the callback in the next animation frame, because
                         // we need to wait for the window to recognize the selection
-                        onSelect(getCaretPosition(codeElementRef.current));
+                        onSelectionChange(getCaretPosition(codeElementRef.current));
                     });
                 }}
                 contenteditable

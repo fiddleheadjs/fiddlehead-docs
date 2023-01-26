@@ -22,7 +22,7 @@ export let CodeArea = ({defaultValue, onChange, language}) => {
             {Mirror === null
                 ? <Mask
                     content={defaultValue}
-                    onSelect={(selection) => {
+                    onSelectionChange={(selection) => {
                         defaultSelection.current = selection;
                         setLoadsMirror(true);
                     }}
