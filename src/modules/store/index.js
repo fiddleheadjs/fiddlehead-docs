@@ -1,3 +1,4 @@
+import {useMemo} from 'fiddlehead';
 import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 
 const scope = {};
@@ -9,7 +10,9 @@ const data = {
 Object.seal(data);
 
 export let useStore = () => {
-    useStoreInit(scope, data);
+    useMemo(() => {
+        useStoreInit(scope, data);
+    }, []);
 };
 
 export let useSelect = (readFn, compareFn) => {
