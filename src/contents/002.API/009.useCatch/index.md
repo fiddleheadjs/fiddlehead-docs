@@ -17,9 +17,12 @@ import {Post} from './Post';
 
 export default function App() {
     return (
-        <ErrorBoundary>
-            <Post />
-        </ErrorBoundary>
+        <>
+            <h1>Title</h1>
+            <ErrorBoundary>
+                <Post />
+            </ErrorBoundary>
+        </>
     );
 }
 ```
@@ -34,7 +37,7 @@ function Post() {
         eval(badCode);
     }, []);
 
-    return <div>post</div>;
+    return <div>Post Content</div>;
 }
 ```
 
@@ -46,7 +49,7 @@ function ErrorBoundary({children}) {
     let [error, clearError] = useCatch();
 
     if (error !== null) {
-        return 'Oops... Something went wrong!';
+        return `${error.name}: ${error.message}`;
     }
 
     return children;
