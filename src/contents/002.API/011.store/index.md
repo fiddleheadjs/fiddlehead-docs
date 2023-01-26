@@ -6,10 +6,14 @@ Store is a separated package. It is helpful when you want to use some global sta
 
 Let's checkout this example:
 
+<playground>
+
 ```jsx
+/** filename="App.js" */
+
 import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 
-function App() {
+export default function App() {
     useStoreInit(
         App, // Scope, can be any reference-type value (object, function,...)
         {title: 'Store usage example'} // Initial data, a reference-type value
@@ -47,8 +51,10 @@ function Form() {
         <input
             type="text"
             value={title}
-            onChange={ev => setTitle(ev.target.value)}
+            onInput={event => setTitle(event.target.value)}
         />
     );
 }
 ```
+
+</playground>
