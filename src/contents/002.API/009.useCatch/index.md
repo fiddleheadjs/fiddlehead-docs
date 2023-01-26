@@ -42,7 +42,7 @@ export function Post() {
 ```
 
 ```jsx
-/** filename="ErrorBoundary.js" */
+/** filename="ErrorBoundary.js" open */
 import {useCatch} from 'fiddlehead';
 
 export function ErrorBoundary({children}) {

@@ -86,9 +86,9 @@
                         }]
                     ]
                 };
-                var outputCode = playground_exec.babelTransform(inputCode, transformOptions).code;
+                var transformed = playground_exec.babelTransform(inputCode, transformOptions);
                 var require = (pathname) => requireFromContext(pathname, file.filename);
-                var func = new Function('require', 'exports', outputCode);
+                var func = new Function('require', 'exports', transformed.code);
                 func(require, exports);
             } else {
                 throw new Error("Language is not supported: '" + file.language

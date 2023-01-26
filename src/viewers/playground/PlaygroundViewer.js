@@ -16,7 +16,7 @@ export let PlaygroundViewer = ({fileList}) => {
 
     return (
         <div class="PlaygroundViewer">
-            {fileList.map(({filename}) => (
+            {fileList.map(({filename, open}) => (
                 <FileEditor
                     key={filename}
                     file={files[filename]}
@@ -26,7 +26,7 @@ export let PlaygroundViewer = ({fileList}) => {
                             [filename]: updatedFile
                         }));
                     }}
-                    defaultCollapsed={filename !== entryFilename}
+                    defaultOpen={open}
                 />
             ))}
             {fileList.length > 0 &&

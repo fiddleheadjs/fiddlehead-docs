@@ -4,15 +4,15 @@ import {CodeArea} from '../../../components/code-area/CodeArea';
 import {Spinner} from '../../../components/spinner/Spinner';
 import {CautionIcon} from '../../../icons/CautionIcon';
 
-export let FileEditor = ({file, onChange, defaultCollapsed}) => {
-    let [collapsed, setCollapsed] = useState(defaultCollapsed);
+export let FileEditor = ({file, onChange, defaultOpen}) => {
+    let [open, setOpen] = useState(defaultOpen);
     let [loadingState, setLoadingState] = useState({inProgress: false, error: null});
 
     return (
         <div class="FileEditor">
             <div
                 class="heading"
-                onClick={() => setCollapsed(t => !t)}
+                onClick={() => setOpen(t => !t)}
             >
                 <span class="filename">
                     {file.filename}
@@ -29,7 +29,7 @@ export let FileEditor = ({file, onChange, defaultCollapsed}) => {
                 )}
             </div>
             {
-                !collapsed &&
+                open &&
                 <CodeArea
                     defaultValue={file.code}
                     onChange={(value) => {
