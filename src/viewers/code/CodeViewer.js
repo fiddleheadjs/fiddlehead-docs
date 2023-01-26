@@ -20,10 +20,10 @@ export let CodeViewer = ({code, language, options = {}}) => {
 
     return (
         <div class="CodeViewer">
-            <pre {...options}>
+            <pre class={`language-${language}`} {...options}>
                 <code
                     ref={codeElementRef}
-                    class={`language-${language}`} // keep the same format with Marked
+                    class={`language-${language}`}
                 >
                     {code}
                 </code>

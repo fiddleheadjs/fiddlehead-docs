@@ -5,7 +5,7 @@ let compression = require('compression');
 let app = express();
 let port = 3022;
 
-app.use(compression());
+// app.use(compression());
 
 app.use(express.static('public'));
 

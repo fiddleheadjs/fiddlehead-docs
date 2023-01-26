@@ -6,17 +6,17 @@ import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 import {PlayIcon} from '../../../icons/PlayIcon';
 
 export let Player = ({entryFilename, files}) => {
-    let Sandbox = useRef();
-
-    let [isLoading, setIsLoading] = useState(false);
-
+    let containerRef = useRef(null);
+    
+    let Sandbox = useRef(null);
+    
+    let [isFetchingSandbox, setIsFetchingSandbox] = useState(false);
+    
     let [error, setError] = useState(null);
-
-    let playerRef = useRef(null);
 
     let startImport = () => {
         setError(null);
-        setIsLoading(true);
+        setIsFetchingSandbox(true);
 
         import('../fiddlehead-sandbox/FiddleheadSandbox')
             .then((exports) => {
@@ -26,7 +26,7 @@ export let Player = ({entryFilename, files}) => {
                 setError(error);
             })
             .finally(() => {
-                setIsLoading(false);
+                setIsFetchingSandbox(false);
             });
     };
 
@@ -46,7 +46,7 @@ export let Player = ({entryFilename, files}) => {
             }
         });
 
-        observer.observe(playerRef.current);
+        observer.observe(containerRef.current);
 
         return () => observer.disconnect();
     }, []);
@@ -56,8 +56,8 @@ export let Player = ({entryFilename, files}) => {
             return [<CautionIcon />, __('Error')];
         }
 
-        if (isLoading) {
-            return [<PlayIcon />, __('Loading...')];
+        if (isFetchingSandbox) {
+            return [<PlayIcon />, __('Processing...')];
         }
 
         if (Sandbox.current === null) {
@@ -70,7 +70,7 @@ export let Player = ({entryFilename, files}) => {
     return (
         <div
             class="Player"
-            ref={playerRef}
+            ref={containerRef}
         >
             <div class="heading">
                 {icon}
