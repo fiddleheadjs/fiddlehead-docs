@@ -31,7 +31,7 @@ export default function App() {
 /** filename="Post.js" */
 import {useEffect} from 'fiddlehead';
 
-function Post() {
+export function Post() {
     useEffect(() => {
         let badCode = 'const a;';
         eval(badCode);
@@ -45,7 +45,7 @@ function Post() {
 /** filename="ErrorBoundary.js" */
 import {useCatch} from 'fiddlehead';
 
-function ErrorBoundary({children}) {
+export function ErrorBoundary({children}) {
     let [error, clearError] = useCatch();
 
     if (error !== null) {
