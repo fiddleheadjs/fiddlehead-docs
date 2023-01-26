@@ -8,7 +8,38 @@ To support that purpose, Fiddlehead provides you `useCatch` hook. `useCatch` cat
 
 The component implements `useCatch` hook works as an error boundary. Each error boundary allows only one `useCatch` inside.
 
+<playground>
+
 ```jsx
+/** filename="App.js" */
+import {ErrorBoundary} from './ErrorBoundary';
+import {Post} from './Post';
+
+export default function App() {
+    return (
+        <ErrorBoundary>
+            <Post />
+        </ErrorBoundary>
+    );
+}
+```
+
+```jsx
+/** filename="Post.js" */
+import {useEffect} from 'fiddlehead';
+
+function Post() {
+    useEffect(() => {
+        let badCode = 'const a;';
+        eval(badCode);
+    }, []);
+
+    return <div>post</div>;
+}
+```
+
+```jsx
+/** filename="ErrorBoundary.js" */
 import {useCatch} from 'fiddlehead';
 
 function ErrorBoundary({children}) {
@@ -21,3 +52,5 @@ function ErrorBoundary({children}) {
     return children;
 }
 ```
+
+</playground>
