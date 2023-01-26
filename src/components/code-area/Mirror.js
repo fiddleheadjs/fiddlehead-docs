@@ -7,7 +7,7 @@ import {getSyntaxHighlighting} from './highlightStyle';
 import {getLanguageCompartment} from './languageSupport';
 import {editorTheme} from './editorTheme';
 
-export let Mirror = ({defaultValue = '', defaultSelectionAnchor = null, onChange, language}) => {
+export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, language}) => {
     let containerRef = useRef(null);
 
     useLayoutEffect(() => {
@@ -15,9 +15,10 @@ export let Mirror = ({defaultValue = '', defaultSelectionAnchor = null, onChange
 
         initialState = EditorState.create({
             doc: defaultValue,
-            selection: {
-                anchor: defaultSelectionAnchor
-            },
+            selection: defaultSelection !== null ? {
+                anchor: defaultSelection[0],
+                head: defaultSelection[1]
+            } : null,
             extensions: [
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
@@ -40,7 +41,7 @@ export let Mirror = ({defaultValue = '', defaultSelectionAnchor = null, onChange
             parent: containerRef.current
         });
 
-        if (defaultSelectionAnchor !== null) {
+        if (defaultSelection !== null) {
             editorView.focus();
         }
     }, []);

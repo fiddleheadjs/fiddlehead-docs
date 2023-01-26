@@ -1,27 +1,36 @@
-import {useState} from 'fiddlehead';
-import {Touchable} from './Touchable';
+import {useState, useEffect, useRef} from 'fiddlehead';
+import {Mask} from './Mask';
 
 let Mirror = null;
 
 export let CodeArea = ({defaultValue, onChange, language}) => {
-    let [defaultSelectionAnchor, setDefaultSelectionAnchor] = useState(null);
+    let [loadsMirror, setLoadsMirror] = useState(false);
+    let defaultSelection = useRef(null);
+
+    useEffect(() => {
+        if (!(loadsMirror && Mirror === null)) {
+            return;
+        }
+        import('./Mirror').then((exports) => {
+            Mirror = exports.Mirror;
+            setLoadsMirror(false);
+        });
+    }, [loadsMirror]);
 
     return (
         <div class="CodeArea">
             {Mirror === null
-                ? <Touchable
+                ? <Mask
                     content={defaultValue}
-                    onSelect={([start, end]) => {
-                        import('./Mirror').then((exports) => {
-                            Mirror = exports.Mirror;
-                            setDefaultSelectionAnchor(end);
-                        });
+                    onSelect={(selection) => {
+                        defaultSelection.current = selection;
+                        setLoadsMirror(true);
                     }}
                     language={language}
                 />
                 : <Mirror
                     defaultValue={defaultValue}
-                    defaultSelectionAnchor={defaultSelectionAnchor}
+                    defaultSelection={defaultSelection.current}
                     onChange={onChange}
                     language={language}
                 />

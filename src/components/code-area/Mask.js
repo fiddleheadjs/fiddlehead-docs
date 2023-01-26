@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'fiddlehead';
 import {highlightElement} from '../../modules/highlight';
 import {getCaretPosition} from '../../utils/getCaretPosition';
 
-export let Touchable = ({content, onSelect, language}) => {
+export let Mask = ({content, onSelect, language}) => {
     let codeElementRef = useRef(null);
 
     useEffect(() => {
@@ -16,12 +16,22 @@ export let Touchable = ({content, onSelect, language}) => {
             <code
                 class={`language-${language}`}
                 onSelectStart={() => {
-                    // Need to wait for the window to recognize the selection
+                    // This event will not fire when a range is selected,
+                    // it only fires when the user start selecting.
+                    // TODO: Update selection when a range is selected
+
                     requestAnimationFrame(() => {
+                        // Call the callback in the next animation frame, because
+                        // we need to wait for the window to recognize the selection
                         onSelect(getCaretPosition(codeElementRef.current));
                     });
                 }}
                 contenteditable
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+                translate="no"
+                style={{tabSize: 4}}
                 ref={codeElementRef}
             >
                 {content}

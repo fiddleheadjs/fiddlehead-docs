@@ -7,16 +7,16 @@ import {PlayIcon} from '../../../icons/PlayIcon';
 
 export let Player = ({entryFilename, files}) => {
     let containerRef = useRef(null);
-    
+
     let Sandbox = useRef(null);
     
-    let [isFetchingSandbox, setIsFetchingSandbox] = useState(false);
+    let [isLoadingSandbox, setIsLoadingSandbox] = useState(false);
     
     let [error, setError] = useState(null);
 
     let startImport = () => {
         setError(null);
-        setIsFetchingSandbox(true);
+        setIsLoadingSandbox(true);
 
         import('../fiddlehead-sandbox/FiddleheadSandbox')
             .then((exports) => {
@@ -26,7 +26,7 @@ export let Player = ({entryFilename, files}) => {
                 setError(error);
             })
             .finally(() => {
-                setIsFetchingSandbox(false);
+                setIsLoadingSandbox(false);
             });
     };
 
@@ -56,7 +56,7 @@ export let Player = ({entryFilename, files}) => {
             return [<CautionIcon />, __('Error')];
         }
 
-        if (isFetchingSandbox) {
+        if (isLoadingSandbox) {
             return [<PlayIcon />, __('Processing...')];
         }
 
