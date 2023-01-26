@@ -9,6 +9,8 @@ Let's checkout this example:
 <playground>
 
 ```jsx
+/** filename="App.js" */
+
 import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 
 export default function App() {
