@@ -4,6 +4,7 @@ import {Nav} from './nav/Nav';
 import {useDispatch} from '../modules/store';
 import {Top} from './top/Top';
 import {useLocation} from '../modules/router';
+import {Main} from './main/Main';
 
 export let Layout = ({children}) => {
     let location = useLocation();
@@ -37,7 +38,7 @@ export let Layout = ({children}) => {
                         <Nav/>
                     </nav>
                     <main key={location.key}>
-                        {children}
+                        <Main>{children}</Main>
                     </main>
                 </div>
             </div>

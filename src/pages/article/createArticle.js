@@ -4,19 +4,14 @@ import {DocumentViewer} from '../../viewers/document/DocumentViewer';
 export let createArticle = (contentPath, currentNavItem) => {
     let Article = () => {
         let [data, setData] = useState(null);
-
-        let isUnmounted = useRef(false);
-    
+        let [error, setError] = useState(null);
+        
         useEffect(() => {
             import('@contents/' + contentPath + '/index.md').then(data => {
-                if (!isUnmounted.current) {
-                    setData(data);
-                }
+                setData(data);
+            }).catch((error) => {
+                setError(error);
             });
-
-            return () => {
-                isUnmounted.current = true;
-            };
         }, []);
 
         useEffect(() => {
@@ -27,6 +22,10 @@ export let createArticle = (contentPath, currentNavItem) => {
                 document.title = data.title;
             }
         }, [data]);
+
+        if (error !== null) {
+            throw error;
+        }
     
         if (data === null) {
             return null;
