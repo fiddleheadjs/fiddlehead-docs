@@ -4,8 +4,9 @@ import {__} from '../../../modules/i18n';
 import {Button} from '../../../components/button/Button';
 import {TerminalIcon} from '../../../icons/TerminalIcon';
 import {BanIcon} from '../../../icons/BanIcon';
+import {Checkbox} from '../../../components/checkbox/Checkbox';
 
-export let Console = ({items, clear}) => {
+export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
     let [focusedItemRow, setFocusedItemRow] = useState(null);
 
     let bodyRef = useRef();
@@ -31,7 +32,7 @@ export let Console = ({items, clear}) => {
 
     return (
         <div
-            class="Console"
+            class={`Console${items.length === 0 ? ' empty' : ''}`}
             onMouseDown={handleFocusRow}
             onTouchStart={handleFocusRow}
         >
@@ -41,6 +42,12 @@ export let Console = ({items, clear}) => {
                     <span>{__('Console')}</span>
                 </div>
                 <div class="actions">
+                    <Checkbox
+                        label={__('Preserve log')}
+                        checked={preservesLog}
+                        setChecked={setPreservesLog}
+                        size="small"
+                    />
                     <Button
                         variant="textual"
                         size="small"

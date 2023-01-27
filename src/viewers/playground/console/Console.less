@@ -4,6 +4,11 @@
     width: 100%;
     padding: @space-tiny-4;
     border: 1px solid @gray-light-A1;
+    
+    &.empty {
+        transition: opacity 1s;
+        opacity: 0.3;
+    }
 
     > .heading {
         display: flex;

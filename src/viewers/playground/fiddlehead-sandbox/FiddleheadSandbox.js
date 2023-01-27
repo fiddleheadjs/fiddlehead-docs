@@ -20,9 +20,9 @@ export let FiddleheadSandbox = ({
             return;
         }
 
-        iframe.addEventListener('load', () => {
-            let win = iframe.contentWindow;
+        let win = iframe.contentWindow;
 
+        let setupAndRun = () => {
             win.playground_src = {
                 entryFilename,
                 files,
@@ -60,7 +60,14 @@ export let FiddleheadSandbox = ({
             });
 
             win.playground_run();
-        });
+        };
+
+        if (win.playground_run !== undefined) {
+            setupAndRun();
+        } else {
+            // Almost time this case will happen
+            iframe.addEventListener('load', setupAndRun);
+        }
     }, []);
 
     useEffect(() => {

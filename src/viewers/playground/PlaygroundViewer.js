@@ -19,6 +19,8 @@ export let PlaygroundViewer = ({fileList}) => {
 
     let [showsConsole, setShowsConsole] = useState(false);
 
+    let [preservesLog, setPreservesLog] = useState(false);
+
     useEffect(() => {
         if (consoleItems.length > 0) {
             setShowsConsole(true);
@@ -28,7 +30,7 @@ export let PlaygroundViewer = ({fileList}) => {
         // Wait a moment to close the console
         let timeoutId = setTimeout(() => {
             setShowsConsole(false);
-        }, 500);
+        }, 1000);
 
         return () => clearTimeout(timeoutId);
     }, [consoleItems.length]);
@@ -47,6 +49,18 @@ export let PlaygroundViewer = ({fileList}) => {
         });
     };
 
+    let clearConsole = () => {
+        // Clear the sandbox console (including the iframe's console)
+        if (sandboxConsole.current !== null) {
+            sandboxConsole.current.clear();
+        }
+
+        // Set to an empty array to close the console
+        setConsoleItems([]);
+    };
+
+    console.log('preservesLog__', preservesLog);
+
     return (
         <div class="PlaygroundViewer">
             {fileList.map(({filename, open}) => (
@@ -58,6 +72,10 @@ export let PlaygroundViewer = ({fileList}) => {
                             ...prevFiles,
                             [filename]: updatedFile
                         }));
+                        console.log('preservesLog', preservesLog);
+                        if (!preservesLog) {
+                            clearConsole();
+                        }
                     }}
                     defaultOpen={open}
                 />
@@ -75,13 +93,9 @@ export let PlaygroundViewer = ({fileList}) => {
             {showsConsole && (
                 <Console
                     items={consoleItems}
-                    clear={() => {
-                        // Clear the sandbox console (including the iframe's console)
-                        sandboxConsole.current.clear();
-
-                        // Set to an empty array to close the console
-                        setConsoleItems([]);
-                    }}
+                    clear={clearConsole}
+                    preservesLog={preservesLog}
+                    setPreservesLog={setPreservesLog}
                 />
             )}
         </div>

@@ -1,4 +1,4 @@
-export let createIcon = (children, viewBoxWidth, viewBoxHeight) => (({
+export let createIcon = (pathData, viewBoxWidth, viewBoxHeight) => (({
     size = '1em',
     color = 'currentColor',
 }) => (
@@ -13,6 +13,6 @@ export let createIcon = (children, viewBoxWidth, viewBoxHeight) => (({
             fill: color,
         }}
     >
-        {children}
+        <path d={pathData} />
     </svg>
 ));
