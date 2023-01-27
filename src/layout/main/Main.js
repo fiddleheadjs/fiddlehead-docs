@@ -2,6 +2,7 @@ import './Main.less';
 import {useCatch} from 'fiddlehead';
 import {__} from '../../modules/i18n';
 import format from 'pretty-format';
+import {ErrorViewer} from '../../viewers/error/ErrorViewer';
 
 export let Main = ({children}) => {
     let [error] = useCatch();
@@ -14,10 +15,10 @@ export let Main = ({children}) => {
 
     return (
         <div class="Main">
-            <div class="unexpected-error">
-                <h1>{__('Oops... something went wrong!')}</h1>
-                <p>{format(error)}</p>
-            </div>
+            <ErrorViewer
+                title={__('Oops... something went wrong!')}
+                detail={format(error)}
+            />
         </div>
     );
 };

@@ -1,11 +1,13 @@
-import './NotFound.less';
 import {__} from '../../modules/i18n';
+import {ErrorViewer} from '../../viewers/error/ErrorViewer';
 
 export let NotFound = () => {
     return (
         <div class="NotFound">
-            <h1>404</h1>
-            <p>{__('Content not found.')}</p>
+            <ErrorViewer
+                title="404"
+                detail={__('Content not found.')}
+            />
         </div>
     );
 };
