@@ -46,4 +46,3 @@ module.exports = function getMetadata(markdown) {
 
     return {title, description, headings};
 }
-

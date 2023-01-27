@@ -1,23 +1,10 @@
 module.exports = function getContents(markdown) {
     return markdown
-        // Split markdown into an array, separating demos
-        .split(/^{{("demo":[^}]*)}}$|^(<playground>[\S\s]*?<\/playground>)$/gm)
+        .split(/^(<playground>[\S\s]*?<\/playground>)$/gm)
         .map((content) => {
             if (content === undefined) {
                 // Should not undefined
                 return '';
-            }
-
-            if (/^"demo": "(.*)"/.test(content)) {
-                try {
-                    return JSON.parse(`{${content}}`);
-                } catch (err) {
-                    console.error('JSON.parse fails with: ', `{${content}}`);
-                    console.error(err);
-
-                    // Empty lines will be ignored
-                    return '';
-                }
             }
 
             if (/^<playground>[\S\s]*?<\/playground>$/.test(content)) {
@@ -64,5 +51,7 @@ module.exports = function getContents(markdown) {
             return content;
         })
         // Remove empty lines
-        .filter(content => !(typeof content === 'string' && content.trim() === ''));
+        .filter(content => !(
+            typeof content === 'string' && content.trim() === ''
+        ));
 }

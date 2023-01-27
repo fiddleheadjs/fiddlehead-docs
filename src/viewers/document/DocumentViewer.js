@@ -1,7 +1,6 @@
 import './DocumentViewer.less';
 import {useCallback, useEffect, useRef} from 'fiddlehead';
 import {MarkdownViewer} from '../markdown/MarkdownViewer';
-import {DemoViewer} from '../demo/DemoViewer';
 import {__} from '../../modules/i18n';
 import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
@@ -17,7 +16,6 @@ const MIN_HEADINGS_TO_SHOW_TOC = 2;
 export let DocumentViewer = ({
     headings = [],
     contents = [],
-    demos = {},
     contentPath,
     previous,
     next,
@@ -178,18 +176,6 @@ export let DocumentViewer = ({
                         content={content}
                         headings={headings}
                         headingPosRef={headingPosRef}
-                    />
-                );
-            }
-
-            if (content.demo !== undefined) {
-                let {Component, code} = demos[content.demo];
-
-                return (
-                    <DemoViewer
-                        key={index}
-                        Component={Component}
-                        code={code}
                     />
                 );
             }

@@ -32,13 +32,12 @@ export let createArticle = (contentPath, currentNavItem) => {
             return null;
         }
 
-        let {headings, contents, demos} = data;
+        let {headings, contents} = data;
     
         return (
             <DocumentViewer
                 headings={headings}
                 contents={contents}
-                demos={demos}
                 contentPath={contentPath}
                 next={currentNavItem.next}
                 previous={currentNavItem.previous}
