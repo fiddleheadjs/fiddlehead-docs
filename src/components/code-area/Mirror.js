@@ -1,7 +1,6 @@
 import {useRef, useLayoutEffect} from 'fiddlehead';
 import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
-import {indentUnit} from '@codemirror/language';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
 import {autoCloseTags} from '@codemirror/lang-javascript';
 import {getSyntaxHighlighting} from './highlightStyle';
@@ -19,7 +18,6 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
             doc: defaultValue,
             extensions: [
                 editorTheme,
-                indentUnit.of(' '.repeat(TAB_SIZE)),
                 keymap.of(defaultKeymap),
                 keymap.of(indentWithTab),
                 keymap.of(historyKeymap),

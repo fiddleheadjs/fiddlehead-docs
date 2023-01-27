@@ -52,6 +52,7 @@ export let Console = ({items, clear}) => {
                         {value}
                     </p>
                 ))}
+                <p>&nbsp;</p>
             </div>
         </div>
     );

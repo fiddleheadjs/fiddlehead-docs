@@ -4,7 +4,10 @@ export let ErrorViewer = ({title, detail}) => {
     return (
         <div class="ErrorViewer">
             <h1>{title}</h1>
-            <p>{detail}</p>
+            {
+                detail != null &&
+                <p>{detail}</p>
+            }
         </div>
     );
 };

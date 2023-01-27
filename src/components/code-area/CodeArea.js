@@ -1,54 +1,50 @@
 import {useState, useEffect, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
 
-let Mirror = null;
-
-export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {
-    let [loadsMirror, setLoadsMirror] = useState(false);
-    let defaultSelection = useRef(null);
+export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {    
+    let Mirror = useRef(null);
+    let [isLoadingMirror, setIsLoadingSandbox] = useState(false);
+    let [mirrorLoadingError, setLoadingError] = useState(null);
+    let [defaultSelection, setDefaultSelection] = useState(null);
 
     useEffect(() => {
-        if (!(loadsMirror && Mirror === null)) {
+        onLoadingStateChange({
+            inProgress: isLoadingMirror,
+            error: mirrorLoadingError
+        });
+    }, [isLoadingMirror, mirrorLoadingError]);
+
+    useEffect(() => {
+        if (defaultSelection === null || isLoadingMirror || Mirror.current !== null) {
             return;
         }
 
-        onLoadingStateChange({
-            inProgress: true,
-            error: null
-        });
+        setLoadingError(null);
+        setIsLoadingSandbox(true);
 
         import('./Mirror').then((exports) => {
-            Mirror = exports.Mirror;
-
-            setLoadsMirror(false);
-            onLoadingStateChange({
-                inProgress: false,
-                error: null
-            });
+            Mirror.current = exports.Mirror;
         }).catch((error) => {
-            setLoadsMirror(false);
-            onLoadingStateChange({
-                inProgress: false,
-                error: error.message
-            });
+            setLoadingError(error.message);
+        }).finally(() => {
+            setIsLoadingSandbox(false);
         });
-    }, [loadsMirror]);
+    }, [defaultSelection]);
 
     return (
         <div class="CodeArea">
-            {Mirror === null
-                ? <Mask
-                    content={defaultValue}
-                    onSelectionChange={(selection) => {
-                        defaultSelection.current = selection;
-                        setLoadsMirror(true);
-                    }}
+            {Mirror.current !== null && defaultSelection !== null
+                ? <Mirror.current
+                    defaultValue={defaultValue}
+                    defaultSelection={defaultSelection}
+                    onChange={onChange}
                     language={language}
                 />
-                : <Mirror
-                    defaultValue={defaultValue}
-                    defaultSelection={defaultSelection.current}
-                    onChange={onChange}
+                : <Mask
+                    content={defaultValue}
+                    onSelectionChange={(selection) => {
+                        setDefaultSelection(selection);
+                    }}
                     language={language}
                 />
             }
