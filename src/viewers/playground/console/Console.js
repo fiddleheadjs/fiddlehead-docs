@@ -39,18 +39,19 @@ export let Console = ({items, clear}) => {
                 </div>
             </div>
             <div class="body">
-                <pre>
-                    {items.map(([name, value], row) => (
-                        <p
-                            key={row}
-                            class={focusedItemRow === row ? 'focused' : null}
-                            data-row={row}
-                            data-command={name}
-                        >
-                            {value}
-                        </p>
-                    ))}
-                </pre>
+                {items.map(([name, value], row) => (
+                    <p
+                        key={row}
+                        class={[
+                            focusedItemRow === row && 'focused',
+                            value.includes('\n') && 'multiple-line'
+                        ].filter(Boolean).join(' ')}
+                        data-row={row}
+                        data-command={name}
+                    >
+                        {value}
+                    </p>
+                ))}
             </div>
         </div>
     );

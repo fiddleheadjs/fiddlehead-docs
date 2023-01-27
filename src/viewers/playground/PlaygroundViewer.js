@@ -25,7 +25,7 @@ export let PlaygroundViewer = ({fileList}) => {
             return;
         }
 
-        // Close after a moment
+        // Wait a moment to close the console
         let timeoutId = setTimeout(() => {
             setShowsConsole(false);
         }, 500);
@@ -34,6 +34,18 @@ export let PlaygroundViewer = ({fileList}) => {
     }, [consoleItems.length]);
 
     let entryFilename = fileList.length > 0 ? fileList[0].filename : null;
+
+    let consoleCommandHandle = (name, value) => {
+        if (name === 'clear') {
+            return setConsoleItems([[name, value]]);
+        }
+        if (value == null) {
+            return;
+        }
+        setConsoleItems((prevConsoleItems) => {
+            return [...prevConsoleItems, [name, value]];
+        });
+    };
 
     return (
         <div class="PlaygroundViewer">
@@ -54,14 +66,7 @@ export let PlaygroundViewer = ({fileList}) => {
                 <Player
                     entryFilename={entryFilename}
                     files={files}
-                    consoleCommandHandle={(name, value) => {
-                        setConsoleItems((prevConsoleItems) => {
-                            if (name === 'clear') {
-                                return [[name, value]];
-                            }
-                            return [...prevConsoleItems, [name, value]];
-                        });
-                    }}
+                    consoleCommandHandle={consoleCommandHandle}
                     onConsoleTransplanted={(console) => {
                         sandboxConsole.current = console;
                     }}
@@ -74,7 +79,7 @@ export let PlaygroundViewer = ({fileList}) => {
                         // Clear the sandbox console (including the iframe's console)
                         sandboxConsole.current.clear();
 
-                        // Set to an empty array to close the console card
+                        // Set to an empty array to close the console
                         setConsoleItems([]);
                     }}
                 />

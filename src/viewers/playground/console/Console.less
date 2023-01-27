@@ -30,33 +30,36 @@
     > .body {
         margin-top: @space-tiny-4;
         border: 1px solid @gray-twilight;
-        height: 200px;
+        height: 14rem;
         overflow: auto;
+        .font-code();
+        
+        p {
+            padding: @space-tiny-1 @space-tiny-4;
 
-        pre {
-            p {
-                padding: @space-tiny-1 @space-tiny-4;
+            &.multiple-line {
+                white-space: pre-wrap;
+            }
 
-                &:not(:first-child) {
-                    border-top: 1px solid @gray-light-A3;
-                }
+            &:not(:first-child) {
+                border-top: 1px solid @gray-light-A3;
+            }
 
-                &.focused {
-                    background: @gray-light-A4;
-                }
+            &.focused {
+                background: @gray-light-A4;
+            }
 
-                &[data-command="info"] {
-                    color: @color-info;
-                }
+            &[data-command="info"] {
+                color: @color-info;
+            }
 
-                &[data-command="error"] {
-                    color: @color-danger;
-                }
+            &[data-command="error"] {
+                color: @color-danger;
+            }
 
-                &[data-command="clear"] {
-                    color: @gray-twilight;
-                    font-style: italic;
-                }
+            &[data-command="clear"] {
+                color: @gray-twilight;
+                font-style: italic;
             }
         }
     }

@@ -1,49 +1,104 @@
 import {format} from 'pretty-format';
 
-let formatAll = (values) => {
-    if (values.length === 0) {
-        return format(undefined);
+// Helpers:
+
+let stringify = (values) => {
+    if (values.length > 0) {
+        return [].map.call(values, value => format(value)).join(' ');
     }
-    return values.map(value => format(value)).join(' ');
+    return format(undefined);
 };
 
-function log(...values) {
-    return formatAll(values);
+let normalizeLabel = (rawLabel) => {
+    if (rawLabel === undefined) {
+        return 'default';
+    }
+    return String(rawLabel);
+};
+
+// Console context:
+
+export let createConsoleContext = () => ({
+    timers: new Map(),
+    counters: new Map(),
+});
+
+let clearConsoleContext = (context) => {
+    context.timers.clear();
+    context.counters.clear();
+};
+
+// Console methods:
+// Use 'function' to access the context via 'this' pointer
+// Use 'arguments' to keep the fn.length is zero as the browsers' implementations
+
+function log() {
+    return stringify(arguments);
 }
 
-function error(...values) {
-    return formatAll(values);
+function error() {
+    return stringify(arguments);
 }
 
-function warn(...values) {
-    return formatAll(values);
+function warn() {
+    return stringify(arguments);
 }
 
-function info(...values) {
-    formatAll(values);
+function info() {
+    return stringify(arguments);
 }
 
-function table(value) {
-    return format(value);
+function table() {
+    return stringify([arguments[0]]);
 }
 
-function time(label = 'default') {
-    let timers = this.timers;
-    if (timers.has(label)) {
+function assert() {
+    let [passed, ...tags] = arguments;
+    if (passed) {
+        return;
+    }
+    if (tags.length === 0) {
+        return 'Assertion failed';
+    }
+    return `Assertion failed: ${stringify(tags)}`;
+}
+
+function time() {
+    let label = normalizeLabel(arguments[0]);
+    if (this.timers.has(label)) {
         return `Timer '${label}' already exists`;
     }
-    timers.set(label, performance.now());
-    return format(undefined);
+    this.timers.set(label, performance.now());
 }
 
-function timeEnd(label = 'default') {
-    let timers = this.timers;
-    let startTime = timers.get(label);
+function timeEnd() {
+    let label = normalizeLabel(arguments[0]);
+    let startTime = this.timers.get(label);
     if (startTime === undefined) {
         return `Timer '${label}' does not exist`;
     }
-    timers.delete(label);
+    this.timers.delete(label);
     return `${label}: ${performance.now() - startTime}ms`;
+}
+
+function count() {
+    let label = normalizeLabel(arguments[0]);
+    let currentCount = this.counters.get(label);
+    if (currentCount === undefined) {
+        currentCount = 0;
+    }
+    currentCount++;
+    this.counters.set(label, currentCount);
+    return `${label}: ${currentCount}`;
+}
+
+function countReset() {
+    let label = normalizeLabel(arguments[0]);
+    if (!this.counters.has(label)) {
+        return `Count for '${label}' does not exist`;
+    }
+    this.counters.delete(label);
+    return `${label}: 0`;
 }
 
 function clear() {
@@ -57,15 +112,10 @@ export let consol2 = {
     warn,
     info,
     table,
+    assert,
     time,
     timeEnd,
+    count,
+    countReset,
     clear,
 };
-
-let clearConsoleContext = (context) => {
-    context.timers.clear();
-};
-
-export let createConsoleContext = () => ({
-    timers: new Map()
-});
