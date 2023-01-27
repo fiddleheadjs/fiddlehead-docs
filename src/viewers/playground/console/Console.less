@@ -29,9 +29,35 @@
 
     > .body {
         margin-top: @space-tiny-4;
-        border: 1px solid @gray-light-A2;
+        border: 1px solid @gray-twilight;
         height: 200px;
-        padding: @space-tiny-4;
         overflow: auto;
+
+        pre {
+            p {
+                padding: @space-tiny-1 @space-tiny-4;
+
+                &:not(:first-child) {
+                    border-top: 1px solid @gray-light-A3;
+                }
+
+                &.focused {
+                    background: @gray-light-A4;
+                }
+
+                &[data-command="info"] {
+                    color: @color-info;
+                }
+
+                &[data-command="error"] {
+                    color: @color-danger;
+                }
+
+                &[data-command="clear"] {
+                    color: @gray-twilight;
+                    font-style: italic;
+                }
+            }
+        }
     }
 }

@@ -1,13 +1,27 @@
 import './Console.less';
+import {useState} from 'fiddlehead';
 import {__} from '../../../modules/i18n';
 import {Button} from '../../../components/button/Button';
 import {TerminalIcon} from '../../../icons/TerminalIcon';
 import {BanIcon} from '../../../icons/BanIcon';
 
 export let Console = ({items, clear}) => {
+    let [focusedItemRow, setFocusedItemRow] = useState(null);
+
+    let handleFocusRow = (event) => {
+        let row = event.target.getAttribute('data-row');
+        if (row !== null) {
+            row = Number(row);
+        }
+        setFocusedItemRow(row);
+    };
 
     return (
-        <div class="Console">
+        <div
+            class="Console"
+            onMouseDown={handleFocusRow}
+            onTouchStart={handleFocusRow}
+        >
             <div class="heading">
                 <div class="title">
                     <TerminalIcon />
@@ -26,8 +40,15 @@ export let Console = ({items, clear}) => {
             </div>
             <div class="body">
                 <pre>
-                    {items.map(([name, value], index) => (
-                        <p key={index} class={name}>{value}</p>
+                    {items.map(([name, value], row) => (
+                        <p
+                            key={row}
+                            class={focusedItemRow === row ? 'focused' : null}
+                            data-row={row}
+                            data-command={name}
+                        >
+                            {value}
+                        </p>
                     ))}
                 </pre>
             </div>

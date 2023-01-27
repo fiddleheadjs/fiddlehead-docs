@@ -1,5 +1,5 @@
 import './PlaygroundViewer.less';
-import {useState} from 'fiddlehead';
+import {useEffect, useState} from 'fiddlehead';
 import {FileEditor} from './file-editor/FileEditor';
 import {Player} from './player/Player';
 import {Console} from './console/Console';
@@ -14,6 +14,21 @@ export let PlaygroundViewer = ({fileList}) => {
     });
 
     let [consoleItems, setConsoleItems] = useState([]);
+
+    let [showsConsole, setShowsConsole] = useState(false);
+
+    useEffect(() => {
+        if (consoleItems.length > 0) {
+            setShowsConsole(true);
+            return;
+        }
+
+        let timeoutId = setTimeout(() => {
+            setShowsConsole(false);
+        }, 500);
+
+        return () => clearTimeout(timeoutId);
+    }, [consoleItems.length]);
 
     let entryFilename = fileList.length > 0 ? fileList[0].filename : null;
 
@@ -39,14 +54,14 @@ export let PlaygroundViewer = ({fileList}) => {
                     handleConsoleCommand={(name, value) => {
                         setConsoleItems((prevConsoleItems) => {
                             if (name === 'clear') {
-                                return [];
+                                return [[name, value]];
                             }
                             return [...prevConsoleItems, [name, value]];
                         });
                     }}
                 />
             )}
-            {consoleItems.length > 0 && (
+            {showsConsole && (
                 <Console
                     items={consoleItems}
                     clear={() => setConsoleItems([])}
