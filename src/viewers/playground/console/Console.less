@@ -1,46 +1,19 @@
 @import '../../../style/mixin.less';
 
 .Console {
-    width: 100%;
-    padding: @space-tiny-4;
-    border: 1px solid @gray-light-A1;
-    
     &.empty {
         transition: opacity 1s;
         opacity: 0.3;
     }
 
-    > .heading {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
 
-        .title,
-        .actions {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            
-            > :not(:last-child) {
-                margin-right: @space-tiny-4;
-            }
-        }
-        
-        .title {
-            flex-grow: 1;
-            margin-right: @space-tiny-4;
-        }
-    }
-
-    > .body {
-        margin-top: @space-tiny-4;
-        border: 1px solid @gray-twilight;
+    .console-output {
         height: 14rem;
         overflow: auto;
-        .font-code();
         
         p {
             padding: @space-tiny-1 @space-tiny-4;
+            .font-code();
 
             &.multiple-line {
                 white-space: pre-wrap;

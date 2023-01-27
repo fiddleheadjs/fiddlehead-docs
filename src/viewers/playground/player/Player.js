@@ -4,6 +4,7 @@ import {__} from '../../../modules/i18n';
 import {CautionIcon} from '../../../icons/CautionIcon';
 import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 import {PlayIcon} from '../../../icons/PlayIcon';
+import {Section} from '../section/Section';
 
 export let Player = ({
     entryFilename,
@@ -69,19 +70,19 @@ export let Player = ({
             return [<PlayIcon />, __('Compile')];
         }
 
-        return [<CircleCheckIcon />, __('Result')];
+        return [<CircleCheckIcon />, __('Sandbox')];
     })();
 
     return (
-        <div
+        <Section
             class="Player"
+            icon={icon}
+            title={title}
+            defaultOpen={true}
+            usesCssToCollapse={true}
             ref={containerRef}
         >
-            <div class="heading">
-                {icon}
-                <span>{title}</span>
-            </div>
-            <div class="body">
+            <div class="player-sandbox">
                 {Sandbox.current !== null &&
                     <Sandbox.current
                         entryFilename={entryFilename}
@@ -98,6 +99,6 @@ export let Player = ({
                     </pre>
                 }
             </div>
-        </div>
+        </Section>
     );
 };

@@ -29,6 +29,18 @@
             > :not(:first-child) {
                 margin-top: 1em;
             }
+
+            > .MarkdownViewer {
+                // Relate to passing the top bar when scroll-into-view.
+                // Keep all children not overlapping outside elements.
+                z-index: 1;
+            }
+
+            > .PlaygroundViewer {
+                // Relate to passing the top bar when scroll-into-view.
+                // Keep all children not overlapping outside elements.
+                z-index: 2;
+            }
             
             > .quick-nav {
                 display: flex;

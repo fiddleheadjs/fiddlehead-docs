@@ -1,7 +1,9 @@
 @import '../../style/mixin.less';
 
 .PlaygroundViewer {
-    > :not(:first-child) {
-        margin-top: @space-tiny-4;
+    border: 1px solid @gray-light-A1;
+
+    > .Section:not(:first-child) {
+        border-top: 1px solid @gray-light-A2;
     }
 }

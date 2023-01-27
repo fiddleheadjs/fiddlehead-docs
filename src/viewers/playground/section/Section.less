@@ -1,0 +1,39 @@
+@import '../../../style/mixin.less';
+
+.Section {
+    > .heading {
+        min-height: 2.6rem;
+        padding: @space-tiny-1 @space-tiny-4;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        &.touchable {
+            cursor: pointer;
+            user-select: none;
+            .color-tinge-interactive(@text-color-default);
+        }
+        
+        > .title,
+        > .actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            > :not(:last-child) {
+                margin-right: @space-tiny-4;
+            }
+        }
+        
+        > .title {
+            flex-grow: 1;
+            margin-right: @space-tiny-4;
+            .font-body-semibold();
+        }
+    }
+
+    > .body {
+        width: 100%;
+        border-top: 1px solid @gray-light-A3;
+    }
+}

@@ -5,21 +5,22 @@ import {Button} from '../../../components/button/Button';
 import {TerminalIcon} from '../../../icons/TerminalIcon';
 import {BanIcon} from '../../../icons/BanIcon';
 import {Checkbox} from '../../../components/checkbox/Checkbox';
+import {Section} from '../section/Section';
 
 export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
     let [focusedItemRow, setFocusedItemRow] = useState(null);
 
-    let bodyRef = useRef();
+    let scrollerRef = useRef();
 
     useEffect(() => {
-        let body = bodyRef.current;
-        if (body === null) {
+        let scroller = scrollerRef.current;
+        if (scroller === null) {
             return;
         }
         if (focusedItemRow !== null) {
             return;
         }
-        body.scroll(0, body.scrollHeight);
+        scroller.scroll(0, scroller.scrollHeight);
     }, [items]);
 
     let handleFocusRow = (event) => {
@@ -31,17 +32,14 @@ export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
     };
 
     return (
-        <div
+        <Section
             class={`Console${items.length === 0 ? ' empty' : ''}`}
             onMouseDown={handleFocusRow}
             onTouchStart={handleFocusRow}
-        >
-            <div class="heading">
-                <div class="title">
-                    <TerminalIcon />
-                    <span>{__('Console')}</span>
-                </div>
-                <div class="actions">
+            icon={<TerminalIcon/>}
+            title={__('Console')}
+            actions={(
+                <>
                     <Checkbox
                         label={__('Preserve log')}
                         checked={preservesLog}
@@ -56,9 +54,10 @@ export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
                     >
                         <BanIcon />
                     </Button>
-                </div>
-            </div>
-            <div class="body" ref={bodyRef}>
+                </>
+            )}
+        >
+            <div class="console-output" ref={scrollerRef}>
                 {items.map(([name, value], row) => (
                     <p
                         key={row}
@@ -74,6 +73,6 @@ export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
                 ))}
                 <p>&nbsp;</p>
             </div>
-        </div>
+        </Section>
     );
 };

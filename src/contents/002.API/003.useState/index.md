@@ -2,6 +2,8 @@
 
 _Manage state of your components._
 
+## Basic usage
+
 <playground>
 
 ```jsx
@@ -30,6 +32,12 @@ export default function Counter() {
 ```
 
 </playground>
+
+## State updates are done in batches
+
+Fiddlehead batches updates to optimize number of renders.
+When you call multiple state updates at the same time,
+the component will only re-render once to apply all updated states.
 
 <playground>
 
