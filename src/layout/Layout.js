@@ -37,8 +37,10 @@ export let Layout = ({children}) => {
                     <nav>
                         <Nav/>
                     </nav>
-                    <main key={location.key}>
-                        <Main>{children}</Main>
+                    <main>
+                        <Main key={location.key}>
+                            {children}
+                        </Main>
                     </main>
                 </div>
             </div>
