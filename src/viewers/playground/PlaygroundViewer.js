@@ -1,5 +1,5 @@
 import './PlaygroundViewer.less';
-import {useEffect, useState} from 'fiddlehead';
+import {useEffect, useRef, useState} from 'fiddlehead';
 import {FileEditor} from './file-editor/FileEditor';
 import {Player} from './player/Player';
 import {Console} from './console/Console';
@@ -13,6 +13,8 @@ export let PlaygroundViewer = ({fileList}) => {
         return initial;
     });
 
+    let sandboxConsole = useRef(null);
+
     let [consoleItems, setConsoleItems] = useState([]);
 
     let [showsConsole, setShowsConsole] = useState(false);
@@ -23,6 +25,7 @@ export let PlaygroundViewer = ({fileList}) => {
             return;
         }
 
+        // Close after a moment
         let timeoutId = setTimeout(() => {
             setShowsConsole(false);
         }, 500);
@@ -51,7 +54,7 @@ export let PlaygroundViewer = ({fileList}) => {
                 <Player
                     entryFilename={entryFilename}
                     files={files}
-                    handleConsoleCommand={(name, value) => {
+                    consoleCommandHandle={(name, value) => {
                         setConsoleItems((prevConsoleItems) => {
                             if (name === 'clear') {
                                 return [[name, value]];
@@ -59,12 +62,21 @@ export let PlaygroundViewer = ({fileList}) => {
                             return [...prevConsoleItems, [name, value]];
                         });
                     }}
+                    onConsoleTransplanted={(console) => {
+                        sandboxConsole.current = console;
+                    }}
                 />
             )}
             {showsConsole && (
                 <Console
                     items={consoleItems}
-                    clear={() => setConsoleItems([])}
+                    clear={() => {
+                        // Clear the sandbox console (including the iframe's console)
+                        sandboxConsole.current.clear();
+
+                        // Set to an empty array to close the console card
+                        setConsoleItems([]);
+                    }}
                 />
             )}
         </div>
