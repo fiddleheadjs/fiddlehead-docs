@@ -3,9 +3,9 @@ import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
 import {autoCloseTags} from '@codemirror/lang-javascript';
-import {getSyntaxHighlighting} from './highlightStyle';
+import {getSyntaxHighlighting} from './prismHighlightStyle';
 import {getLanguageCompartment} from './languageSupport';
-import {editorTheme} from './editorTheme';
+import {mirrorTheme} from './mirrorTheme';
 import {TAB_SIZE} from './tabSize';
 
 export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, language}) => {
@@ -17,7 +17,7 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
         initialState = EditorState.create({
             doc: defaultValue,
             extensions: [
-                editorTheme,
+                mirrorTheme,
                 keymap.of(defaultKeymap),
                 keymap.of(indentWithTab),
                 keymap.of(historyKeymap),

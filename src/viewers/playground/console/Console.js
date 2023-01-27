@@ -1,5 +1,5 @@
 import './Console.less';
-import {useState} from 'fiddlehead';
+import {useEffect, useRef, useState} from 'fiddlehead';
 import {__} from '../../../modules/i18n';
 import {Button} from '../../../components/button/Button';
 import {TerminalIcon} from '../../../icons/TerminalIcon';
@@ -7,6 +7,19 @@ import {BanIcon} from '../../../icons/BanIcon';
 
 export let Console = ({items, clear}) => {
     let [focusedItemRow, setFocusedItemRow] = useState(null);
+
+    let bodyRef = useRef();
+
+    useEffect(() => {
+        let body = bodyRef.current;
+        if (body === null) {
+            return;
+        }
+        if (focusedItemRow !== null) {
+            return;
+        }
+        body.scroll(0, body.scrollHeight);
+    }, [items]);
 
     let handleFocusRow = (event) => {
         let row = event.target.getAttribute('data-row');
@@ -38,7 +51,7 @@ export let Console = ({items, clear}) => {
                     </Button>
                 </div>
             </div>
-            <div class="body">
+            <div class="body" ref={bodyRef}>
                 {items.map(([name, value], row) => (
                     <p
                         key={row}

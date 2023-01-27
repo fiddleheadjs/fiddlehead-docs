@@ -1,7 +1,7 @@
 import {EditorView} from '@codemirror/view';
 import {font_family, font_size, font_weight, gray, line_height, space} from '../../style/theme';
 
-export let editorTheme = EditorView.theme({
+export let mirrorTheme = EditorView.theme({
     '&.cm-focused': {
         outline: 'none',
     },

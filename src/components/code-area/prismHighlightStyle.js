@@ -1,6 +1,10 @@
 import {HighlightStyle, syntaxHighlighting} from '@codemirror/language';
 import {tags} from '@lezer/highlight';
 
+export let getSyntaxHighlighting = (language) => {
+    return syntaxHighlighting(getHighlightStyle(language));
+};
+
 let jsHighlightStyle = HighlightStyle.define([
     {
         tag: [tags.comment, tags.meta],
@@ -75,8 +79,4 @@ let getHighlightStyle = (language) => {
     }
 
     return jsHighlightStyle;
-};
-
-export let getSyntaxHighlighting = (language) => {
-    return syntaxHighlighting(getHighlightStyle(language));
 };
