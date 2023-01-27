@@ -82,6 +82,7 @@ export let Display = ({
             defaultOpen={true}
             forcesClose={forcesClose}
             usesCssToClose={true}
+            bodyPadding={true}
             ref={containerRef}
         >
             <div class="display-output">

@@ -1,5 +1,5 @@
-import {useState} from 'fiddlehead';
 import './Section.less';
+import {useState} from 'fiddlehead';
 
 export let Section = ({
     icon,
@@ -10,6 +10,7 @@ export let Section = ({
     forcesClose = false,
     usesCssToClose = false,
     class: className,
+    bodyPadding = false,
     ...otherProps
 }) => {
     let touchable = !forcesClose && defaultOpen !== null;
@@ -46,7 +47,7 @@ export let Section = ({
             {
                 (finalOpen || usesCssToClose) &&
                 <div
-                    class="body"
+                    class={`body${bodyPadding ? ' padding' : ''}`}
                     style={{display: finalOpen ? null : 'none'}}
                 >
                     {children}
