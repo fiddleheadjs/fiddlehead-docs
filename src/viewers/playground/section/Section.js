@@ -7,18 +7,21 @@ export let Section = ({
     actions,
     children,
     defaultOpen = null,
-    usesCssToCollapse = false,
+    forcesClose = false,
+    usesCssToClose = false,
     class: className,
     ...otherProps
 }) => {
-    let collapsible = defaultOpen !== null;
-    let [open, setOpen] = useState(collapsible ? defaultOpen : true);
+    let touchable = !forcesClose && defaultOpen !== null;
+    let [open, setOpen] = useState(defaultOpen !== null ? defaultOpen : true);
 
     let toggle = () => {
-        if (collapsible) {
+        if (touchable) {
             setOpen(open => !open);
         }
     };
+
+    let finalOpen = !forcesClose && open;
 
     return (
         <div
@@ -26,7 +29,7 @@ export let Section = ({
             {...otherProps}
         >
             <div
-                class={`heading${collapsible ? ' touchable' : ''}`}
+                class={`heading${touchable ? ' touchable' : ''}`}
                 onClick={toggle}
             >
                 <div class="title">
@@ -41,10 +44,10 @@ export let Section = ({
                 }
             </div>
             {
-                (open || usesCssToCollapse) &&
+                (finalOpen || usesCssToClose) &&
                 <div
                     class="body"
-                    style={{display: !open ? 'none' : null}}
+                    style={{display: finalOpen ? null : 'none'}}
                 >
                     {children}
                 </div>

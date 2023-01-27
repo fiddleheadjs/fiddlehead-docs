@@ -1,24 +1,25 @@
-import './Player.less';
+import './Display.less';
 import {useState, useRef, useEffect} from 'fiddlehead';
 import {__} from '../../../modules/i18n';
 import {CautionIcon} from '../../../icons/CautionIcon';
-import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 import {PlayIcon} from '../../../icons/PlayIcon';
 import {Section} from '../section/Section';
+import {DisplayIcon} from '../../../icons/DisplayIcon';
 
-export let Player = ({
+export let Display = ({
     entryFilename,
     files,
     consoleCommandHandle,
     onConsoleTransplanted,
+    forcesClose,
 }) => {
     let containerRef = useRef(null);
+
+    let [error, setError] = useState(null);
 
     let Sandbox = useRef(null);
     
     let [isLoadingSandbox, setIsLoadingSandbox] = useState(false);
-    
-    let [error, setError] = useState(null);
 
     let startImport = () => {
         setError(null);
@@ -70,24 +71,25 @@ export let Player = ({
             return [<PlayIcon />, __('Compile')];
         }
 
-        return [<CircleCheckIcon />, __('Sandbox')];
+        return [<DisplayIcon />, __('Display')];
     })();
 
     return (
         <Section
-            class="Player"
+            class="Display"
             icon={icon}
             title={title}
             defaultOpen={true}
-            usesCssToCollapse={true}
+            forcesClose={forcesClose}
+            usesCssToClose={true}
             ref={containerRef}
         >
-            <div class="player-sandbox">
+            <div class="display-output">
                 {Sandbox.current !== null &&
                     <Sandbox.current
                         entryFilename={entryFilename}
                         files={files}
-                        setError={setError}
+                        errorHandle={setError}
                         consoleCommandHandle={consoleCommandHandle}
                         onConsoleTransplanted={onConsoleTransplanted}
                     />

@@ -1,7 +1,7 @@
 import './PlaygroundViewer.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {FileEditor} from './file-editor/FileEditor';
-import {Player} from './player/Player';
+import {Display} from './display/Display';
 import {Console} from './console/Console';
 
 export let PlaygroundViewer = ({fileList}) => {
@@ -59,8 +59,6 @@ export let PlaygroundViewer = ({fileList}) => {
         setConsoleItems([]);
     };
 
-    console.log('preservesLog__', preservesLog);
-
     return (
         <div class="PlaygroundViewer">
             {fileList.map(({filename, open}) => (
@@ -72,7 +70,6 @@ export let PlaygroundViewer = ({fileList}) => {
                             ...prevFiles,
                             [filename]: updatedFile
                         }));
-                        console.log('preservesLog', preservesLog);
                         if (!preservesLog) {
                             clearConsole();
                         }
@@ -81,7 +78,7 @@ export let PlaygroundViewer = ({fileList}) => {
                 />
             ))}
             {fileList.length > 0 && (
-                <Player
+                <Display
                     entryFilename={entryFilename}
                     files={files}
                     consoleCommandHandle={consoleCommandHandle}

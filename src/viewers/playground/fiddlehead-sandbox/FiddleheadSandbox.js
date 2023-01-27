@@ -7,7 +7,7 @@ import {consoleTransplant} from '../console/transplant';
 export let FiddleheadSandbox = ({
     entryFilename,
     files,
-    setError,
+    errorHandle,
     consoleCommandHandle,
     onConsoleTransplanted,
 }) => {
@@ -56,7 +56,7 @@ export let FiddleheadSandbox = ({
             onConsoleTransplanted(win.console);
 
             win.addEventListener('error', function (event) {
-                setError(event.error);
+                errorHandle(event.error);
             });
 
             win.playground_run();
@@ -84,7 +84,7 @@ export let FiddleheadSandbox = ({
         }
 
         let timeoutId = setTimeout(() => {
-            setError(null);
+            errorHandle(null);
 
             win.playground_src = {
                 entryFilename,
