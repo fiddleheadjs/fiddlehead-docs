@@ -2,8 +2,9 @@ import './FiddleheadSandbox.less';
 import {useEffect, useRef} from 'fiddlehead';
 import iframeContent from './iframeContent.html';
 import {transform as babelTransform} from '@babel/standalone';
+import {consoleInject} from '../console/inject';
 
-export let FiddleheadSandbox = ({entryFilename, files, setError}) => {
+export let FiddleheadSandbox = ({entryFilename, files, setError, handleConsoleCommand}) => {
     let iframeRef = useRef(null);
 
     useEffect(() => {
@@ -44,6 +45,8 @@ export let FiddleheadSandbox = ({entryFilename, files, setError}) => {
                 fiddlehead,
                 babelTransform,
             };
+
+            consoleInject(win.console, handleConsoleCommand);
 
             win.addEventListener('error', function (event) {
                 setError(event.error);

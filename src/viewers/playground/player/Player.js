@@ -5,7 +5,7 @@ import {CautionIcon} from '../../../icons/CautionIcon';
 import {CircleCheckIcon} from './../../../icons/CircleCheckIcon';
 import {PlayIcon} from '../../../icons/PlayIcon';
 
-export let Player = ({entryFilename, files}) => {
+export let Player = ({entryFilename, files, handleConsoleCommand}) => {
     let containerRef = useRef(null);
 
     let Sandbox = useRef(null);
@@ -82,6 +82,7 @@ export let Player = ({entryFilename, files}) => {
                         entryFilename={entryFilename}
                         files={files}
                         setError={setError}
+                        handleConsoleCommand={handleConsoleCommand}
                     />
                 }
                 {
