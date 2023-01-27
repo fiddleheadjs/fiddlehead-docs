@@ -24,6 +24,7 @@ export let createArticle = (contentPath, currentNavItem) => {
         }, [data]);
 
         if (error !== null) {
+            // This error should be handled in a higher level
             throw error;
         }
     
