@@ -48,14 +48,24 @@ export let Mask = ({content, onSelectionChange, language}) => {
                 style={{
                     tabSize: TAB_SIZE,
                     caretColor: gray.black,
-                    borderRadius: `${border_radius.level_2}px`,
-                    boxShadow: focused ? `inset 0 0 0 1px ${color.primary}` : null,
                     outline: 'none',
                 }}
                 ref={codeElementRef}
             >
                 {content}
             </code>
+            <div
+                style={{
+                    pointerEvents: 'none',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    borderRadius: `${border_radius.level_2}px`,
+                    boxShadow: focused ? `inset 0 0 0 1px ${color.primary}` : null,
+                }}
+            />
         </pre>
     );
 };

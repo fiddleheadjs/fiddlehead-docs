@@ -12,10 +12,10 @@ export let mirrorTheme = EditorView.theme({
         fontWeight: font_weight.code,
     },
     '.cm-content': {
-        padding: `${space.tiny_3}px 0`,
+        padding: `${space.tiny_4}px 0`,
         caretColor: gray.black,
     },
     '.cm-line': {
-        padding: `0 ${space.tiny_3}px`,
+        padding: `0 ${space.tiny_4}px`,
     },
 });

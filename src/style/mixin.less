@@ -3,3 +3,46 @@
 
 @top-height: 72px;
 @viewport-padding: @space-small-4;
+
+// SCROLLBAR
+.custom-scrollbar(@colorTrack, @colorThumb, @colorThumbHovered, @colorThumbActive) {
+    // width
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    // Track
+    ::-webkit-scrollbar-track {
+        background: @colorTrack;
+    }
+
+    // Handle
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        border: 2px solid @colorTrack;
+        background: @colorThumb;
+    }
+
+    // Handle on hover
+    ::-webkit-scrollbar-thumb:hover {
+        background: @colorThumbHovered;
+    }
+
+    // Handle on active
+    ::-webkit-scrollbar-thumb:active {
+        background: @colorThumbActive;
+    }
+}
+
+.custom-scrollbar-light {
+    .custom-scrollbar(@gray-white, @gray-light-A2, @gray-light-A0, @gray-twilight);
+}
+
+.custom-scrollbar-dark {
+    .custom-scrollbar(@gray-dark, @gray-medium, @gray-twilight, @gray-light-A0);
+}
+
+.custom-scrollbar-invisible {
+    .custom-scrollbar(transparent, transparent, transparent, transparent);
+}

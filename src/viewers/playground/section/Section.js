@@ -7,22 +7,12 @@ export let Section = ({
     actions,
     children,
     defaultOpen = null,
-    forcesClose = false,
     usesCssToClose = false,
     class: className,
-    bodyPadding = false,
     ...otherProps
 }) => {
-    let touchable = !forcesClose && defaultOpen !== null;
-    let [open, setOpen] = useState(defaultOpen !== null ? defaultOpen : true);
-
-    let toggle = () => {
-        if (touchable) {
-            setOpen(open => !open);
-        }
-    };
-
-    let finalOpen = !forcesClose && open;
+    let touchable = defaultOpen !== null;
+    let [open, setOpen] = useState(touchable ? defaultOpen : true);
 
     return (
         <div
@@ -31,7 +21,7 @@ export let Section = ({
         >
             <div
                 class={`heading${touchable ? ' touchable' : ''}`}
-                onClick={toggle}
+                onClick={touchable ? () => setOpen(open => !open) : null}
             >
                 <div class="title">
                     {icon}
@@ -45,10 +35,10 @@ export let Section = ({
                 }
             </div>
             {
-                (finalOpen || usesCssToClose) &&
+                (open || usesCssToClose) &&
                 <div
-                    class={`body${bodyPadding ? ' padding' : ''}`}
-                    style={{display: finalOpen ? null : 'none'}}
+                    class="body"
+                    style={{display: open ? null : 'none'}}
                 >
                     {children}
                 </div>

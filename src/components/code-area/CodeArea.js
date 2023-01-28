@@ -8,10 +8,17 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     let [defaultSelection, setDefaultSelection] = useState(null);
 
     useEffect(() => {
-        onLoadingStateChange({
-            inProgress: isLoadingMirror,
-            error: mirrorLoadingError
-        });
+        // Make little delay so that the loading indicator
+        // will not display if the internet connection is fast.
+        // Once the indicator displays, it also should not hide too quickly
+        let timeoutId = setTimeout(() => {
+            onLoadingStateChange({
+                inProgress: isLoadingMirror,
+                error: mirrorLoadingError
+            });
+        }, 300);
+
+        return () => clearTimeout(timeoutId);
     }, [isLoadingMirror, mirrorLoadingError]);
 
     useEffect(() => {

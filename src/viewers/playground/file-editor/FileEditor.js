@@ -30,7 +30,6 @@ export let FileEditor = ({file, onChange, defaultOpen}) => {
                 </>
             }
             defaultOpen={defaultOpen}
-            bodyPadding={true}
         >
             <CodeArea
                 defaultValue={file.code}
