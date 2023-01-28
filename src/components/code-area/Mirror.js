@@ -8,13 +8,11 @@ import {getLanguageCompartment} from './languageSupport';
 import {mirrorTheme} from './mirrorTheme';
 import {TAB_SIZE} from './tabSize';
 
-export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, language}) => {
+export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, onFocusChange, language}) => {
     let containerRef = useRef(null);
 
     useLayoutEffect(() => {
-        let initialState, editorView;
-
-        initialState = EditorState.create({
+        let initialState = EditorState.create({
             doc: defaultValue,
             extensions: [
                 mirrorTheme,
@@ -31,13 +29,16 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, lang
                 }),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
-                        onChange(editorView.state.doc.toString());
+                        onChange(update.view.state.doc.toString());
+                    }
+                    if (update.focusChanged) {
+                        onFocusChange(update.view.hasFocus);
                     }
                 }),
             ].filter(t => t !== null)
         });
 
-        editorView = new EditorView({
+        let editorView = new EditorView({
             state: initialState,
             parent: containerRef.current
         });

@@ -1,0 +1,10 @@
+@import '../../style/mixin.less';
+
+.CodeArea {
+    .custom-scrollbar-invisible();
+    
+    &.focused,
+    &.touched {
+        .custom-scrollbar-light();
+    }
+}

@@ -1,13 +1,11 @@
-import {useRef, useEffect, useState} from 'fiddlehead';
+import {useRef, useEffect} from 'fiddlehead';
 import {highlightElement} from '../../modules/highlight';
 import {border_radius, color, gray} from '../../style/theme';
 import {getCaretPosition} from '../../utils/getCaretPosition';
 import {TAB_SIZE} from './tabSize';
 
-export let Mask = ({content, onSelectionChange, language}) => {
+export let Mask = ({content, onSelectionChange, focused, onFocusChange, language}) => {
     let codeElementRef = useRef(null);
-
-    let [focused, setFocused] = useState(false);
 
     useEffect(() => {
         if (codeElementRef.current !== null) {
@@ -37,8 +35,8 @@ export let Mask = ({content, onSelectionChange, language}) => {
                     // we will try to load the Mirror again
                     handleSelectionChange();
                 }}
-                onFocus={() => setFocused(true)}
-                onBlur={() => setFocused(false)}
+                onFocus={() => onFocusChange(true)}
+                onBlur={() => onFocusChange(false)}
                 contenteditable
                 spellcheck="false"
                 autocorrect="off"

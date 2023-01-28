@@ -1,6 +1,8 @@
 @import '../../style/mixin.less';
 
 .MarkdownViewer {
+    .custom-scrollbar-light();
+
     > * {
         // Relate to passing the top bar when scroll-into-view.
         // Headings use padding-top to make space above them,
@@ -84,11 +86,6 @@
         }
     }
 
-    pre {
-        width: 100%;
-        border: 1px solid @gray-light-A3;
-    }
-
     table {
         border-collapse: collapse;
 
@@ -111,5 +108,10 @@
                 background: @gray-light-A4;
             }
         }
+    }
+
+    .code-snippet {
+        width: 100%;
+        border: 1px solid @gray-light-A3;
     }
 }

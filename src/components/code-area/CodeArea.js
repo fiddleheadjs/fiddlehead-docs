@@ -1,11 +1,16 @@
+import './CodeArea.less';
 import {useState, useEffect, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
 
 export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {    
     let Mirror = useRef(null);
+    
+    let [defaultSelection, setDefaultSelection] = useState(null);
     let [isLoadingMirror, setIsLoadingMirror] = useState(false);
     let [mirrorLoadingError, setMirrorLoadingError] = useState(null);
-    let [defaultSelection, setDefaultSelection] = useState(null);
+
+    let [focused, setFocused] = useState(false);
+    let [touched, setTouched] = useState(false);
 
     useEffect(() => {
         // Make little delay so that the loading indicator
@@ -39,19 +44,26 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     }, [defaultSelection]);
 
     return (
-        <div class="CodeArea">
+        <div
+            class={`CodeArea${focused ? ' focused' : ''}${touched ? ' touched' : ''}`}
+            onTouchStart={() => setTouched(true)}
+            onTouchEnd={() => setTouched(false)}
+            onMouseEnter={() => setTouched(true)}
+            onMouseLeave={() => setTouched(false)}
+        >
             {Mirror.current !== null && defaultSelection !== null
                 ? <Mirror.current
                     defaultValue={defaultValue}
                     defaultSelection={defaultSelection}
                     onChange={onChange}
+                    onFocusChange={setFocused}
                     language={language}
                 />
                 : <Mask
                     content={defaultValue}
-                    onSelectionChange={(selection) => {
-                        setDefaultSelection(selection);
-                    }}
+                    focused={focused}
+                    onSelectionChange={setDefaultSelection}
+                    onFocusChange={setFocused}
                     language={language}
                 />
             }
