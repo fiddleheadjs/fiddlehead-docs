@@ -3,6 +3,7 @@ import {useEffect, useRef} from 'fiddlehead';
 import iframeContent from './iframeContent.html';
 import {transform as babelTransform} from '@babel/standalone';
 import {consoleTransplant} from '../console/transplant';
+import {space} from '../../../style/theme';
 
 export let FiddleheadSandbox = ({
     entryFilename,
@@ -28,17 +29,9 @@ export let FiddleheadSandbox = ({
                 files,
             };
 
-            let makeModule = (source, deps) => {
-                let fn = new win.Function('require', 'exports', source);
-                let require = (depName) => deps[depName];
-                let exports = {};
-                fn(require, exports);
-                return exports;
-            };
+            let fiddlehead = makeModule(win, __srcFiddlehead__, {});
 
-            let fiddlehead = makeModule(__srcFiddlehead__);
-
-            let fiddleheadStore = makeModule(__srcFiddleheadStore__, {
+            let fiddleheadStore = makeModule(win, __srcFiddleheadStore__, {
                 'fiddlehead': fiddlehead,
             });
 
@@ -55,7 +48,12 @@ export let FiddleheadSandbox = ({
             consoleTransplant(win.console, consoleCommandHandle);
             onConsoleTransplanted(win.console);
 
-            win.addEventListener('error', function (event) {
+            observeIframeContentHeight(win, (newHeight) => {
+                // Add 2px to deal with the pixel manipulation of browsers
+                iframe.style.height = `${newHeight + 2}px`;
+            });
+
+            win.addEventListener('error', (event) => {
                 errorHandle(event.error);
             });
 
@@ -85,6 +83,9 @@ export let FiddleheadSandbox = ({
 
         let timeoutId = setTimeout(() => {
             errorHandle(null);
+            
+            // Reset the iframe height
+            iframe.style.height = '0px';
 
             win.playground_src = {
                 entryFilename,
@@ -106,4 +107,28 @@ export let FiddleheadSandbox = ({
             ref={iframeRef}
         />
     );
+};
+
+let makeModule = (win, source, deps) => {
+    let fn = new win.Function('require', 'exports', source);
+    let require = (depName) => deps[depName];
+    let exports = {};
+    fn(require, exports);
+    return exports;
+};
+
+let observeIframeContentHeight = (win, callback) => {
+    let observer = new win.MutationObserver(() => {
+        let doc = win.document.documentElement;
+
+        if (doc.scrollHeight > doc.clientHeight) {
+            callback(doc.scrollHeight);
+        }
+    });
+
+    observer.observe(win.document.body, {
+        childList: true,
+        attributes: true,
+        subtree: true,
+    });
 };

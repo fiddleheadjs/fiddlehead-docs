@@ -17,14 +17,14 @@ export default function Counter() {
     return (
         <>
             <h2>Count: {count}</h2>
-            <br/>
+            {new Array(count).fill(1).map((_, index) => <p>Row {index}.</p>)}
             <button
                 onClick={() => {
                     setCount(count + 1);
                     console.log('count', count);
                 }}
             >
-                Increase
+                Add row
             </button>
         </>
     );

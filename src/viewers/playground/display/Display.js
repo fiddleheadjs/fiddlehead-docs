@@ -71,7 +71,7 @@ export let Display = ({
             return [<PlayIcon />, __('Compile')];
         }
 
-        return [<DisplayIcon />, __('Display result')];
+        return [<DisplayIcon />, __('Display Result')];
     })();
 
     return (
