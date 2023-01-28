@@ -2,12 +2,14 @@
 
 .Console {
     .console-output {
-        max-height: 14rem;
         overflow: auto;
+        .font-code();
+
+        // Show maximum number of single-line rows
+        max-height: 9 * (@font-size-code * @line-height-code + 2 * @space-tiny-1 + 1px);
         
         p {
             padding: @space-tiny-1 @space-tiny-4;
-            .font-code();
 
             &.multiple-line {
                 white-space: pre-wrap;
