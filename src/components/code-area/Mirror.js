@@ -1,4 +1,4 @@
-import {useRef, useLayoutEffect} from 'fiddlehead';
+import {useRef, useLayoutEffect, useCallback} from 'fiddlehead';
 import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';
@@ -8,8 +8,21 @@ import {getLanguageCompartment} from './languageSupport';
 import {mirrorTheme} from './mirrorTheme';
 import {TAB_SIZE} from './tabSize';
 
-export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, onFocusChange, language}) => {
+export let Mirror = ({
+    defaultValue = '',
+    defaultSelection = null,
+    onChange,
+    onFocusChange,
+    language,
+}) => {
     let containerRef = useRef(null);
+
+    // We only initialize CodeMirror once
+    // So the event handlers we pass directly will not be updated
+    // The solution is to use a pointer and update the properties every render
+    let listeners = useRef({}).current;
+    listeners.onChange = onChange;
+    listeners.onFocusChange = onFocusChange;
 
     useLayoutEffect(() => {
         let initialState = EditorState.create({
@@ -29,10 +42,10 @@ export let Mirror = ({defaultValue = '', defaultSelection = null, onChange, onFo
                 }),
                 EditorView.updateListener.of((update) => {
                     if (update.docChanged) {
-                        onChange(update.view.state.doc.toString());
+                        listeners.onChange(update.view.state.doc.toString());
                     }
                     if (update.focusChanged) {
-                        onFocusChange(update.view.hasFocus);
+                        listeners.onFocusChange(update.view.hasFocus);
                     }
                 }),
             ].filter(t => t !== null)

@@ -31,6 +31,7 @@ export default function Counter() {
                 >
                     Add row
                 </button>
+                {' '}
                 {count > 0 && (
                     <button
                         onClick={() => {
