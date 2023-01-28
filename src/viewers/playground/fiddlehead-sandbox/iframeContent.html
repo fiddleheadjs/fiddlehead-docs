@@ -101,9 +101,8 @@
         };
 
         window.playground_run = function () {
-            if (window.playground_started === 1) {
-                clear();
-            }
+            // Clear
+            clear();
 
             // Create
             var rootNative = document.createElement('div');
@@ -116,9 +115,6 @@
                 var exports = exec(entry);
                 var jsxElement = playground_exec.fiddlehead.jsx(exports.default, null);
                 playground_exec.fiddlehead.render(jsxElement, rootNative);
-
-                // Flag
-                window.playground_started = 1;
             });
         };
     </script>

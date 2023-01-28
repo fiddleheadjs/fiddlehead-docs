@@ -2,18 +2,17 @@
 
 .Display {
     .display-output {
-        min-height: 9rem;
+        > .sandbox {
+            &.hidden {
+                position: absolute;
+                opacity: 0;
+            }
+        }
 
-        .error {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        > .error {
             background: @gray-white;
             padding: @space-tiny-4;
             color: @color-danger;
-            overflow: auto;
         }
     }
 }

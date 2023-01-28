@@ -86,18 +86,22 @@ export let Display = ({
         >
             <div class="display-output">
                 {Sandbox.current !== null &&
-                    <Sandbox.current
-                        entryFilename={entryFilename}
-                        files={files}
-                        errorHandle={setError}
-                        consoleCommandHandle={consoleCommandHandle}
-                        onConsoleTransplanted={onConsoleTransplanted}
-                    />
+                    <div class={`sandbox${error !== null ? ' hidden' : ''}`}>
+                        <Sandbox.current
+                            entryFilename={entryFilename}
+                            files={files}
+                            errorHandle={setError}
+                            consoleCommandHandle={consoleCommandHandle}
+                            onConsoleTransplanted={onConsoleTransplanted}
+                        />
+                    </div>
                 }
                 {
                     error !== null &&
                     <pre class="error">
-                        {`${error.name}: ${error.message}`}
+                        <code>
+                            {`${error.name}: ${error.message}`}
+                        </code>
                     </pre>
                 }
             </div>

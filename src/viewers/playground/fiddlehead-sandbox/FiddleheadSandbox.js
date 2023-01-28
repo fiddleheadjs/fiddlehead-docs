@@ -1,9 +1,8 @@
 import './FiddleheadSandbox.less';
-import {useEffect, useRef} from 'fiddlehead';
+import {useCallback, useEffect, useRef} from 'fiddlehead';
 import iframeContent from './iframeContent.html';
 import {transform as babelTransform} from '@babel/standalone';
 import {consoleTransplant} from '../console/transplant';
-import {space} from '../../../style/theme';
 
 export let FiddleheadSandbox = ({
     entryFilename,
@@ -13,78 +12,79 @@ export let FiddleheadSandbox = ({
     onConsoleTransplanted,
 }) => {
     let iframeRef = useRef(null);
+    let initialized = useRef(false);
 
-    useEffect(() => {
-        let iframe = iframeRef.current;
-
-        if (iframe === null) {
-            return;
-        }
-
-        let win = iframe.contentWindow;
-
-        let setupAndRun = () => {
-            win.playground_src = {
-                entryFilename,
-                files,
-            };
-
-            let fiddlehead = makeModule(win, __srcFiddlehead__, {});
-
-            let fiddleheadStore = makeModule(win, __srcFiddleheadStore__, {
-                'fiddlehead': fiddlehead,
-            });
-
-            win.playground_deps = {
-                'fiddlehead': fiddlehead,
-                'fiddlehead/store': fiddleheadStore,
-            };
-
-            win.playground_exec = {
-                fiddlehead,
-                babelTransform,
-            };
-
-            consoleTransplant(win.console, consoleCommandHandle);
-            onConsoleTransplanted(win.console);
-
-            observeIframeContentHeight(win, (newHeight) => {
-                // Add 2px to deal with the pixel manipulation of browsers
-                iframe.style.height = `${newHeight + 2}px`;
-            });
-
-            win.addEventListener('error', (event) => {
-                errorHandle(event.error);
-            });
-
-            win.playground_run();
+    let init = useCallback((win, iframe) => {
+        win.playground_src = {
+            entryFilename,
+            files,
         };
 
-        if (win.playground_run !== undefined) {
-            setupAndRun();
-        } else {
-            // Almost time this case will happen
-            iframe.addEventListener('load', setupAndRun);
-        }
+        let fiddlehead = makeModule(win, __srcFiddlehead__, {});
+
+        let fiddleheadStore = makeModule(win, __srcFiddleheadStore__, {
+            'fiddlehead': fiddlehead,
+        });
+
+        win.playground_deps = {
+            'fiddlehead': fiddlehead,
+            'fiddlehead/store': fiddleheadStore,
+        };
+
+        win.playground_exec = {
+            fiddlehead,
+            babelTransform,
+        };
+
+        consoleTransplant(win.console, consoleCommandHandle);
+        onConsoleTransplanted(win.console);
+
+        observeIframeContentHeight(win, (newHeight) => {
+            // Add 2px to deal with the pixel manipulation of browsers
+            iframe.style.height = `${newHeight + 2}px`;
+        });
+
+        win.addEventListener('error', (event) => {
+            errorHandle(event.error);
+        });
+
+        initialized.current = true;
     }, []);
 
     useEffect(() => {
         let iframe = iframeRef.current;
-
-        if (iframe === null) {
-            return;
-        }
-
         let win = iframe.contentWindow;
 
-        if (win.playground_started !== 1) {
+        if (win.playground_run !== undefined) {
+            init(win, iframe);
+            win.playground_run();
             return;
         }
 
+        // Almost time this case will happen
+        iframe.addEventListener('load', () => {
+            init(win, iframe);
+            win.playground_run();
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!initialized.current) {
+            return;
+        }
+
+        let iframe = iframeRef.current;
+        let win = iframe.contentWindow;
+
         let timeoutId = setTimeout(() => {
+            // Clear the old error if any
             errorHandle(null);
             
-            // Reset the iframe height
+            // We use documentElement.scrollHeight to set the iframe height,
+            // scrollHeight is never less than clientHeight,
+            // so the iframe height has no chance to reduce.
+            // So there, we make a chance to recalculate the iframe height
+            // each time files are updated.
             iframe.style.height = '0px';
 
             win.playground_src = {
@@ -95,9 +95,7 @@ export let FiddleheadSandbox = ({
             win.playground_run();
         }, 500);
 
-        return () => {
-            clearTimeout(timeoutId);
-        };
+        return () => clearTimeout(timeoutId);;
     }, [entryFilename, files]);
 
     return (

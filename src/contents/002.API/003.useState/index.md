@@ -2,7 +2,9 @@
 
 _Manage state of your components._
 
-## Basic usage
+## States
+
+Any function component can hold one or more states.
 
 <playground>
 
@@ -17,15 +19,29 @@ export default function Counter() {
     return (
         <>
             <h2>Count: {count}</h2>
-            {new Array(count).fill(1).map((_, index) => <p>Row {index}.</p>)}
-            <button
-                onClick={() => {
-                    setCount(count + 1);
-                    console.log('count', count);
-                }}
-            >
-                Add row
-            </button>
+            {new Array(count).fill(1).map((_, index) => (
+                <p>Row {index}.</p>
+            ))}
+            <p>
+                <button
+                    onClick={() => {
+                        setCount(count + 1);
+                        console.log('count', count);
+                    }}
+                >
+                    Add row
+                </button>
+                {count > 0 && (
+                    <button
+                        onClick={() => {
+                            setCount(count - 1);
+                            console.log('count', count);
+                        }}
+                    >
+                        Delete row
+                    </button>
+                )}
+            </p>
         </>
     );
 }
