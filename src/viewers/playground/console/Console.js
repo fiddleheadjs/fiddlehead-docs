@@ -7,7 +7,7 @@ import {BanIcon} from '../../../icons/BanIcon';
 import {Checkbox} from '../../../components/checkbox/Checkbox';
 import {Section} from '../section/Section';
 
-export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
+export let Console = ({items, clear, empty, preservesLog, setPreservesLog}) => {
     let [focusedItemRow, setFocusedItemRow] = useState(null);
 
     let scrollerRef = useRef();
@@ -33,7 +33,7 @@ export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
 
     return (
         <Section
-            class={`Console${items.length === 0 ? ' empty' : ''}`}
+            class={`Console${empty ? ' empty' : ''}`}
             onMouseDown={handleFocusRow}
             onTouchStart={handleFocusRow}
             icon={<TerminalIcon/>}
@@ -63,7 +63,7 @@ export let Console = ({items, clear, preservesLog, setPreservesLog}) => {
                         key={row}
                         class={[
                             focusedItemRow === row && 'focused',
-                            value.includes('\n') && 'multiple-line'
+                            value.includes('\n') && 'multiple-line',
                         ].filter(Boolean).join(' ')}
                         data-row={row}
                         data-command={name}

@@ -1,13 +1,8 @@
 @import '../../../style/mixin.less';
 
 .Console {
-    &.empty {
-        transition: opacity 1s;
-        opacity: 0.2;
-    }
-
     .console-output {
-        height: 14rem;
+        max-height: 14rem;
         overflow: auto;
         
         p {
@@ -38,6 +33,15 @@
                 color: @gray-twilight;
                 font-style: italic;
             }
+        }
+    }
+
+    &.empty {
+        transition: opacity 1s;
+        opacity: 0.2;
+
+        .console-output {
+            opacity: 0;
         }
     }
 }

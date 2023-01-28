@@ -17,19 +17,19 @@ export let PlaygroundViewer = ({fileList}) => {
 
     let [consoleItems, setConsoleItems] = useState([]);
 
-    let [showsConsole, setShowsConsole] = useState(false);
+    let [consoleItemsToRender, setConsoleItemsToRender] = useState(false);
 
     let [preservesLog, setPreservesLog] = useState(false);
 
     useEffect(() => {
         if (consoleItems.length > 0) {
-            setShowsConsole(true);
+            setConsoleItemsToRender(consoleItems);
             return;
         }
 
         // Wait a moment to close the console
         let timeoutId = setTimeout(() => {
-            setShowsConsole(false);
+            setConsoleItemsToRender([]);
         }, 1000);
 
         return () => clearTimeout(timeoutId);
@@ -87,10 +87,11 @@ export let PlaygroundViewer = ({fileList}) => {
                     }}
                 />
             )}
-            {showsConsole && (
+            {consoleItemsToRender.length > 0 && (
                 <Console
-                    items={consoleItems}
+                    items={consoleItemsToRender}
                     clear={clearConsole}
+                    empty={consoleItems.length === 0}
                     preservesLog={preservesLog}
                     setPreservesLog={setPreservesLog}
                 />

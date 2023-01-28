@@ -22,36 +22,38 @@ export let Mask = ({content, onSelectionChange, focused, onFocusChange, language
     };
 
     return (
-        <pre class={`language-${language}`}>
-            <code
-                class={`language-${language}`}
-                onSelectStart={() => {
-                    // This event will not fire when a range is selected,
-                    // it only fires when the user start selecting.
-                    handleSelectionChange();
-                }}
-                onKeyDown={() => {
-                    // In case of error, when the user is typing
-                    // we will try to load the Mirror again
-                    handleSelectionChange();
-                }}
-                onFocus={() => onFocusChange(true)}
-                onBlur={() => onFocusChange(false)}
-                contenteditable
-                spellcheck="false"
-                autocorrect="off"
-                autocapitalize="off"
-                translate="no"
-                data-gramm="false" // disable Grammarly
-                style={{
-                    tabSize: TAB_SIZE,
-                    caretColor: gray.black,
-                    outline: 'none',
-                }}
-                ref={codeElementRef}
-            >
-                {content}
-            </code>
+        <div>
+            <pre class={`language-${language}`}>
+                <code
+                    class={`language-${language}`}
+                    onSelectStart={() => {
+                        // This event will not fire when a range is selected,
+                        // it only fires when the user start selecting.
+                        handleSelectionChange();
+                    }}
+                    onKeyDown={() => {
+                        // In case of error, when the user is typing
+                        // we will try to load the Mirror again
+                        handleSelectionChange();
+                    }}
+                    onFocus={() => onFocusChange(true)}
+                    onBlur={() => onFocusChange(false)}
+                    contenteditable
+                    spellcheck="false"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    translate="no"
+                    data-gramm="false" // disable Grammarly
+                    style={{
+                        tabSize: TAB_SIZE,
+                        caretColor: gray.black,
+                        outline: 'none',
+                    }}
+                    ref={codeElementRef}
+                >
+                    {content}
+                </code>
+            </pre>
             <div
                 style={{
                     pointerEvents: 'none',
@@ -64,6 +66,6 @@ export let Mask = ({content, onSelectionChange, focused, onFocusChange, language
                     boxShadow: focused ? `inset 0 0 0 1px ${color.primary}` : null,
                 }}
             />
-        </pre>
+        </div>
     );
 };
