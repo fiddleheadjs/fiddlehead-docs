@@ -17,7 +17,7 @@ With such criteria in mind, we made it some benefits:
 - Performant: use only 50% memory, and slightly better CPU usage compared to React
 - Lightweight: only 8kb (or 3kb gzipped), compared to 132kb for React
 
-#### Try it now
+### Try it now
 
 <playground>
 
@@ -88,3 +88,30 @@ export function Button({title, onClick}) {
 ```
 
 </playground>
+
+## Compare with React
+
+### Performance
+
+Benchmark test: https://github.com/fiddleheadjs/fiddlehead/tree/master/bench#the-table-test
+
+| Criteria | Fiddlehead | React    | Vanila |
+| ---------| ---------- | -------- | ------ |
+| File size | 9.5 KB | 140 KB | 2.6 KB
+| Gzipped size | 3.6 KB | 45 KB | 1.0 KB |
+| Scripting | 1312 ms | 1637 ms | 934 ms |
+| Rendering | 3162 ms | 3100 ms | 3601 ms |
+| Heap memory | 8.8 MB - 82.1 MB | 9.8 MB - 152 MB | 2.0 MB - 6.2 MB |
+| Persistent memory | 16.2 MB | 23 MB | 9.1 MB |
+
+### Features
+
+| Features | Fiddlehead | React |
+| --- | ---------- | ----- |
+| Functional components | YES | YES |
+| Hooks | YES | YES |
+| State management | Store API | Context API |
+| HTML/SVG attributes | Close to native DOM | Modified for consistency |
+| Forwarding ref | Handle as a normal property | Use `forwardRef()` |
+| Synthetic events | _ | YES |
+| Class components | _ | YES |

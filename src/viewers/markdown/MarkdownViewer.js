@@ -82,6 +82,14 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         );
     };
 
+    renderer.table = (header, body) => {
+        return (
+            `<div class="table-wrapper">` +
+            `<table>${header}${body}</table>` +
+            `</div>`
+        );
+    };
+
     const markedOptions = {
         gfm: true,
         tables: true,
