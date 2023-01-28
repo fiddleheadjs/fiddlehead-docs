@@ -3,8 +3,8 @@ import {Mask} from './Mask';
 
 export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {    
     let Mirror = useRef(null);
-    let [isLoadingMirror, setIsLoadingSandbox] = useState(false);
-    let [mirrorLoadingError, setLoadingError] = useState(null);
+    let [isLoadingMirror, setIsLoadingMirror] = useState(false);
+    let [mirrorLoadingError, setMirrorLoadingError] = useState(null);
     let [defaultSelection, setDefaultSelection] = useState(null);
 
     useEffect(() => {
@@ -26,15 +26,15 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
             return;
         }
 
-        setLoadingError(null);
-        setIsLoadingSandbox(true);
+        setMirrorLoadingError(null);
+        setIsLoadingMirror(true);
 
         import('./Mirror').then((exports) => {
             Mirror.current = exports.Mirror;
         }).catch((error) => {
-            setLoadingError(error.message);
+            setMirrorLoadingError(error.message);
         }).finally(() => {
-            setIsLoadingSandbox(false);
+            setIsLoadingMirror(false);
         });
     }, [defaultSelection]);
 
