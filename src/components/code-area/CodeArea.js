@@ -16,7 +16,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                 inProgress: isLoadingMirror,
                 error: mirrorLoadingError
             });
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timeoutId);
     }, [isLoadingMirror, mirrorLoadingError]);
