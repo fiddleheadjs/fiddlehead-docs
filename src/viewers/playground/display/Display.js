@@ -60,7 +60,7 @@ export let Display = ({
 
     let [icon, title] = (() => {
         if (error !== null) {
-            return [<CautionIcon />, __('Error')];
+            return [<CautionIcon />, __('Sandbox failed')];
         }
 
         if (isLoadingSandbox) {
@@ -71,7 +71,7 @@ export let Display = ({
             return [<PlayIcon />, __('Compile')];
         }
 
-        return [<DisplayIcon />, __('Display')];
+        return [<DisplayIcon />, __('Display result')];
     })();
 
     return (
