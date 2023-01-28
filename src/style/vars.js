@@ -96,11 +96,11 @@ let font_size = {
     h4: 18,
     body: 16,
     body_bold: 16,
-    body_semibold: 15,
+    body_semibold: 16,
     body_small: 15,
     button: 16,
-    button_small: 15,
-    button_large: 17,
+    button_small: 14,
+    button_large: 18,
     code: 14,
 };
 

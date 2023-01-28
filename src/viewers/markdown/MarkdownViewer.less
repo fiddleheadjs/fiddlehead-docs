@@ -11,11 +11,15 @@
         margin: 0.6em 0;
     }
 
-    > h1 + p:not(:last-child) {
+    h1 + p:not(:last-child) {
         margin-bottom: 1.4em;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1 {
+        margin-top: 0;
+    }
+
+    h2, h3, h4, h5, h6 {
         // Pass the top bar when scroll-into-view
         padding-top: @top-height + @viewport-padding;
         margin-top: calc(0.8em - @top-height - @viewport-padding);

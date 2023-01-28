@@ -25,22 +25,27 @@
         border-color: none;
     }
 
+    .set-dimensions(@unit) {
+        min-height: 1.4 * @unit;
+        padding: 0.1 * @unit 0.4 * @unit;
+
+        & > :not(:last-child) {
+            margin-right: 0.4 * @unit
+        }
+    }
+
     &.size-small {
         .font-button-small();
-        padding: 0.3 * @font-size-button-small * @line-height-button-small;
+        .set-dimensions(@font-size-button-small * @line-height-button-small);
     }
 
     &.size-medium {
         .font-button();
-        padding: 0.3 * @font-size-button * @line-height-button;
+        .set-dimensions(@font-size-button * @line-height-button);
     }
 
     &.size-large {
         .font-button-large();
-        padding: 0.3 * @font-size-button-large * @line-height-button-large;
-    }
-
-    > :not(:last-child) {
-        margin-right: 0.5em;
+        .set-dimensions(@font-size-button-large * @line-height-button-large);
     }
 }
