@@ -8,10 +8,7 @@
         // Headings use padding-top to make space above them,
         // So other elements need to have a higher z-index to not be overlapped.
         z-index: 1000;
-    }
-
-    > :not(:last-child) {
-        margin-bottom: 0.6em;
+        margin: 0.6em 0;
     }
 
     > h1 + p:not(:last-child) {
@@ -21,7 +18,7 @@
     h1, h2, h3, h4, h5, h6 {
         // Pass the top bar when scroll-into-view
         padding-top: @top-height + @viewport-padding;
-        margin-top: -@top-height - @viewport-padding;
+        margin-top: calc(0.8em - @top-height - @viewport-padding);
 
         a {
             visibility: hidden;
@@ -51,8 +48,14 @@
         padding: 0 0 0 2em;
 
         & > li {
-            &:not(:last-child) {
-                margin-bottom: 0.5em;
+            margin: 0.4em 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
             }
         }
     }
@@ -92,7 +95,7 @@
         tr {
             th, td {
                 text-align: left;
-                padding: @space-tiny-4;
+                padding: 0.6em;
                 vertical-align: top;
             }
 

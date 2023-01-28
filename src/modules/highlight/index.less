@@ -1,9 +1,5 @@
 @import '../../style/mixin.less';
 
-code {
-    .font-code();
-}
-
 // Inline codes
 code:not([class*="language-"]) {
     background: @color-primary-light-A4;
@@ -15,6 +11,7 @@ code:not([class*="language-"]) {
 pre[class*="language-"] {
     width: 100%;
     overflow: auto;
+    .font-code();
 
     & > code {
         min-width: 100%;
@@ -32,6 +29,7 @@ pre[class*="language-"] {
     &[filename]::before {
         content: attr(filename);
         display: block;
+        z-index: 1;
         background: @gray-light-A4;
         padding: 0 @space-tiny-4;
         position: sticky;
@@ -41,18 +39,6 @@ pre[class*="language-"] {
         font-weight: @font-weight-body-semibold;
     }
 
-    .line-highlight {
-        position: absolute;
-        z-index: -1;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: @color-primary-light-A4;
-        pointer-events: none;
-        line-height: inherit;
-        white-space: pre;
-    }
-    
     .token.comment,
     .token.prolog,
     .token.doctype,
