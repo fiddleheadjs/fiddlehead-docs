@@ -17,7 +17,7 @@ With such criteria in mind, we made it some benefits:
 - Performant: use only 50% memory, and slightly better CPU usage compared to React
 - Lightweight: only 8kb (or 3kb gzipped), compared to 132kb for React
 
-### Try it now
+## Try it now
 
 <playground>
 
