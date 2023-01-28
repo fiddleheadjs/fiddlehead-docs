@@ -62,6 +62,10 @@ export let DocumentViewer = ({
     // When the user is scrolling contents,
     // table-of-contents needs to indicate what contents are displaying in the viewport
     useEffect(() => {
+        if (tocRef.current === null) {
+            return;
+        }
+
         let mixins = headings.map(({id, level}) => ({
             heading: document.getElementById(id),
             tocItem: tocRef.current.querySelector(`li[data-id="${id}"]`),
@@ -192,11 +196,11 @@ export let DocumentViewer = ({
         });
     };
 
-    let tocHidden = headings.length < MIN_HEADINGS_TO_SHOW_TOC;
+    let showsToc = headings.length >= MIN_HEADINGS_TO_SHOW_TOC;
 
     return (
         <div class="DocumentViewer">
-            <main class={tocHidden ? 'toc-hidden' : null}>
+            <main>
                 <div class="contents" ref={contentsRef}>
                     {
                         getContents()
@@ -235,25 +239,28 @@ export let DocumentViewer = ({
                     </a>
                 </div>
             </main>
-            <nav class={tocHidden ? 'toc-hidden' : null}>
-                <div
-                    class="table-of-contents"
-                    ref={tocRef}
-                >
-                    <div class="title">{__('Table of contents')}</div>
-                    <ul class="list">
-                        {
-                            headings.map(({text, level, id}) => {
-                                return (
-                                    <li key={id} data-id={id} data-level={level}>
-                                        <a href={'#'.concat(id)} innerHTML={marked.parseInline(text)} />
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
-                </div>
-            </nav>
+            {
+                showsToc &&
+                <nav>
+                    <div
+                        class="table-of-contents"
+                        ref={tocRef}
+                    >
+                        <div class="title">{__('Table of contents')}</div>
+                        <ul class="list">
+                            {
+                                headings.map(({text, level, id}) => {
+                                    return (
+                                        <li key={id} data-id={id} data-level={level}>
+                                            <a href={'#'.concat(id)} innerHTML={marked.parseInline(text)} />
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            }
         </div>
     );
 }
