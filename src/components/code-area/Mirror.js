@@ -75,7 +75,7 @@ export let Mirror = ({
         }
 
         if (defaultScrollPosition !== null) {
-            editorView.scrollDOM.scrollTo({
+            editorView.scrollDOM.scroll({
                 left: defaultScrollPosition[0],
                 top: defaultScrollPosition[1],
             });
