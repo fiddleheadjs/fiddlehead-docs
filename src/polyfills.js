@@ -1,5 +1,7 @@
 import 'mdn-polyfills/Array.prototype.includes';
 import 'mdn-polyfills/String.prototype.startsWith';
+import 'mdn-polyfills/Object.entries';
+import 'mdn-polyfills/Object.assign';
 
 if (Promise.prototype.finally === undefined) {
     Promise.prototype.finally = function (callback) {
