@@ -101,7 +101,7 @@ let font_size = {
     button: 16,
     button_small: 14,
     button_large: 18,
-    code: 16,
+    code: 15,
 };
 
 let font_weight = {
