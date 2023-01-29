@@ -3,7 +3,11 @@ import {useState, useEffect, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
 import {InProgress} from './InProgress';
 
-export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {    
+export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {
+    // CodeMirror is heavy, so we load it only when the user want to edit
+    // Before that, we use Prism as a "mask"
+    // Actually, Prism highlights codes in more details and is faster (of course),
+    // so we always use it first, even when the CodeMirror is already loaded.
     let Mirror = useRef(null);
     
     let [defaultSelection, setDefaultSelection] = useState(null);
