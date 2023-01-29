@@ -1,4 +1,4 @@
-import {useRef, useLayoutEffect, useCallback} from 'fiddlehead';
+import {useRef, useLayoutEffect} from 'fiddlehead';
 import {EditorState} from '@codemirror/state';
 import {EditorView, keymap} from '@codemirror/view';
 import {defaultKeymap, historyKeymap, history, indentWithTab} from '@codemirror/commands';

@@ -54,8 +54,19 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         // to avoid overlap ones above due to their padding-top.
         let zIndex = 2 + headings.length - headingPosRef.current;
 
-        return `<h${level} id="${id}" style="z-index:${zIndex}">`
-            + `${text}<a href="#${id}">${linkSvg}</a></h${level}>`;
+        return (
+            `<h${level} id="${id}" style="z-index:${zIndex}">` +
+            `${text}<a href="#${id}">${linkSvg}</a>` +
+            `</h${level}>`
+        );
+    };
+
+    renderer.table = (header, body) => {
+        return (
+            `<div class="table-wrapper">` +
+            `<table>${header}${body}</table>` +
+            `</div>`
+        );
     };
 
     renderer.code = (code, language) => {
@@ -78,14 +89,6 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
             `<pre class="language-${language}"${options && ' ' + options}>` +
             `<code class="language-${language}">${code}</code>` +
             `</pre>` +
-            `</div>`
-        );
-    };
-
-    renderer.table = (header, body) => {
-        return (
-            `<div class="table-wrapper">` +
-            `<table>${header}${body}</table>` +
             `</div>`
         );
     };
