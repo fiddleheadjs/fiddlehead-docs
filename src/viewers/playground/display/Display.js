@@ -60,7 +60,7 @@ export let Display = ({
 
     let [icon, title] = (() => {
         if (error !== null) {
-            return [<CautionIcon />, __('Sandbox failed')];
+            return [<CautionIcon />, __('Sandbox Failed')];
         }
 
         if (isLoadingSandbox) {

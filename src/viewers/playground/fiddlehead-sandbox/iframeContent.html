@@ -58,7 +58,6 @@
                     }
                 }
             }
-
             throw new Error("Cannot find module '" + pathname + "' from '" + context + "'");
         };
 
@@ -112,10 +111,17 @@
             // Use setTimeout to make window.onerror can handle errors.
             // Actually I did not learn why, it will not work without setTimeout
             setTimeout(() => {
-                var entry = playground_src.files[playground_src.entryFilename];
-                var exports = exec(entry);
-                var jsxElement = playground_exec.fiddlehead.jsx(exports.default, null);
-                playground_exec.fiddlehead.render(jsxElement, rootNative);
+                try {
+                    var entry = playground_src.files[playground_src.entryFilename];
+                    var exports = exec(entry);
+                    var jsxElement = playground_exec.fiddlehead.jsx(exports.default, null);
+                    playground_exec.fiddlehead.render(jsxElement, rootNative);
+                } catch (error) {
+                    // Some errors: import error, language not supported
+                    // Cannot be handled by window.onerror
+                    // I didn't know why??
+                    playground_callbacks.onErrorUnhandled(error);
+                }
             });
         };
     </script>

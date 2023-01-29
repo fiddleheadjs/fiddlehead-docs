@@ -48,6 +48,12 @@ export let FiddleheadSandbox = ({
             errorHandle(event.error);
         });
 
+        win.playground_callbacks = {
+            onErrorUnhandled: (error) => {
+                errorHandle(error);
+            }
+        };
+
         initialized.current = true;
     }, []);
 

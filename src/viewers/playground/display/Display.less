@@ -7,6 +7,8 @@
         min-height: 9rem;
 
         > .sandbox {
+            width: 100%;
+
             &.hidden {
                 position: absolute;
                 opacity: 0;
@@ -23,6 +25,8 @@
             background: @gray-white;
             padding: @space-tiny-4;
             color: @color-danger;
+            white-space: pre-line;
+            overflow-wrap: wrap;
         }
     }
 }

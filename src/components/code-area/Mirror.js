@@ -75,10 +75,13 @@ export let Mirror = ({
         }
 
         if (defaultScrollPosition !== null) {
-            editorView.scrollDOM.scroll({
-                left: defaultScrollPosition[0],
-                top: defaultScrollPosition[1],
-            });
+            // Safari 10, scroll is undefined
+            if (editorView.scrollDOM.scroll !== undefined) {
+                editorView.scrollDOM.scroll({
+                    left: defaultScrollPosition[0],
+                    top: defaultScrollPosition[1],
+                });
+            }
         }
     }, []);
 
