@@ -8,18 +8,18 @@ _Use this hook to store a local variable that is accessible between renders. Als
 import {useEffect, useRef} from 'fiddlehead';
 
 function Image() {
-    let imageRef = useRef(null);
+  let imageRef = useRef(null);
 
-    useEffect(() => {
-        let image = imageRef.current;
+  useEffect(() => {
+    let image = imageRef.current;
 
-        // Do something with the native image element
-        console.log(image.naturalWidth, image.naturalHeight);
-    }, []);
+    // Do something with the native image element
+    console.log(image.naturalWidth, image.naturalHeight);
+  }, []);
 
-    return (
-        <img ref={imageRef} src="/path/to/image.png"/>
-    );
+  return (
+    <img ref={imageRef} src="/path/to/image.png"/>
+  );
 }
 ```
 
@@ -34,20 +34,20 @@ which you will get by using the `createRef` function or `useRef` hook.
 import {useRef} from 'fiddlehead';
 
 function TextInput({ref}) {
-    return (
-        <input ref={ref}/>
-    );
+  return (
+    <input ref={ref}/>
+  );
 }
 
 function App() {
-    let inputRef = useRef(null);
-    
-    useEffect(() => {
-        console.log('Input element', inputRef.current);
-    }, []);
+  let inputRef = useRef(null);
+  
+  useEffect(() => {
+    console.log('Input element', inputRef.current);
+  }, []);
 
-    return (
-        <TextInput ref={inputRef}/>
-    );
+  return (
+    <TextInput ref={inputRef}/>
+  );
 }
 ```

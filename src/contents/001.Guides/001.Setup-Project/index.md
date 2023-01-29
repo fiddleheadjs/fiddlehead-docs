@@ -40,25 +40,25 @@ Create the Webpack configuration file:
 let path = require('path');
 
 module.exports = {
-    mode: 'development',
-    entry: './index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['babel-preset-fiddlehead'],
-                    },
-                },
-            },
-        ],
-    },
+  mode: 'development',
+  entry: './index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['babel-preset-fiddlehead'],
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -75,7 +75,7 @@ Now, let's start with a tiny piece of code!
 import {render} from 'fiddlehead';
 
 function MyApp() {
-    return <div class="my-app">Hello world!</div>;
+  return <div class="my-app">Hello world!</div>;
 }
 
 render(<App/>, document.getElementById('root'));
@@ -98,16 +98,16 @@ Your code will be transform to something like this:
 var {jsx, render} = require('fiddlehead');
 
 function MyApp() {
-    return jsx(
-        'h1',
-        {class: 'my-app'},
-        'Hello world!'
-    );
+  return jsx(
+    'h1',
+    {class: 'my-app'},
+    'Hello world!'
+  );
 }
 
 render(
-    jsx(MyApp, null),
-    document.getElementById('root')
+  jsx(MyApp, null),
+  document.getElementById('root')
 );
 ```
 

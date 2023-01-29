@@ -75,7 +75,7 @@
                 document.body.appendChild(style);
             } else if (/^(js|ts)x?$/.test(file.language)) {
                 var jsxImportCode = "import {jsx as _jsx$, Fragment as _frag$} from 'fiddlehead';";
-                var inputCode = jsxImportCode + '\r\n' + file.code;
+                var inputCode = jsxImportCode + '\r\n\r\n' + file.code;
                 var transformOptions = {
                     sourceType: 'module',
                     presets: ['env'],
@@ -109,12 +109,10 @@
             rootNative.className = 'root';
             document.body.appendChild(rootNative);
 
-            var entry = playground_src.files[playground_src.entryFilename];
-
-            // Use setTimeout to make window.onerror can handle errors
-            // Actually I did not learn why, but `exec(entry)` should be the first line
-            // Otherwise, errors we through in this file, iframeContent.html, cannot be handled
+            // Use setTimeout to make window.onerror can handle errors.
+            // Actually I did not learn why, it will not work without setTimeout
             setTimeout(() => {
+                var entry = playground_src.files[playground_src.entryFilename];
                 var exports = exec(entry);
                 var jsxElement = playground_exec.fiddlehead.jsx(exports.default, null);
                 playground_exec.fiddlehead.render(jsxElement, rootNative);

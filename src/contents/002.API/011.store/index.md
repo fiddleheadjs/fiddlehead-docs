@@ -14,46 +14,46 @@ Let's checkout this example:
 import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 
 export default function App() {
-    useStoreInit(
-        App, // Scope, can be any reference-type value (object, function,...)
-        {title: 'Store usage example'} // Initial data, a reference-type value
-    );
+  useStoreInit(
+    App, // Scope, can be any reference-type value (object, function,...)
+    {title: 'Store usage example'} // Initial data, a reference-type value
+  );
 
-    return (
-        <main>
-            <Header/>
-            <section>
-                <Form/>
-            </section>
-        </main>
-    );
+  return (
+    <main>
+      <Header/>
+      <section>
+        <Form/>
+      </section>
+    </main>
+  );
 }
 
 function Header() {
-    let title = useStoreRead(
-        App, // Scope
-        (data) => data.title // Reader
-    );
+  let title = useStoreRead(
+    App, // Scope
+    (data) => data.title // Reader
+  );
 
-    return (
-        <h1>{title}</h1>
-    );
+  return (
+    <h1>{title}</h1>
+  );
 }
 
 function Form() {
-    let title = useStoreRead(App, (data) => data.title);
-    let setTitle = useStoreWrite(
-        App, // Scope
-        (value, data) => data.title = value // Writer
-    );
+  let title = useStoreRead(App, (data) => data.title);
+  let setTitle = useStoreWrite(
+    App, // Scope
+    (value, data) => data.title = value // Writer
+  );
 
-    return (
-        <input
-            type="text"
-            value={title}
-            onInput={ev => setTitle(ev.target.value)}
-        />
-    );
+  return (
+    <input
+      type="text"
+      value={title}
+      onInput={ev => setTitle(ev.target.value)}
+    />
+  );
 }
 ```
 
@@ -73,16 +73,16 @@ import {Header} from './Header';
 import {Form} from './Form';
 
 export default function App() {
-    useMetaInit();
+  useMetaInit();
 
-    return (
-        <main>
-            <Header/>
-            <section>
-                <Form/>
-            </section>
-        </main>
-    );
+  return (
+    <main>
+      <Header/>
+      <section>
+        <Form/>
+      </section>
+    </main>
+  );
 }
 ```
 
@@ -92,11 +92,11 @@ export default function App() {
 import {useTitle} from './stores/meta';
 
 export function Header() {
-    let title = useTitle();
+  let title = useTitle();
 
-    return (
-        <h1>{title}</h1>
-    );
+  return (
+    <h1>{title}</h1>
+  );
 }
 ```
 
@@ -106,16 +106,16 @@ export function Header() {
 import {useTitle, useSetTitle} from './stores/meta';
 
 export function Form() {
-    let title = useTitle();
-    let setTitle = useSetTitle();
+  let title = useTitle();
+  let setTitle = useSetTitle();
 
-    return (
-        <input
-            type="text"
-            value={title}
-            onInput={event => setTitle(event.target.value)}
-        />
-    );
+  return (
+    <input
+      type="text"
+      value={title}
+      onInput={event => setTitle(event.target.value)}
+    />
+  );
 }
 ```
 
@@ -127,17 +127,17 @@ import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 const scope = Object.create(null);
 
 export function useMetaInit() {
-    useStoreInit(scope, {
-        title: 'Store usage example'
-    });
+  useStoreInit(scope, {
+    title: 'Store usage example'
+  });
 }
 
 export function useTitle() {
-    return useStoreRead(scope, (data) => data.title);
+  return useStoreRead(scope, (data) => data.title);
 }
 
 export function useSetTitle() {
-    return useStoreWrite(scope, (value, data) => data.title = value);
+  return useStoreWrite(scope, (value, data) => data.title = value);
 }
 ```
 

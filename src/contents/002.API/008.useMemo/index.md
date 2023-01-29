@@ -6,11 +6,11 @@ _This hook is used to avoid re-running a heavy calculation every time the compon
 import {useMemo} from 'fiddlehead';
 
 function App() {
-    let result = useMemo(() => {
-        // Run heavy tasks
-        return result;
-    }, []);
+  let result = useMemo(() => {
+    // Run heavy tasks
+    return result;
+  }, []);
 
-    // ...
+  // ...
 }
 ```

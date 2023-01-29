@@ -14,37 +14,37 @@ Any function component can hold one or more states.
 import {useState} from 'fiddlehead';
 
 export default function Counter() {
-    let [count, setCount] = useState(0);
-    
-    return (
-        <>
-            <h2>Count: {count}</h2>
-            {new Array(count).fill(1).map((_, index) => (
-                <p>Row {index}.</p>
-            ))}
-            <p>
-                <button
-                    onClick={() => {
-                        setCount(count + 1);
-                        console.log('count', count);
-                    }}
-                >
-                    Add row
-                </button>
-                {' '}
-                {count > 0 && (
-                    <button
-                        onClick={() => {
-                            setCount(count - 1);
-                            console.log('count', count);
-                        }}
-                    >
-                        Delete row
-                    </button>
-                )}
-            </p>
-        </>
-    );
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h2>Count: {count}</h2>
+      {new Array(count).fill(1).map((_, index) => (
+        <p>Row {index}.</p>
+      ))}
+      <p>
+        <button
+          onClick={() => {
+            setCount(count + 1);
+            console.log('count', count);
+          }}
+        >
+          Add row
+        </button>
+        {' '}
+        {count > 0 && (
+          <button
+            onClick={() => {
+              setCount(count - 1);
+              console.log('count', count);
+            }}
+          >
+            Delete row
+          </button>
+        )}
+      </p>
+    </>
+  );
 }
 ```
 
@@ -64,29 +64,29 @@ the component will only re-render once to apply all updated states.
 import {useState} from 'fiddlehead';
 
 export default function Batching() {
-    const [age, setAge] = useState(20);
+  const [age, setAge] = useState(20);
 
-    const increment = () => {
-        console.count('increment');
-        setAge(x => x + 1);
-    };
+  const increment = () => {
+    console.count('increment');
+    setAge(x => x + 1);
+  };
 
-    console.count('render');
+  console.count('render');
 
-    return (
-        <>
-            <h1>Age: {age}</h1>
-            <button
-                onClick={() => {
-                    increment();
-                    increment();
-                    increment();
-                }}
-            >
-                Increase (+3)
-            </button>
-        </>
-    );
+  return (
+    <>
+      <h1>Age: {age}</h1>
+      <button
+        onClick={() => {
+          increment();
+          increment();
+          increment();
+        }}
+      >
+        Increase (+3)
+      </button>
+    </>
+  );
 }
 ```
 

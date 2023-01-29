@@ -16,14 +16,14 @@ import {ErrorBoundary} from './ErrorBoundary';
 import {Post} from './Post';
 
 export default function App() {
-    return (
-        <>
-            <h1>Title</h1>
-            <ErrorBoundary>
-                <Post />
-            </ErrorBoundary>
-        </>
-    );
+  return (
+    <>
+      <h1>Title</h1>
+      <ErrorBoundary>
+        <Post />
+      </ErrorBoundary>
+    </>
+  );
 }
 ```
 
@@ -32,12 +32,12 @@ export default function App() {
 import {useEffect} from 'fiddlehead';
 
 export function Post() {
-    useEffect(() => {
-        let badCode = 'const a;';
-        eval(badCode);
-    }, []);
+  useEffect(() => {
+    let badCode = 'const a;';
+    eval(badCode);
+  }, []);
 
-    return <div>Post Content</div>;
+  return <div>Post Content</div>;
 }
 ```
 
@@ -46,17 +46,17 @@ export function Post() {
 import {useCatch} from 'fiddlehead';
 
 export function ErrorBoundary({children}) {
-    let [error, clearError] = useCatch();
+  let [error, clearError] = useCatch();
 
-    if (error !== null) {
-        if (error instanceof Error) {
-            return `${error.name}: ${error.message}`;
-        }
-
-        return 'Oops... Something went wrong!';
+  if (error !== null) {
+    if (error instanceof Error) {
+      return `${error.name}: ${error.message}`;
     }
 
-    return children;
+    return 'Oops... Something went wrong!';
+  }
+
+  return children;
 }
 ```
 

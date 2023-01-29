@@ -12,19 +12,19 @@ In the following example, whenever the App component re-renders, the Form compon
 import {useState} from 'fiddlehead';
 
 function App() {
-    let handleSubmit = () => {
-        // ...
-    };
+  let handleSubmit = () => {
+    // ...
+  };
 
-    return (
-        <div>
-            <Form onSubmit={handleSubmit} />
-        </div>
-    );
+  return (
+    <div>
+      <Form onSubmit={handleSubmit} />
+    </div>
+  );
 }
 
 function Form({onSubmit}) {
-    // ...
+  // ...
 }
 ```
 
@@ -34,10 +34,10 @@ Wrap the inline function within useCallback to avoid re-rendering:
 import {useState, useCallback} from 'fiddlehead';
 
 function App() {
-    let handleSubmit = useCallback(() => {
-        // ...
-    }, []);
-
+  let handleSubmit = useCallback(() => {
     // ...
+  }, []);
+
+  // ...
 }
 ```

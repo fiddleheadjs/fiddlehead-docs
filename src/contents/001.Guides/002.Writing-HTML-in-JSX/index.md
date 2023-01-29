@@ -22,10 +22,10 @@ instead of a string, to the `style` property.
 
 ```jsx
 <div style={{
-    marginTop: '100px',
-    padding: '1em 2em',
-    fontWeight: 'bold',
-    zIndex: 100,
+  marginTop: '100px',
+  padding: '1em 2em',
+  fontWeight: 'bold',
+  zIndex: 100,
 }} />
 ```
 
@@ -46,8 +46,8 @@ Say, we want to do something when a user clicks on an element:
 
 ```jsx
 let handleClick = (event) => {
-    event.preventDefault();
-    // ...
+  event.preventDefault();
+  // ...
 };
 ```
 
@@ -63,6 +63,6 @@ Setting an event listener in Fiddlehead is similar, except event names are writt
 
 ```jsx
 <a onClick={handleClick}>
-    Homepage
+  Homepage
 </a>
 ```

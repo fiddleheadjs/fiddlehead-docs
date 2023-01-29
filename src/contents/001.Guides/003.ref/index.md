@@ -13,20 +13,20 @@ which you will get by using the `createRef` function or `useRef` hook.
 import {useRef} from 'fiddlehead';
 
 function TextInput({ref}) {
-    return (
-        <input ref={ref}/>
-    );
+  return (
+    <input ref={ref}/>
+  );
 }
 
 function App() {
-    let inputRef = useRef(null);
-    
-    useEffect(() => {
-        console.log('Input element', inputRef.current);
-    }, []);
+  let inputRef = useRef(null);
+  
+  useEffect(() => {
+    console.log('Input element', inputRef.current);
+  }, []);
 
-    return (
-        <TextInput ref={inputRef}/>
-    );
+  return (
+    <TextInput ref={inputRef}/>
+  );
 }
 ```
