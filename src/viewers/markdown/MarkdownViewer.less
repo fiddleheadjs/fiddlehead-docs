@@ -125,10 +125,27 @@
     }
 
     .table-wrapper {
-        overflow: auto;
+        overflow-x: auto;
     }
-
+    
     .code-snippet {
         border: 1px solid @gray-light-A3;
+
+        pre {
+            overflow-x: auto;
+
+            &[filename]::before {
+                content: attr(filename);
+                display: block;
+                z-index: 1;
+                background: @gray-light-A4;
+                padding: 0 @space-tiny-4;
+                position: sticky;
+                top: 0;
+                left: 0;
+                color: @gray-dark;
+                font-weight: @font-weight-body-semibold;
+            }        
+        }
     }
 }

@@ -1,6 +1,7 @@
 import './CodeArea.less';
 import {useState, useEffect, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
+import {border_radius, color} from '../../style/theme';
 
 export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {    
     let Mirror = useRef(null);
@@ -43,6 +44,8 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
         });
     }, [defaultSelection]);
 
+    let showsMask = Mirror.current === null || defaultSelection === null;
+
     return (
         <div
             class={`CodeArea${focused ? ' focused' : ''}${touched ? ' touched' : ''}`}
@@ -51,22 +54,37 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
             onMouseEnter={() => setTouched(true)}
             onMouseLeave={() => setTouched(false)}
         >
-            {Mirror.current !== null && defaultSelection !== null
-                ? <Mirror.current
-                    defaultValue={defaultValue}
-                    defaultSelection={defaultSelection}
-                    onChange={onChange}
-                    onFocusChange={setFocused}
-                    language={language}
+            <div class="scrollable">
+                {showsMask
+                    ? <Mask
+                        content={defaultValue}
+                        onSelectionChange={setDefaultSelection}
+                        onFocusChange={setFocused}
+                        language={language}
+                    />
+                    : <Mirror.current
+                        defaultValue={defaultValue}
+                        defaultSelection={defaultSelection}
+                        onChange={onChange}
+                        onFocusChange={setFocused}
+                        language={language}
+                    />
+                }
+            </div>
+            {showsMask && focused && (
+                <div
+                    style={{
+                        pointerEvents: 'none',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        borderRadius: `${border_radius.level_2}px`,
+                        boxShadow: focused ? `inset 0 0 0 1px ${color.primary}` : null,
+                    }}
                 />
-                : <Mask
-                    content={defaultValue}
-                    focused={focused}
-                    onSelectionChange={setDefaultSelection}
-                    onFocusChange={setFocused}
-                    language={language}
-                />
-            }
+            )}
         </div>
     );
 };
