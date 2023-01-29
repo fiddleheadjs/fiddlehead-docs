@@ -86,8 +86,8 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
             .replace(/>/g, '&gt;');
 
         return (
-            `<div class="code-snippet">` +
-            `<pre class="language-${language}"${options && ' ' + options}>` +
+            `<div class="code-snippet"${options && ' ' + options}>` +
+            `<pre class="language-${language}">` +
             `<code class="language-${language}">${code}</code>` +
             `</pre>` +
             `</div>`

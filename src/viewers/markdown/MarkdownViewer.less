@@ -131,21 +131,16 @@
     .code-snippet {
         border: 1px solid @gray-light-A3;
 
+        &[filename]::before {
+            content: attr(filename);
+            display: block;
+            background: @gray-light-A4;
+            padding: @space-tiny-1 @space-tiny-4;
+            color: @gray-dark;
+        }
+
         pre {
             overflow-x: auto;
-
-            &[filename]::before {
-                content: attr(filename);
-                display: block;
-                z-index: 1;
-                background: @gray-light-A4;
-                padding: 0 @space-tiny-4;
-                position: sticky;
-                top: 0;
-                left: 0;
-                color: @gray-dark;
-                font-weight: @font-weight-body-semibold;
-            }        
         }
     }
 }
