@@ -49,6 +49,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     }, [defaultSelection]);
 
     useEffect(() => {
+        // Wait a moment so the layout does not bounce
         let timeoutId = setTimeout(() => {
             setShowsMask(!showsMirror);
         }, 10);
