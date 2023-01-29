@@ -4,7 +4,8 @@ import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 const scope = {};
 
 const data = {
-    layoutScroll: {}
+    layoutScroll: {},
+    sidebarElement: null,
 };
 
 Object.seal(data);

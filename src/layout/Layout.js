@@ -5,6 +5,7 @@ import {useDispatch} from '../modules/store';
 import {Top} from './top/Top';
 import {useLocation} from '../modules/router';
 import {Main} from './main/Main';
+import {Sidebar} from './sidebar/Sidebar';
 
 export let Layout = ({children}) => {
     let location = useLocation();
@@ -35,12 +36,13 @@ export let Layout = ({children}) => {
             <div class="inner">
                 <div class={`middle${showsNavOnNonDesktop ? ' shows-nav-on-non-desktop' : ''}`}>
                     <nav>
-                        <Nav/>
+                        <Nav />
                     </nav>
                     <main>
                         <Main key={location.key}>
                             {children}
                         </Main>
+                        <Sidebar />
                     </main>
                 </div>
             </div>

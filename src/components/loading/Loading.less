@@ -1,0 +1,11 @@
+@import '../../style/mixin.less';
+
+.Loading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    > :not(:last-child) {
+        margin-right: @space-tiny-4;
+    }
+}

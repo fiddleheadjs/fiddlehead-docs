@@ -4,13 +4,13 @@
     position: sticky;
     top: @top-height;
     max-height: calc(100vh - @top-height);
+    min-width: 22ch;
     overflow: auto;
     padding:
         @viewport-padding
         0
         @viewport-padding
         @viewport-padding - @space-tiny-3;
-    min-width: 22ch;
 
     .media-current(@screen-mobile, {
         min-width: 18ch;

@@ -10,6 +10,8 @@ import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
 import {RightArrowIcon} from '../../icons/RightArrowIcon';
 import {AltGithubIcon} from '../../icons/AltGithubIcon';
 import {PlaygroundViewer} from '../playground/PlaygroundViewer';
+import {SidebarPortal} from '../../layout/sidebar/Sidebar';
+import {TableOfContents} from './TableOfContents';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
@@ -200,66 +202,51 @@ export let DocumentViewer = ({
 
     return (
         <div class="DocumentViewer">
-            <main>
-                <div class="contents" ref={contentsRef}>
-                    {
-                        getContents()
-                    }
-                    {(previous !== null || next !== null) && (
-                        <div class="quick-nav">
-                            {previous !== null ? (
-                                <Link href={previous.path}>
-                                    <Button>
-                                        <LeftArrowIcon />
-                                        <span>{previous.label}</span>
-                                    </Button>
-                                </Link>
-                            ) : <span />}
-                            {next !== null ? (
-                                <Link href={next.path}>
-                                    <Button>
-                                        <span>{next.label}</span>
-                                        <RightArrowIcon />
-                                    </Button>
-                                </Link>
-                            ) : <span />}
-                        </div>
-                    )}
-                </div>
-                <div class="bottom">
-                    <a
-                        href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
-                        target="_blank"
-                    >
-                        <Button variant="textual" size="small">
-                            <span>{__('Edit this page')}</span>
-                            <span>&middot;</span>
-                            <AltGithubIcon size="1.2em" />
-                        </Button>
-                    </a>
-                </div>
-            </main>
+            <div class="contents" ref={contentsRef}>
+                {
+                    getContents()
+                }
+                {(previous !== null || next !== null) && (
+                    <div class="quick-nav">
+                        {previous !== null ? (
+                            <Link href={previous.path}>
+                                <Button>
+                                    <LeftArrowIcon />
+                                    <span>{previous.label}</span>
+                                </Button>
+                            </Link>
+                        ) : <span />}
+                        {next !== null ? (
+                            <Link href={next.path}>
+                                <Button>
+                                    <span>{next.label}</span>
+                                    <RightArrowIcon />
+                                </Button>
+                            </Link>
+                        ) : <span />}
+                    </div>
+                )}
+            </div>
+            <div class="bottom">
+                <a
+                    href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
+                    target="_blank"
+                >
+                    <Button variant="textual" size="small">
+                        <span>{__('Edit this page')}</span>
+                        <span>&middot;</span>
+                        <AltGithubIcon size="1.2em" />
+                    </Button>
+                </a>
+            </div>
             {
                 showsToc &&
-                <nav>
-                    <div
-                        class="table-of-contents"
+                <SidebarPortal>
+                    <TableOfContents
+                        headings={headings}
                         ref={tocRef}
-                    >
-                        <div class="title">{__('Table of contents')}</div>
-                        <ul class="list">
-                            {
-                                headings.map(({text, level, id}) => {
-                                    return (
-                                        <li key={id} data-id={id} data-level={level}>
-                                            <a href={'#'.concat(id)} innerHTML={marked.parseInline(text)} />
-                                        </li>
-                                    );
-                                })
-                            }
-                        </ul>
-                    </div>
-                </nav>
+                    />
+                </SidebarPortal>
             }
         </div>
     );

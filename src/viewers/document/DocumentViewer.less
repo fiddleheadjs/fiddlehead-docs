@@ -1,139 +1,43 @@
 @import '../../style/mixin.less';
 
 .DocumentViewer {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-
-    @nav-width: 28ch;
-    @nav-width-small: 22ch;
-
-    > main {
+    > .contents {
         width: 100%;
-        max-width: 100%;
+        max-width: @article-content-width;
+        margin: 0 auto;
 
-        .media-current(@screen-desktop, {
-            padding-right: 2em;
-            width: calc(100% - @nav-width);
-        });
-
-        .media-current(@screen-desktop-small, {
-            width: calc(100% - @nav-width-small);
-        });
-
-        > .contents {
-            width: 100%;
-            max-width: 70ch;
-            margin: 0 auto;
-
-            > :not(:first-child) {
-                margin-top: 1em;
-            }
-
-            > .MarkdownViewer {
-                // Relate to passing the top bar when scroll-into-view.
-                // Keep all children not overlapping outside elements.
-                z-index: 1;
-            }
-
-            > .PlaygroundViewer {
-                // Relate to passing the top bar when scroll-into-view.
-                // Keep all children not overlapping outside elements.
-                z-index: 2;
-            }
-            
-            > .quick-nav {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: space-between;
-                gap: @space-tiny-4;
-                margin-top: @space-medium-4;
-            }
+        > :not(:first-child) {
+            margin-top: 1em;
         }
-        
-        > .bottom {
+
+        > .MarkdownViewer {
+            // Relate to passing the top bar when scroll-into-view.
+            // Keep all children not overlapping outside elements.
+            z-index: 1;
+        }
+
+        > .PlaygroundViewer {
+            // Relate to passing the top bar when scroll-into-view.
+            // Keep all children not overlapping outside elements.
+            z-index: 2;
+        }
+
+        > .quick-nav {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            gap: @space-tiny-4;
             margin-top: @space-medium-4;
         }
     }
 
-    > nav {
-        width: @nav-width;
-        position: sticky;
-        top: @top-height + @viewport-padding;
-        bottom: 0;
-        max-height: calc(100vh - @top-height - @viewport-padding);
+    > .bottom {
         display: flex;
-        flex-direction: column;
-
-        .media-current(@screen-desktop-small, {
-            width: @nav-width-small;
-        });
-
-        .media-current(@screen-non-desktop, {
-            display: none;
-        });
-
-        > .table-of-contents {
-            height: 100%;
-            overflow: auto;
-
-            .title {
-                .font-h4();
-                margin-bottom: @space-small-2;
-            }
-
-            .list {
-                li {
-                    &[data-level="3"] {
-                        padding-left: @space-small-2;
-                    }
-
-                    &[data-level="4"] {
-                        padding-left: @space-small-2 * 2;
-                    }
-
-                    &[data-level="5"] {
-                        padding-left: @space-small-2 * 3;
-                    }
-
-                    &[data-level="6"] {
-                        padding-left: @space-small-2 * 4;
-                    }
-
-                    a {
-                        display: block;
-                        padding: @space-tiny-3;
-                        border-left: 2px solid transparent;
-
-                        &:hover {
-                            text-decoration: underline;
-                        }
-
-                        &:active {
-                            opacity: 0.6;
-                        }
-                    }
-
-                    &[data-active="true"] {
-                        a {
-                            border-left-color: @color-primary-light-A3;
-                        }
-                    }
-
-                    &[data-focused="true"] {
-                        a {
-                            border-left-color: @color-primary-light-A0;
-                            color: @color-primary;
-                        }
-                    }
-                }
-            }
-        }
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: @space-medium-4;
     }
 }
