@@ -11,6 +11,11 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     let Mirror = useRef(null);
     
     let [defaultSelection, setDefaultSelection] = useState(null);
+
+    // We want to use the scroll feature supported by CodeMirror
+    // Using a scroller to wrap both Mirror and Mask also works,
+    // but leads to a "paint" error in Safari 14 for iOS.
+    // This ref is used to transfer the scroll position from Mask to Mirror
     let defaultScrollPosition = useRef([0, 0]);
 
     let [isLoadingMirror, setIsLoadingMirror] = useState(false);
