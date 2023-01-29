@@ -18,7 +18,7 @@ if (Promise.prototype.finally === undefined) {
     };
 }
 
-// // Bad polyfill for globalThis
-// if (window.globalThis === undefined) {
-//     window.globalThis = window;
-// }
+// Bad polyfill for globalThis
+if (window.globalThis === undefined) {
+    window.globalThis = window;
+}
