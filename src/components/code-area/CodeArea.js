@@ -13,6 +13,9 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     let [focused, setFocused] = useState(false);
     let [touched, setTouched] = useState(false);
 
+    let [showsMask, setShowsMask] = useState(Mirror.current === null || defaultSelection === null);
+    let [showsMirror, setShowsMirror] = useState(!showsMask);
+
     useEffect(() => {
         // Make little delay so that the loading indicator
         // will not display if the internet connection is fast.
@@ -37,6 +40,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
 
         import('./Mirror').then((exports) => {
             Mirror.current = exports.Mirror;
+            setShowsMirror(true);
         }).catch((error) => {
             setMirrorLoadingError(error.message);
         }).finally(() => {
@@ -44,7 +48,13 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
         });
     }, [defaultSelection]);
 
-    let showsMask = Mirror.current === null || defaultSelection === null;
+    useEffect(() => {
+        let timeoutId = setTimeout(() => {
+            setShowsMask(!showsMirror);
+        }, 10);
+
+        return () => clearTimeout(timeoutId);
+    }, [showsMirror]);
 
     return (
         <div
@@ -55,23 +65,42 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
             onMouseLeave={() => setTouched(false)}
         >
             <div class="scrollable">
-                {showsMask
-                    ? <Mask
-                        content={defaultValue}
-                        onSelectionChange={setDefaultSelection}
-                        onFocusChange={setFocused}
-                        language={language}
-                    />
-                    : <Mirror.current
-                        defaultValue={defaultValue}
-                        defaultSelection={defaultSelection}
-                        onChange={onChange}
-                        onFocusChange={setFocused}
-                        language={language}
-                    />
-                }
+                {showsMask && (
+                    <div
+                        style={showsMirror ? {
+                            opacity: 0.1,
+                            pointerEvents: 'none',
+                        } : null}
+                    >
+                        <Mask
+                            content={defaultValue}
+                            onSelectionChange={setDefaultSelection}
+                            onFocusChange={setFocused}
+                            language={language}
+                        />
+                    </div>
+                )}
+                {showsMirror && (
+                    <div
+                        style={showsMask ? {
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                        } : null}
+                    >
+                        <Mirror.current
+                            defaultValue={defaultValue}
+                            defaultSelection={defaultSelection}
+                            onChange={onChange}
+                            onFocusChange={setFocused}
+                            language={language}
+                        />
+                    </div>
+                )}
             </div>
-            {showsMask && focused && (
+            {focused && showsMask && !showsMirror && (
                 <InProgress />
             )}
         </div>
