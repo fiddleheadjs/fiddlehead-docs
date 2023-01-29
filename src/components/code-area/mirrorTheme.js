@@ -10,10 +10,6 @@ export let mirrorTheme = EditorView.theme({
         fontSize: `${font_size.code}px`,
         lineHeight: line_height.code,
         fontWeight: font_weight.code,
-
-        // Disable scrolling in Mirror,
-        // scrolling will be handled by the wrapper
-        overflow: 'visible !important',
     },
     '.cm-content': {
         padding: `${space.tiny_4}px 0`,

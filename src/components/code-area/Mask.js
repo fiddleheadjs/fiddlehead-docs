@@ -4,7 +4,7 @@ import {gray} from '../../style/theme';
 import {getCaretPosition} from '../../utils/getCaretPosition';
 import {TAB_SIZE} from './tabSize';
 
-export let Mask = ({content, onSelectionChange, onFocusChange, language}) => {
+export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, language}) => {
     let codeElementRef = useRef(null);
 
     useEffect(() => {
@@ -22,7 +22,11 @@ export let Mask = ({content, onSelectionChange, onFocusChange, language}) => {
     };
 
     return (
-        <pre class={`language-${language}`}>
+        <pre
+            class={`language-${language}`}
+            style={{overflowX: 'auto'}}
+            onScroll={onScroll}
+        >
             <code
                 class={`language-${language}`}
                 onSelectStart={() => {

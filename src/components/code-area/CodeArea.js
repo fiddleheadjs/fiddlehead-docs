@@ -7,12 +7,14 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     let Mirror = useRef(null);
     
     let [defaultSelection, setDefaultSelection] = useState(null);
+    let defaultScrollPosition = useRef([0, 0]);
+
     let [isLoadingMirror, setIsLoadingMirror] = useState(false);
     let [mirrorLoadingError, setMirrorLoadingError] = useState(null);
-
+    
     let [focused, setFocused] = useState(false);
     let [touched, setTouched] = useState(false);
-
+    
     let [showsMask, setShowsMask] = useState(Mirror.current === null || defaultSelection === null);
     let [showsMirror, setShowsMirror] = useState(!showsMask);
 
@@ -65,42 +67,47 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
             onMouseEnter={() => setTouched(true)}
             onMouseLeave={() => setTouched(false)}
         >
-            <div class="scrollable">
-                {showsMask && (
-                    <div
-                        style={showsMirror ? {
-                            opacity: 0.1,
-                            pointerEvents: 'none',
-                        } : null}
-                    >
-                        <Mask
-                            content={defaultValue}
-                            onSelectionChange={setDefaultSelection}
-                            onFocusChange={setFocused}
-                            language={language}
-                        />
-                    </div>
-                )}
-                {showsMirror && (
-                    <div
-                        style={showsMask ? {
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                        } : null}
-                    >
-                        <Mirror.current
-                            defaultValue={defaultValue}
-                            defaultSelection={defaultSelection}
-                            onChange={onChange}
-                            onFocusChange={setFocused}
-                            language={language}
-                        />
-                    </div>
-                )}
-            </div>
+            {showsMask && (
+                <div
+                    style={showsMirror ? {
+                        opacity: 0.1,
+                        pointerEvents: 'none',
+                    } : null}
+                >
+                    <Mask
+                        content={defaultValue}
+                        onSelectionChange={setDefaultSelection}
+                        onFocusChange={setFocused}
+                        onScroll={(event) => {
+                            defaultScrollPosition.current = [
+                                event.target.scrollLeft,
+                                event.target.scrollTop,
+                            ];
+                        }}
+                        language={language}
+                    />
+                </div>
+            )}
+            {showsMirror && (
+                <div
+                    style={showsMask ? {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                    } : null}
+                >
+                    <Mirror.current
+                        defaultValue={defaultValue}
+                        defaultSelection={defaultSelection}
+                        defaultScrollPosition={defaultScrollPosition.current}
+                        onChange={onChange}
+                        onFocusChange={setFocused}
+                        language={language}
+                    />
+                </div>
+            )}
             {focused && showsMask && !showsMirror && (
                 <InProgress />
             )}

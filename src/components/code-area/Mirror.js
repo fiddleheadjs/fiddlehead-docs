@@ -11,6 +11,7 @@ import {TAB_SIZE} from './tabSize';
 export let Mirror = ({
     defaultValue = '',
     defaultSelection = null,
+    defaultScrollPosition = null,
     onChange,
     onFocusChange,
     language,
@@ -71,6 +72,13 @@ export let Mirror = ({
             // Auto focus so the user don't need to click twice to edit -
             // the first click is on the Mask
             editorView.focus();
+        }
+
+        if (defaultScrollPosition !== null) {
+            editorView.scrollDOM.scrollTo({
+                left: defaultScrollPosition[0],
+                top: defaultScrollPosition[1],
+            });
         }
     }, []);
 
