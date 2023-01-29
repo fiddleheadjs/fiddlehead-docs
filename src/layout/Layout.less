@@ -11,7 +11,7 @@
         z-index: 10;
     }
     
-    > .inner {
+    > .epic-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,25 +25,10 @@
             justify-content: flex-start;
 
             &:not(.shows-nav-on-non-desktop) {
-                > nav {
+                > .Nav {
                     .media-current(@screen-non-desktop, {
                         display: none;
                     });
-                }
-            }
-
-            > main {
-                flex-grow: 1;
-                max-width: 100%;
-                display: flex;
-                flex-direction: row;
-                align-items: stretch;
-                justify-content: flex-start;
-            }
-
-            &.shows-nav-on-non-desktop {
-                > main {
-                    overflow-x: auto;
                 }
             }
         }

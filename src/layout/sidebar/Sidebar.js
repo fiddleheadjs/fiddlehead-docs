@@ -13,7 +13,7 @@ export let Sidebar = () => {
         setSidebarElement(sidebarRef.current);    
     }, []);
 
-    return <aside class="Sidebar" ref={sidebarRef} />;
+    return <div class="Sidebar" ref={sidebarRef} />;
 };
 
 export let SidebarPortal = ({children}) => {

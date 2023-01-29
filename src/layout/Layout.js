@@ -33,17 +33,13 @@ export let Layout = ({children}) => {
                 toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
                 navShown={showsNavOnNonDesktop}
             />
-            <div class="inner">
+            <div class="epic-container">
                 <div class={`middle${showsNavOnNonDesktop ? ' shows-nav-on-non-desktop' : ''}`}>
-                    <nav>
-                        <Nav />
-                    </nav>
-                    <main>
-                        <Main key={location.key}>
-                            {children}
-                        </Main>
-                        <Sidebar />
-                    </main>
+                    <Nav />
+                    <Main key={location.key}>
+                        {children}
+                    </Main>
+                    <Sidebar />
                 </div>
             </div>
         </div>

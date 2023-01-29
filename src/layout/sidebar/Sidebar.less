@@ -5,15 +5,14 @@
     top: @top-height;
     max-height: calc(100vh - @top-height);
     width: 28ch;
+    min-width: 28ch;
     overflow: auto;
-    padding:
-        @viewport-padding
-        0
-        @viewport-padding
-        @viewport-padding - @space-tiny-3;
+    padding: @viewport-padding;
+    padding-left: 0;
 
     .media-current(@screen-desktop-small, {
         width: 22ch;
+        min-width: 22ch;
     });
 
     .media-current(@screen-non-desktop, {
