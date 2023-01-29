@@ -90,6 +90,10 @@ fs.readdirSync(entriesDir).map(filename => {
         resolve: {
             alias: {
                 '@contents': path.resolve(rootDir, 'src/contents'),
+
+                // Use these special aliases when debugging Fiddlehead:
+                // 'fiddlehead$': path.resolve(rootDir, '../fiddlehead/lib/core'),
+                // 'fiddlehead/store$': path.resolve(rootDir, '../fiddlehead/lib/store'),
             }
         }
     });
