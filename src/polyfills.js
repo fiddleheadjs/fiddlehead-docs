@@ -1,7 +1,10 @@
+import getGlobalThis from 'globalthis';
 import 'mdn-polyfills/Array.prototype.includes';
 import 'mdn-polyfills/String.prototype.startsWith';
 import 'mdn-polyfills/Object.entries';
 import 'mdn-polyfills/Object.assign';
+
+window.globalThis = getGlobalThis();
 
 if (Promise.prototype.finally === undefined) {
     Promise.prototype.finally = function (callback) {
@@ -16,9 +19,4 @@ if (Promise.prototype.finally === undefined) {
             })
         );
     };
-}
-
-// Bad polyfill for globalThis
-if (window.globalThis === undefined) {
-    window.globalThis = window;
 }
