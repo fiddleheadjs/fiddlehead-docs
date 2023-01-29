@@ -79,8 +79,9 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
             code = code.substring(match[0].length);
         }
 
-        code = code.trimEnd()
-            .replace(/&/, '&amp;')
+        code = code.replace(/\s+$/, '');
+
+        code = code
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
 
