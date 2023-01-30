@@ -1,5 +1,6 @@
 import history from 'history/browser';
 import {useState, useEffect} from 'fiddlehead';
+import {Button} from '../../components/button/Button';
 
 export let useHistory = () => {
     return history;
@@ -55,15 +56,23 @@ export let useRouter = (routes) => {
     }
 };
 
-export let Link = ({href, children, ...rest}) => (
-    <a
-        {...rest}
-        href={href}
-        onClick={href != null ? (event) => {
-            event.preventDefault();
-            navigate(href);
-        } : null}
-    >
+let composeLinkProps = ({href, ...otherProps}) => ({
+    ...otherProps,
+    href,
+    onClick: href == null ? null : (event) => {
+        event.preventDefault();
+        navigate(href);
+    }
+});
+
+export let Link = ({children, ...otherProps}) => (
+    <a {...composeLinkProps(otherProps)}>
         {children}
     </a>
+);
+
+export let LinkButton = ({children, ...otherProps}) => (
+    <Button {...composeLinkProps(otherProps)}>
+        {children}
+    </Button>
 );

@@ -1,6 +1,6 @@
 import './Top.less';
 import {__} from '../../modules/i18n';
-import {Link} from '../../modules/router';
+import {LinkButton} from '../../modules/router';
 import {Button} from '../../components/button/Button';
 import {GithubIcon} from '../../icons/GithubIcon';
 import {HamburgerIcon} from '../../icons/HamburgerIcon';
@@ -9,14 +9,17 @@ export let Top = ({toggleNav, navShown}) => {
     return (
         <div class="Top">
             <div class="inner">
-                <Link class="logo" href="/">
+                <LinkButton
+                    class="logo"
+                    variant="textual"
+                    href="/"
+                >
                     <img 
                         src="/img/Fiddlehead_320x320.png" 
                         alt={__('Fiddlehead logo')}
                     />
-                    {' '}
                     <span>Fiddlehead</span>
-                </Link>
+                </LinkButton>
                 <div class="right">
                     <Button
                         class="github"
