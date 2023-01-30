@@ -15,7 +15,7 @@ export let Top = ({toggleNav, navShown}) => {
                     href="/"
                 >
                     <img 
-                        src="/img/Fiddlehead_320x320.png" 
+                        src="/img/fiddlehead_64.png"
                         alt={__('Fiddlehead logo')}
                     />
                     <span>Fiddlehead</span>
