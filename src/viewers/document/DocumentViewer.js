@@ -2,7 +2,6 @@ import './DocumentViewer.less';
 import {useCallback, useEffect, useRef} from 'fiddlehead';
 import {MarkdownViewer} from '../markdown/MarkdownViewer';
 import {__} from '../../modules/i18n';
-import * as marked from 'marked';
 import {useSelect} from '../../modules/store';
 import {Link} from '../../modules/router';
 import {Button} from '../../components/button/Button';

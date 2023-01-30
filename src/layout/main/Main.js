@@ -10,14 +10,26 @@ export let Main = ({children}) => {
         console.error('Unexpected error:', error);
     }
 
-    return (
-        <div class="Main">
-            {error === null ? children : (
+    let renderChildren = () => {
+        if (error !== null) {
+            return (
                 <ErrorViewer
                     title={__('Oops... something went wrong!')}
                     detail={error instanceof Error ? `${error.name}: ${error.message}` : null}
                 />
-            )}
+            );
+        }
+
+        return (
+            <main>
+                {children}
+            </main>
+        );
+    };
+
+    return (
+        <div class="Main">
+            {renderChildren()}
         </div>
     );
 };

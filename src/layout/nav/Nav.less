@@ -4,19 +4,19 @@
     position: sticky;
     top: @top-height;
     max-height: calc(100vh - @top-height);
-    min-width: 22ch;
+    min-width: 23ch;
     overflow: auto;
-    padding:
-        @viewport-padding
-        0
-        @viewport-padding
-        @viewport-padding - @space-tiny-3;
-
-    .media-current(@screen-mobile, {
-        min-width: 18ch;
-    });
+    padding: @viewport-padding;
+    padding-right: 0;
+    padding-left: @viewport-padding - @space-tiny-3;
 
     ul {
+        ul, li {
+            &:not(:first-child) {
+                margin-top: @space-tiny-1;
+            }
+        }
+        
         ul {
             padding-left: @space-small-4;
         }
@@ -25,7 +25,6 @@
             a {
                 display: block;
                 padding: @space-tiny-4 @space-tiny-3;
-                white-space: nowrap;
                 cursor: pointer;
                 .border-radius(2);
 

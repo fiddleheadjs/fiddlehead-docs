@@ -27,6 +27,14 @@ export let Layout = ({children}) => {
 
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
+    useEffect(() => {
+        let timeoutId = setTimeout(() => {
+            setShowsNavOnNonDesktop(false);
+        }, 200);
+
+        return () => clearTimeout(timeoutId);
+    }, [location]);
+
     return (
         <div class="Layout">
             <Top
