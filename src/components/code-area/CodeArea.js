@@ -1,5 +1,5 @@
 import './CodeArea.less';
-import {useState, useEffect, useRef} from 'fiddlehead';
+import {useState, useEffect, useCallback, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
 import {InProgress} from './InProgress';
 
@@ -26,6 +26,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     
     let [showsMask, setShowsMask] = useState(Mirror.current === null || defaultSelection === null);
     let [showsMirror, setShowsMirror] = useState(!showsMask);
+    let [showsScrollbar, setShowsScrollbar] = useState(false);
 
     useEffect(() => {
         // Make little delay so that the loading indicator
@@ -68,9 +69,32 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
         return () => clearTimeout(timeoutId);
     }, [showsMirror]);
 
+    useEffect(() => {
+        if (focused || touched) {
+            setShowsScrollbar(true);
+            return;
+        }
+
+        let timeoutId = setTimeout(() => {
+            setShowsScrollbar(false);
+
+            // Delay a moment to hide the scrollbar
+            // The scrolling can continue after the user swipes due to inertia simulation
+        }, 1000);
+
+        return () => clearTimeout(timeoutId);
+    }, [touched || focused]);
+
+    let handleMaskScroll = useCallback((event) => {
+        defaultScrollPosition.current = [
+            event.target.scrollLeft,
+            event.target.scrollTop,
+        ];
+    }, []);
+
     return (
         <div
-            class={`CodeArea${focused ? ' focused' : ''}${touched ? ' touched' : ''}`}
+            class={`CodeArea${focused ? ' focused' : ''}${!showsScrollbar ? ' scrollbar-hidden' : ''}`}
             onTouchStart={() => setTouched(true)}
             onTouchEnd={() => setTouched(false)}
             onMouseEnter={() => setTouched(true)}
@@ -87,12 +111,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                         content={defaultValue}
                         onSelectionChange={setDefaultSelection}
                         onFocusChange={setFocused}
-                        onScroll={(event) => {
-                            defaultScrollPosition.current = [
-                                event.target.scrollLeft,
-                                event.target.scrollTop,
-                            ];
-                        }}
+                        onScroll={handleMaskScroll}
                         language={language}
                     />
                 </div>

@@ -5,19 +5,33 @@ import {getCaretPosition} from '../../utils/getCaretPosition';
 import {TAB_SIZE} from './tabSize';
 
 export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, language}) => {
-    let codeElementRef = useRef(null);
+    let preRef = useRef(null);
+    let codeRef = useRef(null);
 
     useEffect(() => {
-        if (codeElementRef.current !== null) {
-            highlightElement(codeElementRef.current);
+        if (codeRef.current !== null) {
+            highlightElement(codeRef.current);
         }
     }, []);
+
+    useEffect(() => {
+        let scroller = preRef.current;
+        let options = {passive: true};
+        
+        scroller.addEventListener('scroll', onScroll, options);
+
+        return () => {
+            // Matching event listeners for removal
+            // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener#matching_event_listeners_for_removal
+            scroller.removeEventListener('scroll', onScroll, options);
+        };
+    }, [onScroll]);
 
     let handleSelectionChange = () => {
         requestAnimationFrame(() => {
             // Call the callback in the next animation frame, because
             // we need to wait for the window to recognize the selection
-            onSelectionChange(getCaretPosition(codeElementRef.current));
+            onSelectionChange(getCaretPosition(codeRef.current));
         });
     };
 
@@ -25,7 +39,7 @@ export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, languag
         <pre
             class={`language-${language}`}
             style={{overflowX: 'auto'}}
-            onScroll={onScroll}
+            ref={preRef}
         >
             <code
                 class={`language-${language}`}
@@ -52,7 +66,7 @@ export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, languag
                     caretColor: gray.black,
                     outline: 'none',
                 }}
-                ref={codeElementRef}
+                ref={codeRef}
             >
                 {content}
             </code>
