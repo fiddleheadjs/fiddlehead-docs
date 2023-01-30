@@ -1,10 +1,10 @@
 import './Display.less';
-import {useState, useRef, useEffect} from 'fiddlehead';
+import {useState, useRef, useMemo, useEffect} from 'fiddlehead';
 import {__} from '../../../modules/i18n';
 import {CautionIcon} from '../../../icons/CautionIcon';
-import {PlayIcon} from '../../../icons/PlayIcon';
 import {Section} from '../section/Section';
 import {DisplayIcon} from '../../../icons/DisplayIcon';
+import {Loading} from '../../../components/loading/Loading';
 
 export let Display = ({
     entryFilename,
@@ -58,21 +58,13 @@ export let Display = ({
         return () => observer.disconnect();
     }, []);
 
-    let [icon, title] = (() => {
-        if (error !== null) {
-            return [<CautionIcon />, __('Sandbox Failed')];
+    let [icon, title] = useMemo(() => {
+        if (error === null) {
+            return [<DisplayIcon />, __('Display Result')];
         }
-
-        if (isLoadingSandbox) {
-            return [<PlayIcon />, __('Processing...')];
-        }
-
-        if (Sandbox.current === null) {
-            return [<PlayIcon />, __('Compile')];
-        }
-
-        return [<DisplayIcon />, __('Display Result')];
-    })();
+        
+        return [<CautionIcon />, __('Sandbox Failed')];
+    }, [error]);
 
     return (
         <Section
@@ -96,14 +88,18 @@ export let Display = ({
                         />
                     </div>
                 }
-                {
-                    error !== null &&
+                {error !== null && (
                     <pre class="error">
                         <code>
                             {`${error.name}: ${error.message}`}
                         </code>
                     </pre>
-                }
+                )}
+                {isLoadingSandbox && (
+                    <div class="loading">
+                        <Loading />
+                    </div>
+                )}
             </div>
         </Section>
     );
