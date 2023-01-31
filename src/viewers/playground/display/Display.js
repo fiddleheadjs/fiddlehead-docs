@@ -17,9 +17,7 @@ export let Display = ({
     let containerRef = useRef(null);
 
     let [error, setError] = useState(null);
-
     let [Sandbox, setSandbox] = useState(null);
-    
     let [isLoadingSandbox, setIsLoadingSandbox] = useState(false);
 
     let startImport = () => {
