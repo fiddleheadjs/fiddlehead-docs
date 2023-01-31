@@ -11,7 +11,7 @@ import {AltGithubIcon} from '../../icons/AltGithubIcon';
 import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 import {SidebarPortal} from '../../layout/sidebar/Sidebar';
 import {TableOfContents} from './TableOfContents';
-import {getHeadingMixins, highlightTocItems} from './toc';
+import {getHeadingMixins, highlightTocItems} from './tocHighlight';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
