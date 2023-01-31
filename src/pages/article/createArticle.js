@@ -33,7 +33,11 @@ export let createArticle = (contentPath, currentNavItem) => {
 
         let renderChildren = () => {
             if (data === null) {   
-                return <Loading />;
+                return (
+                    <div class="preparation">
+                        <Loading />
+                    </div>
+                );
             }
     
             let {title, description, headings, playgrounds, content} = data;

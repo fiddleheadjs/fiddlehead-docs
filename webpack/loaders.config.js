@@ -10,13 +10,6 @@ function getJsLoaders() {
                 presets: [
                     'babel-preset-fiddlehead',
                 ],
-                plugins: [
-                    ['prismjs', {
-                        languages: ['markup', 'jsx', 'json', 'css', 'bash'],
-                        theme: 'default',
-                        css: false,
-                    }]
-                ],
             }
         }
     ];
