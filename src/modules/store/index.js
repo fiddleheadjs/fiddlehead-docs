@@ -4,7 +4,7 @@ import {useStoreInit, useStoreRead, useStoreWrite} from 'fiddlehead/store';
 const scope = {};
 
 const data = {
-    layoutScroll: {},
+    layoutScroll: null,
     sidebarElement: null,
 };
 

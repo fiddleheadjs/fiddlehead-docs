@@ -63,7 +63,8 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
 
         return (
             `<h${level} id="${id}" style="z-index:${zIndex}">` +
-            `${text}<a href="#${id}">${linkSvg}</a>` +
+            `<span>${text}</span>` +
+            `<a href="#${id}">${linkSvg}</a>` +
             `</h${level}>`
         );
     };

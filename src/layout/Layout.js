@@ -1,5 +1,5 @@
 import './Layout.less';
-import {useEffect, useState} from 'fiddlehead';
+import {useEffect, useRef, useState} from 'fiddlehead';
 import {Nav} from './nav/Nav';
 import {useDispatch} from '../modules/store';
 import {Top} from './top/Top';
@@ -10,16 +10,17 @@ import {Sidebar} from './sidebar/Sidebar';
 export let Layout = ({children}) => {
     let location = useLocation();
 
+    let topbarRef = useRef(null);
+
     let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
     let setLayoutScroll = useDispatch((value, data) => {
-        data.layoutScroll.element = document.documentElement;
-        data.layoutScroll.object = window;
+        data.layoutScroll = {
+            scrollee: document.documentElement,
+            scroller: window,
+            topShift: topbarRef.current?.offsetHeight || 0,
+        };
     });
-
-    useEffect(() => {
-
-    }, [location]);
 
     useEffect(() => {
         setLayoutScroll();
@@ -35,7 +36,7 @@ export let Layout = ({children}) => {
 
     return (
         <div class="Layout">
-            <div class="topbar">
+            <div class="topbar" ref={topbarRef}>
                 <Top
                     toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
                     navShown={showsNavOnNonDesktop}
