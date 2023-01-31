@@ -29,7 +29,7 @@ export let getHeadingMixins = (headings, tocContainer) => {
             return;
         }
 
-        let contentBox = heading.firstChild ?? heading;
+        let contentBox = heading.querySelector('span') ?? heading;
         let tocItem = tocContainer.querySelector(`li[data-id="${id}"]`);
 
         headingMixins.push({contentBox, tocItem, level});
