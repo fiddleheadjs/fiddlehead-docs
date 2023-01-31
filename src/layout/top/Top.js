@@ -3,8 +3,6 @@ import {__} from '../../modules/i18n';
 import {LinkButton} from '../../modules/router';
 import {Button} from '../../components/button/Button';
 import {GithubIcon} from '../../icons/GithubIcon';
-import {HamburgerIcon} from '../../icons/HamburgerIcon';
-import {XMarkIcon} from '../../icons/XmarkIcon';
 import {ChevronRightIcon} from '../../icons/ChevronRightIcon';
 import {ChevronLeftIcon} from '../../icons/ChevronLeftIcon';
 
