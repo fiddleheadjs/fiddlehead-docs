@@ -11,7 +11,7 @@ import {AltGithubIcon} from '../../icons/AltGithubIcon';
 import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 import {SidebarPortal} from '../../layout/sidebar/Sidebar';
 import {TableOfContents} from './TableOfContents';
-import {getScrolling, getHeadingMixins, highlightTocItems} from './toc';
+import {getHeadingMixins, highlightTocItems} from './toc';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
@@ -52,8 +52,7 @@ export let DocumentViewer = ({
         let headingMixins = getHeadingMixins(headings, tocRef.current);
         
         let handleEvent = () => {
-            let scrolling = getScrolling(scrollee, topShift);
-            highlightTocItems(headingMixins, contentsRef.current, scrolling);
+            highlightTocItems(headingMixins, contentsRef.current, scrollee, topShift);
         };
 
         handleEvent();

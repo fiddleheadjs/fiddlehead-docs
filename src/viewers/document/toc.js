@@ -1,4 +1,4 @@
-export let getScrolling = (scrollee, topShift) => {
+let getScrolling = (scrollee, topShift) => {
     if (scrollee === document.documentElement) {
         return {
             height: window.innerHeight - topShift,
@@ -38,7 +38,9 @@ export let getHeadingMixins = (headings, tocContainer) => {
     return headingMixins;
 };
 
-export let highlightTocItems = (headingMixins, contentsContainer, scrolling, activeAreaPaddingRatio = 0.3) => {
+export let highlightTocItems = (headingMixins, contentsContainer, scrollee, topShift = 0, activeAreaPaddingRatio = 0.3) => {
+    let scrolling = getScrolling(scrollee, topShift);
+
     headingMixins.map(({contentBox: heading, tocItem, level}, index) => {
         let headingRect = heading.getBoundingClientRect();
 
