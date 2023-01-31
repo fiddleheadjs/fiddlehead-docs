@@ -20,7 +20,7 @@ export let Section = ({
             {...otherProps}
         >
             <div
-                class={`heading${touchable ? ' touchable' : ''}`}
+                class={`heading${touchable ? ' touchable' : ''}${open ? ' open' : ''}`}
                 onClick={touchable ? () => setOpen(open => !open) : null}
             >
                 <div class="title">

@@ -1,10 +1,16 @@
 @import '../../../style/mixin.less';
 
 .Display {
-    .display-output {
+    .display-output {      
         // This should have min-height to not be collapsed
         // while waiting for the sandbox to be loaded
         min-height: 9rem;
+
+        .media-current(@screen-non-desktop, {
+            margin-left: -@viewport-padding;
+            margin-right: -@viewport-padding;
+            width: calc(100% + 2 * @viewport-padding);
+        });
 
         > .sandbox {
             width: 100%;
