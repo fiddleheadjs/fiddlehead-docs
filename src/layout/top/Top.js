@@ -9,36 +9,34 @@ import {ChevronLeftIcon} from '../../icons/ChevronLeftIcon';
 export let Top = ({toggleNav, navShown}) => {
     return (
         <div class="Top">
-            <div class="inner">
-                <LinkButton
-                    class="logo"
+            <LinkButton
+                class="logo"
+                variant="textual"
+                href="/"
+            >
+                <img 
+                    src="/img/fiddlehead_64.png"
+                    alt={__('Fiddlehead logo')}
+                />
+                <span>Fiddlehead</span>
+            </LinkButton>
+            <div class="right">
+                <Button
+                    class="github"
+                    href="https://github.com/fiddleheadjs/fiddlehead"
+                    title="Fiddlehead repository on GitHub"
+                    target="_blank"
                     variant="textual"
-                    href="/"
                 >
-                    <img 
-                        src="/img/fiddlehead_64.png"
-                        alt={__('Fiddlehead logo')}
-                    />
-                    <span>Fiddlehead</span>
-                </LinkButton>
-                <div class="right">
-                    <Button
-                        class="github"
-                        href="https://github.com/fiddleheadjs/fiddlehead"
-                        title="Fiddlehead repository on GitHub"
-                        target="_blank"
-                        variant="textual"
-                    >
-                        <GithubIcon size="1.6em" />
-                    </Button>
-                    <Button
-                        class="nav-toggle"
-                        onClick={toggleNav}
-                    >
-                        <span>{__('Menu')}</span>
-                        {navShown ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </Button>
-                </div>
+                    <GithubIcon size="1.6em" />
+                </Button>
+                <Button
+                    class="nav-toggle"
+                    onClick={toggleNav}
+                >
+                    <span>{__('Menu')}</span>
+                    {navShown ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                </Button>
             </div>
         </div>
     );

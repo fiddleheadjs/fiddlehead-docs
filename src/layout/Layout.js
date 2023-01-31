@@ -29,10 +29,12 @@ export let Layout = ({children}) => {
 
     return (
         <div class="Layout">
-            <Top
-                toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
-                navShown={showsNavOnNonDesktop}
-            />
+            <div class="topbar">
+                <Top
+                    toggleNav={() => setShowsNavOnNonDesktop(x => !x)}
+                    navShown={showsNavOnNonDesktop}
+                />
+            </div>
             <div class="epic-container">
                 <div class={`middle${showsNavOnNonDesktop ? ' shows-nav-on-non-desktop' : ''}`}>
                     <Nav />

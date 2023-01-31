@@ -1,59 +1,47 @@
 @import '../../style/mixin.less';
 
 .Top {
-    width: 100%;
-    height: @top-height;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    border-bottom: 1px solid @gray-light-A3;
-    background: @gray-white;
+    justify-content: space-between;
+    align-items: center;
+    padding: @space-tiny-2 @viewport-padding;
 
-    > .inner {
-        width: 100%;
-        max-width: 160ch;
+    > :not(:last-child) {
+        margin-right: @space-small-4;
+    }
+
+    > .logo {
+        white-space: nowrap;
+
+        img {
+            width: 1.7em;
+            height: 1.7em;
+            margin: 0;
+            margin-right: 0.3em;
+        }
+        
+        span {
+            padding-top: 0.5em;
+            margin: 0;
+            .font-body-bold();
+        }
+    }
+
+    > .right {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
-        padding: @viewport-padding;
 
-        > :not(:last-child) {
-            margin-right: @space-small-4;
+        > :not(:first-child) {
+            margin-left: @space-small-2;
         }
+        
+        .nav-toggle {
+            text-transform: lowercase;
 
-        > .logo {
-            white-space: nowrap;
-
-            img {
-                width: 1.7em;
-                height: 1.7em;
-                margin: 0;
-                margin-right: 0.3em;
-            }
-            
-            span {
-                padding-top: 0.5em;
-                margin: 0;
-                .font-body-bold();
-            }
-        }
-
-        > .right {
-            display: flex;
-            align-items: center;
-
-            > :not(:last-child) {
-                margin-right: @space-small-2;
-            }
-            
-            .nav-toggle {
-                text-transform: lowercase;
-
-                .media-current(@screen-desktop, {
-                    display: none;
-                });
-            }
+            .media-current(@screen-desktop, {
+                display: none;
+            });
         }
     }
 }
