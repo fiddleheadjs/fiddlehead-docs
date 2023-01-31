@@ -1,5 +1,5 @@
 import './DocumentViewer.less';
-import {useCallback, useEffect, useRef} from 'fiddlehead';
+import {useEffect, useRef} from 'fiddlehead';
 import {MarkdownViewer} from '../markdown/MarkdownViewer';
 import {__} from '../../modules/i18n';
 import {useSelect} from '../../modules/store';
