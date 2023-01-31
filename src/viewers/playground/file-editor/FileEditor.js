@@ -32,7 +32,8 @@ export let FileEditor = ({file, onChange, defaultOpen}) => {
             defaultOpen={defaultOpen}
         >
             <CodeArea
-                defaultValue={file.code}
+                defaultCode={file.code}
+                preHighlightedCode={file.highlightedCode}
                 onChange={(value) => {
                     onChange({
                         filename: file.filename,

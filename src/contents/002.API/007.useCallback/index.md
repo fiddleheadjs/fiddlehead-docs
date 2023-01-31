@@ -1,6 +1,6 @@
 # useCallback
 
-_It keeps the instance of a function through renders._
+> It keeps the instance of a function through renders.
 
 When you pass an inline function to a child component, that child component will always re-render when the current component re-renders, because the inline function is always a different instance.
 

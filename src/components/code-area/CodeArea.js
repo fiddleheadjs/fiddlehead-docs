@@ -3,7 +3,7 @@ import {useState, useEffect, useCallback, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
 import {BreathRing} from '../breath-ring/BreathRing';
 
-export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {
+export let CodeArea = ({defaultCode, preHighlightedCode, onChange, onLoadingStateChange, language}) => {
     // CodeMirror is heavy, so we load it only when the user want to edit
     // Before that, we use Prism as a "mask"
     // Actually, Prism highlights codes in more details and is faster (of course),
@@ -101,7 +101,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                     } : null}
                 >
                     <Mask
-                        content={defaultValue}
+                        content={preHighlightedCode}
                         onSelectionChange={setDefaultSelection}
                         onFocusChange={setFocused}
                         onScroll={handleMaskScroll}
@@ -120,7 +120,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                     } : null}
                 >
                     <Mirror.current
-                        defaultValue={defaultValue}
+                        defaultValue={defaultCode}
                         defaultSelection={defaultSelection}
                         defaultScrollPosition={defaultScrollPosition.current}
                         onChange={onChange}

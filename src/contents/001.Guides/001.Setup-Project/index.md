@@ -1,6 +1,6 @@
 # Setup Project
 
-_Setup your project workspace to start coding with Fiddlehead._
+> Setup your project workspace to start coding with Fiddlehead.
 
 ## Installation
 

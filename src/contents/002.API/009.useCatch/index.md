@@ -1,6 +1,6 @@
 # useCatch
 
-_This is used to create error boundaries._
+> This is used to create error boundaries.
 
 You may want your application to handle unexpected errors in runtime, then show a user-friendly message instead of a blank screen, while reporting errors to a logging service in the background.
 

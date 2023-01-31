@@ -1,5 +1,4 @@
 import {useRef, useEffect} from 'fiddlehead';
-import {highlightElement} from '../../modules/highlight';
 import {gray} from '../../style/theme';
 import {getCaretPosition} from '../../utils/getCaretPosition';
 import {TAB_SIZE} from './tabSize';
@@ -7,12 +6,6 @@ import {TAB_SIZE} from './tabSize';
 export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, language}) => {
     let preRef = useRef(null);
     let codeRef = useRef(null);
-
-    useEffect(() => {
-        if (codeRef.current !== null) {
-            highlightElement(codeRef.current);
-        }
-    }, []);
 
     useEffect(() => {
         let scroller = preRef.current;
@@ -43,6 +36,7 @@ export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, languag
         >
             <code
                 class={`language-${language}`}
+                innerHTML={content}
                 onSelectStart={() => {
                     // This event will not fire when a range is selected,
                     // it only fires when the user start selecting.
@@ -67,9 +61,7 @@ export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, languag
                     outline: 'none',
                 }}
                 ref={codeRef}
-            >
-                {content}
-            </code>
+            />
         </pre>
     );
 };

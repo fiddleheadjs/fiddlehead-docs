@@ -1,6 +1,6 @@
 # Writing HTML in JSX
 
-_Some notes when writing JSX to describe your UI with Fiddlehead._
+> Some notes when writing JSX to describe your UI with Fiddlehead.
 
 ### class and className
 

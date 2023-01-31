@@ -1,6 +1,5 @@
 import './DocumentViewer.less';
 import {useEffect, useRef} from 'fiddlehead';
-import {MarkdownViewer} from '../markdown/MarkdownViewer';
 import {__} from '../../modules/i18n';
 import {useSelect} from '../../modules/store';
 import {Link} from '../../modules/router';
@@ -8,16 +7,19 @@ import {Button} from '../../components/button/Button';
 import {LeftArrowIcon} from '../../icons/LeftArrowIcon';
 import {RightArrowIcon} from '../../icons/RightArrowIcon';
 import {AltGithubIcon} from '../../icons/AltGithubIcon';
-import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 import {SidebarPortal} from '../../layout/sidebar/Sidebar';
 import {TableOfContents} from './TableOfContents';
 import {getHeadingMixins, highlightTocItems} from './tocHighlight';
+import {Contents} from './Contents';
 
 const MIN_HEADINGS_TO_SHOW_TOC = 2;
 
 export let DocumentViewer = ({
+    title,
+    description,
     headings = [],
-    contents = [],
+    playgrounds = [],
+    content = '',
     contentPath,
     previous,
     next,
@@ -68,41 +70,20 @@ export let DocumentViewer = ({
         };
     }, [layoutScroll]);
 
-    let getContents = () => {
-        let headingPosRef = {current: -1};
-
-        return contents.map((content, index) => {
-            if (typeof content === 'string') {
-                return (
-                    <MarkdownViewer
-                        key={index}
-                        content={content}
-                        headings={headings}
-                        headingPosRef={headingPosRef}
-                    />
-                );
-            }
-
-            if (content.playground !== undefined) {
-                const {fileList} = content.playground;
-
-                return (
-                    <PlaygroundViewer
-                        fileList={fileList}
-                    />
-                );
-            }
-        });
-    };
-
     let showsToc = headings.length >= MIN_HEADINGS_TO_SHOW_TOC;
 
     return (
         <div class="DocumentViewer">
-            <div class="contents" ref={contentsRef}>
-                {
-                    getContents()
-                }
+            <div class="heading">
+                <h1 innerHTML={title} />
+                <div class="description" innerHTML={description} />
+            </div>
+            <div class="middle">
+                <Contents
+                    content={content}
+                    playgrounds={playgrounds}
+                    ref={contentsRef}
+                />
                 {(previous !== null || next !== null) && (
                     <div class="quick-nav">
                         {previous !== null ? (

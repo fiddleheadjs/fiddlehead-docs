@@ -1,6 +1,6 @@
 # ref
 
-_Some notes about `ref` in Fiddlehead._
+> Some notes about `ref` in Fiddlehead.
 
 ### Forwarding refs
 
