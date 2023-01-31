@@ -10,22 +10,28 @@ import {Sidebar} from './sidebar/Sidebar';
 export let Layout = ({children}) => {
     let location = useLocation();
 
+    let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
+
     let setLayoutScroll = useDispatch((value, data) => {
         data.layoutScroll.element = document.documentElement;
         data.layoutScroll.object = window;
     });
 
     useEffect(() => {
+
+    }, [location]);
+
+    useEffect(() => {
         setLayoutScroll();
 
-        window.addEventListener('resize', setLayoutScroll);
+        let listenOptions = {passive: true};
+
+        window.addEventListener('resize', setLayoutScroll, listenOptions);
 
         return () => {
-            window.removeEventListener('resize', setLayoutScroll);
+            window.removeEventListener('resize', setLayoutScroll, listenOptions);
         };
     }, []);
-
-    let [showsNavOnNonDesktop, setShowsNavOnNonDesktop] = useState(false);
 
     return (
         <div class="Layout">

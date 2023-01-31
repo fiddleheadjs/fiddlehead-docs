@@ -19,10 +19,15 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
                 highlightAllUnder(elementRef.current);
             }
         };
+
         highlight();
-        window.addEventListener('resize', highlight);
+
+        let listenOptions = {passive: true};
+
+        window.addEventListener('resize', highlight, listenOptions);
+
         return () => {
-            window.removeEventListener('resize', highlight);
+            window.removeEventListener('resize', highlight, listenOptions);
         };
     }, []);
 
@@ -30,7 +35,9 @@ export let MarkdownViewer = ({content, headings, headingPosRef}) => {
         if (elementRef.current === null) {
             return;
         }
+        
         let links = elementRef.current.querySelectorAll('a[href^="/"]');
+
         [].forEach.call(links, (link) => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();

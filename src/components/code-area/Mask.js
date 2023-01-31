@@ -16,14 +16,14 @@ export let Mask = ({content, onSelectionChange, onFocusChange, onScroll, languag
 
     useEffect(() => {
         let scroller = preRef.current;
-        let options = {passive: true};
+        let listenOptions = {passive: true};
         
-        scroller.addEventListener('scroll', onScroll, options);
+        scroller.addEventListener('scroll', onScroll, listenOptions);
 
         return () => {
             // Matching event listeners for removal
             // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener#matching_event_listeners_for_removal
-            scroller.removeEventListener('scroll', onScroll, options);
+            scroller.removeEventListener('scroll', onScroll, listenOptions);
         };
     }, [onScroll]);
 
