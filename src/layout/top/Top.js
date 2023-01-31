@@ -4,6 +4,9 @@ import {LinkButton} from '../../modules/router';
 import {Button} from '../../components/button/Button';
 import {GithubIcon} from '../../icons/GithubIcon';
 import {HamburgerIcon} from '../../icons/HamburgerIcon';
+import {XMarkIcon} from '../../icons/XmarkIcon';
+import {ChevronRightIcon} from '../../icons/ChevronRightIcon';
+import {ChevronLeftIcon} from '../../icons/ChevronLeftIcon';
 
 export let Top = ({toggleNav, navShown}) => {
     return (
@@ -31,11 +34,11 @@ export let Top = ({toggleNav, navShown}) => {
                         <GithubIcon size="1.6em" />
                     </Button>
                     <Button
-                        class={`nav-toggle${navShown ? ' active' : ''}`}
+                        class="nav-toggle"
                         onClick={toggleNav}
                     >
-                        <HamburgerIcon />
                         <span>{__('Menu')}</span>
+                        {navShown ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </Button>
                 </div>
             </div>
