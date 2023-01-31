@@ -1,10 +1,9 @@
-import './CodeArea.less';
 import {useEffect, useState} from 'fiddlehead';
 import {border_radius, color} from '../../style/theme';
 
 const TRANSITION_MILLIS = 500;
 
-export let InProgress = () => {
+export let BreathRing = () => {
     let [peak, setPeak] = useState(false);
 
     useEffect(() => {

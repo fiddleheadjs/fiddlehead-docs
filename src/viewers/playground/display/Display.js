@@ -4,8 +4,8 @@ import {__} from '../../../modules/i18n';
 import {CautionIcon} from '../../../icons/CautionIcon';
 import {Section} from '../section/Section';
 import {DisplayIcon} from '../../../icons/DisplayIcon';
-import {Loading} from '../../../components/loading/Loading';
 import {PlayIcon} from '../../../icons/PlayIcon';
+import {BreathRing} from '../../../components/breath-ring/BreathRing';
 
 export let Display = ({
     entryFilename,
@@ -21,8 +21,6 @@ export let Display = ({
     let Sandbox = useRef(null);
     
     let [isLoadingSandbox, setIsLoadingSandbox] = useState(false);
-
-    let [showsLoadingIndicator, setShowsLoadingIndicator] = useState(false);
 
     let startImport = () => {
         setError(null);
@@ -61,19 +59,6 @@ export let Display = ({
         return () => observer.disconnect();
     }, []);
 
-    useEffect(() => {
-        if (!isLoadingSandbox) {
-            setShowsLoadingIndicator(false);
-            return;
-        }
-
-        let timeoutId = setTimeout(() => {
-            setShowsLoadingIndicator(true);
-        }, 500);
-
-        return () => clearTimeout(timeoutId);
-    }, [isLoadingSandbox]);
-
     let [icon, title] = useMemo(() => {
         if (isLoadingSandbox) {
             return [<PlayIcon />, __('Sandbox processing...')];
@@ -83,6 +68,10 @@ export let Display = ({
             return [<CautionIcon />, __('Sandbox failed')];
         }
         
+        if (Sandbox.current === null) {
+            return [<PlayIcon />, __('Sandbox pending')];
+        }
+
         return [<DisplayIcon />, __('Display result')];
     }, [isLoadingSandbox, error]);
 
@@ -115,10 +104,8 @@ export let Display = ({
                         </code>
                     </pre>
                 )}
-                {showsLoadingIndicator && (
-                    <div class="loading">
-                        <Loading />
-                    </div>
+                {isLoadingSandbox && (
+                    <BreathRing />
                 )}
             </div>
         </Section>

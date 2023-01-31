@@ -1,7 +1,7 @@
 import './CodeArea.less';
 import {useState, useEffect, useCallback, useRef} from 'fiddlehead';
 import {Mask} from './Mask';
-import {InProgress} from './InProgress';
+import {BreathRing} from '../breath-ring/BreathRing';
 
 export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language}) => {
     // CodeMirror is heavy, so we load it only when the user want to edit
@@ -137,7 +137,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                 </div>
             )}
             {focused && showsMask && !showsMirror && (
-                <InProgress />
+                <BreathRing />
             )}
         </div>
     );

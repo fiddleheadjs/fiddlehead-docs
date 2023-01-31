@@ -8,20 +8,12 @@ export let createArticle = (contentPath, currentNavItem) => {
     let Article = () => {
         let [data, setData] = useState(null);
         let [error, setError] = useState(null);
-        let [shouldShowLoading, setShouldShowLoading] = useState(false);
         
         useEffect(() => {
-            let timeoutId = setTimeout(() => {
-                setShouldShowLoading(true);
-            }, 300);
-
             import('@contents/' + contentPath + '/index.md').then(data => {
                 setData(data);
-                setShouldShowLoading(false);
             }).catch((error) => {
                 setError(error);
-            }).finally(() => {
-                clearTimeout(timeoutId);
             });
         }, []);
 
@@ -40,16 +32,8 @@ export let createArticle = (contentPath, currentNavItem) => {
         }
 
         let renderChildren = () => {
-            if (data === null) {
-                if (shouldShowLoading) {
-                    return (
-                        <div class="preparation">
-                            <Loading />
-                        </div>
-                    );
-                }
-    
-                return null;
+            if (data === null) {   
+                return <Loading />;
             }
     
             let {headings, contents} = data;
