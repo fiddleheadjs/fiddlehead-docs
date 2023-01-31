@@ -18,7 +18,7 @@ export let Layout = ({children}) => {
         data.layoutScroll = {
             scrollee: document.documentElement,
             scroller: window,
-            topShift: topbarRef.current?.offsetHeight || 0,
+            topShift: topbarRef.current?.offsetHeight || 0
         };
     });
 
@@ -33,6 +33,18 @@ export let Layout = ({children}) => {
             window.removeEventListener('resize', setLayoutScroll, listenOptions);
         };
     }, []);
+
+    useEffect(() => {
+        if (!showsNavOnNonDesktop) {
+            return;
+        }
+
+        let timeoutId = setTimeout(() => {
+            setShowsNavOnNonDesktop(false);
+        }, 200);
+
+        return () => clearTimeout(timeoutId);
+    }, [location]);
 
     return (
         <div class="Layout">
