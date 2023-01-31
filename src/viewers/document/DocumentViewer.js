@@ -75,7 +75,7 @@ export let DocumentViewer = ({
     return (
         <div class="DocumentViewer">
             <div class="heading">
-                <h1 innerHTML={title} />
+                <h1 class="title" innerHTML={title} />
                 <div class="description" innerHTML={description} />
             </div>
             <div class="middle">
