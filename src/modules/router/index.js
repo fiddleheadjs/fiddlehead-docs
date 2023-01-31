@@ -56,12 +56,21 @@ export let useRouter = (routes) => {
     }
 };
 
-let composeLinkProps = ({href, ...otherProps}) => ({
+let composeLinkProps = ({href, onClick, ...otherProps}) => ({
     ...otherProps,
     href,
-    onClick: href == null ? null : (event) => {
-        event.preventDefault();
-        navigate(href);
+    onClick(event) {
+        if (onClick != null) {
+            onClick(event);
+            if (event.defaultPrevented) {
+                return;
+            }
+        }
+
+        if (href != null) {
+            event.preventDefault();
+            navigate(href);
+        }
     }
 });
 

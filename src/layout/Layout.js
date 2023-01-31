@@ -34,18 +34,6 @@ export let Layout = ({children}) => {
         };
     }, []);
 
-    useEffect(() => {
-        if (!showsNavOnNonDesktop) {
-            return;
-        }
-
-        let timeoutId = setTimeout(() => {
-            setShowsNavOnNonDesktop(false);
-        }, 200);
-
-        return () => clearTimeout(timeoutId);
-    }, [location]);
-
     return (
         <div class="Layout">
             <div class="topbar" ref={topbarRef}>
@@ -56,7 +44,7 @@ export let Layout = ({children}) => {
             </div>
             <div class="epic-container">
                 <div class={`middle${showsNavOnNonDesktop ? ' shows-nav-on-non-desktop' : ''}`}>
-                    <Nav />
+                    <Nav hideNav={() => setShowsNavOnNonDesktop(false)} />
                     <Main key={location.key}>
                         {children}
                     </Main>
