@@ -1,9 +1,9 @@
 import './FileEditor.less';
 import {useState} from 'fiddlehead';
 import {CodeArea} from '../../../components/code-area/CodeArea';
-import {Spinner} from '../../../components/spinner/Spinner';
 import {CautionIcon} from '../../../icons/CautionIcon';
 import {Section} from '../section/Section';
+import {Loading} from '../../../components/loading/Loading';
 
 export let FileEditor = ({file, onChange, defaultOpen}) => {
     let [loadingState, setLoadingState] = useState({
@@ -19,7 +19,7 @@ export let FileEditor = ({file, onChange, defaultOpen}) => {
                 <>
                     {loadingState.inProgress && (
                         <span class="status">
-                            <Spinner />
+                            <Loading label={null} />
                         </span>
                     )}
                     {loadingState.error !== null && (

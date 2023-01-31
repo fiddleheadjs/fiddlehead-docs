@@ -3,10 +3,13 @@ import {useEffect, useState} from 'fiddlehead';
 import {__} from '../../modules/i18n';
 import {Spinner} from '../spinner/Spinner';
 
-export let Loading = () => {
+export let Loading = ({label = __('Loading...')}) => {
     let [opacity, setOpacity] = useState(0);
 
     useEffect(() => {
+        // Make little delay so that the loading indicator
+        // will not display if the internet connection is fast.
+        // Once the indicator displays, it also should not hide too quickly
         let timeoutId = setTimeout(() => {
             setOpacity(1);
         }, 200);
@@ -19,7 +22,7 @@ export let Loading = () => {
             class="Loading"
             style={{opacity, transition: 'opacity 800ms'}}
         >
-            <span>{__('Loading...')}</span>
+            <span>{label}</span>
             <Spinner />
         </div>
     );

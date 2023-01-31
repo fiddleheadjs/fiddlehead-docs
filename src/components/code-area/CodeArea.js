@@ -29,17 +29,10 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
     let [showsScrollbar, setShowsScrollbar] = useState(false);
 
     useEffect(() => {
-        // Make little delay so that the loading indicator
-        // will not display if the internet connection is fast.
-        // Once the indicator displays, it also should not hide too quickly
-        let timeoutId = setTimeout(() => {
-            onLoadingStateChange({
-                inProgress: isLoadingMirror,
-                error: mirrorLoadingError
-            });
-        }, 500);
-
-        return () => clearTimeout(timeoutId);
+        onLoadingStateChange({
+            inProgress: isLoadingMirror,
+            error: mirrorLoadingError
+        });
     }, [isLoadingMirror, mirrorLoadingError]);
 
     useEffect(() => {
@@ -136,7 +129,7 @@ export let CodeArea = ({defaultValue, onChange, onLoadingStateChange, language})
                     />
                 </div>
             )}
-            {focused && showsMask && !showsMirror && (
+            {isLoadingMirror && (
                 <BreathRing />
             )}
         </div>
