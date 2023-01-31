@@ -2,6 +2,7 @@
 // Fiddlehead - building UI with JSX and hooks
 
 import '../style/common.less';
+import '../style/prism.less';
 import '../polyfills';
 import {render} from 'fiddlehead';
 import {Layout} from '../layout/Layout';

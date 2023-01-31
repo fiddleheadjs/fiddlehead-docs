@@ -1,6 +1,6 @@
 # useMemo
 
-_This hook is used to avoid re-running a heavy calculation every time the component re-renders._
+> This hook is used to avoid re-running a heavy calculation every time the component re-renders.
 
 ```jsx
 import {useMemo} from 'fiddlehead';

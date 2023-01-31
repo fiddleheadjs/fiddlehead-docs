@@ -1,6 +1,6 @@
 # Pure Components
 
-_Same props and state then the same output._
+> Same props and state then the same output.
 
 Pure components are components that always produce the same output (view) with the same props and state.
 Different from React, any components of Fiddlehead are pure without wrapping them with `memo` HOC.

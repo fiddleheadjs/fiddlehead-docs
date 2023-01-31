@@ -1,6 +1,6 @@
 # createPortal
 
-_This one allows you to create a portal to split the subtree bellow from the native DOM tree to somewhere outside._
+> This one allows you to create a portal to split the subtree bellow from the native DOM tree to somewhere outside.
 
 It is helpful when you want to create components that appear above others like Modal, Popover, Dropdown, Tooltip, and so on.
 
