@@ -18,7 +18,7 @@ export let Display = ({
 
     let [error, setError] = useState(null);
 
-    let Sandbox = useRef(null);
+    let [Sandbox, setSandbox] = useState(null);
     
     let [isLoadingSandbox, setIsLoadingSandbox] = useState(false);
 
@@ -28,7 +28,7 @@ export let Display = ({
 
         import('../fiddlehead-sandbox/FiddleheadSandbox')
             .then((exports) => {
-                Sandbox.current = exports.FiddleheadSandbox;
+                setSandbox(() => exports.FiddleheadSandbox);
             })
             .catch((error) => {
                 setError(error);
@@ -68,12 +68,12 @@ export let Display = ({
             return [<CautionIcon />, __('Sandbox failed')];
         }
         
-        if (Sandbox.current === null) {
+        if (Sandbox === null) {
             return [<PlayIcon />, __('Sandbox pending')];
         }
 
         return [<DisplayIcon />, __('Display result')];
-    }, [isLoadingSandbox, error]);
+    }, [isLoadingSandbox, error, Sandbox]);
 
     return (
         <Section
@@ -86,9 +86,9 @@ export let Display = ({
             ref={containerRef}
         >
             <div class="display-output">
-                {Sandbox.current !== null &&
+                {Sandbox !== null &&
                     <div class={`sandbox${error !== null ? ' hidden' : ''}`}>
-                        <Sandbox.current
+                        <Sandbox
                             entryFilename={entryFilename}
                             files={files}
                             errorHandle={setError}
