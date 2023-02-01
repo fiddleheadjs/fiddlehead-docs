@@ -6,7 +6,6 @@ let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
-
 let configs = [];
 let isDev = process.env.NODE_ENV !== 'production';
 let rootDir = path.resolve(__dirname, '..');
