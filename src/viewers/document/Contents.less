@@ -120,6 +120,19 @@
 
     .table-wrapper {
         overflow-x: auto;
+
+        .media-current(@screen-non-desktop, {
+            margin-left: -@viewport-padding;
+            margin-right: -@viewport-padding;
+            width: calc(100% + 2 * @viewport-padding);
+        });
+        
+        > table {
+            .media-current(@screen-non-desktop, {
+                margin-left: @viewport-padding;
+                margin-right: @viewport-padding;
+            });
+        }
     }
     
     .code-snippet {
