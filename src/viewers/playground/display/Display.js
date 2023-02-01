@@ -97,9 +97,7 @@ export let Display = ({
                 }
                 {error !== null && (
                     <pre class="error">
-                        <code>
-                            {`${error.name}: ${error.message}`}
-                        </code>
+                        <code>{error.name}: {error.message}</code>
                     </pre>
                 )}
                 {isLoadingSandbox && (

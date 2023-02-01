@@ -2,8 +2,10 @@ let path = require('path');
 let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
+
 
 let configs = [];
 let isDev = process.env.NODE_ENV !== 'production';
@@ -35,7 +37,7 @@ fs.readdirSync(entriesDir).map(filename => {
     }
 
     configs.push({
-        mode: isDev ? 'development' : 'production',
+        mode: false && isDev ? 'development' : 'production',
         devtool: 'cheap-module-source-map',
         entry: path.resolve(entriesDir, filename),
         output: {
@@ -86,6 +88,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
             }),
+            new MiniCssExtractPlugin(),
         ],
         resolve: {
             alias: {

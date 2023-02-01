@@ -1,6 +1,7 @@
 let path = require('path');
 let autoprefixer = require('autoprefixer');
 let postcssInitial = require('postcss-initial');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function getJsLoaders() {
     return [
@@ -9,7 +10,7 @@ function getJsLoaders() {
             options: {
                 presets: [
                     'babel-preset-fiddlehead',
-                ],
+                ]
             }
         }
     ];
@@ -23,6 +24,7 @@ function getLessLoaders() {
                 injectType: 'singletonStyleTag',
             }
         },
+        MiniCssExtractPlugin.loader,
         {
             loader: 'css-loader',
             options: {
@@ -46,7 +48,13 @@ function getLessLoaders() {
 
 function getCssLoaders() {
     return [
-        'style-loader',
+        {
+            loader: 'style-loader',
+            options: {
+                injectType: 'singletonStyleTag',
+            }
+        },
+        MiniCssExtractPlugin.loader,
         {
             loader: 'css-loader',
             options: {
