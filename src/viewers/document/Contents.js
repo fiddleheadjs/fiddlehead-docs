@@ -1,17 +1,22 @@
 import './Contents.less';
-import {render, useLayoutEffect} from 'fiddlehead';
+import {createPortal, useLayoutEffect, useState} from 'fiddlehead';
 import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 
 export let Contents = ({content, playgrounds, ref}) => {
-    useLayoutEffect(() => {
-        let container = ref.current;
+    let [playgroundPortals, setPlaygroundPortals] = useState({});
 
-        playgrounds.forEach(({id, fileList}) => {
-            render(
-                <PlaygroundViewer fileList={fileList} />,
-                container.querySelector(`playground[data-id="${id}"]`)
-            );
+    useLayoutEffect(() => {        
+        let playgroundPortals = {};
+
+        playgrounds.forEach(({id}) => {
+            let slot = ref.current.querySelector(`playground[data-id="${id}"]`);
+            let subtreeRoot = document.createElement('div');
+            slot.appendChild(subtreeRoot);
+            let PP = ({children}) => createPortal(children, subtreeRoot);
+            playgroundPortals[id] = PP;
         });
+
+        setPlaygroundPortals(playgroundPortals);
     }, [content, playgrounds]);
 
     return (
@@ -19,6 +24,16 @@ export let Contents = ({content, playgrounds, ref}) => {
             class="Contents"
             innerHTML={content}
             ref={ref}
-        />
+        >
+            {playgrounds.map(({id, fileList}) => {
+                let PP = playgroundPortals[id];
+
+                return (
+                    <PP key={id}>
+                        <PlaygroundViewer fileList={fileList} />
+                    </PP>
+                );
+            })}
+        </div>
     );
 };
