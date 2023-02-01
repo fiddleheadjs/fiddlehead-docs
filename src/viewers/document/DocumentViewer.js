@@ -128,4 +128,4 @@ export let DocumentViewer = ({
             }
         </div>
     );
-}
+};
