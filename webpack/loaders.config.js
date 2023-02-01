@@ -16,7 +16,7 @@ function getJsLoaders() {
     ];
 }
 
-function getLessLoaders() {
+function getLessLoaders(isDev) {
     return [
         {
             loader: 'style-loader',
@@ -24,7 +24,7 @@ function getLessLoaders() {
                 injectType: 'singletonStyleTag',
             }
         },
-        MiniCssExtractPlugin.loader,
+        !isDev && MiniCssExtractPlugin.loader,
         {
             loader: 'css-loader',
             options: {
@@ -43,7 +43,7 @@ function getLessLoaders() {
             }
         },
         'less-loader',
-    ];
+    ].filter(Boolean);
 }
 
 function getCssLoaders() {
@@ -54,7 +54,6 @@ function getCssLoaders() {
                 injectType: 'singletonStyleTag',
             }
         },
-        MiniCssExtractPlugin.loader,
         {
             loader: 'css-loader',
             options: {

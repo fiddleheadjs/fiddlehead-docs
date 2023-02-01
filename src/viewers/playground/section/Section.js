@@ -16,11 +16,11 @@ export let Section = ({
 
     return (
         <div
-            class={`Section ${className}`}
+            class={`Section${className != null ? ` ${className}` : ''}${open ? ' open' : ''}`}
             {...otherProps}
         >
             <div
-                class={`heading${touchable ? ' touchable' : ''}${open ? ' open' : ''}`}
+                class={`heading${touchable ? ' touchable' : ''}`}
                 onClick={touchable ? () => setOpen(open => !open) : null}
             >
                 <div class="title">

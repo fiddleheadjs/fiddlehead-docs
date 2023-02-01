@@ -8,7 +8,7 @@ let pkg = require('../package.json');
 
 
 let configs = [];
-let isDev = process.env.NODE_ENV !== 'production';
+let isDev = process.env.NODE_ENV === 'production';
 let rootDir = path.resolve(__dirname, '..');
 let entriesDir = path.resolve(rootDir, 'src/entries');
 
@@ -37,7 +37,7 @@ fs.readdirSync(entriesDir).map(filename => {
     }
 
     configs.push({
-        mode: false && isDev ? 'development' : 'production',
+        mode: isDev ? 'development' : 'production',
         devtool: 'cheap-module-source-map',
         entry: path.resolve(entriesDir, filename),
         output: {
@@ -53,7 +53,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders()
+                    use: getLessLoaders(isDev)
                 },
                 {
                     test: /\.css$/,
@@ -88,8 +88,8 @@ fs.readdirSync(entriesDir).map(filename => {
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
             }),
-            new MiniCssExtractPlugin(),
-        ],
+            !isDev && new MiniCssExtractPlugin(),
+        ].filter(Boolean),
         resolve: {
             alias: {
                 '@contents': path.resolve(rootDir, 'src/contents'),

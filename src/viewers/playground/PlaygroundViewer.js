@@ -7,9 +7,11 @@ import {Console} from './console/Console';
 export let PlaygroundViewer = ({fileList}) => {
     let [files, setFiles] = useState(() => {
         let initial = {};
+        
         fileList.forEach((file) => {
             initial[file.filename] = file;
         });
+
         return initial;
     });
 
