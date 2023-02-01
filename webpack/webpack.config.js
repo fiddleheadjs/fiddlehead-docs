@@ -8,7 +8,7 @@ let pkg = require('../package.json');
 
 
 let configs = [];
-let isDev = process.env.NODE_ENV === 'production';
+let isDev = process.env.NODE_ENV !== 'production';
 let rootDir = path.resolve(__dirname, '..');
 let entriesDir = path.resolve(rootDir, 'src/entries');
 
