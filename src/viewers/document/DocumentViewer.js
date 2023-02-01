@@ -106,16 +106,16 @@ export let DocumentViewer = ({
                 )}
             </div>
             <div class="bottom">
-                <a
+                <Button
+                    variant="textual"
+                    size="small"
                     href={`https://github.com/fiddleheadjs/fiddlehead-docs/blob/master/src/contents/${contentPath}/index.md`}
                     target="_blank"
                 >
-                    <Button variant="textual" size="small">
-                        <span>{__('Edit this page')}</span>
-                        <span>&middot;</span>
-                        <AltGithubIcon size="1.2em" />
-                    </Button>
-                </a>
+                    <span>{__('Edit this page')}</span>
+                    <span>&middot;</span>
+                    <AltGithubIcon size="1.2em" />
+                </Button>
             </div>
             {
                 showsToc &&
