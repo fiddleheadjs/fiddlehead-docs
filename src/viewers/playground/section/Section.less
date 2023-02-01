@@ -8,6 +8,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
+        border-bottom: 1px solid @gray-light-A0;
 
         &.touchable {
             cursor: pointer;
@@ -15,10 +16,6 @@
             .color-tinge-interactive(@text-color-default);
         }
         
-        &.open {
-            border-bottom: 1px solid @gray-light-A0;
-        }
-
         > .title,
         > .actions {
             display: flex;
@@ -38,6 +35,18 @@
     }
 
     > .body {
+        border-bottom: 1px solid @gray-light-A0;
+    }
 
+    &:last-child {
+        > .body {
+            border-bottom: none;
+        }
+
+        &:not(.open) {
+            > .heading {
+                border-bottom-color: transparent;
+            }
+        }
     }
 }

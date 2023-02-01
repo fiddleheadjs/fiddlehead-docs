@@ -2,6 +2,7 @@ let path = require('path');
 let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
@@ -51,7 +52,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders()
+                    use: getLessLoaders(isDev)
                 },
                 {
                     test: /\.css$/,
@@ -86,7 +87,8 @@ fs.readdirSync(entriesDir).map(filename => {
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
             }),
-        ],
+            !isDev && new MiniCssExtractPlugin(),
+        ].filter(Boolean),
         resolve: {
             alias: {
                 '@contents': path.resolve(rootDir, 'src/contents'),
