@@ -4,15 +4,18 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-green.svg?logo=github)](https://github.com/fiddleheadjs/fiddlehead/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/fiddlehead.svg?color=green&logo=npm)](https://www.npmjs.com/package/fiddlehead) [![bundle size](https://img.shields.io/github/size/fiddleheadjs/fiddlehead/lib/core/esm.production.min.js?color=green)](https://github.com/fiddleheadjs/fiddlehead/blob/master/lib/core/esm.production.min.js)
 
-Welcome to the world of Fiddlehead, a UI library for building dynamic and stunning web applications. With its focus on simplicity, performance, and ease of use, Fiddlehead is quickly becoming a popular choice for web developers around the world.
+Fiddlehead is a UI library that allows you to develop web apps in the declarative style,
+component-based - these make your lines of code more predictable and maintainable.
 
-Fiddlehead is designed to make web development more accessible, with a user-friendly interface and a clear and concise syntax. Whether you're a seasoned web developer or just starting out, Fiddlehead is the perfect tool to help you bring your ideas to life.
+If you are familiar with React before, using Fiddlehead is quite similar.
+It implements some of the main ideas of React: virtual DOM, functional components, and hooks.
 
-At its core, Fiddlehead is built around the concept of components, allowing developers to break down complex applications into smaller, more manageable parts. And with the power of hooks, Fiddlehead makes it easy to add functionality and interactivity to your components.
-
-What sets Fiddlehead apart from other UI libraries is its lightweight and performant design. At only 8kb (or 3kb gzipped), Fiddlehead uses significantly less memory and CPU than other popular libraries, making it an excellent choice for projects where size and performance are important.
-
-We're excited to share the power of Fiddlehead with you, and we've put together this comprehensive documentation site to help you get started. Whether you're building your first web application or looking to take your skills to the next level, we're here to help. So dive in, and start building with Fiddlehead today!
+Writing codes with Fiddlehead is nothing but JSX and hooks.
+It is aimed to be as simple as possible, while still providing an excellent development experience.
+With such criteria in mind, we made it some benefits:
+- Simple usage: only JSX and hooks
+- Performant: use only 50% memory, and slightly better CPU usage compared to React
+- Lightweight: only 8kb (or 3kb gzipped), compared to 132kb for React
 
 ## Try it now
 
