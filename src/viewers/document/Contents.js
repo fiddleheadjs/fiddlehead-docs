@@ -3,38 +3,36 @@ import {createPortal, useLayoutEffect, useMemo} from 'fiddlehead';
 import {PlaygroundViewer} from '../playground/PlaygroundViewer';
 
 export let Contents = ({content, playgrounds, ref}) => {
-    let container = useMemo(() => {
-        let container = document.createElement('div');
-        container.innerHTML = content;
-        return container;
+    let inner = useMemo(() => {
+        let inner = document.createElement('div');
+        inner.className = 'inner';
+        inner.innerHTML = content;
+        return inner;
     }, [content]);
 
     let playgroundPortals = useMemo(() => {
         let playgroundPortals = {};
         playgrounds.forEach(({id}) => {
-            let slot = container.querySelector(`playground[data-id="${id}"]`);
+            let slot = inner.querySelector(`playground[data-id="${id}"]`);
             let subtreeRoot = document.createElement('div');
             slot.appendChild(subtreeRoot);
             let PP = ({children}) => createPortal(children, subtreeRoot);
             playgroundPortals[id] = PP;
         });
         return playgroundPortals;
-    }, [container, playgrounds]);
+    }, [inner, playgrounds]);
 
     useLayoutEffect(() => {
-        ref.current.appendChild(container);
+        ref.current.appendChild(inner);
         return () => {
             if (ref.current !== null) {
-                ref.current.removeChild(container);
+                ref.current.removeChild(inner);
             }
         };
-    }, [container]);
+    }, [inner]);
 
     return (
-        <div
-            class="Contents"
-            ref={ref}
-        >
+        <div class="Contents" ref={ref}>
             {playgrounds.map(({id, fileList}) => {
                 let PP = playgroundPortals[id];
                 return (
