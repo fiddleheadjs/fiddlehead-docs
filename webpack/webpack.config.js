@@ -3,7 +3,7 @@ let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let MiniCssExtractPlugin = require('mini-css-extract-plugin');
-let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getCssLoaders, getHtmlLoaders} = require('./loaders.config');
+let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
 let configs = [];
