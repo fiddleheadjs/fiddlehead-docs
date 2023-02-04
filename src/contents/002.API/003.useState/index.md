@@ -6,7 +6,7 @@ State is a data structure that holds information about a component and can chang
 
 ## Adding state to a component
 
-Here's a simple example that demonstrates how to use the useState API in FiddleheadJS:
+Here's a simple example that demonstrates how to use the useState API in Fiddlehead:
 
 <playground>
 
@@ -111,9 +111,9 @@ In this example, we use the initializer function to fetch the count value from l
 
 ## Batching state updates
 
-In FiddleheadJS, state updates are done in batches, meaning that multiple updates made within the same render cycle will be combined into a single update. This can help optimize the performance of your app, as the virtual DOM will only need to be reconciled once per render cycle, instead of multiple times.
+In Fiddlehead, state updates are done in batches, meaning that multiple updates made within the same render cycle will be combined into a single update. This can help optimize the performance of your app, as the virtual DOM will only need to be reconciled once per render cycle, instead of multiple times.
 
-Here's an example to illustrate the concept of batching state updates in FiddleheadJS:
+Here's an example to illustrate the concept of batching state updates in Fiddlehead:
 
 <playground>
 
@@ -150,4 +150,12 @@ export default function Batching() {
 
 </playground>
 
-In conclusion, the useState API in FiddleheadJS provides a simple and efficient way to add state to functional components, just like the useState hook in React. By using the useState API, you can manage state in a clean and organized manner.
+In this example, the state is a count value, and the function to update the state is setCount.
+
+The component begins by calling useState with an initial value of 20, which means that the count state will start at 20. The setCount function is used to update the count state, and it takes a new value as an argument. In this example, the setCount function is called three times in the increment function, which is called when the button is clicked.
+
+The increment function increases the count state by one each time it is called, and it does this by calling setCount with an updater function that takes the previous value and returns the new value. In this case, the updater function simply adds 1 to the previous value.
+
+The component then displays the count state and a button that, when clicked, calls the increment function three times. When the button is clicked, the count state will be increased by three, and the component will re-render to display the new value.
+
+In the console, you can see that render is logged each time the component is re-rendered, and increment is logged each time the increment function is called. This demonstrates that the component is only re-rendered once, even though the increment function is called three times, because Fiddlehead batches updates to the state to minimize the number of re-renders.
