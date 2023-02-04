@@ -59,6 +59,14 @@ function Form() {
 
 </playground>
 
+The code example demonstrates the usage of store APIs in Fiddlehead, including useStoreInit, useStoreRead, and useStoreWrite.
+
+The useStoreInit is used to initialize a store with a given scope and initial data. In this example, the store is scoped to the App component and is initialized with a single property title and its value is "Store usage example".
+
+The useStoreRead hook is used to read the data from the store. The hook accepts two arguments: the scope of the store and a reader function that maps the data from the store to the component's state. In the Header component, the hook reads the title value from the store and displays it in an h1 tag.
+
+The useStoreWrite hook is used to write data to the store. The hook also accepts two arguments: the scope of the store and a writer function that updates the data in the store. In the Form component, the hook reads the title value from the store and creates a setter to update it. The setter is then passed to an input field, so when the value of the input changes, the title value in the store also changes.
+
 In practice, you may want to provide your own APIs to access stores, instead of directly using the built-in hooks.
 
 This is a refactor of the example above:
