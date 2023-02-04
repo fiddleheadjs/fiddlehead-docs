@@ -23,7 +23,6 @@ export let Contents = ({content, playgrounds, ref}) => {
 
     useLayoutEffect(() => {
         ref.current.appendChild(container);
-
         return () => {
             if (ref.current !== null) {
                 ref.current.removeChild(container);
@@ -38,7 +37,6 @@ export let Contents = ({content, playgrounds, ref}) => {
         >
             {playgrounds.map(({id, fileList}) => {
                 let PP = playgroundPortals[id];
-
                 return (
                     <PP key={id}>
                         <PlaygroundViewer fileList={fileList} />
