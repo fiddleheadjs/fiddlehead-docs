@@ -18,7 +18,7 @@ function getJsLoaders() {
 
 function getLessLoaders(isDev) {
     return [
-        {
+        isDev && {
             loader: 'style-loader',
             options: {
                 injectType: 'singletonStyleTag',
@@ -46,23 +46,6 @@ function getLessLoaders(isDev) {
     ].filter(Boolean);
 }
 
-function getCssLoaders() {
-    return [
-        {
-            loader: 'style-loader',
-            options: {
-                injectType: 'singletonStyleTag',
-            }
-        },
-        {
-            loader: 'css-loader',
-            options: {
-                url: false,
-            }
-        },
-    ];
-}
-
 function getMarkdownLoaders() {
     return [
         path.resolve(__dirname, 'custom-loaders/markdown')
@@ -84,7 +67,6 @@ function getScandirLoaders() {
 module.exports = {
     getJsLoaders,
     getLessLoaders,
-    getCssLoaders,
     getMarkdownLoaders,
     getHtmlLoaders,
     getScandirLoaders,

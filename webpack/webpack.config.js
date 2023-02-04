@@ -55,10 +55,6 @@ fs.readdirSync(entriesDir).map(filename => {
                     use: getLessLoaders(isDev)
                 },
                 {
-                    test: /\.css$/,
-                    use: getCssLoaders(),
-                },
-                {
                     test: /\.md$/,
                     use: getMarkdownLoaders(),
                     exclude: /[\\/]node_modules[\\/]/
