@@ -1,5 +1,4 @@
-function jsToLess(source) {
-
+module.exports = function jsToLess(source) {
     const lines = [];
 
     const pixelTypes = [
@@ -57,8 +56,5 @@ function jsToLess(source) {
         }
     }
 
-
     return lines.join('\n');
-}
-
-module.exports = jsToLess;
+};

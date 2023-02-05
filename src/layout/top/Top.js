@@ -5,6 +5,8 @@ import {Button} from '../../components/button/Button';
 import {GithubIcon} from '../../icons/GithubIcon';
 import {ChevronRightIcon} from '../../icons/ChevronRightIcon';
 import {ChevronLeftIcon} from '../../icons/ChevronLeftIcon';
+import {LogoIcon} from '../logo/LogoIcon';
+import {LogoText} from '../logo/LogoText';
 
 export let Top = ({toggleNav, navShown}) => {
     return (
@@ -14,11 +16,8 @@ export let Top = ({toggleNav, navShown}) => {
                 variant="textual"
                 href="/"
             >
-                <img 
-                    src="/img/fiddlehead_64.png"
-                    alt={__('Fiddlehead logo')}
-                />
-                <span>Fiddlehead</span>
+                <LogoIcon />
+                <LogoText />
             </LinkButton>
             <div class="right">
                 <Button
