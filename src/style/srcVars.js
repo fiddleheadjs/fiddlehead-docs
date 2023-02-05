@@ -187,8 +187,8 @@ let $color_interactive = {
     color_active: 'fade(@color, 60%)',
     background_hover: 'darken(@color, 4%)',
     background_active: 'darken(@color, 8%)',
-    background_tinged_hover: `hardlight(@color, ${gray.light_A4})`,
-    background_tinged_active: `hardlight(@color, ${gray.light_A3})`,
+    background_tinged_hover: `fade(hardlight(@color, ${gray.light_A4}), 40%)`,
+    background_tinged_active: `fade(hardlight(@color, ${gray.light_A2}), 40%)`,
 };
 
 module.exports = {

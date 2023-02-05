@@ -109,6 +109,7 @@ Benchmark test: https://github.com/fiddleheadjs/fiddlehead/tree/master/bench#the
 | Hooks | YES | YES |
 | State management | Store API | Context API |
 | HTML/SVG attributes | Close to native DOM | Modified for consistency |
-| Forwarding ref | Handle as a normal property | Use `forwardRef()` |
+| Error boundary | `useCatch` hook | `componentDidCatch` and `getDerivedStateFromError` lifecycle methods |
+| Forwarding ref | Just handle `ref` as a normal property | Use `forwardRef` HOC |
 | Synthetic events | _ | YES |
 | Class components | _ | YES |
