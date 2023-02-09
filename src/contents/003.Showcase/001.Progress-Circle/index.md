@@ -33,7 +33,11 @@ export default function App() {
 
     return (
         <div class="App">
-            <Circle percentage={100 * (totalMillis - millis) / totalMillis}/>
+            <Circle
+                percentage={100 * (totalMillis - millis) / totalMillis}
+                dimension={80}
+                strokeWidth={4}
+            />
             <code>{Math.ceil(millis / 1000)}</code>
         </div>
     );
@@ -59,16 +63,13 @@ export default function App() {
 ```jsx
 /** filename="Circle.js" open */
 
-export function Circle({percentage, dimension = 80, strokeWidth = 4}) {
+export function Circle({percentage, dimension, strokeWidth}) {
     let diameter = dimension - strokeWidth;
-
     let radius = diameter / 2;
-
     let perimeter = diameter * Math.PI;
 
     // Start the arc from the top offset instead of right offset
     let arcOffset = perimeter / 4;
-
     let arcLength = perimeter * percentage / 100;
 
     return (
