@@ -90,7 +90,7 @@ export function Circle({percentage, dimension = 80, strokeWidth = 4}) {
             />
         </svg>
     );
-};
+}
 ```
 
 </playground>
