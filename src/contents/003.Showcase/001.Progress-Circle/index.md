@@ -14,7 +14,7 @@ import {useState, useEffect} from 'fiddlehead';
 import {Circle} from './Circle';
 
 export default function App() {
-    let totalMillis = 10000;
+    let totalMillis = 100000;
     let [millis, setMillis] = useState(totalMillis);
 
     useEffect(() => {
