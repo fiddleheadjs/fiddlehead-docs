@@ -14,11 +14,11 @@ import {useState, useEffect} from 'fiddlehead';
 import {Circle} from './Circle';
 
 export default function App() {
-    let totalMillis = 100000;
+    let totalMillis = 20000;
     let [millis, setMillis] = useState(totalMillis);
 
     useEffect(() => {
-        let step = 10;
+        let step = 20;
         let intervalId = setInterval(() => {
             setMillis(millis => {
                 if (millis > 0) {
@@ -34,7 +34,7 @@ export default function App() {
     return (
         <div class="App">
             <Circle
-                fillRate={millis / totalMillis}
+                fillRate={(totalMillis - millis) / totalMillis}
                 dimension={80}
                 strokeWidth={4}
             />
