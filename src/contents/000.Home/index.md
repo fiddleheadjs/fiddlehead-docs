@@ -11,7 +11,7 @@ Fiddlehead is designed to make web development more accessible, with a user-frie
 At its core, Fiddlehead is built around the concept of components, allowing developers to break down complex applications into smaller, more manageable parts. And with the power of hooks, Fiddlehead makes it easy to add functionality and interactivity to your components.
 
 What sets Fiddlehead apart from other UI libraries is its lightweight and performant design. At only 8kb (or 3kb gzipped), Fiddlehead uses significantly less memory and CPU than other popular libraries, making it an excellent choice for projects where size and performance are important.
-
+c
 We're excited to share the power of Fiddlehead with you, and we've put together this comprehensive documentation site to help you get started. Whether you're building your first web application or looking to take your skills to the next level, we're here to help. So dive in, and start building with Fiddlehead today!
 
 ## Try it now

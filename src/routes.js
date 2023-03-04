@@ -43,16 +43,16 @@ let walk = (dirItem, navItems) => {
         next: null,
     };
     navItems.push(currentNavItem);
-    if (lastNavItem !== null) {
-        lastNavItem.next = currentNavItem;
-    }
-    lastNavItem = currentNavItem;
-
+    
     if (hasTarget) {
         contentRoutes.push({
             path: publicPath,
             Component: createArticle(pathname, currentNavItem),
         });
+        if (lastNavItem !== null) {
+            lastNavItem.next = currentNavItem;
+        }
+        lastNavItem = currentNavItem;
     }
 
     dirChildren.forEach(child => {
