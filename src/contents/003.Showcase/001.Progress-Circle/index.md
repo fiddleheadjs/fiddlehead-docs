@@ -34,7 +34,7 @@ export default function App() {
     return (
         <div class="App">
             <Circle
-                fillRate={(totalMillis - millis) / totalMillis}
+                fillRate={millis / totalMillis}
                 dimension={80}
                 strokeWidth={4}
             />
