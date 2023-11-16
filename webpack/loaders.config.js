@@ -27,12 +27,12 @@ function getLessLoaders(isDev) {
         },
         // !isDev && 
         // MiniCssExtractPlugin.loader,
-        // {
-        //     loader: 'css-loader',
-        //     options: {
-        //         url: false,
-        //     }
-        // },
+        {
+            loader: 'css-loader',
+            options: {
+                url: false,
+            }
+        },
         {
             loader: 'postcss-loader',
             options: {
