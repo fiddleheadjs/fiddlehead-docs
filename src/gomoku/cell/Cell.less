@@ -4,20 +4,23 @@
     width: 2rem;
     height: 2rem;
     border: 1px solid @gray-twilight;
-    cursor: pointer;
     text-align: center;
     vertical-align: middle;
+    cursor: default;
+    
+    &:not(.locked){
+        &[data-value="2"]:hover {
+            background: @gray-light-A2;
+            cursor: pointer;
+        }
+    }
 
-    &[data-value="0"]:hover {
-        background: @gray-light-A2;
+    &[data-value="0"]::after {
+        content: "O";
     }
 
     &[data-value="1"]::after {
         content: "X";
-    }
-
-    &[data-value="2"]::after {
-        content: "O";
     }
 
     &[data-streak="true"] {

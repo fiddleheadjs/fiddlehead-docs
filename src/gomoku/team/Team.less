@@ -1,0 +1,15 @@
+@import '../../style/mixin.less';
+
+.Team {
+    padding: 0 @space-small-2;
+
+    .user {
+        &[data-thinking="true"] {
+            font-weight: bold;
+
+            &::before {
+                content: "> ";
+            }
+        }
+    }
+}

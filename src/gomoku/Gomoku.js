@@ -1,141 +1,69 @@
-import {useEffect, useMemo, useState} from 'fiddlehead';
 import './Gomoku.less';
-import {Cell} from './cell/Cell';
+import {useEffect, useState} from 'fiddlehead';
+import {AddUser} from './add-user/AddUser';
+import {Board} from './board/Board';
+import {Team} from './team/Team';
 
 export let Gomoku = () => {
-    let size = 20;
-    let teamValue = 2;
+    let [gameData, setGameData] = useState(null);
 
-    let [matrix, setMatrix] = useState(() => {
-        let matrix = [];
-        for (let r = 0; r < size; r++) {
-            let row = [];
-            for (let c = 0; c < size; c++) {
-                row[c] = 0;
-            }
-            matrix[r] = row;
-        }
-        return matrix;
+    useEffect(() => {
+        let intervalId = setInterval(() => {
+            fetch(`/gomoku/game-data`).then(response => response.json()).then((data) => {
+                setGameData(data);
+            });
+        }, 1000);
+        return () => clearInterval(intervalId);
     });
 
-    let streak = useMemo(() => {
-        for (let r = 0; r < size; r++) {
-            let previous = 0;
-            let count = 0;
-            for (let c = 0; c < size; c++) {
-                let current = matrix[r][c];
-                if (current === previous) {
-                    count++;
-                    if (count === 5 && current !== 0) {
-                        return [
-                            `${r}:${c - 4}`,
-                            `${r}:${c - 3}`,
-                            `${r}:${c - 2}`,
-                            `${r}:${c - 1}`,
-                            `${r}:${c}`,
-                        ];
-                    }
-                } else {
-                    previous = current;
-                    count = 1;
-                }
-            }
-        }
+    if (gameData === null) {
+        return null;
+    }
 
-        for (let c = 0; c < size; c++) {
-            let previous = 0;
-            let count = 0;
-            for (let r = 0; r < size; r++) {
-                let current = matrix[r][c];
-                if (current === previous) {
-                    count++;
-                    if (count === 5 && current !== 0) {
-                        return [
-                            `${r - 4}:${c}`,
-                            `${r - 3}:${c}`,
-                            `${r - 2}:${c}`,
-                            `${r - 1}:${c}`,
-                            `${r}:${c}`,
-                        ];
-                    }
-                } else {
-                    previous = current;
-                    count = 1;
-                }
-            }
-        }
+    let {users, teams, state} = gameData;
 
-        for (let half = 0; half < 2; half++) {
-            for (let start = 0; start < size; start++) {
-                let previous = 0;
-                let count = 0;
-                for (let r = half === 0 ? 0 : start, c = half === 0 ? start : 0; r < size && c < size; r++, c++) {
-                    let current = matrix[r][c];
-                    if (current === previous) {
-                        count++;
-                        if (count === 5 && current !== 0) {
-                            return [
-                                `${r - 4}:${c - 4}`,
-                                `${r - 3}:${c - 3}`,
-                                `${r - 2}:${c - 2}`,
-                                `${r - 1}:${c - 1}`,
-                                `${r}:${c}`,
-                            ];
-                        }
-                    } else {
-                        previous = current;
-                        count = 1;
-                    }
-                }
-            }
-        }
+    let myUserId = sessionStorage.getItem('userId');
+    let myself = users[myUserId];
 
-        for (let half = 0; half < 2; half++) {
-            for (let start = 0; start < size; start++) {
-                let previous = 0;
-                let count = 0;
-                for (let r = half === 0 ? start : size - 1, c = half === 0 ? 0 : start; r > 0 && c < size; r--, c++) {
-                    let current = matrix[r][c];
-                    if (current === previous) {
-                        count++;
-                        if (count === 5 && current !== 0) {
-                            return [
-                                `${r + 4}:${c - 4}`,
-                                `${r + 3}:${c - 3}`,
-                                `${r + 2}:${c - 2}`,
-                                `${r + 1}:${c - 1}`,
-                                `${r}:${c}`,
-                            ];
-                        }
-                    } else {
-                        previous = current;
-                        count = 1;
-                    }
-                }
-            }
-        }
+    if (!myself) {
+        return <AddUser onDone={() => {}} />
+    }
 
-        return [];
-    }, [matrix]);
+    let myIndex = teams[myself.teamId].indexOf(myUserId);
 
     return (
-        <table class="Gomoku">
-            <tbody>
-                {matrix.map((row, rx) => (
-                    <tr>
-                        {row.map((value, cx) => (
-                            <Cell
-                                value={value}
-                                teamValue={teamValue}
-                                rx={rx}
-                                cx={cx}
-                                setMatrix={setMatrix}
-                                streak={streak}
-                            />
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div class="Gomoku">
+            <div class="topbar">
+                <h4>Player: {myself.name} &ndash; Team: {myself.teamId === 0 ? 'O' : 'X'}</h4>
+                <button onClick={() => {
+                    if (confirm('Are you sure you want to replay?')) {
+                        fetch(`/gomoku/replay`).then(response => response.json()).then((data) => {
+                            setGameData(data);
+                        });
+                    }
+                }}>Replay</button>
+            </div>
+            <div class="main">
+                <Team
+                    teamName="O"
+                    users={users}
+                    team={teams[0]}
+                    thinking={state.thinkingTeamId === 0}
+                    thinkingUserIndex={state.thinkingUserIndexes[0]}
+                />
+                <Board
+                    remoteMatrix={state.matrix}
+                    teamId={state.thinkingTeamId}
+                    isMyTurn={state.thinkingTeamId === myself.teamId && state.thinkingUserIndexes[state.thinkingTeamId] === myIndex}
+                />
+                <Team
+                    teamName="X"
+                    users={users}
+                    team={teams[1]}
+                    thinking={state.thinkingTeamId === 1}
+                    thinkingUserIndex={state.thinkingUserIndexes[1]}
+                />
+            </div>
+        </div>
     );
 };

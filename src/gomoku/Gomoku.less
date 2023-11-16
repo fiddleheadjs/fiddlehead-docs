@@ -1,3 +1,24 @@
 .Gomoku {
-    border-collapse: collapse;
+    .topbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    
+        .Team {
+            width: 20%;
+            min-width: 20%;
+        }
+    
+        .Board {
+            max-width: 60%;
+        }
+    }
 }

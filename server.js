@@ -9,9 +9,7 @@ app.use(compression());
 
 app.use(express.static('public'));
 
-app.get('/gomoku', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
-});
+app.use('/gomoku', require('./gomoku'));
 
 app.use((req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/main.html'));

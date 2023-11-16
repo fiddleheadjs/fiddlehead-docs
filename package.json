@@ -27,7 +27,8 @@
     "marked": "^4.2.1",
     "mdn-polyfills": "^5.20.0",
     "pretty-format": "^29.4.1",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.29.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
