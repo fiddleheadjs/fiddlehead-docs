@@ -90,4 +90,23 @@ router.get('/replay', (req, res) => {
     res.send(JSON.stringify(data));
 });
 
+router.get('/reset', (req, res) => {
+    users = {};
+    teams = [[], []];
+    state = {
+        startTeamId: 0,
+        thinkingTeamId: 0,
+        thinkingUserIndexes: [0, 0],
+        matrix: createMatrix()
+    };
+
+    let data = {
+        users,
+        teams,
+        state
+    };
+
+    res.send(JSON.stringify(data));
+});
+
 module.exports = router;

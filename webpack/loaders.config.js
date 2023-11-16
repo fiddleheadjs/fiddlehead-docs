@@ -18,19 +18,21 @@ function getJsLoaders() {
 
 function getLessLoaders(isDev) {
     return [
-        isDev && {
+        // isDev && 
+        {
             loader: 'style-loader',
             options: {
                 injectType: 'singletonStyleTag',
             }
         },
-        !isDev && MiniCssExtractPlugin.loader,
-        {
-            loader: 'css-loader',
-            options: {
-                url: false,
-            }
-        },
+        // !isDev && 
+        // MiniCssExtractPlugin.loader,
+        // {
+        //     loader: 'css-loader',
+        //     options: {
+        //         url: false,
+        //     }
+        // },
         {
             loader: 'postcss-loader',
             options: {
