@@ -18,7 +18,7 @@ export let AddUser = ({ onDone }) => {
 
     return (
         <form onSubmit={onSubmit}>
-            <input placeholder="Enter your name" value={userName} onChange={ev => setUserName(ev.target.value)} />
+            <input placeholder="Enter your name" value={userName} onInput={ev => setUserName(ev.target.value)} />
             <button type="submit" disabled={userName === ''}>Add</button>
         </form>
     );
