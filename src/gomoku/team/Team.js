@@ -7,7 +7,7 @@ export let Team = ({ teamName, team, users, thinking, thinkingUserIndex }) => {
             {team.map((userId, index) => {
                 let user = users[userId];
                 return (
-                    <div class="user" key={user.id} data-thinking={thinking && thinkingUserIndex === index}>
+                    <div key={user.id} class={`user ${thinking && thinkingUserIndex === index ? 'thinking' : ''}`}>
                         {user.name}
                     </div>
                 );

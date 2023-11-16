@@ -17,14 +17,27 @@
 
     &[data-value="0"]::after {
         content: "O";
+        color: #E00;
+        font-weight: bold;
     }
 
     &[data-value="1"]::after {
         content: "X";
+        color: #0A0;
+        font-weight: bold;
     }
 
     &[data-streak="true"] {
-        background: @color-success;
-        color: @gray-white;
+        &::after {
+            color: #FFF;
+        }
+
+        &[data-value="0"] {
+            background: #E00;
+        }
+    
+        &[data-value="1"] {
+            background: #0A0;
+        }
     }
 }

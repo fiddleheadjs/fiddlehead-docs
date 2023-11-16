@@ -31,10 +31,15 @@ export let Gomoku = () => {
 
     let myIndex = teams[myself.teamId].indexOf(myUserId);
 
+    let isMyTurn = state.thinkingTeamId === myself.teamId && state.thinkingUserIndexes[state.thinkingTeamId] === myIndex;
+
     return (
         <div class="Gomoku">
             <div class="topbar">
-                <h4>Player: {myself.name} &ndash; Team: {myself.teamId === 0 ? 'O' : 'X'}</h4>
+                <div class="left">
+                    <h4>Player: {myself.name} &ndash; Team: {myself.teamId === 0 ? 'O' : 'X'}</h4>
+                    {isMyTurn && <div class="your-turn">Your turn!</div>}
+                </div>
                 <button onClick={() => {
                     if (confirm('Are you sure you want to replay?')) {
                         fetch(`/gomoku/replay`).then(response => response.json()).then((data) => {
@@ -54,7 +59,7 @@ export let Gomoku = () => {
                 <Board
                     remoteMatrix={state.matrix}
                     teamId={state.thinkingTeamId}
-                    isMyTurn={state.thinkingTeamId === myself.teamId && state.thinkingUserIndexes[state.thinkingTeamId] === myIndex}
+                    isMyTurn={isMyTurn}
                 />
                 <Team
                     teamName="X"
