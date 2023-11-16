@@ -9,8 +9,12 @@ app.use(compression());
 
 app.use(express.static('public'));
 
+app.get('/gomoku', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
+});
+
 app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+    res.sendFile(path.resolve(__dirname, 'dist/main.html'));
 });
 
 app.listen(port, () => {
