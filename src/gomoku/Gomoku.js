@@ -8,25 +8,26 @@ export let Gomoku = () => {
     let [gameData, setGameData] = useState(null);
 
     useEffect(() => {
-        let intervalId = setInterval(() => {
-            fetch(`/gomoku/game-data`).then(response => response.json()).then((data) => {
-                setGameData(data);
-            });
-        }, 1000);
+        let refresh = () => {
+            let userId = localStorage.getItem('userId');
+            fetch(`/gomoku/game-data?userId=${userId}`).then(res => res.json()).then(setGameData);
+        };
+        refresh();
+        let intervalId = setInterval(refresh, 1000);
         return () => clearInterval(intervalId);
-    });
+    }, []);
 
     if (gameData === null) {
-        return null;
+        return 'Loading game data...';
     }
 
-    let {users, teams, state} = gameData;
+    let {users, teams, state, now} = gameData;
 
-    let myUserId = sessionStorage.getItem('userId');
+    let myUserId = localStorage.getItem('userId');
     let myself = users[myUserId];
 
     if (!myself) {
-        return <AddUser onDone={() => {}} />
+        return <AddUser setGameData={setGameData} />
     }
 
     let myIndex = teams[myself.teamId].indexOf(myUserId);
@@ -55,11 +56,14 @@ export let Gomoku = () => {
                     team={teams[0]}
                     thinking={state.thinkingTeamId === 0}
                     thinkingUserIndex={state.thinkingUserIndexes[0]}
+                    now={now}
                 />
                 <Board
                     remoteMatrix={state.matrix}
                     teamId={state.thinkingTeamId}
+                    userId={myself.id}
                     isMyTurn={isMyTurn}
+                    setGameData={setGameData}
                 />
                 <Team
                     teamName="X"
@@ -67,6 +71,7 @@ export let Gomoku = () => {
                     team={teams[1]}
                     thinking={state.thinkingTeamId === 1}
                     thinkingUserIndex={state.thinkingUserIndexes[1]}
+                    now={now}
                 />
             </div>
         </div>

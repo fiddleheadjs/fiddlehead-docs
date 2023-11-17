@@ -1,7 +1,9 @@
+import './AddUser.less';
 import {useState} from 'fiddlehead';
 import { v4 as uuid } from 'uuid';
+import {Button} from '../../components/button/Button';
 
-export let AddUser = ({ onDone }) => {
+export let AddUser = ({ setGameData }) => {
     let [userName, setUserName] = useState('');
 
     let onSubmit = (event) => {
@@ -9,17 +11,22 @@ export let AddUser = ({ onDone }) => {
         if (userName === '') {
             return;
         }
+        setUserName('');
         let userId = uuid();
-        sessionStorage.setItem('userId', userId);
-        fetch(`/gomoku/add-user?userId=${userId}&userName=${userName}`).then(() => {
-            onDone();
+        localStorage.setItem('userId', userId);
+        fetch(`/gomoku/add-user?userId=${userId}&userName=${userName}`).then(res => res.json()).then((data) => {
+            setGameData(data);
         });
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            <input placeholder="Enter your name" value={userName} onInput={ev => setUserName(ev.target.value)} />
-            <button type="submit" disabled={userName === ''}>Add</button>
+        <form class="AddUser" onSubmit={onSubmit}>
+            <h3>Play Gomoku</h3>
+            <div>Please enter your name:</div>
+            <div>
+                <input type="text" placeholder="your name" value={userName} onInput={ev => setUserName(ev.target.value)} />
+            </div>
+            <Button type="submit" disabled={userName === ''}>{'Join >>'}</Button>
         </form>
     );
 };

@@ -1,0 +1,15 @@
+@import '../../style/mixin.less';
+
+.AddUser {
+    > * + * {
+        margin-top: @space-small-4;
+    }
+
+    input {
+        border: 1px solid @gray-twilight;
+        box-sizing: content-box;
+        height: @dimension-input-standard-height;
+        padding: @dimension-input-standard-padding;
+        width: 20rem;
+    }
+}

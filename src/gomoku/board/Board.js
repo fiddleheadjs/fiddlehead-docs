@@ -2,7 +2,7 @@ import {useEffect, useMemo, useState} from 'fiddlehead';
 import './Board.less';
 import {Cell} from '../cell/Cell';
 
-export let Board = ({ remoteMatrix, teamId, isMyTurn }) => {
+export let Board = ({ remoteMatrix, teamId, userId, isMyTurn, setGameData }) => {
     let size = 20;
     let [moved, setMoved] = useState(false);
 
@@ -137,12 +137,14 @@ export let Board = ({ remoteMatrix, teamId, isMyTurn }) => {
                             <Cell
                                 value={value}
                                 teamId={teamId}
+                                userId={userId}
                                 rx={rx}
                                 cx={cx}
                                 setMatrix={setMatrix}
                                 streak={streak}
                                 setMoved={setMoved}
                                 locked={!isMyTurn || moved}
+                                setGameData={setGameData}
                             />
                         ))}
                     </tr>

@@ -1,6 +1,6 @@
 import './Cell.less';
 
-export let Cell = ({ value, rx, cx, setMatrix, teamId, streak, setMoved, locked }) => {
+export let Cell = ({ value, rx, cx, setMatrix, teamId, userId, streak, setMoved, locked, setGameData }) => {
     return (
         <td
             class={`Cell ${locked ? 'locked' : ''}`}
@@ -17,7 +17,7 @@ export let Cell = ({ value, rx, cx, setMatrix, teamId, streak, setMoved, locked 
                     matrix[rx] = row;
                     return [...matrix];
                 });
-                fetch(`/gomoku/move?row=${rx}&cell=${cx}&teamId=${teamId}`);
+                fetch(`/gomoku/move?row=${rx}&cell=${cx}&userId=${userId}`).then(res => res.json()).then(setGameData);
             }}
         />
     );
