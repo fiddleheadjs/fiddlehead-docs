@@ -35,8 +35,8 @@
         "group": 2
     },
     {
-        "id": "chuyen",
-        "name": "Chuyền",
+        "id": "chuyennguyen",
+        "name": "Mabư Chuyền",
         "group": 3
     },
     {
@@ -47,6 +47,16 @@
     {
         "id": "thanhtran",
         "name": "Trần Ngọc Thanh",
+        "group": 3
+    },
+    {
+        "id": "thangle",
+        "name": "Lê Duy Thắng",
+        "group": 3
+    },
+    {
+        "id": "phongnguyen",
+        "name": "Nguyễn Tiến Phong",
         "group": 3
     }
 ]

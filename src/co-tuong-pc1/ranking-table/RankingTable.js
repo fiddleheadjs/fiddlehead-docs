@@ -1,3 +1,4 @@
+import {Player} from '../player/Player';
 import './RankingTable.less';
 
 export let RankingTable = ({ players, matches }) => {
@@ -54,25 +55,19 @@ export let RankingTable = ({ players, matches }) => {
                 <tr>
                     <th align="right">#</th>
                     <th align="left">Kỳ thủ</th>
-                    <th align="left">Nhóm</th>
-                    {/* <th align="right">Thắng</th>
-                    <th align="right">Hòa</th>
-                    <th align="right">Thua</th> */}
                     <th align="center">Các ván đấu</th>
                     <th align="right">Điểm</th>
                 </tr>
             </thead>
             <tbody>
                 {rankedPlayers.map((player, index) => {
-                    let { score, wins, draws, losses, history } = results[player.id];
+                    let { score, history } = results[player.id];
                     return (
                         <tr>
                             <td align="right">{index + 1}</td>
-                            <td align="left">{player.name}</td>
-                            <td align="left">{player.group}</td>
-                            {/* <td align="right">{wins}</td>
-                            <td align="right">{draws}</td>
-                            <td align="right">{losses}</td> */}
+                            <td align="left">
+                                <Player player={player} />
+                            </td>
                             <td align="center">
                                 <div class="history">                                
                                     {history.map(result => <span data-result={result}/>)}

@@ -1,0 +1,30 @@
+.Player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .name {
+            font-weight: bold;
+        }
+
+        .group {
+            color: gray;
+            font-size: smaller;
+        }
+    }
+    
+    &.align-right {
+        flex-direction: row-reverse;
+
+        .info {
+            align-items: flex-end;
+        }
+    }
+
+}

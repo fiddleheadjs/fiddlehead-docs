@@ -1,3 +1,4 @@
+import {Player} from '../player/Player';
 import './RoundsAndMatches.less';
 
 const resultLabels = {
@@ -78,9 +79,15 @@ export let RoundsAndMatches = ({players, matches}) => {
                             let resultLabel = resultLabels[result];
                             return (
                                 <tr key={matchId}>
-                                    <td>{firstPlayer.name}</td>
-                                    <td><div class="result" data-result={result}>{resultLabel}</div></td>
-                                    <td>{secondPlayer.name}</td>
+                                    <td align="right">
+                                        <Player player={firstPlayer} align="right" />
+                                    </td>
+                                    <td align="center">
+                                        <span class="result" data-result={result}>{resultLabel}</span>
+                                    </td>
+                                    <td align="left">
+                                        <Player player={secondPlayer} />
+                                    </td>
                                 </tr>
                             );
                         })}
