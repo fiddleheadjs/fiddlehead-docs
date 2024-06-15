@@ -1,4 +1,5 @@
 import {Player} from '../player/Player';
+import {TableResponsive} from '../table-responsive/TableResponsive';
 import './RankingTable.less';
 
 export let RankingTable = ({ players, matches }) => {
@@ -50,34 +51,38 @@ export let RankingTable = ({ players, matches }) => {
     });
 
     return (
-        <table class="RankingTable">
-            <thead>
-                <tr>
-                    <th align="right">#</th>
-                    <th align="left">Kỳ thủ</th>
-                    <th align="center">Các ván đấu</th>
-                    <th align="right">Điểm</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rankedPlayers.map((player, index) => {
-                    let { score, history } = results[player.id];
-                    return (
+        <div class="RankingTable">
+            <TableResponsive>
+                <table>
+                    <thead>
                         <tr>
-                            <td align="right">{index + 1}</td>
-                            <td align="left">
-                                <Player player={player} />
-                            </td>
-                            <td align="center">
-                                <div class="history">                                
-                                    {history.map(result => <span data-result={result}/>)}
-                                </div>
-                            </td>
-                            <td align="right">{score}</td>
+                            <th align="right">#</th>
+                            <th align="left">Kỳ thủ</th>
+                            <th align="center">Các ván đấu</th>
+                            <th align="right">Điểm</th>
                         </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        {rankedPlayers.map((player, index) => {
+                            let { score, history } = results[player.id];
+                            return (
+                                <tr>
+                                    <td align="right">{index + 1}</td>
+                                    <td align="left">
+                                        <Player player={player} />
+                                    </td>
+                                    <td align="center">
+                                        <div class="history">                                
+                                            {history.map(result => <span data-result={result}/>)}
+                                        </div>
+                                    </td>
+                                    <td align="right">{score}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </TableResponsive>
+        </div>
     );
 };
