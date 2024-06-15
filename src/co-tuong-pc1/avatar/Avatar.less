@@ -1,4 +1,5 @@
 .Avatar {
+    position: relative;
     max-width: 2.5em;
     max-height: 2.5em;
     min-width: 2.5em;
@@ -7,11 +8,13 @@
     overflow: hidden;
     background: lightgray;
 
-    img {
+    .background-image {
         display: block;
+        position: absolute;
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        object-position: center;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
