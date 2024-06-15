@@ -1,0 +1,52 @@
+[
+    {
+        "id": "ngocnguyen",
+        "name": "Nguyễn Hữu Ngọc",
+        "group": 2
+    },
+    {
+        "id": "hai",
+        "name": "Hải",
+        "group": 2
+    },
+    {
+        "id": "tungdai",
+        "name": "Tùng Đại",
+        "group": 1
+    },
+    {
+        "id": "quanvu",
+        "name": "Vũ Hồng Quân",
+        "group": 3
+    },
+    {
+        "id": "tuanquach",
+        "name": "Quách Văn Tuấn",
+        "group": 2
+    },
+    {
+        "id": "thinhdoan",
+        "name": "Đoàn Quang Thịnh",
+        "group": 2
+    },
+    {
+        "id": "quyettran",
+        "name": "Trần Văn Quyết",
+        "group": 2
+    },
+    {
+        "id": "chuyen",
+        "name": "Chuyền",
+        "group": 3
+    },
+    {
+        "id": "tungnguyen",
+        "name": "Tùng Nguyễn",
+        "group": 3
+    },
+    {
+        "id": "thanhtran",
+        "name": "Trần Ngọc Thanh",
+        "group": 3
+    }
+]

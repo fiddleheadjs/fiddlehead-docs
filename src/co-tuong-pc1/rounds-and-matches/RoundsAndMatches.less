@@ -1,0 +1,31 @@
+.RoundsAndMatches {
+    table {
+        border-collapse: collapse;
+
+        td, th {
+            padding: 0.5em;
+        }
+    
+        td {
+            border-top: 1px solid lightgray;
+        }
+
+        .result {
+            &[data-result="0"] {
+                color: red;
+            }
+
+            &[data-result="1"] {
+                color: gray;
+            }
+
+            &[data-result="2"] {
+                color: green;
+            }
+
+            &[data-result="NaN"] {
+                color: gray;
+            }
+        }
+    }
+}

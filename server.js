@@ -11,6 +11,8 @@ app.use(express.static('public'));
 
 app.use('/gomoku', require('./gomoku'));
 
+app.use('/co-tuong-pc1', require('./cotuongpc1'));
+
 app.use((req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/main.html'));
 });

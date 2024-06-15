@@ -1,0 +1,33 @@
+.RankingTable {
+    border-collapse: collapse;
+
+    td, th {
+        padding: 0.5em;
+    }
+
+    td {
+        border-top: 1px solid lightgray;
+    }
+
+    .history {
+        span {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            border-radius: 4px;
+            margin-right: 0.2em;
+
+            &[data-result="0"] {
+                background: red;
+            }
+
+            &[data-result="1"] {
+                background: gray;
+            }
+
+            &[data-result="2"] {
+                background: green;
+            }
+        }
+    }
+}
