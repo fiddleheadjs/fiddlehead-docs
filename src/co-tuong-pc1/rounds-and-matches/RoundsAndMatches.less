@@ -11,20 +11,20 @@
         }
 
         .result {
+            &[data-result="-1"] {
+                color: lightgray;
+            }
+            
             &[data-result="0"] {
                 color: red;
             }
 
             &[data-result="1"] {
-                color: gray;
+                color: blue;
             }
 
             &[data-result="2"] {
                 color: green;
-            }
-
-            &[data-result="NaN"] {
-                color: gray;
             }
         }
     }

@@ -1,3 +1,4 @@
+import './CoTuongPc1.less';
 import {RoundsAndMatches} from './rounds-and-matches/RoundsAndMatches';
 import players from './data/players.json';
 import matches from './data/matches.json';

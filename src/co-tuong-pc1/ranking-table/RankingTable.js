@@ -3,20 +3,24 @@ import './RankingTable.less';
 export let RankingTable = ({ players, matches }) => {
     let results = {};
 
-    let P = players.length;
+    let P = players.length;    
+    let matchesPerPlayer = P - 1;
     for (let i = 0; i < P; i++) {
         results[players[i].id] = {
             score: 0,
             wins: 0,
             draws: 0,
             losses: 0,
-            history: []
+            history: new Array(matchesPerPlayer).fill(-1)
         };
     }
 
     let M = matches.length;
     for (let i = 0; i < M; i++) {
-        const { firstPlayerId, secondPlayerId, result } = matches[i];
+        let { firstPlayerId, secondPlayerId, result } = matches[i];
+        if (result === -1) {
+            continue;
+        }
         switch (result) {
             case 0:
                 results[firstPlayerId].losses++;
@@ -35,11 +39,11 @@ export let RankingTable = ({ players, matches }) => {
                 results[secondPlayerId].losses++;
                 break;
         }
-        results[firstPlayerId].history.push(result);
-        results[secondPlayerId].history.push(2 - result);
+        results[firstPlayerId].history[i] = result;
+        results[secondPlayerId].history[i] = 2 - result;
     }
 
-    const rankedPlayers = [...players];
+    let rankedPlayers = [...players];
     rankedPlayers.sort((player1, player2) => {
         return results[player2.id].score - results[player1.id].score;
     });
@@ -60,7 +64,7 @@ export let RankingTable = ({ players, matches }) => {
             </thead>
             <tbody>
                 {rankedPlayers.map((player, index) => {
-                    const { score, wins, draws, losses, history } = results[player.id];
+                    let { score, wins, draws, losses, history } = results[player.id];
                     return (
                         <tr>
                             <td align="right">{index + 1}</td>

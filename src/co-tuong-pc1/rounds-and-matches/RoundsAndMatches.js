@@ -1,10 +1,10 @@
 import './RoundsAndMatches.less';
 
 const resultLabels = {
+    '-1': '- vs -',
     '0': 'thua',
     '1': 'hòa',
     '2': 'thắng',
-    'NaN': '---',
 };
 
 let datePlus = (originalDate, additionalDays) => {
@@ -74,7 +74,7 @@ export let RoundsAndMatches = ({players, matches}) => {
                         {pairs.map(({firstPlayer, secondPlayer}) => {
                             let matchId = `${firstPlayer.id}-${secondPlayer.id}`;
                             let match = matchesById[matchId];
-                            let result = match?.result ?? NaN;
+                            let result = match?.result ?? -1;
                             let resultLabel = resultLabels[result];
                             return (
                                 <tr key={matchId}>
