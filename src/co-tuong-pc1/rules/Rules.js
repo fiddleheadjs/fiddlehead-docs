@@ -12,6 +12,17 @@ export let Rules = () => {
                     <li>Mỗi trận đấu các kỳ thủ thi đấu 2 ván cờ để quyết định thắng/hòa/thua. Kỳ thủ thắng trận đấu được 2 điểm, hòa 1 điểm, thua 0 điểm.</li>
                     <li>Thể thức ván cờ: 25 phút tích lũy 10 giây cho mỗi nước đi (25m+10s).</li>
                 </ul>
+                <h3>Chấp quân, chấp tiên:</h3>
+                <p>Các kỳ thủ được phân làm 4 nhóm: A, B, C, D. Quy tắc chấp quân, chấp tiên như sau:</p>
+                <ul>
+                    <li>A chấp B = 1 Mã</li>
+                    <li>A chấp C = 1 Mã + 1 Tiên</li>
+                    <li>A chấp D = 1 Pháo + 1 Tiên </li>
+                    <li>B chấp C = 2 Tiên</li>
+                    <li>B chấp D = 1 Mã</li>
+                    <li>C chấp D = 2 Tiên</li>
+                    <li>Cùng nhóm đánh phân tiên</li>
+                </ul>
                 <h3>Luật cờ tướng Việt Nam:</h3>
                 <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a>. Một số ý chính:</p>
                 <ul>
