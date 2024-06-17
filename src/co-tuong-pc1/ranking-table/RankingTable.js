@@ -58,7 +58,7 @@ export let RankingTable = ({ players, matches }) => {
                         <tr>
                             <th align="right">#</th>
                             <th align="left">Kỳ thủ</th>
-                            <th align="center">Các ván đấu</th>
+                            <th align="center">Các trận đấu</th>
                             <th align="right">Điểm</th>
                         </tr>
                     </thead>

@@ -3,7 +3,7 @@ import {TableResponsive} from '../table-responsive/TableResponsive';
 import './RoundsAndMatches.less';
 
 const resultLabels = {
-    '-1': '- vs -',
+    '-1': '- v/s -',
     '0': 'thua',
     '1': 'hòa',
     '2': 'thắng',
