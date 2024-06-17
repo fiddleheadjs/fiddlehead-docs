@@ -2,61 +2,61 @@
     {
         "id": "ngocnguyen",
         "name": "Nguyễn Hữu Ngọc",
-        "group": 2
+        "group": "C"
     },
     {
         "id": "hai",
         "name": "Hải",
-        "group": 2
+        "group": "B"
     },
     {
         "id": "tungdai",
         "name": "Tùng Đại",
-        "group": 1
+        "group": "A"
     },
     {
         "id": "quanvu",
         "name": "Vũ Hồng Quân",
-        "group": 3
+        "group": "C"
     },
     {
         "id": "tuanquach",
         "name": "Quách Văn Tuấn",
-        "group": 2
+        "group": "B"
     },
     {
         "id": "thinhdoan",
         "name": "Đoàn Quang Thịnh",
-        "group": 2
+        "group": "B"
     },
     {
         "id": "quyettran",
         "name": "Trần Văn Quyết",
-        "group": 2
+        "group": "B"
     },
     {
         "id": "chuyennguyen",
         "name": "Mabư Chuyền",
-        "group": 3
+        "group": "C"
     },
     {
         "id": "tungnguyen",
         "name": "Tùng Nguyễn",
-        "group": 3
+        "group": "C"
     },
     {
         "id": "thanhtran",
         "name": "Trần Ngọc Thanh",
-        "group": 3
+        "group": "C"
     },
     {
         "id": "thangle",
         "name": "Lê Duy Thắng",
-        "group": 3
+        "group": "D"
     },
     {
         "id": "phongnguyen",
         "name": "Nguyễn Tiến Phong",
-        "group": 3
+        "group": "D"
     }
 ]

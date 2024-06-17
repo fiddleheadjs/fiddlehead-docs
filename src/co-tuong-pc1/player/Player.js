@@ -7,7 +7,7 @@ export let Player = ({player, align = 'left'}) => {
             <Avatar player={player} />
             <div class="info">
                 <div class="name">{player.name}</div>
-                <div class="group">nhóm {player.group}</div>
+                <div class={`group group-${player.group}`}>nhóm {player.group}</div>
             </div>
         </div>
     );

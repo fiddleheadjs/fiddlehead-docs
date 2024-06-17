@@ -1,8 +1,8 @@
 import './CoTuongPc1.less';
 import {RoundsAndMatches} from './rounds-and-matches/RoundsAndMatches';
+import {RankingTable} from './ranking-table/RankingTable';
 import players from './data/players.json';
 import matches from './data/matches.json';
-import {RankingTable} from './ranking-table/RankingTable';
 
 export let CoTuongPc1 = () => {
 
