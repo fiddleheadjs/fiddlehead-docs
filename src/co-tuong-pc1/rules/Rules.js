@@ -26,6 +26,7 @@ export let Rules = () => {
                 <h3>Luật cờ tướng Việt Nam:</h3>
                 <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a>. Một số ý chính:</p>
                 <ul>
+                    <li>Hạn định số nước đi dẫn tới hòa cờ: Trang 10, mục 12</li>
                     <li>Cách xếp hạng các kỳ thủ: Trang 16, mục 21.3</li>
                     <li>Mười điểm chính khi xử ván cờ: Trang 17, mục 23</li>
                 </ul>
