@@ -165,10 +165,10 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                             <th align="center">#</th>
                             <th align="left">Kỳ thủ</th>
                             <th align="center">Các trận đấu</th>
-                            <th align="right">H3</th>
-                            <th align="right">H2</th>
-                            <th align="right">H1</th>
                             <th align="right">Đ</th>
+                            <th align="right">H1</th>
+                            <th align="right">H2</th>
+                            <th align="right">H3</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,10 +189,10 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                                             {history.map(result => <span data-result={result}/>)}
                                         </div>
                                     </td>
-                                    <td align="right">{winGames}</td>
-                                    <td align="right">{competitorsScore}</td>
+                                    <td align="right">{matchScore}</td>
                                     <td align="right">{gameScore}</td>
-                                    <td align="right"><b>{matchScore}</b></td>
+                                    <td align="right">{competitorsScore}</td>
+                                    <td align="right">{winGames}</td>
                                 </tr>
                             );
                         })}
