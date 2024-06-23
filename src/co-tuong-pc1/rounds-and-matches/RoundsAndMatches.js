@@ -24,13 +24,33 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                 let matchOrEmpty = matchesById[matchId];
                                 let result = getMatchResult(matchOrEmpty);
                                 let resultLabel = resultLabels[result];
+                                let resultDetails;
+                                if (matchOrEmpty != null) {
+                                   let gameResults = [];
+                                   let counts = {};
+                                    for (let game of matchOrEmpty.games) {
+                                        if (counts[game.result] != null) {
+                                            counts[game.result]++;
+                                        } else {
+                                            counts[game.result] = 1;
+                                            gameResults.push(game.result);
+                                        }
+                                    }
+                                    resultDetails = gameResults.map(gameResult => {
+                                        return `${counts[gameResult]} ${resultLabels[gameResult]}`;
+                                    }).join(' ');
+                                }
+
                                 return (
                                     <tr key={matchId}>
                                         <td align="right">
                                             <Player player={firstPlayer} align="right" />
                                         </td>
                                         <td align="center">
-                                            <span class="result" data-result={result}>{resultLabel}</span>
+                                            <div class="result" data-result={result}>{resultLabel}</div>
+                                            {resultDetails && (
+                                                <div class="result-details">{resultDetails}</div>
+                                            )}
                                         </td>
                                         <td align="left">
                                             <Player player={secondPlayer} />

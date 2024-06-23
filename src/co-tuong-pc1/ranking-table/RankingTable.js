@@ -14,11 +14,10 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
             matchScore: 0,
             gameScore: 0,
             competitorsScore: 0,
-            matches: 0,
             winGames: 0,
-            history: new Array(matchesPerPlayer).fill(-1),
             loserIds: [],
-            drawerIds: []
+            drawerIds: [],
+            history: new Array(matchesPerPlayer).fill(-1),
         };
     }
 
@@ -36,9 +35,6 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
 
         let firstPlayerResult = resultsByPlayerId[firstPlayerId];
         let secondPlayerResult = resultsByPlayerId[secondPlayerId];
-        
-        firstPlayerResult.matches++;
-        secondPlayerResult.matches++;
 
         firstPlayerResult.matchScore += matchResult;
         secondPlayerResult.matchScore += 2 - matchResult;
@@ -77,10 +73,10 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
     for (let playerResult of Object.values(resultsByPlayerId)) {
         let competitorsScore = 0;
         for (let loserId of playerResult.loserIds) {
-            competitorsScore += resultsByPlayerId[loserId].matchScore;
+            competitorsScore += 2 * resultsByPlayerId[loserId].matchScore;
         }
         for (let drawerId of playerResult.drawerIds) {
-            competitorsScore += 0.5 * resultsByPlayerId[drawerId].matchScore;
+            competitorsScore += resultsByPlayerId[drawerId].matchScore;
         }
         playerResult.competitorsScore = competitorsScore;
     }
@@ -185,19 +181,20 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                                     <td align="right">{winGames}</td>
                                     <td align="right">{competitorsScore}</td>
                                     <td align="right">{gameScore}</td>
-                                    <td align="right">{matchScore}</td>
+                                    <td align="right"><b>{matchScore}</b></td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
             </TableResponsive>
+            <br/>
             <details>
                 <summary>Ghi chú xếp hạng</summary>
-                <p><b>Đ</b>: Điểm - Tổng điểm các trận đấu. Mỗi trận thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
-                <p><b>H1</b>: Hệ số phụ 1 - Tổng điểm các ván cờ. Mỗi ván thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
-                <p><b>H2</b>: Hệ số phụ 2 - Cộng tổng điểm của các đối phương mà kỳ thủ đã thắng và một nửa tổng điểm của các đối phương mà kỳ thủ đã hòa.</p>
-                <p><b>H3</b>: Hệ số phụ 3 - Tổng số các ván cờ mà kỳ thủ đã thắng.</p>
+                <p><b>Đ</b>: Điểm = Tổng điểm các trận đấu. Mỗi trận thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
+                <p><b>H1</b>: Hệ số phụ 1 = Tổng điểm các ván cờ. Mỗi ván thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
+                <p><b>H2</b>: Hệ số phụ 2 = 2 x (tổng điểm của các đối phương mà kỳ thủ đã thắng) + (tổng điểm của các đối phương mà kỳ thủ đã hòa).</p>
+                <p><b>H3</b>: Hệ số phụ 3 = Tổng số các ván cờ mà kỳ thủ đã thắng.</p>
                 <p>Thứ tự ưu tiên khi xếp hạng:</p>
                 <ol>
                     <li>Điểm</li>

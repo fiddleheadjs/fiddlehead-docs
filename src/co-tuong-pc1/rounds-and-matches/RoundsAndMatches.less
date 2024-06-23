@@ -12,7 +12,6 @@
 
         .result {
             white-space: nowrap;
-            font-style: italic;
             
             &[data-result="-1"] {
                 color: lightgray;
@@ -20,15 +19,24 @@
 
             &[data-result="0"] {
                 color: red;
+                text-transform: uppercase;
             }
 
             &[data-result="1"] {
                 color: blue;
+                text-transform: uppercase;
             }
 
             &[data-result="2"] {
                 color: green;
+                text-transform: uppercase;
             }
+        }
+
+        .result-details {
+            white-space: nowrap;
+            font-size: x-small;
+            color: #aaa;
         }
     }
 }
