@@ -10,10 +10,15 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
     let matchesPerPlayer = P - 1;
     for (let i = 0; i < P; i++) {
         resultsByPlayerId[players[i].id] = {
+            rank: 0,
             matchScore: 0,
             gameScore: 0,
+            competitorsScore: 0,
             matches: 0,
-            history: new Array(matchesPerPlayer).fill(-1)
+            winGames: 0,
+            history: new Array(matchesPerPlayer).fill(-1),
+            loserIds: [],
+            drawerIds: []
         };
     }
 
@@ -28,21 +33,63 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
 
         let {firstPlayerGameScore, secondPlayerGameScore} = getGameScore(match);
         let roundIndex = roundIndexesByMatchId[createMatchId(firstPlayerId, secondPlayerId)];
-        
-        resultsByPlayerId[firstPlayerId].matches++;
-        resultsByPlayerId[secondPlayerId].matches++;
 
-        resultsByPlayerId[firstPlayerId].matchScore += matchResult;
-        resultsByPlayerId[secondPlayerId].matchScore += 2 - matchResult;
+        let firstPlayerResult = resultsByPlayerId[firstPlayerId];
+        let secondPlayerResult = resultsByPlayerId[secondPlayerId];
         
-        resultsByPlayerId[firstPlayerId].gameScore += firstPlayerGameScore;
-        resultsByPlayerId[secondPlayerId].gameScore += secondPlayerGameScore;
+        firstPlayerResult.matches++;
+        secondPlayerResult.matches++;
 
-        resultsByPlayerId[firstPlayerId].history[roundIndex] = matchResult;
-        resultsByPlayerId[secondPlayerId].history[roundIndex] = 2 - matchResult;
+        firstPlayerResult.matchScore += matchResult;
+        secondPlayerResult.matchScore += 2 - matchResult;
+        
+        firstPlayerResult.gameScore += firstPlayerGameScore;
+        secondPlayerResult.gameScore += secondPlayerGameScore;
+
+        firstPlayerResult.history[roundIndex] = matchResult;
+        secondPlayerResult.history[roundIndex] = 2 - matchResult;
+
+        switch (matchResult) {
+            case 0:
+                secondPlayerResult.loserIds.push(firstPlayerId);
+                break;
+            case 1:
+                firstPlayerResult.drawerIds.push(secondPlayerId);
+                secondPlayerResult.drawerIds.push(firstPlayerId);
+                break;
+            case 2:
+                firstPlayerResult.loserIds.push(secondPlayerId);
+                break;
+        }
+
+        for (let game of match.games) {
+            switch (game.result) {
+                case 0:
+                    secondPlayerResult.winGames++;
+                    break;
+                case 2:
+                    firstPlayerResult.winGames++;
+                    break;
+            }
+        }
     }
 
-    let rankedPlayers = [...players];
+    for (let playerResult of Object.values(resultsByPlayerId)) {
+        let competitorsScore = 0;
+        for (let loserId of playerResult.loserIds) {
+            competitorsScore += resultsByPlayerId[loserId].matchScore;
+        }
+        for (let drawerId of playerResult.drawerIds) {
+            competitorsScore += 0.5 * resultsByPlayerId[drawerId].matchScore;
+        }
+        playerResult.competitorsScore = competitorsScore;
+    }
+
+    let rankedPlayers = players.map(player => ({
+        ...player,
+        equalsToPrevious: false
+    }));
+    
     rankedPlayers.sort((player1, player2) => {
         let p1__p2 = -1;
         let p2__p1 = 1;
@@ -58,22 +105,6 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
             return p1__p2;
         }
 
-        // Who has played less matches?
-        if (result2.matches < result1.matches) {
-            return p2__p1;
-        }
-        if (result1.matches < result2.matches) {
-            return p1__p2;
-        }
-
-        // Who has a higher game score?
-        if (result2.gameScore > result1.gameScore) {
-            return p2__p1;
-        }
-        if (result1.gameScore > result2.gameScore) {
-            return p1__p2;
-        }
-
         // Who won the match between them?
         let matchId = createMatchId(player1.id, player2.id);
         let matchOrEmpty = matchesById[matchId];
@@ -84,7 +115,43 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
         if (matchResult === 0) {
             return p2__p1;
         }
+
+        // Who has a higher game score?
+        if (result2.gameScore > result1.gameScore) {
+            return p2__p1;
+        }
+        if (result1.gameScore > result2.gameScore) {
+            return p1__p2;
+        }
+
+        // Who has a higher competitors score?
+        if (result2.competitorsScore > result1.competitorsScore) {
+            return p2__p1;
+        }
+        if (result1.competitorsScore > result2.competitorsScore) {
+            return p1__p2;
+        }
+
+        // Who won more games?
+        if (result2.winGames > result1.winGames) {
+            return p2__p1;
+        }
+        if (result1.winGames > result2.winGames) {
+            return p1__p2;
+        }
+
+        // They should have the same rank
+        player1.equalsToPrevious = true;
+        return p2__p1;
     });
+
+    let currentRank = 0;
+    for (let {id, equalsToPrevious} of rankedPlayers) {
+        if (!equalsToPrevious) {
+            currentRank++;
+        }
+        resultsByPlayerId[id].rank = currentRank;
+    }
 
     return (
         <div class="RankingTable">
@@ -95,16 +162,18 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                             <th align="right">#</th>
                             <th align="left">Kỳ thủ</th>
                             <th align="center">Các trận đấu</th>
-                            <th align="right">HS1</th>
-                            <th align="right">Điểm</th>
+                            <th align="right">H3</th>
+                            <th align="right">H2</th>
+                            <th align="right">H1</th>
+                            <th align="right">Đ</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {rankedPlayers.map((player, index) => {
-                            let { matchScore, gameScore, history } = resultsByPlayerId[player.id];
+                        {rankedPlayers.map((player) => {
+                            let { rank, matchScore, gameScore, competitorsScore, winGames, history } = resultsByPlayerId[player.id];
                             return (
                                 <tr>
-                                    <td align="right">{index + 1}</td>
+                                    <td align="right">{M === 0 ? '' : rank}</td>
                                     <td align="left">
                                         <Player player={player} />
                                     </td>
@@ -113,6 +182,8 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                                             {history.map(result => <span data-result={result}/>)}
                                         </div>
                                     </td>
+                                    <td align="right">{winGames}</td>
+                                    <td align="right">{competitorsScore}</td>
                                     <td align="right">{gameScore}</td>
                                     <td align="right">{matchScore}</td>
                                 </tr>
@@ -121,6 +192,21 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                     </tbody>
                 </table>
             </TableResponsive>
+            <details>
+                <summary>Ghi chú xếp hạng</summary>
+                <p><b>Đ</b>: Điểm - Tổng điểm các trận đấu. Mỗi trận thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
+                <p><b>H1</b>: Hệ số phụ 1 - Tổng điểm các ván cờ. Mỗi ván thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>
+                <p><b>H2</b>: Hệ số phụ 2 - Cộng tổng điểm của các đối phương mà kỳ thủ đã thắng và một nửa tổng điểm của các đối phương mà kỳ thủ đã hòa.</p>
+                <p><b>H3</b>: Hệ số phụ 3 - Tổng số các ván cờ mà kỳ thủ đã thắng.</p>
+                <p>Thứ tự ưu tiên khi xếp hạng:</p>
+                <ol>
+                    <li>Điểm</li>
+                    <li>Kết quả đối đầu</li>
+                    <li>Hệ số phụ 1</li>
+                    <li>Hệ số phụ 2</li>
+                    <li>Hệ số phụ 3</li>
+                </ol>
+            </details>
         </div>
     );
 };
