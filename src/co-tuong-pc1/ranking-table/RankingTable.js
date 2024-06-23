@@ -14,10 +14,11 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
             matchScore: 0,
             gameScore: 0,
             competitorsScore: 0,
+            matches: 0,
             winGames: 0,
-            loserIds: [],
-            drawerIds: [],
             history: new Array(matchesPerPlayer).fill(-1),
+            loserIds: [],
+            drawerIds: []
         };
     }
 
@@ -35,6 +36,9 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
 
         let firstPlayerResult = resultsByPlayerId[firstPlayerId];
         let secondPlayerResult = resultsByPlayerId[secondPlayerId];
+        
+        firstPlayerResult.matches++;
+        secondPlayerResult.matches++;
 
         firstPlayerResult.matchScore += matchResult;
         secondPlayerResult.matchScore += 2 - matchResult;
@@ -146,7 +150,10 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
         if (!equalsToPrevious) {
             currentRank++;
         }
-        resultsByPlayerId[id].rank = currentRank;
+        let result = resultsByPlayerId[id];
+        if (result.matches > 0) {
+            result.rank = currentRank;
+        }
     }
 
     return (
@@ -155,7 +162,7 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                 <table>
                     <thead>
                         <tr>
-                            <th align="right">#</th>
+                            <th align="center">#</th>
                             <th align="left">Kỳ thủ</th>
                             <th align="center">Các trận đấu</th>
                             <th align="right">H3</th>
@@ -169,7 +176,11 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                             let { rank, matchScore, gameScore, competitorsScore, winGames, history } = resultsByPlayerId[player.id];
                             return (
                                 <tr>
-                                    <td align="right">{M === 0 ? '' : rank}</td>
+                                    <td align="center">
+                                        <div class="rank" data-rank={rank}>
+                                            {rank > 0 ? rank : '#'}
+                                        </div>
+                                    </td>
                                     <td align="left">
                                         <Player player={player} />
                                     </td>

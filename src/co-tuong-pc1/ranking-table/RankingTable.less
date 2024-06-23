@@ -11,6 +11,43 @@
         }
     }
 
+    .rank {
+        color: #aaa;
+        font-weight: bold;
+        display: block;
+        min-width: 1.4em;
+        min-height: 1.4em;
+        max-width: 1.4em;
+        max-height: 1.4em;
+        line-height: 1.4em;
+        text-align: center;
+        border-radius: 100%;
+
+        &[data-rank="0"] {
+            color: lightgray;
+        }
+
+        &[data-rank="1"] {
+            background: red;
+            color: white;
+        }
+
+        &[data-rank="2"] {
+            background: orange;
+            color: white;
+        }
+
+        &[data-rank="3"] {
+            background: yellowgreen;
+            color: white;
+        }
+        
+        &[data-rank="4"] {
+            background: #aaa;
+            color: white;
+        }
+    }
+
     .history {
         white-space: nowrap;
         
