@@ -8,7 +8,6 @@ export let Rules = () => {
                 <h3>Cách thức tiến hành:</h3>
                 <ul>
                     <li>Thể thức vòng tròn tính điểm 11 vòng đấu, diễn ra trong 11 tuần. Mỗi kỳ thủ thi đấu 1 trận mỗi vòng.</li>
-                    <li>Trận chung kết diễn ra giữa 2 kỳ thủ đứng đầu.</li>
                     <li>Mỗi trận đấu các kỳ thủ thi đấu 2 ván cờ để quyết định thắng/hòa/thua. Kỳ thủ thắng trận đấu được 2 điểm, hòa 1 điểm, thua 0 điểm.</li>
                     <li>Thể thức ván cờ: 25 phút tích lũy 10 giây cho mỗi nước đi (25m+10s).</li>
                 </ul>
@@ -23,7 +22,7 @@ export let Rules = () => {
                     <li>C chấp D = 2 Tiên</li>
                     <li>Cùng nhóm đánh phân tiên</li>
                 </ul>
-                <h3>Luật cờ tướng Việt Nam:</h3>
+                <h3>Luật cờ tướng:</h3>
                 <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a>. Một số ý chính:</p>
                 <ul>
                     <li>Hạn định số nước đi dẫn tới hòa cờ: Trang 10, mục 12</li>
@@ -33,6 +32,7 @@ export let Rules = () => {
                 <p>Một số tình huống hay xảy ra:</p>
                 <ul>
                     <li>Sau khi mỗi bên đi được 50 nước mà không ăn quân thì xử hòa.</li>
+                    <li>Bỏ tướng hoặc làm lộ mặt tướng bị tính lỗi kỹ thuật và được đi lại.</li>
                     <li>Chỉ được phép chiếu hoặc bắt tối đa 6 nước liên tục với 1 quân, 12 nước liên tục với 2 quân, và 18 nước liên tục với 3 quân.</li>
                     <li>Chiếu một hoặc nhiều lần, nghỉ 1 lần (nhất cách nhất chiếu) là được phép</li>
                     <li>Bắt một hoặc nhiều lần, nghỉ 1 lần là được phép</li>
