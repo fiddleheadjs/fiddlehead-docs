@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "firstPlayerId": "ngocnguyen",
+        "secondPlayerId": "phongnguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 0
+            }
+        ]
+    },
+    {
+        "firstPlayerId": "hai",
+        "secondPlayerId": "thangle",
+        "games": [
+            {
+                "result": 1
+            },
+            {
+                "result": 2
+            }
+        ]
+    }
+]
