@@ -23,7 +23,7 @@ export let Rules = () => {
                     <li>Cùng nhóm đánh phân tiên</li>
                 </ul>
                 <h3>Luật cờ tướng:</h3>
-                <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a>. Một số ý chính:</p>
+                <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a> có sửa đổi. Một số ý chính:</p>
                 <ul>
                     <li>Hạn định số nước đi dẫn tới hòa cờ: Trang 10, mục 12</li>
                     <li>Cách xếp hạng các kỳ thủ: Trang 16, mục 21</li>
@@ -31,8 +31,10 @@ export let Rules = () => {
                 </ul>
                 <p>Một số tình huống hay xảy ra:</p>
                 <ul>
+                    <li>Khi đi quân hoặc ăn quân, sau khi đã đặt quân xuống bàn và thả tay ra thì nước đi được xác lập và không được đi lại. Khi quân chưa chạm bàn, hoặc chưa thả tay ra thì được đi lại.</li>
+                    <li>Khi thực hiện một nước đi không hợp lệ, bao gồm bỏ tướng hoặc làm lộ mặt tướng, thì bị tính lỗi kỹ thuật và được đi lại.</li>
+                    <li>Chỉ bấm đồng hồ sau khi hoàn thành nước đi, tay nào đi quân tay đó bấm đồng hồ. Bên nào không bấm đồng hồ thì tự chịu thiệt thòi về thời gian, đối thủ vẫn thực hiện các nước đi bình thường.</li>
                     <li>Sau khi mỗi bên đi được 50 nước mà không ăn quân thì xử hòa.</li>
-                    <li>Bỏ tướng hoặc làm lộ mặt tướng bị tính lỗi kỹ thuật và được đi lại.</li>
                     <li>Chỉ được phép chiếu hoặc bắt tối đa 6 nước liên tục với 1 quân, 12 nước liên tục với 2 quân, và 18 nước liên tục với 3 quân.</li>
                     <li>Chiếu một hoặc nhiều lần, nghỉ 1 lần (nhất cách nhất chiếu) là được phép</li>
                     <li>Bắt một hoặc nhiều lần, nghỉ 1 lần là được phép</li>
