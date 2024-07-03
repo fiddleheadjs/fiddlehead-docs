@@ -4,7 +4,7 @@ import {getMatchResult} from '../utils';
 import './RoundsAndMatches.less';
 
 const resultLabels = {
-    '-1': '- v/s -',
+    '-1': <>&mdash; <sup>V</sup><span>/</span><sub>S</sub> &mdash;</>,
     '0': 'thua',
     '1': 'hòa',
     '2': 'thắng',
