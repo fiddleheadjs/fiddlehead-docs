@@ -22,5 +22,29 @@
                 "result": 2
             }
         ]
+    },
+    {
+        "firstPlayerId": "thinhdoan",
+        "secondPlayerId": "quyettran",
+        "games": [
+            {
+                "result": 1
+            },
+            {
+                "result": 0
+            }
+        ]
+    },
+    {
+        "firstPlayerId": "tuanquach",
+        "secondPlayerId": "chuyennguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ]
     }
 ]

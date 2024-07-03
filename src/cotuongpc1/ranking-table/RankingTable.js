@@ -140,6 +140,14 @@ export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId
             return p1__p2;
         }
 
+        // Who has played?
+        if (result2.matches > 0 && result1.matches === 0) {
+            return p2__p1;
+        }
+        if (result1.matches > 0 && result2.matches === 0) {
+            return p1__p2;
+        }
+
         // They should have the same rank
         player1.equalsToPrevious = true;
         return p2__p1;
