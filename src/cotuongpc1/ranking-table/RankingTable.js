@@ -1,12 +1,12 @@
+import './RankingTable.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
 import {createMatchId, getGameScore, getMatchResult} from '../utils';
-import './RankingTable.less';
 
-export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchId }) => {
+export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId}) => {
     let resultsByPlayerId = {};
 
-    let P = players.length;    
+    let P = players.length;
     let matchesPerPlayer = P - 1;
     for (let i = 0; i < P; i++) {
         resultsByPlayerId[players[i].id] = {
@@ -25,7 +25,7 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
     let M = matches.length;
     for (let i = 0; i < M; i++) {
         let match = matches[i];
-        let { firstPlayerId, secondPlayerId } = match;
+        let {firstPlayerId, secondPlayerId} = match;
         let matchResult = getMatchResult(match);
         if (matchResult === -1) {
             continue;
@@ -36,13 +36,13 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
 
         let firstPlayerResult = resultsByPlayerId[firstPlayerId];
         let secondPlayerResult = resultsByPlayerId[secondPlayerId];
-        
+
         firstPlayerResult.matches++;
         secondPlayerResult.matches++;
 
         firstPlayerResult.matchScore += matchResult;
         secondPlayerResult.matchScore += 2 - matchResult;
-        
+
         firstPlayerResult.gameScore += firstPlayerGameScore;
         secondPlayerResult.gameScore += secondPlayerGameScore;
 
@@ -89,7 +89,7 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
         ...player,
         equalsToPrevious: false
     }));
-    
+
     rankedPlayers.sort((player1, player2) => {
         let p1__p2 = -1;
         let p2__p1 = 1;
@@ -173,7 +173,7 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                     </thead>
                     <tbody>
                         {rankedPlayers.map((player) => {
-                            let { rank, matchScore, gameScore, competitorsScore, winGames, history } = resultsByPlayerId[player.id];
+                            let {rank, matchScore, gameScore, competitorsScore, winGames, history} = resultsByPlayerId[player.id];
                             return (
                                 <tr>
                                     <td align="center">
@@ -185,8 +185,8 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                                         <Player player={player} />
                                     </td>
                                     <td align="center">
-                                        <div class="history">                                
-                                            {history.map(result => <span data-result={result}/>)}
+                                        <div class="history">
+                                            {history.map(result => <span data-result={result} />)}
                                         </div>
                                     </td>
                                     <td align="right">{matchScore}</td>
@@ -199,7 +199,7 @@ export let RankingTable = ({ players, matches, matchesById, roundIndexesByMatchI
                     </tbody>
                 </table>
             </TableResponsive>
-            <br/>
+            <br />
             <details>
                 <summary>Ghi chú xếp hạng</summary>
                 <p><b>Đ</b>: Điểm = Tổng điểm các trận đấu. Mỗi trận thắng được 2 điểm, hòa 1 điểm, thua 0 điểm.</p>

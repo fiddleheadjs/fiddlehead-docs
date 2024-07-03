@@ -1,13 +1,13 @@
+import './RoundsAndMatches.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
 import {getMatchResult} from '../utils';
-import './RoundsAndMatches.less';
 
 const resultLabels = {
-    '-1': <>&mdash; <sup>V</sup><span>/</span><sub>S</sub> &mdash;</>,
-    '0': 'thua',
-    '1': 'hòa',
-    '2': 'thắng',
+    '-1': <>&mdash; <span><sup>V</sup>/<sub>S</sub></span> &mdash;</>,
+    '0': <>thua</>,
+    '1': <>hòa</>,
+    '2': <>thắng</>,
 };
 
 export let RoundsAndMatches = ({rounds, matchesById}) => {
@@ -26,8 +26,8 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                 let resultLabel = resultLabels[result];
                                 let resultDetails;
                                 if (matchOrEmpty != null) {
-                                   let gameResults = [];
-                                   let counts = {};
+                                    let gameResults = [];
+                                    let counts = {};
                                     for (let game of matchOrEmpty.games) {
                                         if (counts[game.result] != null) {
                                             counts[game.result]++;
@@ -36,9 +36,11 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                             gameResults.push(game.result);
                                         }
                                     }
-                                    resultDetails = gameResults.map(gameResult => {
-                                        return `${counts[gameResult]} ${resultLabels[gameResult]}`;
-                                    }).join(' ');
+                                    resultDetails = (
+                                        <>{gameResults.map((gameResult) => (
+                                            <> {counts[gameResult]} {resultLabels[gameResult]} </>
+                                        ))}</>
+                                    );
                                 }
 
                                 return (
