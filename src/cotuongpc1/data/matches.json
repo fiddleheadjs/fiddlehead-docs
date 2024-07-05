@@ -46,5 +46,17 @@
                 "result": 2
             }
         ]
+    },
+    {
+        "firstPlayerId": "tuanquach",
+        "secondPlayerId": "thinhdoan",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ]
     }
 ]
