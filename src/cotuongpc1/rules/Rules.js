@@ -4,25 +4,32 @@ export let Rules = () => {
     return (
         <div class="Rules">
             <details>
-                <summary>Xem chi tiết</summary>
-                <h3>Cách thức tiến hành:</h3>
+                <summary>Chi tiết điều lệ giải đấu</summary>
+                <h3>Giải thưởng</h3>
+                <ul>
+                    <li>Quán quân: 500.000đ + cúp vô địch</li>
+                    <li>Á quân: 300.000đ</li>
+                    <li>Quý quân: 200.000đ</li>
+                    <li>Điện quân: 100.000đ</li>
+                </ul>
+                <h3>Thể thức thi đấu</h3>
                 <ul>
                     <li>Thể thức vòng tròn tính điểm 11 vòng đấu, diễn ra trong 11 tuần. Mỗi kỳ thủ thi đấu 1 trận mỗi vòng.</li>
                     <li>Mỗi trận đấu các kỳ thủ thi đấu 2 ván cờ để quyết định thắng/hòa/thua. Kỳ thủ thắng trận đấu được 2 điểm, hòa 1 điểm, thua 0 điểm.</li>
                     <li>Thể thức ván cờ: 25 phút tích lũy 10 giây cho mỗi nước đi (25m+10s).</li>
                 </ul>
-                <h3>Chấp quân, chấp tiên:</h3>
+                <h3>Chấp quân, chấp tiên</h3>
                 <p>Các kỳ thủ được phân làm 3 nhóm. Quy tắc chấp quân, chấp tiên như sau:</p>
                 <ul>
-                    <li>A chấp B = 1 Mã</li>
-                    <li>A chấp C = 1 Mã + 1 Tiên</li>
-                    <li>A chấp D = 1 Pháo + 1 Tiên</li>
-                    <li>B chấp C = 2 Tiên</li>
-                    <li>B chấp D = 1 Mã</li>
-                    <li>C chấp D = 2 Tiên</li>
+                    <li>A chấp B = 1 mã</li>
+                    <li>A chấp C = 1 mã + 1 tiên</li>
+                    <li>A chấp D = 1 pháo + 1 tiên</li>
+                    <li>B chấp C = 2 tiên</li>
+                    <li>B chấp D = 1 mã</li>
+                    <li>C chấp D = 2 tiên</li>
                     <li>Cùng nhóm đánh phân tiên</li>
                 </ul>
-                <h3>Luật cờ tướng:</h3>
+                <h3>Luật cờ tướng</h3>
                 <p>Giải đấu áp dụng <a href="/files/luat_co_tuong.pdf">Luật cờ tướng Việt Nam</a> có sửa đổi. Một số ý chính:</p>
                 <ul>
                     <li>Hạn định số nước đi dẫn tới hòa cờ: Trang 10, mục 12</li>
