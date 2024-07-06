@@ -4,7 +4,7 @@ export let Rules = () => {
     return (
         <div class="Rules">
             <details>
-                <summary>Chi tiết điều lệ giải đấu</summary>
+                <summary>Chi tiết điều lệ</summary>
                 <h3>Giải thưởng</h3>
                 <ul>
                     <li>Quán quân: 500.000đ + cúp vô địch</li>
