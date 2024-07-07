@@ -19,7 +19,7 @@ export let Rules = () => {
                     <li>Thể thức ván cờ: 25 phút tích lũy 10 giây cho mỗi nước đi (25m+10s).</li>
                 </ul>
                 <h3>Chấp quân, chấp tiên</h3>
-                <p>Các kỳ thủ được phân làm 3 nhóm. Quy tắc chấp quân, chấp tiên như sau:</p>
+                <p>Các kỳ thủ được phân làm 4 nhóm: A, B, C, D. Quy tắc chấp quân, chấp tiên như sau:</p>
                 <ul>
                     <li>A chấp B = 1 mã</li>
                     <li>A chấp C = 1 mã + 1 tiên</li>
