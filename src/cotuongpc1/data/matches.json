@@ -9,7 +9,8 @@
             {
                 "result": 0
             }
-        ]
+        ],
+        "date": "2024-07-01"
     },
     {
         "firstPlayerId": "haicao",
@@ -21,7 +22,8 @@
             {
                 "result": 2
             }
-        ]
+        ],
+        "date": "2024-07-01"
     },
     {
         "firstPlayerId": "thinhdoan",
@@ -33,7 +35,8 @@
             {
                 "result": 0
             }
-        ]
+        ],
+        "date": "2024-07-03"
     },
     {
         "firstPlayerId": "tuanquach",
@@ -45,7 +48,8 @@
             {
                 "result": 2
             }
-        ]
+        ],
+        "date": "2024-07-03"
     },
     {
         "firstPlayerId": "tuanquach",
@@ -57,7 +61,8 @@
             {
                 "result": 2
             }
-        ]
+        ],
+        "date": "2024-07-05"
     },
     {
         "firstPlayerId": "quanvu",
@@ -69,6 +74,7 @@
             {
                 "result": 2
             }
-        ]
+        ],
+        "date": "2024-07-07"
     }
 ]

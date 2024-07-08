@@ -40,5 +40,11 @@ export let getGameScore = (match) => {
 export let datePlus = (originalDate, additionalDays) => {
     let newDate = new Date(originalDate);
     newDate.setDate(newDate.getDate() + additionalDays);
-    return newDate.toLocaleDateString('vi-VN');
+    return formatDate(newDate);
+};
+
+export let formatDate = (date) => {
+    let d = date.getDate().toString().padStart(2, '0');
+    let m = (date.getMonth() + 1).toString().padStart(2, '0');
+    return `${d}/${m}`;
 };

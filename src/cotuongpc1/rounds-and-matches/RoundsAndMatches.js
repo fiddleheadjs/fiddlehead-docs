@@ -1,7 +1,7 @@
 import './RoundsAndMatches.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
-import {getMatchResult} from '../utils';
+import {formatDate, getMatchResult} from '../utils';
 
 const resultLabels = {
     '-1': <>&mdash; <span><sup>V</sup>/<sub>S</sub></span> &mdash;</>,
@@ -24,8 +24,10 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                 let matchOrEmpty = matchesById[matchId];
                                 let result = getMatchResult(matchOrEmpty);
                                 let resultLabel = resultLabels[result];
+                                let date;
                                 let resultDetails;
                                 if (matchOrEmpty != null) {
+                                    date = matchOrEmpty.date;
                                     let gameResults = [];
                                     let counts = {};
                                     for (let game of matchOrEmpty.games) {
@@ -49,10 +51,15 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                             <Player player={firstPlayer} align="right" />
                                         </td>
                                         <td align="center">
-                                            <div class="result" data-result={result}>{resultLabel}</div>
-                                            {resultDetails && (
-                                                <div class="result-details">{resultDetails}</div>
-                                            )}
+                                            <div class="match-info">
+                                                {date && (
+                                                    <div class="date">{formatDate(new Date(date))}</div>
+                                                )}
+                                                <div class="result" data-result={result}>{resultLabel}</div>
+                                                {resultDetails && (
+                                                    <div class="result-details">{resultDetails}</div>
+                                                )}
+                                            </div>
                                         </td>
                                         <td align="left">
                                             <Player player={secondPlayer} />
