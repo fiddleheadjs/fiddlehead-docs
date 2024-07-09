@@ -91,9 +91,29 @@
         "date": "2024-07-08"
     },
     {
-        "firstPlayerId": "ngocnguyen",
-        "secondPlayerId": "thangle",
-        "games": [],
+        "firstPlayerId": "tungdai",
+        "secondPlayerId": "thanhtran",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-07-09"
+    },
+    {
+        "firstPlayerId": "tungdai",
+        "secondPlayerId": "chuyennguyen",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 1
+            }
+        ],
         "date": "2024-07-09"
     },
     {
@@ -103,14 +123,8 @@
         "date": "2024-07-10"
     },
     {
-        "firstPlayerId": "tungdai",
-        "secondPlayerId": "chuyennguyen",
-        "games": [],
-        "date": "2024-07-11"
-    },
-    {
-        "firstPlayerId": "tungdai",
-        "secondPlayerId": "thanhtran",
+        "firstPlayerId": "ngocnguyen",
+        "secondPlayerId": "thangle",
         "games": [],
         "date": "2024-07-11"
     },
