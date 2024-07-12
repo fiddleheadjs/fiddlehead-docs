@@ -145,7 +145,14 @@
     {
         "firstPlayerId": "quanvu",
         "secondPlayerId": "quyettran",
-        "games": [],
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ],
         "date": "2024-07-12"
     }
 ]
