@@ -1746,7 +1746,7 @@ $.extend(vschess.defaultOptions, {
     tagName: {
 		board: "board",
 		moves: "moves",
-        comment: "about",
+        comment: "comt",
         info: "info",
         share: "share",
         export: "export",
@@ -6853,7 +6853,7 @@ vschess.load.prototype.createFormatBar = function(){
 
 		if (vschess.localDownload) {
 			var UTF8Text = _this.exportData.DhtmlXQ.replace(/\n/g, "\r\n").replace(/\r\r/g, "\r");
-			_this.localDownload((_this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb") + ".txt", UTF8Text, { type: "text/plain" });
+			_this.localDownload((_this.chessInfo.title || "xiangqi") + ".txt", UTF8Text, { type: "text/plain" });
 		}
 		else {
 			_this.formatBarButton.saveInput   .val(_this.exportData.DhtmlXQ);
@@ -7245,7 +7245,7 @@ vschess.load.prototype.showEditBoard = function(){
 // 创建编辑局面区域结束编辑按钮
 vschess.load.prototype.createEditEndButton = function(){
 	var _this = this;
-	this.editEndButton = $('<button type="button" class="vschess-button vschess-tab-body-edit-end-button">done</button>');
+	this.editEndButton = $('<button type="button" class="vschess-button vschess-tab-body-edit-end-button">complete edit</button>');
 	this.editEndButton.appendTo(this.editArea);
 
 	this.editEndButton.bind(this.options.click, function(){
@@ -8021,7 +8021,7 @@ vschess.load.prototype.createExportList = function(){
 			var UTF8Text = _this.exportTextarea.val().replace(/\n/g, "\r\n").replace(/\r\r/g, "\r");
 			var GBKArray = new Uint8Array(vschess.iconv2GBK(UTF8Text));
 			var exportFormat = _this.exportFormat.val();
-			var fileName = _this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb";
+			var fileName = _this.chessInfo.title || "xiangqi";
 
 			if (exportFormat.indexOf("PGN") === 0) {
 				_this.localDownload(fileName + ".pgn", GBKArray, { type: "application/octet-stream" });
@@ -8054,7 +8054,7 @@ vschess.load.prototype.setExportFormat = function(format, force){
 	format = format || this.getExportFormat();
 	this._.exportFormat = vschess.exportFormatList[format] ? format : this.getExportFormat();
 	this.exportTextarea.removeClass().addClass("vschess-tab-body-export-textarea vschess-tab-body-export-textarea-format-" + format);
-	this.exportFilename.val(this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb");
+	this.exportFilename.val(this.chessInfo.title || "xiangqi");
 
 	if (format === "TextBoard") {
 		this.exportGenerate.removeClass("vschess-tab-body-export-current");
@@ -8325,7 +8325,7 @@ vschess.load.prototype.createInfo = function(){
 vschess.load.prototype.createInfoList = function(){
 	var _this = this;
 	this.chessInfo = vschess.dataToInfo(this.chessData, this.options.parseType);
-	this.setChessTitle(this.chessInfo && this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb");
+	this.setChessTitle(this.chessInfo && this.chessInfo.title || "xiangqi");
 	this.infoList = $('<ul class="vschess-tab-body-info-list"></ul>');
 	this.infoArea.append(this.infoList);
 	this.insertInfoByCurrent();
@@ -8429,7 +8429,7 @@ vschess.load.prototype.createInfoEditor = function(){
 
 	this.infoEditorOK.bind(this.options.click, function(){
 		_this.chessInfo = _this.getInfoFromEditor();
-		_this.setChessTitle(_this.chessInfo && _this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb");
+		_this.setChessTitle(_this.chessInfo && _this.chessInfo.title || "xiangqi");
 		_this.insertInfoByCurrent();
 		_this.hideInfoEditor();
 		_this.rebuildExportAll();
@@ -8485,7 +8485,7 @@ vschess.load.prototype.refreshInfoEditor = function(){
 		}
 	}
 
-	return this.setChessTitle(this.chessInfo && this.chessInfo.title || "\u4e2d\u56fd\u8c61\u68cb");
+	return this.setChessTitle(this.chessInfo && this.chessInfo.title || "xiangqi");
 };
 
 // 根据结果设置选择结果单选按钮

@@ -1,3 +1,7 @@
+.vschess-edit-mode .vschess-board {
+    display: none;
+}
+
 .vschess-style-figured .vschess-board,
 .vschess-style-figured .vschess-board-edit {
     width: 675px;

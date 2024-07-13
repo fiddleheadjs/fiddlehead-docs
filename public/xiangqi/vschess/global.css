@@ -118,7 +118,3 @@
 .vschess-local-download-link {
     display: none !important;
 }
-
-.vschess-edit-mode .vschess-board {
-    display: none;
-}

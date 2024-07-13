@@ -8,7 +8,13 @@
 			margin: 0px;
 			padding: 0px;
 			font-family: "微软雅黑", "宋体", Tahoma, "Arial Unicode MS";
-			font-size: 10pt;
+			box-sizing: border-box;
+			position: relative;
+			font-size: 14px;
+		}
+
+		html {
+			overflow: scroll;
 		}
 
 		a {
@@ -25,24 +31,23 @@
 		ul {
 			list-style-type: none;
 		}
-
-		body {
-			padding: 50px;
-		}
-
-		div.vschess {
-			float: left;
-			margin-right: 20px;
-			margin-bottom: 20px;
-		}
 	</style>
 	<script type="text/javascript" src="jquery/jquery.js"></script>
 	<script type="text/javascript" src="vschess/vschess.mod.js"></script>
-	<title>中国象棋</title>
+	<title>Xiangqi</title>
 </head>
 
 <body>
 	<div class="vschess"></div>
+	<script type="text/javascript">
+		var style = document.createElement('style');
+		document.head.appendChild(style);
+		function setInnerHeight() {
+			style.textContent = `:root { --inner-width: ${document.body.offsetWidth}px; }`;
+		}
+		setInnerHeight();
+		window.addEventListener('resize', setInnerHeight);
+	</script>
 	<script type="text/javascript">
 		var vschess;
 		var params = new URL(document.location).searchParams;
@@ -55,6 +60,8 @@
 					style: "mobile",
 					layout: "mobile-mod",
 					defaultTab: "board",
+					playGap: 25,
+					sound: false,
 					loadFinish: function () {
 						console.log(vschess);
 					}
