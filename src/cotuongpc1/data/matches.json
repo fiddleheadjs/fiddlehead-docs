@@ -158,7 +158,14 @@
     {
         "firstPlayerId": "phongnguyen",
         "secondPlayerId": "chuyennguyen",
-        "games": [],
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 0
+            }
+        ],
         "date": "2024-07-13"
     }
 ]
