@@ -1,6 +1,10 @@
 
+:root {
+    --layout-padding: 0.5rem;
+}
+
 .vschess.vschess-layout-mobile-mod {
-    padding: 1rem;
+    padding: var(--layout-padding);
 }
 
 .vschess.vschess-layout-mobile-mod > :not(:first-child) {
