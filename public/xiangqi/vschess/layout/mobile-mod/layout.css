@@ -7,10 +7,11 @@
     padding: var(--layout-padding);
 }
 
-.vschess.vschess-layout-mobile-mod > :not(:first-child) {
-    margin-top: 1rem;
+.vschess.vschess-layout-mobile-mod > * {
+    margin-bottom: 1rem;
 }
 
+.vschess-title,
 .vschess-local-download-link,
 .vschess-change-select-title,
 .vschess-change-select-list,
