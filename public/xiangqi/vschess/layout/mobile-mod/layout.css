@@ -1,10 +1,13 @@
 
 :root {
     --layout-padding: 0.5rem;
+    --board-width: calc(var(--inner-width) - 2 * var(--layout-padding));
+    --cell-width: calc(var(--board-width) / (9 + 2 * 10 / 75));
+    --board-padding: calc(var(--cell-width) * 10 / 75);
+    --board-height: calc(var(--cell-width) * 10 + 2 * var(--board-padding));
 }
-
 .vschess.vschess-layout-mobile-mod {
-    padding: var(--layout-padding);
+    padding: 1rem var(--layout-padding);
 }
 
 .vschess.vschess-layout-mobile-mod > * {
