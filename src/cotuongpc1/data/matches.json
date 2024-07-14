@@ -167,5 +167,18 @@
             }
         ],
         "date": "2024-07-13"
+    },
+    {
+        "firstPlayerId": "tungdai",
+        "secondPlayerId": "thinhdoan",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-07-14"
     }
 ]
