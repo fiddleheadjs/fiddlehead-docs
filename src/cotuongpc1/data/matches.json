@@ -193,5 +193,29 @@
             }
         ],
         "date": "2024-07-16"
+    },
+    {
+        "firstPlayerId": "haicao",
+        "secondPlayerId": "quyettran",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 0
+            }
+        ]
+    },
+    {
+        "firstPlayerId": "tungdai",
+        "secondPlayerId": "quanvu",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ]
     }
 ]
