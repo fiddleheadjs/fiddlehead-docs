@@ -1,9 +1,16 @@
 import './RankingTable.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
-import {createMatchId, getGameScore, getMatchResult} from '../utils';
+import {createMatchId, getGameScore, getMatchResult, roundNameAt} from '../utils';
 
-export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId}) => {
+let isRoundReadyForRanking = (roundIndex, currentRoundIndex) => {
+    if (currentRoundIndex < 0) {
+        return true;
+    }
+    return roundIndex <= currentRoundIndex;
+};
+
+export let RankingTable = ({players, matches, matchesById, matchSchedules, currentRoundIndex}) => {
     let resultsByPlayerId = {};
 
     let P = players.length;
@@ -32,7 +39,11 @@ export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId
         }
 
         let {firstPlayerGameScore, secondPlayerGameScore} = getGameScore(match);
-        let roundIndex = roundIndexesByMatchId[createMatchId(firstPlayerId, secondPlayerId)];
+        let matchId = createMatchId(firstPlayerId, secondPlayerId);
+        let {roundIndex} = matchSchedules[matchId];
+        if (!isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
+            continue;
+        }
 
         let firstPlayerResult = resultsByPlayerId[firstPlayerId];
         let secondPlayerResult = resultsByPlayerId[secondPlayerId];
@@ -107,13 +118,16 @@ export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId
 
         // Who won the match between them?
         let matchId = createMatchId(player1.id, player2.id);
-        let matchOrEmpty = matchesById[matchId];
-        let matchResult = getMatchResult(matchOrEmpty);
-        if (matchResult === 2) {
-            return p1__p2;
-        }
-        if (matchResult === 0) {
-            return p2__p1;
+        let {roundIndex} = matchSchedules[matchId];
+        if (isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
+            let matchOrEmpty = matchesById[matchId];
+            let matchResult = getMatchResult(matchOrEmpty);
+            if (matchResult === 2) {
+                return p1__p2;
+            }
+            if (matchResult === 0) {
+                return p2__p1;
+            }
         }
 
         // Who has a higher game score?
@@ -166,6 +180,7 @@ export let RankingTable = ({players, matches, matchesById, roundIndexesByMatchId
 
     return (
         <div class="RankingTable">
+            <p>BXH tính đến vòng đấu hiện tại &mdash; Vòng {roundNameAt(currentRoundIndex)}</p>
             <TableResponsive>
                 <table>
                     <thead>

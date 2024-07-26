@@ -1,7 +1,7 @@
 import './RoundsAndMatches.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
-import {formatDate, getMatchResult} from '../utils';
+import {reformatDate, getMatchResult} from '../utils';
 
 const resultLabels = {
     '-1': <>&mdash; <span><sup>V</sup>/<sub>S</sub></span> &mdash;</>,
@@ -15,8 +15,8 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
         <div class="RoundsAndMatches">
             {rounds.map(({pairs, startDate, endDate, name}) => (
                 <div key={name}>
-                    <h3>{name}</h3>
-                    <p>Thời gian: {startDate} - {endDate}</p>
+                    <h3>Vòng {name}</h3>
+                    <p>Thời gian: {reformatDate(startDate)} - {reformatDate(endDate)}</p>
                     <TableResponsive>
                         <table>
                             {pairs.map(({firstPlayer, secondPlayer}) => {
@@ -53,7 +53,7 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                         <td align="center">
                                             <div class="match-info">
                                                 {date && (
-                                                    <div class="date">{formatDate(new Date(date))}</div>
+                                                    <div class="date">{reformatDate(date)}</div>
                                                 )}
                                                 <div class="result" data-result={result}>{resultLabel}</div>
                                                 {resultDetails && (

@@ -37,14 +37,31 @@ export let getGameScore = (match) => {
     return {firstPlayerGameScore, secondPlayerGameScore};
 };
 
-export let datePlus = (originalDate, additionalDays) => {
-    let newDate = new Date(originalDate);
-    newDate.setDate(newDate.getDate() + additionalDays);
-    return formatDate(newDate);
+export let datePlus = (startDateString, additionalDays) => {
+    let date = new Date(startDateString);
+    date.setDate(date.getDate() + additionalDays);
+    return dateStringify(date);
 };
 
-export let formatDate = (date) => {
+export let dateStringify = (date) => {
+    let y = date.getFullYear();
+    let m = (date.getMonth() + 1).toString().padStart(2, '0');
+    let d = date.getDate().toString().padStart(2, '0');
+    return `${y}-${m}-${d}`;
+};
+
+export let reformatDate = (dateString) => {
+    let date = new Date(dateString);
     let d = date.getDate().toString().padStart(2, '0');
     let m = (date.getMonth() + 1).toString().padStart(2, '0');
     return `${d}/${m}`;
 };
+
+export let isDateInRange = (dateString, startDateString, endDateString) => {
+    let current = new Date(dateString).getTime();
+    let start = new Date(startDateString).getTime();
+    let end = new Date(endDateString).getTime();
+    return start <= current && current <= end;
+};
+
+export let roundNameAt = (roundIndex) => `${roundIndex + 1}`;

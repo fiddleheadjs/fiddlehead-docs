@@ -1,5 +1,3 @@
-import './Rules.less';
-
 export let Rules = () => {
     return (
         <div class="Rules">
