@@ -180,7 +180,9 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
     return (
         <div class="RankingTable">
-            <p>BXH tính đến vòng đấu hiện tại &mdash; Vòng {roundNameAt(currentRoundIndex)}</p>
+            {currentRoundIndex >= 0 && (
+                <p>BXH tính đến vòng đấu hiện tại &mdash; Vòng {roundNameAt(currentRoundIndex)}</p>
+            )}
             <TableResponsive>
                 <table>
                     <thead>
