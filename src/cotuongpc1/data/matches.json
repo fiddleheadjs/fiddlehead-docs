@@ -245,5 +245,31 @@
             }
         ],
         "date": "2024-07-24"
+    },
+    {
+        "firstPlayerId": "haicao",
+        "secondPlayerId": "tungdai",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-07-26"
+    },
+    {
+        "firstPlayerId": "phongnguyen",
+        "secondPlayerId": "quanvu",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-07-26"
     }
 ]
