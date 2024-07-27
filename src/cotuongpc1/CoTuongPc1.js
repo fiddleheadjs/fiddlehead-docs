@@ -106,7 +106,8 @@ export let CoTuongPc1 = () => {
                     matchesById={matchesById}
                 />
             </main>
-            <p>&copy; Giải vô địch Cờ tướng PC1 2024</p>
+            <hr/>
+            <p align="center">&copy; Giải vô địch Cờ tướng PC1 2024</p>
         </div>
     );
 };
