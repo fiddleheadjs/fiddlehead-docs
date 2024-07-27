@@ -5,6 +5,7 @@ import players from './data/players.json';
 import matches from './data/matches.json';
 import {Rules} from './rules/Rules';
 import {createMatchId, datePlus, dateStringify, isDateInRange, roundNameAt} from './utils';
+import {Banner} from './banner/Banner';
 
 export let CoTuongPc1 = () => {
     // Matches
@@ -86,22 +87,25 @@ export let CoTuongPc1 = () => {
 
     return (
         <div class="CoTuongPc1">
-            <h1>Giải vô địch Cờ tướng PC1 2024</h1>
-            <h2>Điều lệ giải đấu</h2>
-            <Rules />
-            <h2>Bảng xếp hạng</h2>
-            <RankingTable
-                players={players}
-                matches={matches}
-                matchesById={matchesById}
-                matchSchedules={matchSchedules}
-                currentRoundIndex={currentRoundIndex}
-            />
-            <h2>Các vòng đấu</h2>
-            <RoundsAndMatches
-                rounds={rounds}
-                matchesById={matchesById}
-            />
+            <Banner />
+            <main>
+                <h1>Giải VĐ Cờ Tướng PC1 2024</h1>
+                <h2>Điều lệ giải đấu</h2>
+                <Rules />
+                <h2>Bảng xếp hạng</h2>
+                <RankingTable
+                    players={players}
+                    matches={matches}
+                    matchesById={matchesById}
+                    matchSchedules={matchSchedules}
+                    currentRoundIndex={currentRoundIndex}
+                />
+                <h2>Các vòng đấu</h2>
+                <RoundsAndMatches
+                    rounds={rounds}
+                    matchesById={matchesById}
+                />
+            </main>
         </div>
     );
 };
