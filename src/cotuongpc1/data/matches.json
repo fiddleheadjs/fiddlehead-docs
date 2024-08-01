@@ -284,5 +284,18 @@
             }
         ],
         "date": "2024-07-26"
+    },
+    {
+        "firstPlayerId": "ngocnguyen",
+        "secondPlayerId": "chuyennguyen",
+        "games": [
+            {
+                "result": 1
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-01"
     }
 ]
