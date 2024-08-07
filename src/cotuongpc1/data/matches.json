@@ -297,5 +297,18 @@
             }
         ],
         "date": "2024-08-01"
+    },
+    {
+        "firstPlayerId": "thangle",
+        "secondPlayerId": "quyettran",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-07"
     }
 ]
