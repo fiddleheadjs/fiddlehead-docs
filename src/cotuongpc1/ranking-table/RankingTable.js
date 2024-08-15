@@ -4,6 +4,9 @@ import {TableResponsive} from '../table-responsive/TableResponsive';
 import {createMatchId, getGameScore, getMatchResult, roundNameAt} from '../utils';
 
 let isRoundReadyForRanking = (roundIndex, currentRoundIndex) => {
+    // No filters
+    return true;
+    
     if (currentRoundIndex < 0) {
         return true;
     }
@@ -180,9 +183,9 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
     return (
         <div class="RankingTable">
-            {currentRoundIndex >= 0 && (
+            {/*currentRoundIndex >= 0 && (
                 <p>BXH tính đến vòng {roundNameAt(currentRoundIndex)} đang diễn ra</p>
-            )}
+            )*/}
             <TableResponsive>
                 <table>
                     <thead>
