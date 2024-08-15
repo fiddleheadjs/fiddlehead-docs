@@ -323,5 +323,31 @@
             }
         ],
         "date": "2024-08-08"
+    },
+    {
+        "firstPlayerId": "quyettran",
+        "secondPlayerId": "tuanquach",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-08-15"
+    },
+    {
+        "firstPlayerId": "ngocnguyen",
+        "secondPlayerId": "quanvu",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 1
+            }
+        ],
+        "date": "2024-08-15"
     }
 ]
