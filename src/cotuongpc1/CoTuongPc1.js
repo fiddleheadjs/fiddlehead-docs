@@ -76,14 +76,14 @@ export let CoTuongPc1 = () => {
     }
 
     let currentRoundIndex = -1;
-    let currentDate = dateStringify(new Date());
-    for (let r = 0; r < R; r++) {
-        let {startDate, endDate} = rounds[r];
-        if (isDateInRange(currentDate, startDate, endDate)) {
-            currentRoundIndex = r;
-            break;
-        }
-    }
+    // let currentDate = dateStringify(new Date());
+    // for (let r = 0; r < R; r++) {
+    //     let {startDate, endDate} = rounds[r];
+    //     if (isDateInRange(currentDate, startDate, endDate)) {
+    //         currentRoundIndex = r;
+    //         break;
+    //     }
+    // }
 
     return (
         <div class="CoTuongPc1">
