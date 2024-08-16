@@ -349,5 +349,18 @@
             }
         ],
         "date": "2024-08-15"
+    },
+    {
+        "firstPlayerId": "chuyennguyen",
+        "secondPlayerId": "quanvu",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-08-16"
     }
 ]
