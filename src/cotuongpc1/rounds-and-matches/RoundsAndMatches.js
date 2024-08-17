@@ -10,7 +10,7 @@ const resultLabels = {
     '2': <>thắng</>,
 };
 
-export let RoundsAndMatches = ({rounds, matchesById}) => {
+export let RoundsAndMatches = ({rounds, matchesById, latestMatchDate}) => {
     return (
         <div class="RoundsAndMatches">
             {rounds.map(({pairs, startDate, endDate, name}) => (
@@ -46,7 +46,7 @@ export let RoundsAndMatches = ({rounds, matchesById}) => {
                                 }
 
                                 return (
-                                    <tr key={matchId}>
+                                    <tr key={matchId} class={date === latestMatchDate ? 'recent-match' : ''}>
                                         <td align="right">
                                             <Player player={firstPlayer} align="right" />
                                         </td>

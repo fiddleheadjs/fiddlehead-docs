@@ -85,6 +85,13 @@ export let CoTuongPc1 = () => {
     //     }
     // }
 
+    let latestMatchDate = null;
+    if (matches.length > 0) {
+        let matchDates = matches.map(match => match.date);
+        matchDates.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+        latestMatchDate = matchDates[0];
+    }
+
     return (
         <div class="CoTuongPc1">
             <Banner />
@@ -104,6 +111,7 @@ export let CoTuongPc1 = () => {
                 <RoundsAndMatches
                     rounds={rounds}
                     matchesById={matchesById}
+                    latestMatchDate={latestMatchDate}
                 />
             </main>
             <hr/>
