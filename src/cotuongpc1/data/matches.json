@@ -362,5 +362,44 @@
             }
         ],
         "date": "2024-08-16"
+    },
+    {
+        "firstPlayerId": "phongnguyen",
+        "secondPlayerId": "haicao",
+        "games": [
+            {
+                "result": 1
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-17"
+    },
+    {
+        "firstPlayerId": "tungnguyen",
+        "secondPlayerId": "quyettran",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-17"
+    },
+    {
+        "firstPlayerId": "tungnguyen",
+        "secondPlayerId": "phongnguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-17"
     }
 ]
