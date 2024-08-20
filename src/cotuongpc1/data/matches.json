@@ -414,5 +414,31 @@
             }
         ],
         "date": "2024-08-18"
+    },
+    {
+        "firstPlayerId": "thinhdoan",
+        "secondPlayerId": "quanvu",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-08-20"
+    },
+    {
+        "firstPlayerId": "chuyennguyen",
+        "secondPlayerId": "thinhdoan",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-20"
     }
 ]
