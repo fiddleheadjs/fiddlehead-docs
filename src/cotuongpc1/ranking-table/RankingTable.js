@@ -40,7 +40,11 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
         let {firstPlayerGameScore, secondPlayerGameScore} = getGameScore(match);
         let matchId = createMatchId(firstPlayerId, secondPlayerId);
-        let {roundIndex} = matchSchedules[matchId];
+        let matchSchedule = matchSchedules[matchId];
+        if (matchSchedule === undefined) {
+            continue;
+        }
+        let {roundIndex} = matchSchedule;
         if (!isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
             continue;
         }
@@ -118,15 +122,18 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
         // Who won the match between them?
         let matchId = createMatchId(player1.id, player2.id);
-        let {roundIndex} = matchSchedules[matchId];
-        if (isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
-            let matchOrEmpty = matchesById[matchId];
-            let matchResult = getMatchResult(matchOrEmpty);
-            if (matchResult === 2) {
-                return p1__p2;
-            }
-            if (matchResult === 0) {
-                return p2__p1;
+        let matchSchedule = matchSchedules[matchId];
+        if (matchSchedule !== undefined) {
+            let {roundIndex} = matchSchedule;
+            if (isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
+                let matchOrEmpty = matchesById[matchId];
+                let matchResult = getMatchResult(matchOrEmpty);
+                if (matchResult === 2) {
+                    return p1__p2;
+                }
+                if (matchResult === 0) {
+                    return p2__p1;
+                }
             }
         }
 
