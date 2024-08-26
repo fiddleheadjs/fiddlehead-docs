@@ -453,5 +453,31 @@
             }
         ],
         "date": "2024-08-21"
+    },
+    {
+        "firstPlayerId": "thinhdoan",
+        "secondPlayerId": "tungnguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 0
+            }
+        ],
+        "date": "2024-08-24"
+    },
+    {
+        "firstPlayerId": "tungdai",
+        "secondPlayerId": "phongnguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-08-25"
     }
 ]
