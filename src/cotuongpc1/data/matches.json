@@ -518,5 +518,18 @@
             }
         ],
         "date": "2024-08-28"
+    },
+    {
+        "firstPlayerId": "ngocnguyen",
+        "secondPlayerId": "haicao",
+        "games": [
+            {
+                "result": 0
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-08-29"
     }
 ]
