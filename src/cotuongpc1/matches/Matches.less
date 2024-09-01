@@ -1,0 +1,66 @@
+.Matches {
+    table {
+        border-collapse: collapse;
+
+        td, th {
+            padding: 0.5em 0.25em;
+        }
+    
+        td {
+            border-top: 1px solid lightgray;
+        }
+
+        tr.recent-match {
+            background: whitesmoke;
+        }
+
+        .match-info {
+            white-space: nowrap;
+
+            > :not(:first-child) {
+                margin-top: 0.1em;
+            }
+
+            .date {
+                font-size: x-small;
+                color: darkgray;
+            }
+
+            .result {
+                &[data-result="-2"] {
+                    color: gray;
+                }
+
+                &[data-result="-1"] {
+                    color: lightgray;
+                    
+                    span {
+                        font-size: smaller;
+                        font-style: italic;
+                        font-weight: bold;
+                    }
+                }
+    
+                &[data-result="0"] {
+                    color: red;
+                    text-transform: uppercase;
+                }
+    
+                &[data-result="1"] {
+                    color: blue;
+                    text-transform: uppercase;
+                }
+    
+                &[data-result="2"] {
+                    color: green;
+                    text-transform: uppercase;
+                }
+            }
+    
+            .result-details {
+                font-size: x-small;
+                color: darkgray;
+            }
+        }
+    }
+}

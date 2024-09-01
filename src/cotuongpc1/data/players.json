@@ -2,61 +2,73 @@
     {
         "id": "ngocnguyen",
         "name": "Nguyễn Hữu Ngọc",
-        "group": "C"
+        "group": "C",
+        "active": true
     },
     {
         "id": "haicao",
         "name": "Cao Bá Hải",
-        "group": "B"
+        "group": "B",
+        "active": true
     },
     {
         "id": "tungdai",
         "name": "Tùng Đại",
-        "group": "A"
+        "group": "A",
+        "active": true
     },
     {
         "id": "quanvu",
         "name": "Vũ Hồng Quân",
-        "group": "C"
+        "group": "C",
+        "active": true
     },
     {
         "id": "tuanquach",
         "name": "Quách Văn Tuấn",
-        "group": "B"
+        "group": "B",
+        "active": true
     },
     {
         "id": "thinhdoan",
         "name": "Đoàn Quang Thịnh",
-        "group": "B"
+        "group": "B",
+        "active": true
     },
     {
         "id": "quyettran",
         "name": "Trần Văn Quyết",
-        "group": "B"
+        "group": "B",
+        "active": true
     },
     {
         "id": "chuyennguyen",
         "name": "Nguyễn Ngọc Chuyền",
-        "group": "C"
+        "group": "C",
+        "active": true
     },
     {
         "id": "tungnguyen",
         "name": "Tùng Nguyễn",
-        "group": "C"
+        "group": "C",
+        "active": true
     },
     {
         "id": "thanhtran",
         "name": "Trần Ngọc Thanh",
-        "group": "C"
+        "group": "C",
+        "active": false
     },
     {
         "id": "thangle",
         "name": "Lê Duy Thắng",
-        "group": "D"
+        "group": "D",
+        "active": false
     },
     {
         "id": "phongnguyen",
         "name": "Nguyễn Tiến Phong",
-        "group": "D"
+        "group": "D",
+        "active": true
     }
 ]

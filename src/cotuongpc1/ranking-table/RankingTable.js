@@ -3,7 +3,7 @@ import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
 import {createMatchId, getGameScore, getMatchResult} from '../utils';
 
-export let RankingTable = ({players, quitPlayerIdSet, matchesById, matchSchedules}) => {
+export let RankingTable = ({players, matchesById, matchSchedules}) => {
     let resultsByPlayerId = {};
     let matchesPerPlayer = players.length - 1;
     for (let player of players) {
@@ -21,11 +21,11 @@ export let RankingTable = ({players, quitPlayerIdSet, matchesById, matchSchedule
         };
     }
 
-    for (let [matchId, { roundIndex, firstPlayerId, secondPlayerId }] of Object.entries(matchSchedules)) {
-        let firstPlayerResult = resultsByPlayerId[firstPlayerId];
-        let secondPlayerResult = resultsByPlayerId[secondPlayerId];
+    for (let [matchId, { roundIndex, firstPlayer, secondPlayer }] of Object.entries(matchSchedules)) {
+        let firstPlayerResult = resultsByPlayerId[firstPlayer.id];
+        let secondPlayerResult = resultsByPlayerId[secondPlayer.id];
         
-        if (quitPlayerIdSet.has(firstPlayerId) || quitPlayerIdSet.has(secondPlayerId)) {
+        if (!(firstPlayer.active && secondPlayer.active)) {
             firstPlayerResult.history[roundIndex] = -2;
             secondPlayerResult.history[roundIndex] = -2;
             continue;
@@ -53,14 +53,14 @@ export let RankingTable = ({players, quitPlayerIdSet, matchesById, matchSchedule
 
         switch (matchResult) {
             case 0:
-                secondPlayerResult.loserIds.push(firstPlayerId);
+                secondPlayerResult.loserIds.push(firstPlayer.id);
                 break;
             case 1:
-                firstPlayerResult.drawerIds.push(secondPlayerId);
-                secondPlayerResult.drawerIds.push(firstPlayerId);
+                firstPlayerResult.drawerIds.push(secondPlayer.id);
+                secondPlayerResult.drawerIds.push(firstPlayer.id);
                 break;
             case 2:
-                firstPlayerResult.loserIds.push(secondPlayerId);
+                firstPlayerResult.loserIds.push(secondPlayer.id);
                 break;
         }
 
