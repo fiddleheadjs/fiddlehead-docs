@@ -1,24 +1,16 @@
 import './RankingTable.less';
 import {Player} from '../player/Player';
 import {TableResponsive} from '../table-responsive/TableResponsive';
-import {createMatchId, getGameScore, getMatchResult, roundNameAt} from '../utils';
+import {createMatchId, getGameScore, getMatchResult} from '../utils';
 
-let isRoundReadyForRanking = (roundIndex, currentRoundIndex) => {
-    if (currentRoundIndex < 0) {
-        return true;
-    }
-    return roundIndex <= currentRoundIndex;
-};
-
-export let RankingTable = ({players, matches, matchesById, matchSchedules, currentRoundIndex}) => {
+export let RankingTable = ({players, quitPlayerIdSet, matchesById, matchSchedules}) => {
     let resultsByPlayerId = {};
-
-    let P = players.length;
-    let matchesPerPlayer = P - 1;
-    for (let i = 0; i < P; i++) {
-        resultsByPlayerId[players[i].id] = {
+    let matchesPerPlayer = players.length - 1;
+    for (let player of players) {
+        resultsByPlayerId[player.id] = {
             rank: 0,
             matchScore: 0,
+            headToHeadScore: 0,
             gameScore: 0,
             competitorsScore: 0,
             matches: 0,
@@ -29,28 +21,23 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
         };
     }
 
-    let M = matches.length;
-    for (let i = 0; i < M; i++) {
-        let match = matches[i];
-        let {firstPlayerId, secondPlayerId} = match;
-        let matchResult = getMatchResult(match);
-        if (matchResult === -1) {
-            continue;
-        }
-
-        let {firstPlayerGameScore, secondPlayerGameScore} = getGameScore(match);
-        let matchId = createMatchId(firstPlayerId, secondPlayerId);
-        let matchSchedule = matchSchedules[matchId];
-        if (matchSchedule === undefined) {
-            continue;
-        }
-        let {roundIndex} = matchSchedule;
-        if (!isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
-            continue;
-        }
-
+    for (let [matchId, { roundIndex, firstPlayerId, secondPlayerId }] of Object.entries(matchSchedules)) {
         let firstPlayerResult = resultsByPlayerId[firstPlayerId];
         let secondPlayerResult = resultsByPlayerId[secondPlayerId];
+        
+        if (quitPlayerIdSet.has(firstPlayerId) || quitPlayerIdSet.has(secondPlayerId)) {
+            firstPlayerResult.history[roundIndex] = -2;
+            secondPlayerResult.history[roundIndex] = -2;
+            continue;
+        }
+        
+        let matchOrEmpty = matchesById[matchId];
+        let matchResult = getMatchResult(matchOrEmpty);
+        if (matchResult < 0) {
+            continue;
+        }
+
+        let {firstPlayerGameScore, secondPlayerGameScore} = getGameScore(matchOrEmpty);
 
         firstPlayerResult.matches++;
         secondPlayerResult.matches++;
@@ -77,7 +64,7 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
                 break;
         }
 
-        for (let game of match.games) {
+        for (let game of matchOrEmpty.games) {
             switch (game.result) {
                 case 0:
                     secondPlayerResult.winGames++;
@@ -89,6 +76,7 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
         }
     }
 
+    // Calculate competitors score
     for (let playerResult of Object.values(resultsByPlayerId)) {
         let competitorsScore = 0;
         for (let loserId of playerResult.loserIds) {
@@ -98,6 +86,38 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
             competitorsScore += resultsByPlayerId[drawerId].matchScore;
         }
         playerResult.competitorsScore = competitorsScore;
+    }
+    
+    // Calculate head-to-head score (for groups of three or more players who have the same match score)
+    let scoreToPlayerIds = {};
+    for (let [playerId, { matchScore }] of Object.entries(resultsByPlayerId)) {
+        if (scoreToPlayerIds[matchScore] === undefined) {
+            scoreToPlayerIds[matchScore] = [];
+        }
+        scoreToPlayerIds[matchScore].push(playerId);
+    }
+    for (let playerIds of Object.values(scoreToPlayerIds)) {
+        if (playerIds.length < 3) {
+            continue;
+        }
+        for (let i = 0; i < playerIds.length; i++) {
+            for (let j = i + 1; j < playerIds.length; j++) {
+                let firstPlayerId = playerIds[i];
+                let secondPlayerId = playerIds[j];
+                let firstPlayerResult = resultsByPlayerId[firstPlayerId];
+                let secondPlayerResult = resultsByPlayerId[secondPlayerId];
+
+                let matchId = createMatchId(firstPlayerId, secondPlayerId);
+                let matchOrEmpty = matchesById[matchId];
+                let matchResult = getMatchResult(matchOrEmpty);
+                if (matchResult < 0) {
+                    continue;
+                }
+
+                firstPlayerResult.headToHeadScore += matchResult;
+                secondPlayerResult.headToHeadScore += 2 - matchResult;
+            }
+        }
     }
 
     let rankedPlayers = players.map(player => ({
@@ -111,7 +131,7 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
         let result1 = resultsByPlayerId[player1.id];
         let result2 = resultsByPlayerId[player2.id];
-
+        
         // Who has a higher match score?
         if (result2.matchScore > result1.matchScore) {
             return p2__p1;
@@ -120,21 +140,23 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
             return p1__p2;
         }
 
+        // Who has a higher head-to-head score?
+        if (result2.headToHeadScore > result1.headToHeadScore) {
+            return p2__p1;
+        }
+        if (result1.headToHeadScore > result2.headToHeadScore) {
+            return p1__p2;
+        }
+        
         // Who won the match between them?
         let matchId = createMatchId(player1.id, player2.id);
-        let matchSchedule = matchSchedules[matchId];
-        if (matchSchedule !== undefined) {
-            let {roundIndex} = matchSchedule;
-            if (isRoundReadyForRanking(roundIndex, currentRoundIndex)) {
-                let matchOrEmpty = matchesById[matchId];
-                let matchResult = getMatchResult(matchOrEmpty);
-                if (matchResult === 2) {
-                    return p1__p2;
-                }
-                if (matchResult === 0) {
-                    return p2__p1;
-                }
-            }
+        let matchOrEmpty = matchesById[matchId];
+        let matchResult = getMatchResult(matchOrEmpty);
+        if (matchResult === 2) {
+            return p1__p2;
+        }
+        if (matchResult === 0) {
+            return p2__p1;
         }
 
         // Who has a higher game score?
@@ -187,9 +209,6 @@ export let RankingTable = ({players, matches, matchesById, matchSchedules, curre
 
     return (
         <div class="RankingTable">
-            {currentRoundIndex >= 0 && (
-                <p>BXH tính đến vòng {roundNameAt(currentRoundIndex)} đang diễn ra</p>
-            )}
             <TableResponsive>
                 <table>
                     <thead>

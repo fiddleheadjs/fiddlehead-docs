@@ -544,5 +544,31 @@
             }
         ],
         "date": "2024-08-30"
+    },
+    {
+        "firstPlayerId": "tungnguyen",
+        "secondPlayerId": "tuanquach",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 1
+            }
+        ],
+        "date": "2024-08-31"
+    },
+    {
+        "firstPlayerId": "chuyennguyen",
+        "secondPlayerId": "tungnguyen",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 1
+            }
+        ],
+        "date": "2024-08-31"
     }
 ]

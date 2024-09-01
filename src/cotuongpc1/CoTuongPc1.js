@@ -3,9 +3,12 @@ import {RoundsAndMatches} from './rounds-and-matches/RoundsAndMatches';
 import {RankingTable} from './ranking-table/RankingTable';
 import players from './data/players.json';
 import matches from './data/matches.json';
+import quitPlayerIds from './data/quitPlayerIds';
 import {Rules} from './rules/Rules';
-import {createMatchId, datePlus, dateStringify, isDateInRange, roundNameAt} from './utils';
+import {createMatchId, datePlus, roundNameAt} from './utils';
 import {Banner} from './banner/Banner';
+
+const quitPlayerIdSet = new Set(quitPlayerIds);
 
 export let CoTuongPc1 = () => {
     // Matches
@@ -64,26 +67,18 @@ export let CoTuongPc1 = () => {
             let firstPlayer = line1[i];
             let secondPlayer = line2[i];
             pairs.push({firstPlayer, secondPlayer});
+            let matchId = createMatchId(firstPlayer.id, secondPlayer.id);
             let matchSchedule = {
                 roundIndex: r,
-                scheduledDate: datePlus(startDate, i)
+                scheduledDate: datePlus(startDate, i),
+                firstPlayerId: firstPlayer.id,
+                secondPlayerId: secondPlayer.id
             };
-            matchSchedules[createMatchId(firstPlayer.id, secondPlayer.id)] = matchSchedule;
-            matchSchedules[createMatchId(secondPlayer.id, firstPlayer.id)] = matchSchedule;
+            matchSchedules[matchId] = matchSchedule;
         }
         line1.splice(1, 0, line2.shift());
         line2.push(line1.pop());
     }
-
-    let currentRoundIndex = -1;
-    // let currentDate = dateStringify(new Date());
-    // for (let r = 0; r < R; r++) {
-    //     let {startDate, endDate} = rounds[r];
-    //     if (isDateInRange(currentDate, startDate, endDate)) {
-    //         currentRoundIndex = r;
-    //         break;
-    //     }
-    // }
 
     let latestMatchDate = null;
     if (matches.length > 0) {
@@ -102,16 +97,17 @@ export let CoTuongPc1 = () => {
                 <h2>Bảng xếp hạng</h2>
                 <RankingTable
                     players={players}
+                    quitPlayerIdSet={quitPlayerIdSet}
                     matches={matches}
                     matchesById={matchesById}
                     matchSchedules={matchSchedules}
-                    currentRoundIndex={currentRoundIndex}
                 />
                 <h2>Các vòng đấu</h2>
                 <RoundsAndMatches
                     rounds={rounds}
                     matchesById={matchesById}
                     latestMatchDate={latestMatchDate}
+                    quitPlayerIdSet={quitPlayerIdSet}
                 />
             </main>
             <hr/>
