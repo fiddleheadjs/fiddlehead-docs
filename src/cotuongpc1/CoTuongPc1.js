@@ -107,12 +107,16 @@ export let CoTuongPc1 = () => {
                     matchesById={matchesById}
                     matchSchedules={matchSchedules}
                 />
-                <h2>Cặp đấu còn lại</h2>
-                <Matches
-                    pairs={remainingPairs}
-                    matchesById={matchesById}
-                    latestMatchDate={latestMatchDate}
-                />
+                {remainingPairs.length > 0 && (
+                    <>
+                        <h2>Cặp đấu còn lại</h2>
+                        <Matches
+                            pairs={remainingPairs}
+                            matchesById={matchesById}
+                            latestMatchDate={latestMatchDate}
+                        />
+                    </>
+                )}
                 <h2>Các vòng đấu</h2>
                 <RoundsAndMatches
                     rounds={rounds}
