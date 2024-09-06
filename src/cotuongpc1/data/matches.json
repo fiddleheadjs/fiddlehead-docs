@@ -583,5 +583,18 @@
             }
         ],
         "date": "2024-09-04"
+    },
+    {
+        "firstPlayerId": "quanvu",
+        "secondPlayerId": "haicao",
+        "games": [
+            {
+                "result": 2
+            },
+            {
+                "result": 2
+            }
+        ],
+        "date": "2024-09-06"
     }
 ]
