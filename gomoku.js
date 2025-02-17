@@ -165,11 +165,13 @@ router.get('/game-data', (req, res) => {
         let substitutionUserIndex = null;
         let count = 0;
         while (count < thinkingTeam.length) {
-            count++;
-            let userId = thinkingTeam[index];
-            if (userId == null) {
+            // may happen after someone leaves
+            if (index > thinkingTeam.length - 1) {
+                index = 0;
                 continue;
             }
+            count++;
+            let userId = thinkingTeam[index];
             let user = users[userId];
             if (user == null) {
                 continue;
