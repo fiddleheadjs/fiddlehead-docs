@@ -1,0 +1,58 @@
+@import '../../style/mixin.less';
+
+.TableViewer {
+    display: table;
+
+    > * + * {
+        margin-top: @space-tiny-4;
+    }
+
+    .headline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: @space-small-4;
+    }
+
+    .team {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        &.align-right {
+            text-align: right;
+        }
+
+        &[data-team="0"] {
+            .name {
+                &.thinking {
+                    color: red;
+                }
+            }
+        }
+
+        &[data-team="1"] {
+            .name {
+                &.thinking {
+                    color: blue;
+                }
+            }
+        }
+
+        .name {
+            .font-body-bold();
+
+            &.thinking {
+                text-decoration: underline;
+            }
+        }
+        
+        .members {
+            display: inline-block;
+            max-width: 12rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+}

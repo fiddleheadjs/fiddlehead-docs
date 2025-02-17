@@ -1,20 +1,37 @@
 @import '../../style/mixin.less';
 
 .Team {
-    padding: 0 @space-small-2;
+    &.align-right {
+        text-align: right;
+
+        h3 {
+            text-align: right;
+        }
+    }
+
+    &[data-team="0"] {
+        .user {
+            &.thinking {
+                color: red;
+            }
+        }
+    }
+
+    &[data-team="1"] {
+        .user {
+            &.thinking {
+                color: blue;
+            }
+        }
+    }
 
     .user {
         &.thinking {
-            font-weight: bold;
-            color: @color-caution;
-
-            &::before {
-                content: "> ";
-            }
+            text-decoration: underline;
         }
 
         &.disconnected {
-            color: @gray-light-A0;
+            color: darkgray;
         }
     }
 }

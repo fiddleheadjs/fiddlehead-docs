@@ -1,0 +1,30 @@
+@import '../../style/mixin.less';
+
+.TopBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .table-name {
+
+    }
+
+    .info {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .your-turn {
+            color: orange;
+            margin-left: @space-small-4;
+        }
+    }
+
+    .actions {
+        :not(:last-child) {
+            margin-right: @space-small-4;
+        }
+    }
+}

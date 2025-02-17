@@ -4,14 +4,18 @@ import { v4 as uuid } from 'uuid';
 import {Button} from '../../components/button/Button';
 
 export let AddUser = ({ setGameData }) => {
-    let [userName, setUserName] = useState('');
+    let [draftUserName, setDraftUserName] = useState('');
+
+    let userName = draftUserName.trim();
+
+    let isValid = userName !== '';
 
     let onSubmit = (event) => {
         event.preventDefault();
-        if (userName === '') {
+        if (!isValid) {
             return;
         }
-        setUserName('');
+        setDraftUserName('');
         let userId = uuid();
         localStorage.setItem('userId', userId);
         fetch(`/gomoku/add-user?userId=${userId}&userName=${userName}`).then(res => res.json()).then((data) => {
@@ -24,9 +28,11 @@ export let AddUser = ({ setGameData }) => {
             <h3>Play Gomoku</h3>
             <div>Please enter your name:</div>
             <div>
-                <input type="text" placeholder="your name" value={userName} onInput={ev => setUserName(ev.target.value)} />
+                <input type="text" placeholder="your name" value={draftUserName} onInput={ev => setDraftUserName(ev.target.value)} />
             </div>
-            <Button type="submit" disabled={userName === ''}>{'Join >>'}</Button>
+            {isValid && (
+                <Button type="submit">Join {'>>'}</Button>
+            )}
         </form>
     );
 };

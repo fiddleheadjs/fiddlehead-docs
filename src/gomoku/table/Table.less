@@ -1,0 +1,19 @@
+@import '../../style/mixin.less';
+
+.Table {
+    .container {
+        max-width: 1200px;
+        margin: auto;
+
+        > * + * {
+            margin-top: @space-medium-4;
+        }
+    }
+
+    .main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}

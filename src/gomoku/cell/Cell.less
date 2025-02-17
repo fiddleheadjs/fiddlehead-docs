@@ -9,7 +9,7 @@
     vertical-align: middle;
     cursor: default;
     
-    &:not(.locked){
+    &:not(.view-only){
         &[data-value="2"]:hover {
             background: @gray-light-A2;
             cursor: pointer;
@@ -18,27 +18,27 @@
 
     &[data-value="0"]::after {
         content: "O";
-        color: #E00;
+        color: red;
         font-weight: bold;
     }
 
     &[data-value="1"]::after {
         content: "X";
-        color: #0A0;
+        color: blue;
         font-weight: bold;
     }
 
     &[data-streak="true"] {
         &::after {
-            color: #FFF;
+            color: white;
         }
 
         &[data-value="0"] {
-            background: #E00;
+            background: red;
         }
     
         &[data-value="1"] {
-            background: #0A0;
+            background: blue;
         }
     }
 }

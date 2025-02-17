@@ -1,8 +1,12 @@
 import './Gomoku.less';
 import {useEffect, useState} from 'fiddlehead';
 import {AddUser} from './add-user/AddUser';
-import {Board} from './board/Board';
-import {Team} from './team/Team';
+import {TableList} from './table-list/TableList';
+import {Table} from './table/Table';
+
+let withWrapper = (content) => (
+    <div class="Gomoku">{content}</div>
+);
 
 export let Gomoku = () => {
     let [gameData, setGameData] = useState(null);
@@ -18,62 +22,23 @@ export let Gomoku = () => {
     }, []);
 
     if (gameData === null) {
-        return 'Loading game data...';
+        return withWrapper('Loading...');
     }
 
-    let {users, teams, state, now} = gameData;
-
+    let {users, tables, now} = gameData;
+    
     let myUserId = localStorage.getItem('userId');
     let myself = users[myUserId];
+    
+    if (myself == null) {
+        return withWrapper(<AddUser setGameData={setGameData} />);
+    }
+    
+    let myTable = Object.values(tables).find(table => table.teams.some(team => team.includes(myself.id)));
 
-    if (!myself) {
-        return <AddUser setGameData={setGameData} />
+    if (myTable == null) {
+        return withWrapper(<TableList myself={myself} users={users} tables={tables} setGameData={setGameData} />);
     }
 
-    let myIndex = teams[myself.teamId].indexOf(myUserId);
-
-    let isMyTurn = state.thinkingTeamId === myself.teamId && state.thinkingUserIndexes[state.thinkingTeamId] === myIndex;
-
-    return (
-        <div class="Gomoku">
-            <div class="topbar">
-                <div class="left">
-                    <h4>Player: {myself.name} &ndash; Team: {myself.teamId === 0 ? 'O' : 'X'}</h4>
-                    {isMyTurn && <div class="your-turn">Your turn!</div>}
-                </div>
-                <button onClick={() => {
-                    if (confirm('Are you sure you want to replay?')) {
-                        fetch(`/gomoku/replay`).then(response => response.json()).then((data) => {
-                            setGameData(data);
-                        });
-                    }
-                }}>Replay</button>
-            </div>
-            <div class="main">
-                <Team
-                    teamName="O"
-                    users={users}
-                    team={teams[0]}
-                    thinking={state.thinkingTeamId === 0}
-                    thinkingUserIndex={state.thinkingUserIndexes[0]}
-                    now={now}
-                />
-                <Board
-                    remoteMatrix={state.matrix}
-                    teamId={state.thinkingTeamId}
-                    userId={myself.id}
-                    isMyTurn={isMyTurn}
-                    setGameData={setGameData}
-                />
-                <Team
-                    teamName="X"
-                    users={users}
-                    team={teams[1]}
-                    thinking={state.thinkingTeamId === 1}
-                    thinkingUserIndex={state.thinkingUserIndexes[1]}
-                    now={now}
-                />
-            </div>
-        </div>
-    );
+    return withWrapper(<Table users={users} myTable={myTable} myself={myself} setGameData={setGameData} now={now} />);
 };

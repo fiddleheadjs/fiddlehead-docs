@@ -1,38 +1,19 @@
 @import '../style/mixin.less';
 
 .Gomoku {
-    .topbar {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        .left {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-
-            .your-turn {
-                color: @color-caution;
-                margin-left: @space-medium-2;
-            }
-        }
+    input, select {
+        border: 1px solid @gray-twilight;
+        box-sizing: content-box;
+        height: @dimension-input-standard-height;
+        padding: @dimension-input-standard-padding;
+        width: 20rem;
+        .font-body();
+        .border-radius(2);
     }
 
-    .main {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-    
-        .Team {
-            width: 20%;
-            min-width: 20%;
-        }
-    
-        .Board {
-            max-width: 60%;
+    button {
+        &:not(:disabled) {
+            cursor: pointer;
         }
     }
 }

@@ -1,0 +1,18 @@
+@import '../../style/mixin.less';
+
+.TableList {
+    > * + * {
+        margin-top: @space-medium-4;
+    }
+
+    section {
+        > * + * {
+            margin-top: @space-small-4;
+        }
+
+        .toggle-heading {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
