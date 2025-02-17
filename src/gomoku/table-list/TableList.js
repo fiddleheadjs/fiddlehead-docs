@@ -18,8 +18,10 @@ export let TableList = ({ myself, users, tables, setGameData }) => {
             )}
             {tableCount < 32 && (
                 <section>
-                    <div class="toggle-heading" onClick={() => setShouldShowAddTable(!shouldShowAddTable)}>
-                        New table
+                    <div class="toggle-heading">
+                        <span onClick={() => setShouldShowAddTable(!shouldShowAddTable)}>
+                            New table
+                        </span>
                     </div>
                     {shouldShowAddTable && (
                         <AddTable myself={myself} setGameData={setGameData} />
