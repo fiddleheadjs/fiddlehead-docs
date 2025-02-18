@@ -4,7 +4,7 @@ import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
 import {findStreak, getTeamName} from '../utils';
 
-export let TableViewer = ({table, users, enterTable}) => {
+export let TableViewer = ({table, users, myself, setGameData}) => {
     let {code, state, teams} = table;
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
@@ -17,11 +17,32 @@ export let TableViewer = ({table, users, enterTable}) => {
         streak === null
     );
 
+    let enterTable = (tableCode) => {
+        fetch(`/gomoku/enter-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
+            setGameData(data);
+        });
+    };
+
+    let removeTable = (tableCode) => {
+        if (confirm(`Are you sure you want to remove table ${tableCode}?`)) {
+            fetch(`/gomoku/remove-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
+                setGameData(data);
+            });
+        }
+    };
+
+    let isNobodyHere = table.teams.every(members => members.length === 0);
+
     return (
         <div class="TableViewer">
             <div class="headline">
-                <span class="code">Table <b>{code}</b></span>
-                <Button type="button" onClick={() => enterTable(code)}>Play</Button>
+                <div class="code">Table <b>{code}</b></div>
+                <div class="actions">
+                    {isNobodyHere && (
+                        <Button type="button" size="small" onClick={() => removeTable(code)}>Remove</Button>
+                    )}
+                    <Button type="button" size="small" onClick={() => enterTable(code)}>Play now</Button>
+                </div>
             </div>
             <div class="headline">
                 <div class="team align-left" data-team={0}>

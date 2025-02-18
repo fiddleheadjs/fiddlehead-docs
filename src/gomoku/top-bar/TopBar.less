@@ -23,8 +23,9 @@
     }
 
     .actions {
-        :not(:last-child) {
-            margin-right: @space-small-4;
-        }
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: @space-small-4;
     }
 }

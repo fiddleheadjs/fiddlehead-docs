@@ -41,6 +41,15 @@ let createMatrix = () => {
     return matrix;
 };
 
+tables = {
+    '123': createTable('123'),
+    '456': createTable('456'),
+    '789': createTable('789'),
+    'abc': createTable('abc'),
+    'def': createTable('def'),
+    'ghj': createTable('ghj'),
+};
+
 router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
@@ -75,6 +84,23 @@ router.get('/add-table', (req, res) => {
     }
 
     tables[tableCode] = createTable(tableCode);
+    res.send(getResData());
+});
+
+router.get('/remove-table', (req, res) => {
+    let {userId, tableCode} = req.query;
+    let user = users[userId];
+    let table = tables[tableCode];
+    if (user == null || table == null) {
+        res.sendStatus(400);
+        return;
+    }
+    let isNobodyHere = table.teams.every(members => members.length === 0);
+    if (!isNobodyHere) {
+        res.sendStatus(400);
+        return;
+    }
+    delete tables[table.code];
     res.send(getResData());
 });
 
@@ -126,12 +152,9 @@ router.get('/move', (req, res) => {
 
     let {teams, state} = table;
     let teamId = [0, 1].find(tId => teams[tId].includes(user.id));
-    if (teamId !== state.thinkingTeamId) {
-        res.status(400);
-        return;
-    }
-
-    if (state.thinkingUserIndexes[teamId] !== teams[teamId].indexOf(user.id)) {
+    if (teamId !== state.thinkingTeamId ||
+        state.thinkingUserIndexes[teamId] !== teams[teamId].indexOf(user.id)
+    ) {
         res.status(400);
         return;
     }
@@ -204,7 +227,7 @@ router.get('/replay', (req, res) => {
     }
 
     let {teams, state} = table;
-    let isUserInTheTable = teams.some(team => team.includes(user.id));
+    let isUserInTheTable = teams.some(members => members.includes(user.id));
     if (!isUserInTheTable) {
         res.status(400);
         return;

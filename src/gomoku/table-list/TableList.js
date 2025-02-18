@@ -1,7 +1,7 @@
+import './TableList.less';
 import {useState} from 'fiddlehead';
 import {AddTable} from '../add-table/AddTable';
-import {EnterTable} from '../enter-table/EnterTable';
-import './TableList.less';
+import {TableViewer} from '../table-viewer/TableViewer';
 
 export let TableList = ({ myself, users, tables, setGameData }) => {
     let [shouldShowAddTable, setShouldShowAddTable] = useState(false);
@@ -12,12 +12,20 @@ export let TableList = ({ myself, users, tables, setGameData }) => {
         <div class="TableList">
             <h3>Hi, {myself.name}</h3>
             {tableCount > 0 && (
-                <section>
-                    <EnterTable myself={myself} users={users} tables={tables} setGameData={setGameData} />
-                </section>
+                <div class="all-tables">
+                    {Object.values(tables).map((table) => (
+                        <TableViewer
+                            key={table.code}
+                            table={table}
+                            users={users}
+                            myself={myself}
+                            setGameData={setGameData}
+                        />
+                    ))}
+                </div>
             )}
             {tableCount < 32 && (
-                <section>
+                <div class="new-table">
                     <div class="toggle-heading">
                         <span onClick={() => setShouldShowAddTable(!shouldShowAddTable)}>
                             New table
@@ -26,7 +34,7 @@ export let TableList = ({ myself, users, tables, setGameData }) => {
                     {shouldShowAddTable && (
                         <AddTable myself={myself} setGameData={setGameData} />
                     )}
-                </section>
+                </div>
             )}
         </div>
     );
