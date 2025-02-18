@@ -1,3 +1,19 @@
 .Board {
-    border-collapse: collapse;
+    position: relative;
+    display: table;
+
+    table {
+        border-collapse: collapse;
+    }
+
+    svg {
+        pointer-events: none;
+        position: absolute;
+        width: calc(100% + 100px);
+        height: calc(100% + 100px);
+        top: -50px;
+        bottom: -50px;
+        left: -50px;
+        right: -50px;
+    }
 }

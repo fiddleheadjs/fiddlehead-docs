@@ -23,8 +23,8 @@ export let TopBar = ({ myTable, myself, myTeamName, setGameData }) => {
                 <span><b>{myself.name}</b> / {myTeamName}</span>
             </div>
             <div class="actions">
-                <Button type="button" onClick={() => replay()}>Replay</Button>
-                <Button type="button" onClick={() => leaveTable()}>Leave table</Button>
+                <Button type="button" size="small" onClick={() => replay()}>Replay</Button>
+                <Button type="button" size="small" onClick={() => leaveTable()}>Leave table</Button>
             </div>
         </div>
     );
