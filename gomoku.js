@@ -41,15 +41,6 @@ let createMatrix = () => {
     return matrix;
 };
 
-tables = {
-    '123': createTable('123'),
-    '456': createTable('456'),
-    '789': createTable('789'),
-    'abc': createTable('abc'),
-    'def': createTable('def'),
-    'ghj': createTable('ghj'),
-};
-
 router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
