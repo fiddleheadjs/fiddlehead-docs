@@ -12,7 +12,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
         }
     }, [isMyTurn]);
     
-    let [matrix, setMatrix] = useState([]);
+    let [matrix, setMatrix] = useState(remoteMatrix);
 
     useEffect(() => {
         setMatrix(remoteMatrix);
