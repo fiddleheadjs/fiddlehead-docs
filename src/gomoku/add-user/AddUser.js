@@ -31,7 +31,11 @@ export let AddUser = ({ setGameData }) => {
                 <input type="text" placeholder="your name" value={draftUserName} onInput={ev => setDraftUserName(ev.target.value)} />
             </div>
             {isValid && (
-                <Button type="submit">Join {'>>'}</Button>
+                <Button type="submit">
+                    <span>Join in</span>
+                    {' '}
+                    <svg viewBox="0 -960 960 960" width="1em"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                </Button>
             )}
         </form>
     );
