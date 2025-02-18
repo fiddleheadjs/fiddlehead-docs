@@ -41,6 +41,15 @@ let createMatrix = () => {
     return matrix;
 };
 
+let resetToDefaultData = () => {
+    users = {};
+    tables = {
+        '1': createTable('1'),
+        '2': createTable('2'),
+        '3': createTable('3')
+    };
+};
+
 router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
@@ -233,9 +242,10 @@ router.get('/replay', (req, res) => {
 });
 
 router.get('/reset', (req, res) => {
-    users = {};
-    tables = {};
+    resetToDefaultData();
     res.send(getResData());
 });
+
+resetToDefaultData();
 
 module.exports = router;
