@@ -31,34 +31,38 @@ export let Table = ({ users, myTable, myself, setGameData, now }) => {
                     setGameData={setGameData}
                 />
                 <div class="main">
-                    <Team
-                        users={users}
-                        teamId={0}
-                        teamMembers={teams[0]}
-                        thinking={state.thinkingTeamId === 0}
-                        thinkingUserIndex={state.thinkingUserIndexes[0]}
-                        streak={streak}
-                        now={now}
-                        align="left"
-                    />
-                    <Board
-                        remoteMatrix={state.matrix}
-                        teamId={state.thinkingTeamId}
-                        userId={myself.id}
-                        tableCode={myTable.code}
-                        isMyTurn={isMyTurn}
-                        setGameData={setGameData}
-                    />
-                    <Team
-                        users={users}
-                        teamId={1}
-                        teamMembers={teams[1]}
-                        thinking={state.thinkingTeamId === 1}
-                        thinkingUserIndex={state.thinkingUserIndexes[1]}
-                        streak={streak}
-                        now={now}
-                        align="right"
-                    />
+                    <div class="left">
+                        <Team
+                            users={users}
+                            teamId={0}
+                            teamMembers={teams[0]}
+                            thinking={state.thinkingTeamId === 0}
+                            thinkingUserIndex={state.thinkingUserIndexes[0]}
+                            streak={streak}
+                            now={now}
+                        />
+                    </div>
+                    <div class="central">
+                        <Board
+                            remoteMatrix={state.matrix}
+                            teamId={state.thinkingTeamId}
+                            userId={myself.id}
+                            tableCode={myTable.code}
+                            isMyTurn={isMyTurn}
+                            setGameData={setGameData}
+                        />
+                    </div>
+                    <div class="right">
+                        <Team
+                            users={users}
+                            teamId={1}
+                            teamMembers={teams[1]}
+                            thinking={state.thinkingTeamId === 1}
+                            thinkingUserIndex={state.thinkingUserIndexes[1]}
+                            streak={streak}
+                            now={now}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

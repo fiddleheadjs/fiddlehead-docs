@@ -6,14 +6,46 @@
         margin: auto;
 
         > * + * {
-            margin-top: @space-medium-4;
+            margin-top: @space-large-2;
         }
     }
 
     .main {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+        .central {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .right {
+            * {
+                text-align: right;
+            }
+        }
+
+        .media-current(@screen-desktop, {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        });
+
+        .media-current(@screen-non-desktop, {
+            display: grid;
+            grid-template-areas: "central central" "left right";
+            gap: @space-small-4;
+
+            .central {
+                grid-area: central;
+            }
+
+            .left {
+                grid-area: left;
+            }
+            
+            .right {
+                grid-area: right;
+            }
+        });
     }
 }
