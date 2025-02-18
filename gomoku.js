@@ -55,35 +55,37 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add-user', (req, res) => {
-    let {userId, userName} = req.query;
-    if (users.hasOwnProperty(userId)) {
+    let {userId: inputUserId, userName: inputUserName} = req.query;
+    let user = createUser(inputUserId, inputUserName);
+    if (users.hasOwnProperty(user.id)) {
         res.sendStatus(400);
         return;
     }
-    users[userId] = createUser(userId, userName);
+    users[user.id] = user;
     res.send(getResData());
 });
 
 router.get('/add-table', (req, res) => {
-    let {userId, tableCode} = req.query;
+    let {userId, tableCode: inputTableCode} = req.query;
     let user = users[userId];
     if (user == null) {
         res.sendStatus(400);
         return;
     }
     
-    if (tables.hasOwnProperty(tableCode)) {
-        res.sendStatus(400);
-        return;
-    }
-
     let tableCount = Object.keys(tables).length;
     if (tableCount >= 32) {
         res.sendStatus(400);
         return;
     }
 
-    tables[tableCode] = createTable(tableCode);
+    let table = createTable(inputTableCode);
+    if (tables.hasOwnProperty(table.code)) {
+        res.sendStatus(400);
+        return;
+    }
+
+    tables[table.code] = table;
     res.send(getResData());
 });
 
