@@ -1,11 +1,11 @@
 @import '../../style/mixin.less';
 
-.TableList {
+.Room {
     > * + * {
         margin-top: @space-medium-4;
     }
 
-    .all-tables {
+    .tables {
         display: flex;
         flex-wrap: wrap;
         gap: @space-medium-4;
@@ -58,6 +58,12 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+        }
+    }
+
+    .users {
+        .heading {
+            font-style: italic;
         }
     }
 }

@@ -108,3 +108,7 @@ export let getWonTeamId = (streak, matrix) => {
     let [row, column] = streak[0].split(':').map(Number);
     return matrix[row][column];
 };
+
+export let isUserDisconnected = (user, now) => {
+    return now - user.lastPingAt > 4000;
+};

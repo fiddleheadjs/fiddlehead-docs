@@ -9,8 +9,6 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
 
-    let listTeamMembers = team => team.map(userId => users[userId].name).join(', ');
-
     let isTeamThinking = (teamId) => (
         teamId === state.thinkingTeamId &&
         teams[teamId].length > 0 &&
@@ -30,6 +28,8 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
             });
         }
     };
+
+    let listTeamMembers = team => team.map(userId => users[userId].name).join(', ');
 
     let isNobodyHere = table.teams.every(members => members.length === 0);
 

@@ -1,7 +1,7 @@
 import './Gomoku.less';
 import {useEffect, useState} from 'fiddlehead';
 import {AddUser} from './add-user/AddUser';
-import {TableList} from './table-list/TableList';
+import {Room} from './room/Room';
 import {Table} from './table/Table';
 
 let withWrapper = (content) => (
@@ -37,7 +37,7 @@ export let Gomoku = () => {
     let myTable = Object.values(tables).find(table => table.teams.some(team => team.includes(myself.id)));
 
     if (myTable == null) {
-        return withWrapper(<TableList myself={myself} users={users} tables={tables} setGameData={setGameData} />);
+        return withWrapper(<Room myself={myself} users={users} tables={tables} now={now} setGameData={setGameData} />);
     }
 
     return withWrapper(<Table users={users} myTable={myTable} myself={myself} setGameData={setGameData} now={now} />);
