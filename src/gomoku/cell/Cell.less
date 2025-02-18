@@ -4,15 +4,22 @@
     width: 2rem;
     height: 2rem;
     aspect-ratio: 1;
-    border: 1px solid @gray-twilight;
+    border: 1px solid lightgray;
     text-align: center;
     vertical-align: middle;
     cursor: default;
     
     &:not(.view-only){
         &[data-value="2"]:hover {
-            background: @gray-light-A2;
             cursor: pointer;
+
+            &[data-myteam="0"] {
+                background: fade(red, 15%);
+            }
+            
+            &[data-myteam="1"] {
+                background: fade(blue, 15%);
+            }
         }
     }
 
