@@ -11,11 +11,11 @@ export let findStreak = (matrix) => {
                 count++;
                 if (count === 5 && current !== 2) {
                     return [
-                        `${r}:${c - 4}`,
-                        `${r}:${c - 3}`,
-                        `${r}:${c - 2}`,
-                        `${r}:${c - 1}`,
-                        `${r}:${c}`,
+                        [r, c - 4],
+                        [r, c - 3],
+                        [r, c - 2],
+                        [r, c - 1],
+                        [r, c],
                     ];
                 }
             } else {
@@ -34,11 +34,11 @@ export let findStreak = (matrix) => {
                 count++;
                 if (count === 5 && current !== 2) {
                     return [
-                        `${r - 4}:${c}`,
-                        `${r - 3}:${c}`,
-                        `${r - 2}:${c}`,
-                        `${r - 1}:${c}`,
-                        `${r}:${c}`,
+                        [r - 4, c],
+                        [r - 3, c],
+                        [r - 2, c],
+                        [r - 1, c],
+                        [r, c],
                     ];
                 }
             } else {
@@ -58,11 +58,11 @@ export let findStreak = (matrix) => {
                     count++;
                     if (count === 5 && current !== 2) {
                         return [
-                            `${r - 4}:${c - 4}`,
-                            `${r - 3}:${c - 3}`,
-                            `${r - 2}:${c - 2}`,
-                            `${r - 1}:${c - 1}`,
-                            `${r}:${c}`,
+                            [r - 4, c - 4],
+                            [r - 3, c - 3],
+                            [r - 2, c - 2],
+                            [r - 1, c - 1],
+                            [r, c],
                         ];
                     }
                 } else {
@@ -83,11 +83,11 @@ export let findStreak = (matrix) => {
                     count++;
                     if (count === 5 && current !== 2) {
                         return [
-                            `${r + 4}:${c - 4}`,
-                            `${r + 3}:${c - 3}`,
-                            `${r + 2}:${c - 2}`,
-                            `${r + 1}:${c - 1}`,
-                            `${r}:${c}`,
+                            [r + 4, c - 4],
+                            [r + 3, c - 3],
+                            [r + 2, c - 2],
+                            [r + 1, c - 1],
+                            [r, c],
                         ];
                     }
                 } else {
@@ -105,7 +105,7 @@ export let getWonTeamId = (streak, matrix) => {
     if (streak === null) {
         return null;
     }
-    let [row, column] = streak[0].split(':').map(Number);
+    let [row, column] = streak[0];
     return matrix[row][column];
 };
 

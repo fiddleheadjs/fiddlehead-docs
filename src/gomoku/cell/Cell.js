@@ -30,7 +30,7 @@ export let Cell = ({ value, rx, cx, setMatrix, teamId, userId, tableCode, streak
         <td
             class={`Cell ${viewOnly ? 'view-only' : ''}`}
             data-value={value}
-            data-streak={streak.includes(`${rx}:${cx}`)}
+            data-streak={streak.some(([r, c]) => r === rx && c === cx)}
             data-myteam={teamId}
             onClick={() => move()}
         />
