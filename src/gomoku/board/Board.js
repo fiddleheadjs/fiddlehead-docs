@@ -26,7 +26,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
 
     let [streakLineData, setStreakLineData] = useState(null);
     
-    let streakDrawPad = 50;
+    let streakDrawPad = 10;
 
     useEffect(() => {
         let findCellElement = (table, [row, column]) => {
@@ -46,23 +46,28 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
             if (table === null || streak === null) {
                 return null;
             }
+            
             let width = table.clientWidth;
             let height = table.clientHeight;
+            let strokeWidth = (width + height) / 2 / matrix.length * 1.2;
+
             let startCell = findCellElement(table, streak[0]);
             let endCell = findCellElement(table, streak[4]);
             if (startCell === null || endCell === null) {
                 return null;
             }
+
             let [x1, y1] = findCentralOfElement(startCell);
             let [x2, y2] = findCentralOfElement(endCell);
-            
+
             return {
                 width: width + 2 * streakDrawPad,
                 height: height + 2 * streakDrawPad,
                 x1: x1 + streakDrawPad,
                 y1: y1 + streakDrawPad,
                 x2: x2 + streakDrawPad,
-                y2: y2 + streakDrawPad
+                y2: y2 + streakDrawPad,
+                strokeWidth
             };
         };
 
@@ -111,9 +116,9 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
                         y1={streakLineData.y1}
                         x2={streakLineData.x2}
                         y2={streakLineData.y2}
-                        stroke={wonTeamId === 0 ? 'rgba(255, 0, 0, 0.25)' : 'rgba(0, 0, 255, 0.25)'}
-                        stroke-width="40"
+                        stroke-width={streakLineData.strokeWidth}
                         stroke-linecap="round"
+                        stroke={wonTeamId === 0 ? 'rgba(255, 0, 0, 0.25)' : 'rgba(0, 0, 255, 0.25)'}
                     />
                 </svg>
             )}
