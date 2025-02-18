@@ -114,12 +114,38 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
                     <line
                         x1={streakLineData.x1}
                         y1={streakLineData.y1}
-                        x2={streakLineData.x2}
-                        y2={streakLineData.y2}
+                        x2={streakLineData.x1}
+                        y2={streakLineData.y1}
+                        stroke={wonTeamId === 0 ? 'red' : 'blue'}
+                        stroke-opacity="0.25"
                         stroke-width={streakLineData.strokeWidth}
                         stroke-linecap="round"
-                        stroke={wonTeamId === 0 ? 'rgba(255, 0, 0, 0.25)' : 'rgba(0, 0, 255, 0.25)'}
-                    />
+                    >
+                        <set
+                            attributeName="x2"
+                            to={streakLineData.x2}
+                            begin="1s"
+                        />
+                        <set
+                            attributeName="y2"
+                            to={streakLineData.y2}
+                            begin="1s"
+                        />
+                        <animate
+                            attributeName="x2"
+                            begin="0.2s"
+                            dur="0.8s"
+                            from={streakLineData.x1}
+                            to={streakLineData.x2}
+                        />
+                        <animate
+                            attributeName="y2"
+                            begin="0.2s"
+                            dur="0.8s"
+                            from={streakLineData.y1}
+                            to={streakLineData.y2}
+                        />
+                    </line>
                 </svg>
             )}
         </div>
