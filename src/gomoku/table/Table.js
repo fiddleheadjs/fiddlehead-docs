@@ -45,10 +45,10 @@ export let Table = ({ users, myTable, myself, setGameData, now }) => {
                     <div class="central">
                         <Board
                             remoteMatrix={state.matrix}
+                            isMyTurn={isMyTurn}
                             teamId={state.thinkingTeamId}
                             userId={myself.id}
                             tableCode={myTable.code}
-                            isMyTurn={isMyTurn}
                             setGameData={setGameData}
                         />
                     </div>

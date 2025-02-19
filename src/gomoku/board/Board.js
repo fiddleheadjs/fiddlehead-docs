@@ -3,21 +3,57 @@ import {useEffect, useMemo, useRef, useState} from 'fiddlehead';
 import {Cell} from '../cell/Cell';
 import {findStreak, getWonTeamId} from '../utils';
 
-export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGameData }) => {
-    let [moved, setMoved] = useState(false);
-    
-    useEffect(() => {
-        if (isMyTurn) {
-            setMoved(false);
-        }
-    }, [isMyTurn]);
-    
+export let Board = ({
+    remoteMatrix,
+    isMyTurn = false,
+    teamId = null,
+    userId = null,
+    tableCode = null,
+    setGameData = null
+}) => {
+    // MATRIX
     let [matrix, setMatrix] = useState(remoteMatrix);
 
     useEffect(() => {
         setMatrix(remoteMatrix);
     }, [String(remoteMatrix)]);
 
+    // MOVE
+    let [justMoved, setJustMoved] = useState(false);
+    
+    useEffect(() => {
+        if (isMyTurn) {
+            setJustMoved(false);
+        }
+    }, [isMyTurn]);
+    
+    let viewOnly = (
+        !isMyTurn ||
+        justMoved ||
+        streak === null ||
+        teamId === null ||
+        userId === null ||
+        tableCode === null ||
+        setGameData === null
+    );
+
+    let makeMoveTo = (value, rx, cx) => {
+        if (viewOnly || value !== 2) {
+            return;
+        }
+        setJustMoved(true);
+        setMatrix(matrix => {
+            let row = [...matrix[rx]];
+            row[cx] = teamId;
+            matrix[rx] = row;
+            return [...matrix];
+        });
+        fetch(`/gomoku/move?row=${rx}&cell=${cx}&userId=${userId}&tableCode=${tableCode}`).then(res => res.json()).then(data => {
+            setGameData(data);
+        });
+    };
+
+    // STREAK
     let streak = useMemo(() => findStreak(matrix), [matrix]);
 
     let wonTeamId = getWonTeamId(streak, matrix);
@@ -83,7 +119,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
             window.removeEventListener('resize', handle);
         };
     }, [streak]);
-
+    
     return (
         <div class="Board">
             <table ref={tableElementRef}>
@@ -94,15 +130,10 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
                                 <Cell
                                     value={value}
                                     teamId={teamId}
-                                    userId={userId}
-                                    tableCode={tableCode}
-                                    rx={rx}
-                                    cx={cx}
-                                    setMatrix={setMatrix}
-                                    streak={streak ?? []}
-                                    setMoved={setMoved}
-                                    locked={!isMyTurn || moved}
-                                    setGameData={setGameData}
+                                    viewOnly={viewOnly}
+                                    makeMove={(value) => {
+                                        makeMoveTo(value, rx, cx);
+                                    }}
                                 />
                             ))}
                         </tr>
