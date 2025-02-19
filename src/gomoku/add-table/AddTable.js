@@ -12,7 +12,6 @@ export let AddTable = ({ myself, setGameData }) => {
     let isValid = tableCode !== '' && moveDuration > 0;
 
     let onSubmit = (event) => {
-        console.log({isValid, tableCode});
         event.preventDefault();
         if (!isValid) {
             return;
