@@ -20,7 +20,7 @@ export let Timer = ({ isFirstMove, moveDuration, makeMoveRandomly }) => {
         return () => {
             clearTimeout(timeoutId);
         };
-    }, [remainingTime]);
+    }, [remainingTime, makeMoveRandomly]);
 
     let isComfortable = remainingTime > moveDuration * 1000;
     let isSensitive = !isComfortable && remainingTime < 3500;

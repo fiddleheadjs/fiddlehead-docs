@@ -1,29 +1,44 @@
 import './TimingBar.less';
 import {Timer} from '../timer/Timer';
 import {getRandomInteger, isInMatrix} from '../utils';
+import {useMemo, useEffect, useCallback} from 'fiddlehead';
+import {addWindowStateChangeListener, removeWindowStateChangeListener, STATE_ACTIVE, STATE_PASSIVE} from '../pageState';
 
 export let TimingBar = ({isWaitingForMove, moveDuration, teamId, matrix, makeMoveTo}) => {
-    let getAvailableCells = () => {
-        let availableCells = [];
+    let availableCells = useMemo(() => {
+        let emptyCells = [];
         for (let rx = 0; rx < matrix.length; rx++) {
             for (let cx = 0; cx < matrix[rx].length; cx++) {
                 if (matrix[rx][cx] === 2) {
-                    availableCells.push([rx, cx]);
+                    emptyCells.push([rx, cx]);
                 }
             }
         }
-        return availableCells;
-    };
+        return emptyCells;
+    }, [matrix]);
 
-    let makeMoveRandomly = () => {
-        let availableCells = getAvailableCells();
+    let makeMoveRandomly = useCallback(() => {
         if (availableCells.length === 0) {
             return;
         }
         let randomIndex = getRandomInteger(0, availableCells.length - 1);
         let [rx, cx] = availableCells[randomIndex];
         makeMoveTo(rx, cx);
-    };
+    }, [availableCells, makeMoveTo]);
+
+    useEffect(() => {
+        let listener = (state) => {
+            if (!(state === STATE_ACTIVE || state === STATE_PASSIVE)) {
+                makeMoveRandomly();
+            }
+        };
+
+        addWindowStateChangeListener(listener);
+
+        return () => {
+            removeWindowStateChangeListener(listener);
+        };
+    }, [makeMoveRandomly]);
 
     let isFirstMove = !isInMatrix(teamId, matrix);
 

@@ -1,5 +1,5 @@
 import './Board.less';
-import {useEffect, useMemo, useRef, useState} from 'fiddlehead';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'fiddlehead';
 import {Cell} from '../cell/Cell';
 import {findStreak, getWonTeamId} from '../utils';
 import {TimingBar} from '../timing-bar/TimingBar';
@@ -104,7 +104,7 @@ export let Board = ({
     
     let viewOnly = isViewer || !isWaitingForMove;
 
-    let makeMoveTo = (rx, cx) => {
+    let makeMoveTo = useCallback((rx, cx) => {
         if (viewOnly) {
             return;
         }
@@ -122,7 +122,7 @@ export let Board = ({
         fetch(`/gomoku/move?row=${rx}&cell=${cx}&userId=${userId}&tableCode=${tableCode}`).then(res => res.json()).then(data => {
             setGameData(data);
         });
-    };
+    }, [viewOnly, matrix, userId, tableCode, setGameData]);
 
     return (
         <div class="Board">
