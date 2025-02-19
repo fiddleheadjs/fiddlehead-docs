@@ -30,7 +30,6 @@ export let AddUser = ({ setGameData }) => {
             <div>
                 <input
                     type="text"
-                    placeholder="your name"
                     value={draftUserName}
                     onInput={event => {
                         setDraftUserName(event.target.value);
