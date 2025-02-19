@@ -1,18 +1,23 @@
+import './Team.less';
 import {UserName} from '../user-name/UserName';
 import {getTeamName} from '../utils';
-import './Team.less';
 
-export let Team = ({ teamId, teamMembers, users, thinking, thinkingUserIndex, streak, now }) => {
+export let Team = ({ teamId, memberIds, tableCode, users, thinking, thinkingUserIndex, streak, now }) => {
     return (
         <div class="Team" data-team={teamId}>
             <h3>{getTeamName(teamId)}</h3>
-            {teamMembers.map((userId, index) => {
-                let user = users[userId];
+            {memberIds.map((memberId, index) => {
+                let member = users[memberId];
+                let isMemberLeftOut = member.playingTableCode !== tableCode;
+                if (isMemberLeftOut) {
+                    return null;
+                }
+                let isMemberThinking = !isMemberLeftOut && thinking && thinkingUserIndex === index && streak === null;
                 return (
-                    <div key={user.id} class={`user ${thinking && thinkingUserIndex === index && streak === null ? 'thinking' : ''}`}>
+                    <div key={member.id} class={`user ${isMemberThinking ? 'thinking' : ''}`}>
                         <UserName
-                            key={user.id}
-                            user={user}
+                            key={member.id}
+                            user={member}
                             now={now}
                         />
                     </div>

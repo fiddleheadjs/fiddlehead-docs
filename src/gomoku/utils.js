@@ -121,6 +121,10 @@ export let isUserDisconnected = (user, now) => {
     return now - user.lastPingAt > 4000;
 };
 
+export let isUserInactive = (user, now) => {
+    return now - user.lastPingAt > 60000;
+};
+
 export let getRandomInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 };

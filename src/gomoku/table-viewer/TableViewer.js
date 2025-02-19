@@ -2,7 +2,7 @@ import './TableViewer.less';
 import {useMemo} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
-import {findStreak, getTeamName} from '../utils';
+import {findStreak, getTeamName, isInMatrix} from '../utils';
 
 export let TableViewer = ({table, users, myself, setGameData}) => {
     let {code, moveDuration, state, teams} = table;
@@ -29,9 +29,15 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
         }
     };
 
-    let listTeamMembers = team => team.map(userId => users[userId].name).join(', ');
+    let listTeamMembers = team => team.map(userId => users[userId]).filter(
+        user => user.playingTableCode === table.code
+    ).map(user => user.name).join(', ');
 
-    let isNobodyHere = table.teams.every(members => members.length === 0);
+    let isNobodyHere = table.teams.every(userIds => userIds.every(
+        userId => users[userId].playingTableCode !== table.code
+    ));
+    let myTeamId = [0, 1].find(teamId => table.teams[teamId].includes(myself.id));
+    let hasMyTeamMoved = myTeamId != null && isInMatrix(myTeamId, table.state.matrix);
 
     return (
         <div class="TableViewer">
@@ -41,7 +47,9 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
                     {isNobodyHere && (
                         <Button type="button" size="small" onClick={() => removeTable(code)}>Remove</Button>
                     )}
-                    <Button type="button" size="small" onClick={() => enterTable(code)}>Play now</Button>
+                    <Button type="button" size="small" disabled={hasMyTeamMoved} onClick={() => enterTable(code)}>
+                        {myTeamId != null ? 'Go back' : 'Play now'}
+                    </Button>
                 </div>
             </div>
             <div class="headline">

@@ -14,7 +14,8 @@ let getResData = () => JSON.stringify({
 let createUser = (id, name) => ({
     id: id.substring(0, 36),
     name: name.substring(0, 20),
-    lastPingAt: new Date().getTime()
+    lastPingAt: new Date().getTime(),
+    playingTableCode: null
 });
 
 let createTable = (code, moveDuration) => ({
@@ -42,6 +43,18 @@ let createMatrix = () => {
     return matrix;
 };
 
+let isInMatrix = (value, matrix) => {
+    let size = matrix.length;
+    for (let rx = 0; rx < size; rx++) {
+        for (let cx = 0; cx < size; cx++) {
+            if (matrix[rx][cx] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 let resetToDefaultData = () => {
     users = {};
     tables = {
@@ -50,6 +63,58 @@ let resetToDefaultData = () => {
         '3': createTable('3')
     };
 };
+
+let getNow = () => new Date().getTime();
+
+let isUserDisconnected = (user, now) => now - user.lastPingAt > 4000;
+
+let isUserInactive = (user, now) => now - user.lastPingAt > 60000;
+
+let getUsersOutOfTablesIfInactive = (now) => {
+    for (let user of Object.values(users)) {
+        if (isUserInactive(user, now)) {
+            user.playingTableCode = null;
+        }
+    }
+};
+
+let substituteThinkingUsersIfDisconnected = (now) => {
+    for (let table of Object.values(tables)) {
+        let {teams, state} = table;
+        let thinkingTeam = teams[state.thinkingTeamId];
+        let index = state.thinkingUserIndexes[state.thinkingTeamId];
+        let substitutionUserIndex = null;
+        let count = 0;
+        while (count < thinkingTeam.length) {
+            if (index > thinkingTeam.length - 1) {
+                index = 0;
+                continue;
+            }
+            count++;
+            let userId = thinkingTeam[index];
+            let user = users[userId];
+            if (user != null) {
+                if (user.playingTableCode === table.code && !isUserDisconnected(user, now)) {
+                    if (substitutionUserIndex === null) {
+                        substitutionUserIndex = index;
+                    }
+                }
+            }
+            if (index < thinkingTeam.length - 1) {
+                index++;
+            } else {
+                index = 0;
+            }
+        }
+        if (substitutionUserIndex !== null) {
+            state.thinkingUserIndexes[state.thinkingTeamId] = substitutionUserIndex;
+        }
+    }
+};
+
+let filterPlayingMembers = (userIds, tableCode) => userIds.map(userId => users[userId]).filter(
+    user => user.playingTableCode === tableCode
+);
 
 router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
@@ -98,7 +163,9 @@ router.get('/remove-table', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    let isNobodyHere = table.teams.every(members => members.length === 0);
+    let isNobodyHere = table.teams.every(memberIds => memberIds.every(
+        memberId => users[memberId].playingTableCode !== table.code
+    ));
     if (!isNobodyHere) {
         res.sendStatus(400);
         return;
@@ -111,22 +178,27 @@ router.get('/enter-table', (req, res) => {
     let user = users[req.query.userId];
     let table = tables[req.query.tableCode];
     if (user == null || table == null) {
-        res.status(400);
+        res.sendStatus(400);
         return;
     }
     
-    let teamId = table.teams[0].length > table.teams[1].length ? 1 : 0;
-    if (table.teams[teamId].includes(user.id)) {
-        res.sendStatus(400);
-        return;    
-    }
-
-    for (let table of Object.values(tables)) {
-        for (let tId of [0, 1]) {
-            table.teams[tId] = table.teams[tId].filter(uId => uId !== user.id);
+    let myTeamId = [0, 1].find(teamId => table.teams[teamId].includes(user.id));
+    if (myTeamId != null) {
+        let hasMyTeamMoved = isInMatrix(myTeamId, table.state.matrix);
+        if (hasMyTeamMoved) {
+            res.sendStatus(400);
+            return;
         }
     }
-    table.teams[teamId].push(user.id);
+
+    if (myTeamId == null) {
+        let teamZeroSize = filterPlayingMembers(table.teams[0], table.code).length;
+        let teamOneSize = filterPlayingMembers(table.teams[1], table.code).length;
+        let teamId = teamZeroSize > teamOneSize ? 1 : 0;
+        table.teams[teamId].push(user.id);
+        myTeamId = teamId;
+    }
+    user.playingTableCode = table.code;
     res.send(getResData());
 });
 
@@ -137,11 +209,7 @@ router.get('/leave-table', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    for (let table of Object.values(tables)) {
-        for (let tId of [0, 1]) {
-            table.teams[tId] = table.teams[tId].filter(uId => uId !== user.id);
-        }
-    }
+    user.playingTableCode = null;
     res.send(getResData());
 });
 
@@ -149,16 +217,21 @@ router.get('/move', (req, res) => {
     let user = users[req.query.userId];
     let table = tables[req.query.tableCode];
     if (user == null || table == null) {
-        res.status(400);
+        res.sendStatus(400);
         return;
     }
 
-    let {teams, state} = table;
+    let {teams, state, code} = table;
+    if (user.playingTableCode !== code) {
+        res.sendStatus(400);
+        return;
+    }
+    
     let teamId = [0, 1].find(tId => teams[tId].includes(user.id));
     if (teamId !== state.thinkingTeamId ||
         state.thinkingUserIndexes[teamId] !== teams[teamId].indexOf(user.id)
     ) {
-        res.status(400);
+        res.sendStatus(400);
         return;
     }
 
@@ -176,48 +249,14 @@ router.get('/move', (req, res) => {
 });
 
 router.get('/game-data', (req, res) => {
-    let now = new Date().getTime();
-
+    let now = getNow();
     let {userId} = req.query;
     let user = users[userId];
     if (user != null) {
         user.lastPingAt = now;
     }
-
-    for (let table of Object.values(tables)) {
-        let {teams, state} = table;
-        let thinkingTeam = teams[state.thinkingTeamId];
-        let index = state.thinkingUserIndexes[state.thinkingTeamId];
-        let substitutionUserIndex = null;
-        let count = 0;
-        while (count < thinkingTeam.length) {
-            // may happen after someone leaves
-            if (index > thinkingTeam.length - 1) {
-                index = 0;
-                continue;
-            }
-            count++;
-            let userId = thinkingTeam[index];
-            let user = users[userId];
-            if (user == null) {
-                continue;
-            }
-            if (now - user.lastPingAt < 4000) {
-                if (substitutionUserIndex === null) {
-                    substitutionUserIndex = index;
-                }
-            }
-            if (index < thinkingTeam.length - 1) {
-                index++;
-            } else {
-                index = 0;
-            }
-        }
-        if (substitutionUserIndex !== null) {
-            state.thinkingUserIndexes[state.thinkingTeamId] = substitutionUserIndex;
-        }
-    }
-
+    getUsersOutOfTablesIfInactive(now);
+    substituteThinkingUsersIfDisconnected(now);
     res.send(getResData());
 });
 
@@ -225,14 +264,14 @@ router.get('/replay', (req, res) => {
     let user = users[req.query.userId];
     let table = tables[req.query.tableCode];
     if (user == null || table == null) {
-        res.status(400);
+        res.sendStatus(400);
         return;
     }
 
     let {teams, state} = table;
-    let isUserInTheTable = teams.some(members => members.includes(user.id));
+    let isUserInTheTable = teams.some(memberIds => memberIds.includes(user.id));
     if (!isUserInTheTable) {
-        res.status(400);
+        res.sendStatus(400);
         return;
     }
 

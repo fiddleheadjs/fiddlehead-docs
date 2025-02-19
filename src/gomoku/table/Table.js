@@ -35,7 +35,8 @@ export let Table = ({ table, myself, users, now, setGameData }) => {
                         <Team
                             users={users}
                             teamId={0}
-                            teamMembers={teams[0]}
+                            memberIds={teams[0]}
+                            tableCode={table.code}
                             thinking={state.thinkingTeamId === 0}
                             thinkingUserIndex={state.thinkingUserIndexes[0]}
                             streak={streak}
@@ -57,7 +58,8 @@ export let Table = ({ table, myself, users, now, setGameData }) => {
                         <Team
                             users={users}
                             teamId={1}
-                            teamMembers={teams[1]}
+                            memberIds={teams[1]}
+                            tableCode={table.code}
                             thinking={state.thinkingTeamId === 1}
                             thinkingUserIndex={state.thinkingUserIndexes[1]}
                             streak={streak}
