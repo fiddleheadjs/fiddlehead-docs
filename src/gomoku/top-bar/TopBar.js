@@ -1,13 +1,11 @@
 import './TopBar.less';
 import {Button} from '../../components/button/Button';
 
-export let TopBar = ({ table, myself, myTeamName, setGameData }) => {
+export let TopBar = ({ table, myself, myTeamName, streak, setGameData }) => {
     let replay = () => {
-        if (confirm('Are you sure you want to replay?')) {
-            fetch(`/gomoku/replay?userId=${myself.id}&tableCode=${table.code}`).then(response => response.json()).then((data) => {
-                setGameData(data);
-            });
-        }
+        fetch(`/gomoku/replay?userId=${myself.id}&tableCode=${table.code}`).then(response => response.json()).then((data) => {
+            setGameData(data);
+        });
     };
 
     let leaveTable = () => {
@@ -23,8 +21,10 @@ export let TopBar = ({ table, myself, myTeamName, setGameData }) => {
                 <span><b>{myself.name}</b> &middot; {myTeamName}</span>
             </div>
             <div class="actions">
-                <Button type="button" size="small" onClick={() => replay()}>Replay</Button>
-                <Button type="button" size="small" onClick={() => leaveTable()}>Leave table</Button>
+                {streak !== null && (
+                    <Button type="button" size="small" onClick={() => replay()}>Replay</Button>
+                )}
+                <Button type="button" size="small" onClick={() => leaveTable()}>Leave</Button>
             </div>
         </div>
     );

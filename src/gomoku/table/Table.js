@@ -28,6 +28,7 @@ export let Table = ({ table, myself, users, now, setGameData }) => {
                     table={table}
                     myself={myself}
                     myTeamName={myTeamName}
+                    streak={streak}
                     setGameData={setGameData}
                 />
                 <div class="main">

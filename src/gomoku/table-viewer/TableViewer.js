@@ -2,7 +2,7 @@ import './TableViewer.less';
 import {useMemo} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
-import {findStreak, getTeamName, isInMatrix} from '../utils';
+import {findStreak, getTeamName, isInMatrix, isMatrixEmpty} from '../utils';
 
 export let TableViewer = ({table, users, myself, setGameData}) => {
     let {code, moveDuration, state, teams} = table;
@@ -22,11 +22,15 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
     };
 
     let removeTable = (tableCode) => {
-        if (confirm(`Are you sure you want to remove table ${tableCode}?`)) {
-            fetch(`/gomoku/remove-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
-                setGameData(data);
-            });
-        }
+        fetch(`/gomoku/remove-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
+            setGameData(data);
+        });
+    };
+
+    let resetTable = () => {
+        fetch(`/gomoku/reset-table?userId=${myself.id}&tableCode=${table.code}`).then(response => response.json()).then((data) => {
+            setGameData(data);
+        });
     };
 
     let listTeamMembers = team => team.map(userId => users[userId]).filter(
@@ -36,7 +40,17 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
     let isNobodyHere = table.teams.every(userIds => userIds.every(
         userId => users[userId].playingTableCode !== table.code
     ));
+
+    let hasSomeOneEntered = table.teams.some(userIds => userIds.length > 0);
+
+    let isTableDirty = hasSomeOneEntered || !isMatrixEmpty(table.state.matrix);
+
+    let showsReset = isNobodyHere && isTableDirty;
+
+    let showsRemove = isNobodyHere && !isTableDirty;
+
     let myTeamId = [0, 1].find(teamId => table.teams[teamId].includes(myself.id));
+
     let hasMyTeamMoved = myTeamId != null && isInMatrix(myTeamId, table.state.matrix);
 
     return (
@@ -44,7 +58,10 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
             <div class="headline">
                 <div class="code">Table <b>{code}</b> &middot; {moveDuration}s/m</div>
                 <div class="actions">
-                    {isNobodyHere && (
+                    {showsReset && (
+                        <Button type="button" size="small" onClick={() => resetTable(code)}>Reset</Button>
+                    )}
+                    {showsRemove && (
                         <Button type="button" size="small" onClick={() => removeTable(code)}>Remove</Button>
                     )}
                     <Button type="button" size="small" disabled={hasMyTeamMoved} onClick={() => enterTable(code)}>
@@ -58,6 +75,9 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
                     {' '}
                     <span class="members">{listTeamMembers(teams[0])}</span>
                 </div>
+                {hasSomeOneEntered && isNobodyHere && (
+                    <div>(everyone has left)</div>
+                )}
                 <div class="team align-right" data-team={1}>
                     <span class="members">{listTeamMembers(teams[1])}</span>
                     {' '}

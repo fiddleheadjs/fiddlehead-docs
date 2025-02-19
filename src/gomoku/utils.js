@@ -140,3 +140,15 @@ export let isInMatrix = (value, matrix) => {
     }
     return false;
 };
+
+export let isMatrixEmpty = (matrix) => {
+    let size = matrix.length;
+    for (let rx = 0; rx < size; rx++) {
+        for (let cx = 0; cx < size; cx++) {
+            if (matrix[rx][cx] !== 2) {
+                return false;
+            }
+        }
+    }
+    return true;
+};

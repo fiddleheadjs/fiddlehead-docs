@@ -116,6 +116,10 @@ let filterPlayingMembers = (userIds, tableCode) => userIds.map(userId => users[u
     user => user.playingTableCode === tableCode
 );
 
+let isNobodyInTheTable = table => table.teams.every(memberIds => memberIds.every(
+    memberId => users[memberId].playingTableCode !== table.code
+));
+
 router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
@@ -163,10 +167,7 @@ router.get('/remove-table', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    let isNobodyHere = table.teams.every(memberIds => memberIds.every(
-        memberId => users[memberId].playingTableCode !== table.code
-    ));
-    if (!isNobodyHere) {
+    if (!isNobodyInTheTable(table)) {
         res.sendStatus(400);
         return;
     }
@@ -210,6 +211,45 @@ router.get('/leave-table', (req, res) => {
         return;
     }
     user.playingTableCode = null;
+    res.send(getResData());
+});
+
+router.get('/reset-table', (req, res) => {
+    let user = users[req.query.userId];
+    let table = tables[req.query.tableCode];
+    if (user == null || table == null) {
+        res.sendStatus(400);
+        return;
+    }
+    if (!isNobodyInTheTable) {
+        res.sendStatus(400);
+        return;
+    }
+    let relica = createTable(table.code, table.moveDuration);
+    tables[relica.code] = relica;
+    res.send(getResData());
+});
+
+router.get('/replay', (req, res) => {
+    let user = users[req.query.userId];
+    let table = tables[req.query.tableCode];
+    if (user == null || table == null) {
+        res.sendStatus(400);
+        return;
+    }
+
+    let {teams, state} = table;
+    
+    for (let teamId of [0, 1]) {
+        let playingMembers = filterPlayingMembers(teams[teamId], table.code);
+        teams[teamId] = playingMembers.map(user => user.id);
+    }
+
+    state.startTeamId = state.startTeamId === 0 ? 1 : 0;
+    state.thinkingTeamId = state.startTeamId;
+    state.thinkingUserIndexes = [0, 0];
+    state.matrix = createMatrix();
+    
     res.send(getResData());
 });
 
@@ -260,30 +300,7 @@ router.get('/game-data', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/replay', (req, res) => {
-    let user = users[req.query.userId];
-    let table = tables[req.query.tableCode];
-    if (user == null || table == null) {
-        res.sendStatus(400);
-        return;
-    }
-
-    let {teams, state} = table;
-    let isUserInTheTable = teams.some(memberIds => memberIds.includes(user.id));
-    if (!isUserInTheTable) {
-        res.sendStatus(400);
-        return;
-    }
-
-    state.startTeamId = state.startTeamId === 0 ? 1 : 0;
-    state.thinkingTeamId = state.startTeamId;
-    state.thinkingUserIndexes = [0, 0];
-    state.matrix = createMatrix();
-    
-    res.send(getResData());
-});
-
-router.get('/reset', (req, res) => {
+router.get('/reset-all-as-admin', (req, res) => {
     resetToDefaultData();
     res.send(getResData());
 });
