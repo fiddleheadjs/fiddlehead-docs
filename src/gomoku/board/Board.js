@@ -18,41 +18,6 @@ export let Board = ({
         setMatrix(remoteMatrix);
     }, [String(remoteMatrix)]);
 
-    // MOVE
-    let [justMoved, setJustMoved] = useState(false);
-    
-    useEffect(() => {
-        if (isMyTurn) {
-            setJustMoved(false);
-        }
-    }, [isMyTurn]);
-    
-    let viewOnly = (
-        !isMyTurn ||
-        justMoved ||
-        streak === null ||
-        teamId === null ||
-        userId === null ||
-        tableCode === null ||
-        setGameData === null
-    );
-
-    let makeMoveTo = (value, rx, cx) => {
-        if (viewOnly || value !== 2) {
-            return;
-        }
-        setJustMoved(true);
-        setMatrix(matrix => {
-            let row = [...matrix[rx]];
-            row[cx] = teamId;
-            matrix[rx] = row;
-            return [...matrix];
-        });
-        fetch(`/gomoku/move?row=${rx}&cell=${cx}&userId=${userId}&tableCode=${tableCode}`).then(res => res.json()).then(data => {
-            setGameData(data);
-        });
-    };
-
     // STREAK
     let streak = useMemo(() => findStreak(matrix), [matrix]);
 
@@ -120,6 +85,37 @@ export let Board = ({
         };
     }, [streak]);
     
+    // MOVE
+    let [isWaitingForMove, setIsWaitingForMove] = useState(false);
+    
+    useEffect(() => {
+        setIsWaitingForMove(isMyTurn && streak === null);
+    }, [isMyTurn, streak === null]);
+    
+    let viewOnly = (
+        !isWaitingForMove ||
+        teamId === null ||
+        userId === null ||
+        tableCode === null ||
+        setGameData === null
+    );
+
+    let makeMoveTo = (value, rx, cx) => {
+        if (viewOnly || value !== 2) {
+            return;
+        }
+        setIsWaitingForMove(false);
+        setMatrix(matrix => {
+            let row = [...matrix[rx]];
+            row[cx] = teamId;
+            matrix[rx] = row;
+            return [...matrix];
+        });
+        fetch(`/gomoku/move?row=${rx}&cell=${cx}&userId=${userId}&tableCode=${tableCode}`).then(res => res.json()).then(data => {
+            setGameData(data);
+        });
+    };
+
     return (
         <div class="Board">
             <table ref={tableElementRef}>
