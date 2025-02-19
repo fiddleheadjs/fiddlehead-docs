@@ -17,8 +17,9 @@ let createUser = (id, name) => ({
     lastPingAt: new Date().getTime()
 });
 
-let createTable = (code) => ({
+let createTable = (code, moveDuration) => ({
     code: code.substring(0, 20),
+    moveDuration: Math.max(parseInt(moveDuration) || 8, 1),
     teams: [[], []],
     state: {
         startTeamId: 0,
@@ -66,7 +67,7 @@ router.get('/add-user', (req, res) => {
 });
 
 router.get('/add-table', (req, res) => {
-    let {userId, tableCode: inputTableCode} = req.query;
+    let {userId, tableCode: inputTableCode, moveDuration: inputMoveDuration} = req.query;
     let user = users[userId];
     if (user == null) {
         res.sendStatus(400);
@@ -79,7 +80,7 @@ router.get('/add-table', (req, res) => {
         return;
     }
 
-    let table = createTable(inputTableCode);
+    let table = createTable(inputTableCode, inputMoveDuration);
     if (tables.hasOwnProperty(table.code)) {
         res.sendStatus(400);
         return;

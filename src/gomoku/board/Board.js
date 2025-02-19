@@ -2,6 +2,7 @@ import './Board.less';
 import {useEffect, useMemo, useRef, useState} from 'fiddlehead';
 import {Cell} from '../cell/Cell';
 import {findStreak, getWonTeamId} from '../utils';
+import {TimingBar} from '../timing-bar/TimingBar';
 
 export let Board = ({
     remoteMatrix,
@@ -9,6 +10,7 @@ export let Board = ({
     teamId = null,
     userId = null,
     tableCode = null,
+    moveDuration = null,
     setGameData = null
 }) => {
     // MATRIX
@@ -91,17 +93,23 @@ export let Board = ({
     useEffect(() => {
         setIsWaitingForMove(isMyTurn && streak === null);
     }, [isMyTurn, streak === null]);
-    
-    let viewOnly = (
-        !isWaitingForMove ||
+
+    let isViewer = (
         teamId === null ||
         userId === null ||
         tableCode === null ||
+        moveDuration === null ||
         setGameData === null
     );
+    
+    let viewOnly = isViewer || !isWaitingForMove;
 
-    let makeMoveTo = (value, rx, cx) => {
-        if (viewOnly || value !== 2) {
+    let makeMoveTo = (rx, cx) => {
+        if (viewOnly) {
+            return;
+        }
+        let isCellAvailable = matrix[rx][cx] === 2;
+        if (!isCellAvailable) {
             return;
         }
         setIsWaitingForMove(false);
@@ -119,6 +127,15 @@ export let Board = ({
     return (
         <div class="Board">
             <table ref={tableElementRef}>
+                {isViewer || (
+                    <TimingBar
+                        isWaitingForMove={isWaitingForMove}
+                        moveDuration={moveDuration}
+                        teamId={teamId}
+                        matrix={matrix}
+                        makeMoveTo={makeMoveTo}
+                    />
+                )}
                 <tbody>
                     {matrix.map((row, rx) => (
                         <tr>
@@ -127,8 +144,8 @@ export let Board = ({
                                     value={value}
                                     teamId={teamId}
                                     viewOnly={viewOnly}
-                                    makeMove={(value) => {
-                                        makeMoveTo(value, rx, cx);
+                                    makeMoveHere={() => {
+                                        makeMoveTo(rx, cx);
                                     }}
                                 />
                             ))}

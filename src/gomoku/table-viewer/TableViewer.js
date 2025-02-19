@@ -5,7 +5,7 @@ import {Board} from '../board/Board';
 import {findStreak, getTeamName} from '../utils';
 
 export let TableViewer = ({table, users, myself, setGameData}) => {
-    let {code, state, teams} = table;
+    let {code, moveDuration, state, teams} = table;
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
 
@@ -36,7 +36,7 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
     return (
         <div class="TableViewer">
             <div class="headline">
-                <div class="code">Table <b>{code}</b></div>
+                <div class="code">Table <b>{code}</b> &middot; {moveDuration}s/m</div>
                 <div class="actions">
                     {isNobodyHere && (
                         <Button type="button" size="small" onClick={() => removeTable(code)}>Remove</Button>

@@ -5,8 +5,8 @@ import {TopBar} from '../top-bar/TopBar';
 import {useMemo} from 'fiddlehead';
 import {findStreak, getTeamName} from '../utils';
 
-export let Table = ({ users, myTable, myself, setGameData, now }) => {
-    let {teams, state} = myTable;
+export let Table = ({ table, myself, users, now, setGameData }) => {
+    let {teams, state} = table;
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
 
@@ -25,7 +25,7 @@ export let Table = ({ users, myTable, myself, setGameData, now }) => {
         <div class="Table">
             <div class="container">
                 <TopBar
-                    myTable={myTable}
+                    table={table}
                     myself={myself}
                     myTeamName={myTeamName}
                     setGameData={setGameData}
@@ -48,7 +48,8 @@ export let Table = ({ users, myTable, myself, setGameData, now }) => {
                             isMyTurn={isMyTurn}
                             teamId={state.thinkingTeamId}
                             userId={myself.id}
-                            tableCode={myTable.code}
+                            tableCode={table.code}
+                            moveDuration={table.moveDuration}
                             setGameData={setGameData}
                         />
                     </div>

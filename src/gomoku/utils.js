@@ -120,3 +120,19 @@ export let getWonTeamId = (streak, matrix) => {
 export let isUserDisconnected = (user, now) => {
     return now - user.lastPingAt > 4000;
 };
+
+export let getRandomInteger = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+};
+
+export let isInMatrix = (value, matrix) => {
+    let size = matrix.length;
+    for (let rx = 0; rx < size; rx++) {
+        for (let cx = 0; cx < size; cx++) {
+            if (matrix[rx][cx] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+};

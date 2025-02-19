@@ -40,5 +40,5 @@ export let Gomoku = () => {
         return withWrapper(<Room tables={tables} myself={myself} users={users} now={now} setGameData={setGameData} />);
     }
 
-    return withWrapper(<Table myTable={myTable} myself={myself} users={users} now={now} setGameData={setGameData} />);
+    return withWrapper(<Table table={myTable} myself={myself} users={users} now={now} setGameData={setGameData} />);
 };
