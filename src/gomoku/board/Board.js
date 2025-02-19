@@ -22,7 +22,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
 
     let wonTeamId = getWonTeamId(streak, matrix);
 
-    let boundaryElementRef = useRef(null);
+    let tableElementRef = useRef(null);
 
     let [streakLineData, setStreakLineData] = useState(null);
     
@@ -42,7 +42,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
         };
 
         let calculateStreakLineData = () => {
-            let table = boundaryElementRef.current;
+            let table = tableElementRef.current;
             if (table === null || streak === null) {
                 return null;
             }
@@ -86,7 +86,7 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
 
     return (
         <div class="Board">
-            <table ref={boundaryElementRef}>
+            <table ref={tableElementRef}>
                 <tbody>
                     {matrix.map((row, rx) => (
                         <tr>
@@ -114,34 +114,29 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
                     <line
                         x1={streakLineData.x1}
                         y1={streakLineData.y1}
-                        x2={streakLineData.x1}
-                        y2={streakLineData.y1}
+                        x2={streakLineData.x2}
+                        y2={streakLineData.y2}
                         stroke={wonTeamId === 0 ? 'red' : 'blue'}
-                        stroke-opacity="0.25"
+                        stroke-opacity="0"
                         stroke-width={streakLineData.strokeWidth}
                         stroke-linecap="round"
                     >
                         <set
-                            attributeName="x2"
-                            to={streakLineData.x2}
-                            begin="1s"
-                        />
-                        <set
-                            attributeName="y2"
-                            to={streakLineData.y2}
-                            begin="1s"
+                            attributeName="stroke-opacity"
+                            begin="0s"
+                            to="0.25"
                         />
                         <animate
                             attributeName="x2"
-                            begin="0.2s"
-                            dur="0.8s"
+                            begin="0s"
+                            dur="1s"
                             from={streakLineData.x1}
                             to={streakLineData.x2}
                         />
                         <animate
                             attributeName="y2"
-                            begin="0.2s"
-                            dur="0.8s"
+                            begin="0s"
+                            dur="1s"
                             from={streakLineData.y1}
                             to={streakLineData.y2}
                         />

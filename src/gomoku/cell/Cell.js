@@ -10,7 +10,7 @@ export let Cell = ({ value, rx, cx, setMatrix, teamId, userId, tableCode, streak
         setGameData == null
     );
     
-    let move = () => {
+    let makeMove = () => {
         if (viewOnly || value !== 2) {
             return;
         }
@@ -32,7 +32,7 @@ export let Cell = ({ value, rx, cx, setMatrix, teamId, userId, tableCode, streak
             data-value={value}
             data-streak={streak.some(([r, c]) => r === rx && c === cx)}
             data-myteam={teamId}
-            onClick={() => move()}
+            onClick={() => makeMove()}
         />
     );
 };

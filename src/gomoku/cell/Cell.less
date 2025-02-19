@@ -1,24 +1,19 @@
 @import '../../style/mixin.less';
 
-.fix-dim(@val) {
-    width: @val;
-    height: @val;
-    min-width: @val;
-    min-height: @val;
-    max-width: @val;
-    max-height: @val;
-}
-
 .Cell {
     border: 1px solid lightgray;
     text-align: center;
     vertical-align: middle;
     cursor: default;
 
-    .fix-dim(2rem);
+    .fix-square(2rem);
 
+    .media-current(@screen-tablet-small, {
+        .fix-square(1.7rem);
+    });
+    
     .media-current(@screen-mobile, {
-        .fix-dim(1.3rem);
+        .fix-square(1.3rem);
     });
     
     &:not(.view-only){

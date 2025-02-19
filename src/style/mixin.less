@@ -5,6 +5,16 @@
 @viewport-padding: @space-small-4;
 @article-content-width: 70ch;
 
+// SQUARE
+.fix-square(@dimension) {
+    width: @dimension;
+    height: @dimension;
+    min-width: @dimension;
+    min-height: @dimension;
+    max-width: @dimension;
+    max-height: @dimension;
+}
+
 // SCROLLBAR
 .custom-scrollbar(@colorTrack, @colorThumb, @colorThumbHovered, @colorThumbActive) {
     // width

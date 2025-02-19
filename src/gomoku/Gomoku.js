@@ -37,8 +37,8 @@ export let Gomoku = () => {
     let myTable = Object.values(tables).find(table => table.teams.some(team => team.includes(myself.id)));
 
     if (myTable == null) {
-        return withWrapper(<Room myself={myself} users={users} tables={tables} now={now} setGameData={setGameData} />);
+        return withWrapper(<Room tables={tables} myself={myself} users={users} now={now} setGameData={setGameData} />);
     }
 
-    return withWrapper(<Table users={users} myTable={myTable} myself={myself} setGameData={setGameData} now={now} />);
+    return withWrapper(<Table myTable={myTable} myself={myself} users={users} now={now} setGameData={setGameData} />);
 };
