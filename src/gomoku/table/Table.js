@@ -47,6 +47,7 @@ export let Table = ({ table, myself, users, now, setGameData }) => {
                     <div class="central">
                         <Board
                             remoteMatrix={state.matrix}
+                            remoteMoveSequence={state.moveSequence}
                             isMyTurn={isMyTurn}
                             teamId={state.thinkingTeamId}
                             userId={myself.id}

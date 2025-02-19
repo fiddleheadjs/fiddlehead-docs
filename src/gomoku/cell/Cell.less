@@ -41,4 +41,14 @@
         color: blue;
         font-weight: bold;
     }
+
+    &.last-move-highlighted {
+        &[data-value="0"] {
+            background: fade(red, 8%);
+        }
+
+        &[data-value="1"] {
+            background: fade(blue, 8%);
+        }
+    }
 }

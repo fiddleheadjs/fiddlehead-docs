@@ -84,7 +84,10 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
                     <span class={`name ${isTeamThinking(1) ? 'thinking' : ''}`}>{getTeamName(1)}</span>
                 </div>
             </div>
-            <Board remoteMatrix={state.matrix} />
+            <Board
+                remoteMatrix={state.matrix}
+                remoteMoveSequence={state.moveSequence}
+            />
         </div>
     );
 };

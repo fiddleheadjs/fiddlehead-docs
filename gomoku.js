@@ -26,7 +26,8 @@ let createTable = (code, moveDuration) => ({
         startTeamId: 0,
         thinkingTeamId: 0,
         thinkingUserIndexes: [0, 0],
-        matrix: createMatrix()
+        matrix: createMatrix(),
+        moveSequence: []
     }
 });
 
@@ -249,6 +250,7 @@ router.get('/replay', (req, res) => {
     state.thinkingTeamId = state.startTeamId;
     state.thinkingUserIndexes = [0, 0];
     state.matrix = createMatrix();
+    state.moveSequence = [];
     
     res.send(getResData());
 });
@@ -276,8 +278,9 @@ router.get('/move', (req, res) => {
     }
 
     let row = Number(req.query.row);
-    let cell = Number(req.query.cell);
-    state.matrix[row][cell] = teamId;
+    let column = Number(req.query.column);
+    state.matrix[row][column] = teamId;
+    state.moveSequence.push([row, column]);
     if (state.thinkingUserIndexes[state.thinkingTeamId] < teams[state.thinkingTeamId].length - 1) {
         state.thinkingUserIndexes[state.thinkingTeamId]++;
     } else {
