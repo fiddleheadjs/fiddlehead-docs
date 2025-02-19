@@ -26,7 +26,7 @@ export let AddUser = ({ setGameData }) => {
     return (
         <form class="AddUser" onSubmit={onSubmit}>
             <h3>Play Gomoku</h3>
-            <div>Please enter your name:</div>
+            <div>Please enter your name</div>
             <div>
                 <input
                     type="text"
