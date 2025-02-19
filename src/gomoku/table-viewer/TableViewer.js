@@ -3,8 +3,9 @@ import {useMemo} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
 import {findStreak, getTeamName, isInMatrix, isMatrixEmpty} from '../utils';
+import {UserName} from '../user-name/UserName';
 
-export let TableViewer = ({table, users, myself, setGameData}) => {
+export let TableViewer = ({table, users, myself, now, setGameData}) => {
     let {code, moveDuration, state, teams} = table;
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
@@ -33,10 +34,6 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
         });
     };
 
-    let listTeamMembers = team => team.map(userId => users[userId]).filter(
-        user => user.playingTableCode === table.code
-    ).map(user => user.name).join(', ');
-
     let isNobodyHere = table.teams.every(userIds => userIds.every(
         userId => users[userId].playingTableCode !== table.code
     ));
@@ -52,6 +49,15 @@ export let TableViewer = ({table, users, myself, setGameData}) => {
     let myTeamId = [0, 1].find(teamId => table.teams[teamId].includes(myself.id));
 
     let hasMyTeamMoved = myTeamId != null && isInMatrix(myTeamId, table.state.matrix);
+
+    let listTeamMembers = team => team.map(
+        userId => users[userId]
+    ).filter(
+        user => user.playingTableCode === table.code
+    ).map((user, index) => [
+        index > 0 && ', ',
+        <UserName user={user} now={now} />
+    ]);
 
     return (
         <div class="TableViewer">

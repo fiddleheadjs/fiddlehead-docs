@@ -256,6 +256,7 @@ router.get('/replay', (req, res) => {
 });
 
 router.get('/move', (req, res) => {
+    let now = getNow();
     let user = users[req.query.userId];
     let table = tables[req.query.tableCode];
     if (user == null || table == null) {
@@ -281,12 +282,13 @@ router.get('/move', (req, res) => {
     let column = Number(req.query.column);
     state.matrix[row][column] = teamId;
     state.moveSequence.push([row, column]);
+    state.thinkingTeamId = teamId === 0 ? 1 : 0;
     if (state.thinkingUserIndexes[state.thinkingTeamId] < teams[state.thinkingTeamId].length - 1) {
         state.thinkingUserIndexes[state.thinkingTeamId]++;
     } else {
         state.thinkingUserIndexes[state.thinkingTeamId] = 0;
     }
-    state.thinkingTeamId = teamId === 0 ? 1 : 0;
+    substituteThinkingUsersIfDisconnected(now);
 
     res.send(getResData());
 });
