@@ -39,7 +39,7 @@ export let AddUser = ({ setGameData }) => {
             <Button type="submit" disabled={!isValid}>
                 <span>Join in</span>
                 {' '}
-                <svg viewBox="0 -960 960 960" width="1em">
+                <svg viewBox="0 -960 960 960" height="1em">
                     <path fill="currentColor" d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
                 </svg>
             </Button>
