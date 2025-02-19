@@ -118,8 +118,8 @@ export let Board = ({ remoteMatrix, teamId, userId, tableCode, isMyTurn, setGame
                         y2={streakLineData.y2}
                         stroke={wonTeamId === 0 ? 'red' : 'blue'}
                         stroke-opacity="0"
-                        stroke-width={streakLineData.strokeWidth}
                         stroke-linecap="round"
+                        stroke-width={streakLineData.strokeWidth}
                     >
                         <set
                             attributeName="stroke-opacity"
