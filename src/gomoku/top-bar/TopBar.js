@@ -18,9 +18,9 @@ export let TopBar = ({ table, myself, myTeamName, setGameData }) => {
 
     return (
         <div class="TopBar">
-            <div class="table-name">Table <b>{table.code}</b> &middot; {table.moveDuration}s/m</div>
-            <div class="info">
-                <span><b>{myself.name}</b> / {myTeamName}</span>
+            <div class="table-info">Table <b>{table.code}</b> &middot; {table.moveDuration}s/m</div>
+            <div class="player-info">
+                <span><b>{myself.name}</b> &middot; {myTeamName}</span>
             </div>
             <div class="actions">
                 <Button type="button" size="small" onClick={() => replay()}>Replay</Button>

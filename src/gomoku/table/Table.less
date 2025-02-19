@@ -11,6 +11,9 @@
     }
 
     .main {
+        display: grid;
+        gap: @space-small-4;
+
         .central {
             display: flex;
             flex-direction: row;
@@ -24,16 +27,11 @@
         }
 
         .media-current(@screen-desktop, {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
+            grid-template-columns: 1fr 3fr 1fr;
         });
 
         .media-current(@screen-non-desktop, {
-            display: grid;
             grid-template-areas: "central central" "left right";
-            gap: @space-small-4;
 
             .central {
                 grid-area: central;
