@@ -52,7 +52,11 @@ export let findStreak = (matrix) => {
         for (let start = 0; start < size; start++) {
             let previous = 0;
             let count = 0;
-            for (let r = half === 0 ? 0 : start, c = half === 0 ? start : 0; r < size && c < size; r++, c++) {
+            for (
+                let r = half === 0 ? 0 : start, c = half === 0 ? start : 0;
+                r < size && c < size;
+                r++, c++
+            ) {
                 let current = matrix[r][c];
                 if (current === previous) {
                     count++;
@@ -77,7 +81,11 @@ export let findStreak = (matrix) => {
         for (let start = 0; start < size; start++) {
             let previous = 0;
             let count = 0;
-            for (let r = half === 0 ? start : size - 1, c = half === 0 ? 0 : start; r > 0 && c < size; r--, c++) {
+            for (
+                let r = half === 0 ? start : size - 1, c = half === 0 ? 0 : start;
+                r >= 0 && c < size;
+                r--, c++
+            ) {
                 let current = matrix[r][c];
                 if (current === previous) {
                     count++;
