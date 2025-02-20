@@ -1,6 +1,6 @@
-export let scheduleTimeout = setTimeout;
+export let scheduleInterval = setInterval;
 
-export let cancelTimeout = clearTimeout;
+export let cancelInterval = clearInterval;
 
 export let getTeamName = (teamId) => teamId === 0 ? 'O' : 'X';
 

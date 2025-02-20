@@ -1,6 +1,6 @@
 import './Timer.less';
-import {useLayoutEffect, useState} from 'fiddlehead';
-import {cancelTimeout, scheduleTimeout} from '../utils';
+import {useEffect, useState} from 'fiddlehead';
+import {cancelInterval, scheduleInterval} from '../utils';
 
 export let Timer = ({isFirstMove, moveDuration, makeMoveRandomly}) => {
     let firstMoveDuration = moveDuration + 30;
@@ -8,21 +8,24 @@ export let Timer = ({isFirstMove, moveDuration, makeMoveRandomly}) => {
 
     let [remainingTime, setRemainingTime] = useState(duration * 1000);
 
-    useLayoutEffect(() => {
-        let zeroWithBuffer = -200;
-        if (remainingTime <= zeroWithBuffer) {
-            makeMoveRandomly();
-            return;
-        }
-
+    useEffect(() => {
         let tick = 100;
-        let timeoutId = scheduleTimeout(() => {
-            setRemainingTime(remainingTime - tick);
+        let intervalId = scheduleInterval(() => {
+            setRemainingTime(time => time - tick);
         }, tick);
         return () => {
-            cancelTimeout(timeoutId);
+            cancelInterval(intervalId);
         };
-    }, [remainingTime, makeMoveRandomly]);
+    }, []);
+
+    let timeOutBuffer = 200;
+    let isTimeOutAlready = remainingTime + timeOutBuffer <= 0;
+
+    useEffect(() => {
+        if (isTimeOutAlready) {
+            makeMoveRandomly();
+        }
+    }, [isTimeOutAlready, makeMoveRandomly]);
 
     let isComfortable = remainingTime > moveDuration * 1000;
     let isSensitive = !isComfortable && remainingTime < 3500;
