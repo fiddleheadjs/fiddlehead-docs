@@ -2,11 +2,11 @@ import './TableViewer.less';
 import {useMemo} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
-import {findStreak, getTeamName, isInMatrix, isMatrixEmpty} from '../utils';
+import {findStreak, getTeamName, isInMatrix, isMatrixEmpty, sendPost} from '../utils';
 import {UserName} from '../user-name/UserName';
 
 export let TableViewer = ({table, users, myself, now, setGameData}) => {
-    let {code, moveDuration, state, teams} = table;
+    let {moveDuration, state, teams} = table;
 
     let streak = useMemo(() => findStreak(state.matrix), [String(state.matrix)]);
 
@@ -16,22 +16,19 @@ export let TableViewer = ({table, users, myself, now, setGameData}) => {
         streak === null
     );
 
-    let enterTable = (tableCode) => {
-        fetch(`/gomoku/enter-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
-            setGameData(data);
-        });
+    let userId = myself.id;
+    let tableCode = table.code;
+
+    let enterTable = () => {
+        sendPost('enter-table', {userId, tableCode}, setGameData);
     };
 
-    let removeTable = (tableCode) => {
-        fetch(`/gomoku/remove-table?userId=${myself.id}&tableCode=${tableCode}`).then(res => res.json()).then((data) => {
-            setGameData(data);
-        });
+    let removeTable = () => {
+        sendPost('remove-table', {userId, tableCode}, setGameData);
     };
 
     let resetTable = () => {
-        fetch(`/gomoku/reset-table?userId=${myself.id}&tableCode=${table.code}`).then(response => response.json()).then((data) => {
-            setGameData(data);
-        });
+        sendPost('reset-table', {userId, tableCode}, setGameData);
     };
 
     let isNobodyHere = table.teams.every(userIds => userIds.every(
@@ -62,15 +59,15 @@ export let TableViewer = ({table, users, myself, now, setGameData}) => {
     return (
         <div class="TableViewer">
             <div class="headline">
-                <div class="code">Table <b>{code}</b> &middot; {moveDuration}s/m</div>
+                <div class="code">Table <b>{tableCode}</b> &middot; {moveDuration}s/m</div>
                 <div class="actions">
                     {showsReset && (
-                        <Button type="button" size="small" onClick={() => resetTable(code)}>Reset</Button>
+                        <Button type="button" size="small" onClick={() => resetTable()}>Reset</Button>
                     )}
                     {showsRemove && (
-                        <Button type="button" size="small" onClick={() => removeTable(code)}>Remove</Button>
+                        <Button type="button" size="small" onClick={() => removeTable()}>Remove</Button>
                     )}
-                    <Button type="button" size="small" disabled={hasMyTeamMoved} onClick={() => enterTable(code)}>
+                    <Button type="button" size="small" disabled={hasMyTeamMoved} onClick={() => enterTable()}>
                         {myTeamId != null ? 'Go back' : 'Play now'}
                     </Button>
                 </div>

@@ -125,8 +125,9 @@ router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
 
-router.get('/add-user', (req, res) => {
-    let {userId: inputUserId, userName: inputUserName} = req.query;
+router.post('/add-user', (req, res) => {
+    console.log(req.body);
+    let {userId: inputUserId, userName: inputUserName} = req.body;
     let user = createUser(inputUserId, inputUserName);
     if (users.hasOwnProperty(user.id)) {
         res.sendStatus(400);
@@ -136,8 +137,8 @@ router.get('/add-user', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/add-table', (req, res) => {
-    let {userId, tableCode: inputTableCode, moveDuration: inputMoveDuration} = req.query;
+router.post('/add-table', (req, res) => {
+    let {userId, tableCode: inputTableCode, moveDuration: inputMoveDuration} = req.body;
     let user = users[userId];
     if (user == null) {
         res.sendStatus(400);
@@ -160,8 +161,8 @@ router.get('/add-table', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/remove-table', (req, res) => {
-    let {userId, tableCode} = req.query;
+router.post('/remove-table', (req, res) => {
+    let {userId, tableCode} = req.body;
     let user = users[userId];
     let table = tables[tableCode];
     if (user == null || table == null) {
@@ -176,9 +177,9 @@ router.get('/remove-table', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/enter-table', (req, res) => {
-    let user = users[req.query.userId];
-    let table = tables[req.query.tableCode];
+router.post('/enter-table', (req, res) => {
+    let user = users[req.body.userId];
+    let table = tables[req.body.tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -204,8 +205,8 @@ router.get('/enter-table', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/leave-table', (req, res) => {
-    let {userId} = req.query;
+router.post('/leave-table', (req, res) => {
+    let {userId} = req.body;
     let user = users[userId];
     if (user == null) {
         res.sendStatus(400);
@@ -215,9 +216,9 @@ router.get('/leave-table', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/reset-table', (req, res) => {
-    let user = users[req.query.userId];
-    let table = tables[req.query.tableCode];
+router.post('/reset-table', (req, res) => {
+    let user = users[req.body.userId];
+    let table = tables[req.body.tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -231,10 +232,15 @@ router.get('/reset-table', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/replay', (req, res) => {
-    let user = users[req.query.userId];
-    let table = tables[req.query.tableCode];
-    if (user == null || table == null) {
+router.post('/replay', (req, res) => {
+    let user = users[req.body.userId];
+    if (user == null || user.playingTableCode === null) {
+        res.sendStatus(400);
+        return;
+    }
+
+    let table = tables[user.playingTableCode];
+    if (table == null) {
         res.sendStatus(400);
         return;
     }
@@ -255,10 +261,12 @@ router.get('/replay', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/move', (req, res) => {
+router.post('/move', (req, res) => {
     let now = getNow();
-    let user = users[req.query.userId];
-    let table = tables[req.query.tableCode];
+    let {userId, tableCode, rx, cx} = req.body;
+
+    let user = users[userId];
+    let table = tables[tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -278,10 +286,8 @@ router.get('/move', (req, res) => {
         return;
     }
 
-    let row = Number(req.query.row);
-    let column = Number(req.query.column);
-    state.matrix[row][column] = teamId;
-    state.moveSequence.push([row, column]);
+    state.matrix[rx][cx] = teamId;
+    state.moveSequence.push([rx, cx]);
     state.thinkingTeamId = teamId === 0 ? 1 : 0;
     if (state.thinkingUserIndexes[state.thinkingTeamId] < teams[state.thinkingTeamId].length - 1) {
         state.thinkingUserIndexes[state.thinkingTeamId]++;
@@ -293,12 +299,14 @@ router.get('/move', (req, res) => {
     res.send(getResData());
 });
 
-router.get('/game-data', (req, res) => {
+router.post('/game-data', (req, res) => {
     let now = getNow();
-    let {userId} = req.query;
-    let user = users[userId];
-    if (user != null) {
-        user.lastPingAt = now;
+    let {userId} = req.body;
+    if (userId != null) {
+        let user = users[userId];
+        if (user != null) {
+            user.lastPingAt = now;
+        }
     }
     getUsersOutOfTablesIfInactive(now);
     substituteThinkingUsersIfDisconnected(now);

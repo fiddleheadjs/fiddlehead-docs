@@ -1,17 +1,16 @@
 import './TopBar.less';
 import {Button} from '../../components/button/Button';
+import {sendPost} from '../utils';
 
 export let TopBar = ({ table, myself, myTeamName, streak, setGameData }) => {
+    let userId = myself.id;
+
     let replay = () => {
-        fetch(`/gomoku/replay?userId=${myself.id}&tableCode=${table.code}`).then(response => response.json()).then((data) => {
-            setGameData(data);
-        });
+        sendPost('replay', {userId}, setGameData);
     };
 
     let leaveTable = () => {
-        fetch(`/gomoku/leave-table?userId=${myself.id}`).then(response => response.json()).then((data) => {
-            setGameData(data);
-        });
+        sendPost('leave-table', {userId}, setGameData);
     };
 
     return (

@@ -1,6 +1,7 @@
 let path = require('path');
 let express = require('express');
 let compression = require('compression');
+let bodyParser = require('body-parser');
 
 let app = express();
 let port = 3022;
@@ -8,6 +9,8 @@ let port = 3022;
 app.use(compression());
 
 app.use(express.static('public'));
+
+app.use(bodyParser.json());
 
 app.use('/gomoku', require('./gomoku'));
 

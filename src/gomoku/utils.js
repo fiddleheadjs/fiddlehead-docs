@@ -130,7 +130,7 @@ export let isUserInactive = (user, now) => {
 };
 
 export let getRandomInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 export let isInMatrix = (value, matrix) => {
@@ -156,3 +156,27 @@ export let isMatrixEmpty = (matrix) => {
     }
     return true;
 };
+
+let XHR = XMLHttpRequest;
+let navSendBeacon = navigator.sendBeacon.bind(navigator);
+
+export let sendPost = (path, data, onSuccess) => {
+    let xhr = new XHR();
+    xhr.open('POST', `/gomoku/${path}`);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onload = () => {
+        if (xhr.status >= 100 && xhr.status < 400) {
+            onSuccess(JSON.parse(xhr.responseText));
+        }
+    };
+    xhr.send(JSON.stringify(data));
+};
+
+export let sendBeacon = (path, data) => {
+    let parts = [JSON.stringify(data)];
+    let options = {
+        type: 'application/json;charset=UTF-8'
+    };
+    let blob = new Blob(parts, options);
+    navSendBeacon(`/gomoku/${path}`, blob);
+}; 

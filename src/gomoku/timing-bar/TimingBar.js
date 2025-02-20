@@ -17,31 +17,19 @@ export let TimingBar = ({isWaitingForMove, moveDuration, teamId, matrix, makeMov
         return emptyCells;
     }, [matrix]);
 
-    let makeMoveRandomly = useCallback(() => {
+    let makeMoveRandomly = useCallback((isBeacon) => {
         if (availableCells.length === 0) {
             return;
         }
         let randomIndex = getRandomInteger(0, availableCells.length - 1);
         let [rx, cx] = availableCells[randomIndex];
-        makeMoveTo(rx, cx);
+        makeMoveTo([rx, cx], isBeacon);
     }, [availableCells, makeMoveTo]);
-
-    useEffect(() => {
-        let listener = (event) => {
-            event.preventDefault();
-            event.returnValue = true;
-            makeMoveRandomly();
-        };
-        window.addEventListener('beforeunload', listener);
-        return () => {
-            window.removeEventListener('beforeunload', listener);
-        };
-    }, [makeMoveRandomly]);
 
     useEffect(() => {
         let listener = (state) => {
             if (!(state === STATE_ACTIVE || state === STATE_PASSIVE)) {
-                makeMoveRandomly();
+                makeMoveRandomly(true);
             }
         };
         addWindowStateChangeListener(listener);

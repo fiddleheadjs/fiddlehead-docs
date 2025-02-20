@@ -2,6 +2,7 @@ import './AddUser.less';
 import {useState} from 'fiddlehead';
 import { v4 as uuid } from 'uuid';
 import {Button} from '../../components/button/Button';
+import {sendPost} from '../utils';
 
 export let AddUser = ({ setGameData }) => {
     let [draftUserName, setDraftUserName] = useState('');
@@ -18,9 +19,7 @@ export let AddUser = ({ setGameData }) => {
         setDraftUserName('');
         let userId = uuid();
         localStorage.setItem('userId', userId);
-        fetch(`/gomoku/add-user?userId=${userId}&userName=${userName}`).then(res => res.json()).then((data) => {
-            setGameData(data);
-        });
+        sendPost('add-user', {userId, userName}, setGameData);
     };
 
     return (

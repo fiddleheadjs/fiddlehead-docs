@@ -1,7 +1,7 @@
 import './Board.less';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'fiddlehead';
 import {Cell} from '../cell/Cell';
-import {findStreak, getWonTeamId} from '../utils';
+import {findStreak, getWonTeamId, sendBeacon, sendPost} from '../utils';
 import {TimingBar} from '../timing-bar/TimingBar';
 
 export let Board = ({
@@ -116,14 +116,16 @@ export let Board = ({
 
     let viewOnly = isViewer || !isWaitingForMove;
 
-    let makeMoveTo = useCallback((rx, cx) => {
+    let makeMoveTo = useCallback(([rx, cx], isBeacon = false) => {
         if (viewOnly) {
             return;
         }
+
         let isCellAvailable = matrix[rx][cx] === 2;
         if (!isCellAvailable) {
             return;
         }
+
         setIsWaitingForMove(false);
         setMatrix(matrix => {
             let row = [...matrix[rx]];
@@ -132,9 +134,21 @@ export let Board = ({
             return [...matrix];
         });
         setMoveSequence(moveSequence => [...moveSequence, [rx, cx]]);
-        fetch(`/gomoku/move?row=${rx}&column=${cx}&userId=${userId}&tableCode=${tableCode}`).then(res => res.json()).then(data => {
-            setGameData(data);
-        });
+
+        let data = {
+            userId,
+            tableCode,
+            rx,
+            cx
+        };
+
+        if (isBeacon) {
+            // To be called on page hides when it does not mean to handle the response
+            // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon
+            sendBeacon('move', data);
+        } else {
+            sendPost('move', data, setGameData);
+        }
     }, [viewOnly, matrix, userId, tableCode, setGameData]);
 
     // LAST MOVE
@@ -171,7 +185,7 @@ export let Board = ({
                                     viewOnly={viewOnly}
                                     lastMoveHighlighted={streak === null && isLastMoveAt(rx, cx)}
                                     makeMoveHere={() => {
-                                        makeMoveTo(rx, cx);
+                                        makeMoveTo([rx, cx]);
                                     }}
                                 />
                             ))}

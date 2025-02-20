@@ -1,6 +1,7 @@
 import './AddTable.less';
 import {useState} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
+import {sendPost} from '../utils';
 
 export let AddTable = ({ myself, setGameData }) => {
     let [draftTableCode, setDraftTableCode] = useState('');
@@ -17,9 +18,8 @@ export let AddTable = ({ myself, setGameData }) => {
             return;
         }
         setDraftTableCode('');
-        fetch(`/gomoku/add-table?userId=${myself.id}&tableCode=${tableCode}&moveDuration=${moveDuration}`).then(res => res.json()).then((data) => {
-            setGameData(data);
-        });
+        let userId = myself.id;
+        sendPost('add-table', {userId, tableCode, moveDuration}, setGameData);
     };
 
     return (
