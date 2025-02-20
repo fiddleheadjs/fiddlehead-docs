@@ -1,17 +1,20 @@
 @import '../style/mixin.less';
 
 .Gomoku {
-    input, select {
-        border: 1px solid @gray-twilight;
-        box-sizing: content-box;
-        height: @dimension-input-standard-height;
-        padding: @dimension-input-standard-padding;
-        width: 20rem;
+    input,
+    select {
+        appearance: none;
+        box-sizing: border-box;
+        border: 1px solid lightgray;
+        height: 2.5em;
+        padding: 0 0.8em;
+        width: 20em;
         .font-body();
         .border-radius(2);
     }
 
-    button {
+    button,
+    select {
         &:not(:disabled) {
             cursor: pointer;
         }
