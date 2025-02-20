@@ -23,7 +23,7 @@ export let Gomoku = () => {
     }, []);
 
     if (gameData === null) {
-        return withWrapper('Loading...');
+        return withWrapper(null);
     }
 
     let {users, tables, now} = gameData;
