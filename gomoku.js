@@ -117,8 +117,8 @@ let filterPlayingMembers = (userIds, tableCode) => userIds.map(userId => users[u
     user => user.playingTableCode === tableCode
 );
 
-let isNobodyInTheTable = table => table.teams.every(memberIds => memberIds.every(
-    memberId => users[memberId].playingTableCode !== table.code
+let isSomeoneInTheTable = table => table.teams.some(memberIds => memberIds.some(
+    memberId => users[memberId].playingTableCode === table.code
 ));
 
 router.get('/', (req, res) => {
@@ -168,7 +168,7 @@ router.get('/remove-table', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    if (!isNobodyInTheTable(table)) {
+    if (isSomeoneInTheTable(table)) {
         res.sendStatus(400);
         return;
     }
@@ -222,7 +222,7 @@ router.get('/reset-table', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    if (!isNobodyInTheTable) {
+    if (isSomeoneInTheTable(table)) {
         res.sendStatus(400);
         return;
     }
