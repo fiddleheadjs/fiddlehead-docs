@@ -27,14 +27,24 @@ export let TimingBar = ({isWaitingForMove, moveDuration, teamId, matrix, makeMov
     }, [availableCells, makeMoveTo]);
 
     useEffect(() => {
+        let listener = (event) => {
+            event.preventDefault();
+            event.returnValue = true;
+            makeMoveRandomly();
+        };
+        window.addEventListener('beforeunload', listener);
+        return () => {
+            window.removeEventListener('beforeunload', listener);
+        };
+    }, [makeMoveRandomly]);
+
+    useEffect(() => {
         let listener = (state) => {
             if (!(state === STATE_ACTIVE || state === STATE_PASSIVE)) {
                 makeMoveRandomly();
             }
         };
-
         addWindowStateChangeListener(listener);
-
         return () => {
             removeWindowStateChangeListener(listener);
         };
