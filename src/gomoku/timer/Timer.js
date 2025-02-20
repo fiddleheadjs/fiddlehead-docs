@@ -1,25 +1,26 @@
 import './Timer.less';
-import {useEffect, useState} from 'fiddlehead';
+import {useLayoutEffect, useState} from 'fiddlehead';
+import {cancelTimeout, scheduleTimeout} from '../utils';
 
-export let Timer = ({ isFirstMove, moveDuration, makeMoveRandomly }) => {
+export let Timer = ({isFirstMove, moveDuration, makeMoveRandomly}) => {
     let firstMoveDuration = moveDuration + 30;
     let duration = isFirstMove ? firstMoveDuration : moveDuration;
-    
+
     let [remainingTime, setRemainingTime] = useState(duration * 1000);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let zeroWithBuffer = -200;
         if (remainingTime <= zeroWithBuffer) {
             makeMoveRandomly();
             return;
         }
-        
+
         let tick = 100;
-        let timeoutId = setTimeout(() => {
+        let timeoutId = scheduleTimeout(() => {
             setRemainingTime(remainingTime - tick);
         }, tick);
         return () => {
-            clearTimeout(timeoutId);
+            cancelTimeout(timeoutId);
         };
     }, [remainingTime, makeMoveRandomly]);
 

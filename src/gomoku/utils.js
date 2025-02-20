@@ -1,3 +1,7 @@
+export let scheduleTimeout = setTimeout;
+
+export let cancelTimeout = clearTimeout;
+
 export let getTeamName = (teamId) => teamId === 0 ? 'O' : 'X';
 
 export let findStreak = (matrix) => {

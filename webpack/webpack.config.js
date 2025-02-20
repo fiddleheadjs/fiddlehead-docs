@@ -90,6 +90,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 '@contents': path.resolve(rootDir, 'src/contents'),
 
                 // Use these special aliases when debugging Fiddlehead:
+                // A trailing $ can also be added to the given object's keys to signify an exact match:
                 // 'fiddlehead$': path.resolve(rootDir, '../fiddlehead/lib/core'),
                 // 'fiddlehead/store$': path.resolve(rootDir, '../fiddlehead/lib/store'),
             }
