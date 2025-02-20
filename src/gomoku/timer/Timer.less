@@ -1,11 +1,15 @@
 @import '../../style/mixin.less';
 
 .Timer {
+    display: inline-block;
+    transition: transform 0.1s;
+    
     &.comfortable {
         color: green;
     }
     
     &.sensitive {
         color: red;
+        transform: scale(1.5);
     }
 }
