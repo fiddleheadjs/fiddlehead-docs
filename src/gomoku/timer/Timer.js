@@ -8,15 +8,16 @@ export let Timer = ({ isFirstMove, moveDuration, makeMoveRandomly }) => {
     let [remainingTime, setRemainingTime] = useState(duration * 1000);
 
     useEffect(() => {
-        if (remainingTime <= 0) {
+        let zeroWithBuffer = -200;
+        if (remainingTime <= zeroWithBuffer) {
             makeMoveRandomly();
             return;
         }
         
+        let tick = 100;
         let timeoutId = setTimeout(() => {
-            setRemainingTime(remainingTime - 100);
-        }, 100);
-
+            setRemainingTime(remainingTime - tick);
+        }, tick);
         return () => {
             clearTimeout(timeoutId);
         };
@@ -27,7 +28,9 @@ export let Timer = ({ isFirstMove, moveDuration, makeMoveRandomly }) => {
 
     return (
         <span class={`Timer ${isComfortable ? 'comfortable' : ''} ${isSensitive ? 'sensitive' : ''}`}>
-            {isSensitive ? (remainingTime / 1000).toFixed(1) : Math.ceil(remainingTime / 1000)}
+            {remainingTime >= 0 && (
+                isSensitive ? (remainingTime / 1000).toFixed(1) : Math.ceil(remainingTime / 1000)
+            )}
         </span>
     );
 };

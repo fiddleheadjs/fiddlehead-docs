@@ -51,7 +51,7 @@ export let TimingBar = ({isWaitingForMove, moveDuration, teamId, matrix, makeMov
                     makeMoveRandomly={makeMoveRandomly}
                 />
             ) : (
-                <span>&nbsp;</span>
+                <span class="placeholder">&nbsp;</span>
             )}
         </caption>
     );
