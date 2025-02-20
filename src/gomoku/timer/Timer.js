@@ -23,7 +23,7 @@ export let Timer = ({ isFirstMove, moveDuration, makeMoveRandomly }) => {
     }, [remainingTime, makeMoveRandomly]);
 
     let isComfortable = remainingTime > moveDuration * 1000;
-    let isSensitive = !isComfortable && remainingTime <= 3100;
+    let isSensitive = !isComfortable && remainingTime < 3500;
 
     return (
         <span class={`Timer ${isComfortable ? 'comfortable' : ''} ${isSensitive ? 'sensitive' : ''}`}>
