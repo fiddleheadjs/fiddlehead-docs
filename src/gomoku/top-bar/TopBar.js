@@ -1,16 +1,16 @@
 import './TopBar.less';
 import {Button} from '../../components/button/Button';
-import {sendPost} from '../utils';
+import {sendRequest} from '../utils';
 
 export let TopBar = ({ table, myself, myTeamName, streak, setGameData }) => {
     let userId = myself.id;
 
     let replay = () => {
-        sendPost('replay', {userId}, setGameData);
+        sendRequest('replay', {userId}, setGameData);
     };
 
     let leaveTable = () => {
-        sendPost('leave-table', {userId}, setGameData);
+        sendRequest('leave-table', {userId}, setGameData);
     };
 
     return (

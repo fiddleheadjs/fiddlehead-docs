@@ -7,16 +7,17 @@ export let Timer = ({isFirstMove, moveDuration, makeMoveRandomly}) => {
     let duration = isFirstMove ? firstMoveDuration : moveDuration;
 
     let [remainingTime, setRemainingTime] = useState(duration * 1000);
+    let tick = remainingTime >= 5000 ? 1000 : 100;
 
     useEffect(() => {
-        let tick = 100;
         let intervalId = scheduleInterval(() => {
             setRemainingTime(time => time - tick);
         }, tick);
+        
         return () => {
             cancelInterval(intervalId);
         };
-    }, []);
+    }, [tick]);
 
     let timeOutBuffer = 200;
     let isTimeOutAlready = remainingTime + timeOutBuffer <= 0;

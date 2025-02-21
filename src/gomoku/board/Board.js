@@ -1,7 +1,7 @@
 import './Board.less';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'fiddlehead';
 import {Cell} from '../cell/Cell';
-import {findStreak, getWonTeamId, sendBeacon, sendPost} from '../utils';
+import {findStreak, getWonTeamId, sendBeacon, sendRequest} from '../utils';
 import {TimingBar} from '../timing-bar/TimingBar';
 
 export let Board = ({
@@ -147,7 +147,7 @@ export let Board = ({
             // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon
             sendBeacon('move', data);
         } else {
-            sendPost('move', data, setGameData);
+            sendRequest('move', data, setGameData);
         }
     }, [viewOnly, matrix, userId, tableCode, setGameData]);
 

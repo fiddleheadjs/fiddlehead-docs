@@ -3,7 +3,7 @@ import {useEffect, useState} from 'fiddlehead';
 import {AddUser} from './add-user/AddUser';
 import {Room} from './room/Room';
 import {Table} from './table/Table';
-import {sendPost} from './utils';
+import {sendRequest} from './utils';
 
 let withWrapper = (content) => (
     <div class="Gomoku">{content}</div>
@@ -15,7 +15,7 @@ export let Gomoku = () => {
     useEffect(() => {
         let refresh = () => {
             let userId = localStorage.getItem('userId');
-            sendPost('game-data', {userId}, setGameData);
+            sendRequest('game-data', {userId}, setGameData);
         };
         refresh();
         let intervalId = setInterval(refresh, 1000);

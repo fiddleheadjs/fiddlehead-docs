@@ -1,7 +1,7 @@
 import './AddTable.less';
 import {useState} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
-import {sendPost} from '../utils';
+import {sendRequest} from '../utils';
 
 export let AddTable = ({ myself, setGameData }) => {
     let [draftTableCode, setDraftTableCode] = useState('');
@@ -19,7 +19,7 @@ export let AddTable = ({ myself, setGameData }) => {
         }
         setDraftTableCode('');
         let userId = myself.id;
-        sendPost('add-table', {userId, tableCode, moveDuration}, setGameData);
+        sendRequest('add-table', {userId, tableCode, moveDuration}, setGameData);
     };
 
     return (

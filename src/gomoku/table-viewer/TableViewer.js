@@ -2,7 +2,7 @@ import './TableViewer.less';
 import {useMemo} from 'fiddlehead';
 import {Button} from '../../components/button/Button';
 import {Board} from '../board/Board';
-import {findStreak, getTeamName, isInMatrix, isMatrixEmpty, sendPost} from '../utils';
+import {findStreak, getTeamName, isInMatrix, isMatrixEmpty, sendRequest} from '../utils';
 import {UserName} from '../user-name/UserName';
 
 export let TableViewer = ({table, users, myself, now, setGameData}) => {
@@ -20,15 +20,15 @@ export let TableViewer = ({table, users, myself, now, setGameData}) => {
     let tableCode = table.code;
 
     let enterTable = () => {
-        sendPost('enter-table', {userId, tableCode}, setGameData);
+        sendRequest('enter-table', {userId, tableCode}, setGameData);
     };
 
     let removeTable = () => {
-        sendPost('remove-table', {userId, tableCode}, setGameData);
+        sendRequest('remove-table', {userId, tableCode}, setGameData);
     };
 
     let resetTable = () => {
-        sendPost('reset-table', {userId, tableCode}, setGameData);
+        sendRequest('reset-table', {userId, tableCode}, setGameData);
     };
 
     let isNobodyHere = table.teams.every(userIds => userIds.every(

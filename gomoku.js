@@ -125,9 +125,8 @@ router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/gomoku.html'));
 });
 
-router.post('/add-user', (req, res) => {
-    console.log(req.body);
-    let {userId: inputUserId, userName: inputUserName} = req.body;
+router.get('/add-user', (req, res) => {
+    let {userId: inputUserId, userName: inputUserName} = req.query;
     let user = createUser(inputUserId, inputUserName);
     if (users.hasOwnProperty(user.id)) {
         res.sendStatus(400);
@@ -137,8 +136,8 @@ router.post('/add-user', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/add-table', (req, res) => {
-    let {userId, tableCode: inputTableCode, moveDuration: inputMoveDuration} = req.body;
+router.get('/add-table', (req, res) => {
+    let {userId, tableCode: inputTableCode, moveDuration: inputMoveDuration} = req.query;
     let user = users[userId];
     if (user == null) {
         res.sendStatus(400);
@@ -161,10 +160,9 @@ router.post('/add-table', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/remove-table', (req, res) => {
-    let {userId, tableCode} = req.body;
-    let user = users[userId];
-    let table = tables[tableCode];
+router.get('/remove-table', (req, res) => {
+    let user = users[req.query.userId];
+    let table = tables[req.query.tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -177,9 +175,9 @@ router.post('/remove-table', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/enter-table', (req, res) => {
-    let user = users[req.body.userId];
-    let table = tables[req.body.tableCode];
+router.get('/enter-table', (req, res) => {
+    let user = users[req.query.userId];
+    let table = tables[req.query.tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -205,9 +203,8 @@ router.post('/enter-table', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/leave-table', (req, res) => {
-    let {userId} = req.body;
-    let user = users[userId];
+router.get('/leave-table', (req, res) => {
+    let user = users[req.query.userId];
     if (user == null) {
         res.sendStatus(400);
         return;
@@ -216,9 +213,9 @@ router.post('/leave-table', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/reset-table', (req, res) => {
-    let user = users[req.body.userId];
-    let table = tables[req.body.tableCode];
+router.get('/reset-table', (req, res) => {
+    let user = users[req.query.userId];
+    let table = tables[req.query.tableCode];
     if (user == null || table == null) {
         res.sendStatus(400);
         return;
@@ -232,8 +229,8 @@ router.post('/reset-table', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/replay', (req, res) => {
-    let user = users[req.body.userId];
+router.get('/replay', (req, res) => {
+    let user = users[req.query.userId];
     if (user == null || user.playingTableCode === null) {
         res.sendStatus(400);
         return;
@@ -261,9 +258,11 @@ router.post('/replay', (req, res) => {
     res.send(getResData());
 });
 
-router.post('/move', (req, res) => {
+let handleMoveRequest = (req, res) => {
     let now = getNow();
-    let {userId, tableCode, rx, cx} = req.body;
+    let {userId, tableCode, rx, cx} = req.query;
+    rx = Number(rx);
+    cx = Number(cx);
 
     let user = users[userId];
     let table = tables[tableCode];
@@ -297,11 +296,15 @@ router.post('/move', (req, res) => {
     substituteThinkingUsersIfDisconnected(now);
 
     res.send(getResData());
-});
+};
 
-router.post('/game-data', (req, res) => {
+router.get('/move', handleMoveRequest);
+
+router.post('/move', handleMoveRequest);
+
+router.get('/game-data', (req, res) => {
     let now = getNow();
-    let {userId} = req.body;
+    let {userId} = req.query;
     if (userId != null) {
         let user = users[userId];
         if (user != null) {

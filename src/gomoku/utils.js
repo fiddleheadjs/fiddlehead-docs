@@ -160,23 +160,37 @@ export let isMatrixEmpty = (matrix) => {
 let XHR = XMLHttpRequest;
 let navSendBeacon = navigator.sendBeacon.bind(navigator);
 
-export let sendPost = (path, data, onSuccess) => {
+let createSearchString = (data) => {
+    let queryParams = [];
+    for (let [name, value] of Object.entries(data)) {
+        queryParams.push([
+            encodeURIComponent(name),
+            encodeURIComponent(value)
+        ].join('='));
+    }
+    if (queryParams.length === 0) {
+        return '';
+    }
+    let query = queryParams.join('&');
+    return `?${query}`;
+};
+
+let createUrl = (path, data) => {
+    let search = createSearchString(data);
+    return `/gomoku/${path}${search}`;
+};
+
+export let sendRequest = (path, data, onSuccess) => {
     let xhr = new XHR();
-    xhr.open('POST', `/gomoku/${path}`);
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.open('GET', createUrl(path, data));
     xhr.onload = () => {
         if (xhr.status >= 100 && xhr.status < 400) {
             onSuccess(JSON.parse(xhr.responseText));
         }
     };
-    xhr.send(JSON.stringify(data));
+    xhr.send(null);
 };
 
 export let sendBeacon = (path, data) => {
-    let parts = [JSON.stringify(data)];
-    let options = {
-        type: 'application/json;charset=UTF-8'
-    };
-    let blob = new Blob(parts, options);
-    navSendBeacon(`/gomoku/${path}`, blob);
-}; 
+    navSendBeacon(createUrl(path, data));
+};
