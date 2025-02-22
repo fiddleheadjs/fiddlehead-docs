@@ -59,9 +59,7 @@ let isInMatrix = (value, matrix) => {
 let resetToDefaultData = () => {
     users = {};
     tables = {
-        '1': createTable('1'),
-        '2': createTable('2'),
-        '3': createTable('3')
+        '1': createTable('1')
     };
 };
 
