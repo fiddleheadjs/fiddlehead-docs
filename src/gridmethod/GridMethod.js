@@ -2,27 +2,10 @@ import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
 export let GridMethod = () => {
-    let [imageData, setImageData] = useState(null);
-
-    let reader = useMemo(() => {
-        let reader = new FileReader();
-        reader.onload = (event) => {
-            setImageData(event.target.result);
-        };
-        return reader;
-    }, []);
-
-    let handleFileInputChange = (event) => {
-        let [file] = event.target.files;
-        if (file != null && file.type.startsWith('image/')) {
-            reader.readAsDataURL(file);
-        }
-    };
-
     let [grid, setGrid] = useState(true);
-    let [rows, setRows] = useState(15);
+    let [rows, setRows] = useState(6);
     let [cols, setCols] = useState(10);
-    let [color, setColor] = useState('black');
+    let [color, setColor] = useState('white');
     let [opacity, setOpacity] = useState(20);
 
     let handleGridCheckboxChange = (event) => {
@@ -45,11 +28,37 @@ export let GridMethod = () => {
         setOpacity(Number(event.target.value));
     };
 
+    let [imageData, setImageData] = useState(null);
+
+    let reader = useMemo(() => {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+            setImageData(event.target.result);
+        };
+        return reader;
+    }, []);
+
+    let handleFileInputChange = (event) => {
+        let [file] = event.target.files;
+        if (file != null && file.type.startsWith('image/')) {
+            reader.readAsDataURL(file);
+        }
+    };
+
+    let handleImageLoad = (event) => {
+        const {naturalWidth, naturalHeight} = event.target;
+        const defaultRows = Math.ceil(cols * naturalHeight / naturalWidth);
+        setRows(defaultRows);
+    };
+
     return (
         <div class="GridMethod">
             <div class="canvas">
                 {imageData != null && (
-                    <img src={imageData} />
+                    <img
+                        src={imageData}
+                        onLoad={handleImageLoad}
+                    />
                 )}
                 <table
                     style={{
