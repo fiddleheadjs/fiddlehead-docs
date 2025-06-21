@@ -1,6 +1,7 @@
 import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
+let gridColumns = new Array(29).fill().map((_, i) => i + 2);
 let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
 let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
 
@@ -8,7 +9,6 @@ export let GridMethod = () => {
     let [
         {
             grid,
-            rows,
             columns,
             color,
             opacity,
@@ -21,7 +21,6 @@ export let GridMethod = () => {
     ] = useState(
         {
             grid: true,
-            rows: 6,
             columns: 10,
             color: 'white',
             opacity: 20,
@@ -33,20 +32,17 @@ export let GridMethod = () => {
     );
 
     let handleOptionInputChange = (event) => {
-        let {type, name, value, checked} = event.target;
+        let {name, value, checked} = event.target;
         let normalizedValue;
-        switch (type) {
-            case 'number':
-                normalizedValue = Number(value);
+        switch (name) {
+            case 'color':
+                normalizedValue = value;
                 break;
-            case 'checkbox':
-            case 'radio':
+            case 'grid':
                 normalizedValue = checked;
                 break;
-            case 'text':
-            case 'select-one':
             default:
-                normalizedValue = value;
+                normalizedValue = Number(value);
         }
         setOptions(options => ({
             ...options,
@@ -55,6 +51,7 @@ export let GridMethod = () => {
     };
 
     let [imageData, setImageData] = useState(null);
+    let [aspectRatio, setAspectRatio] = useState(1.618);
 
     let reader = useMemo(() => {
         let reader = new FileReader();
@@ -73,12 +70,10 @@ export let GridMethod = () => {
 
     let handleImageLoad = (event) => {
         const {naturalWidth, naturalHeight} = event.target;
-        const defaultRows = Math.ceil(columns * naturalHeight / naturalWidth);
-        setOptions(options => ({
-            ...options,
-            rows: defaultRows
-        }));
+        setAspectRatio(naturalWidth / naturalHeight);
     };
+
+    let rows = Math.ceil(columns / aspectRatio);
 
     return (
         <div class="GridMethod">
@@ -141,15 +136,24 @@ export let GridMethod = () => {
                             </td>
                         </tr>
                         <tr>
-                            <th>Rows:</th>
+                            <th>Columns:</th>
                             <td>
-                                <input name="rows" type="number" value={rows} onChange={handleOptionInputChange} />
+                                <select
+                                    name="columns"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {gridColumns.map(value => (
+                                        <option value={value} selected={value === columns}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
                             </td>
                         </tr>
                         <tr>
-                            <th>Columns:</th>
+                            <th>Rows:</th>
                             <td>
-                                <input name="columns" type="number" value={columns} onChange={handleOptionInputChange} />
+                                <input name="rows" type="text" value={rows} readonly />
                             </td>
                         </tr>
                         <tr>

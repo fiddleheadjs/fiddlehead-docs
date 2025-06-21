@@ -20,6 +20,10 @@ select {
     appearance: none;
     background: none;
     box-shadow: none;
+
+    &[readonly] {
+        border-color: transparent;
+    }
 }
 
 input[type="file"],
@@ -55,6 +59,7 @@ input[type="file"]::file-selector-button {
 
     .controls {
         padding: 0.5rem;
+        max-width: 40rem;
 
         table {
             border-collapse: separate;
