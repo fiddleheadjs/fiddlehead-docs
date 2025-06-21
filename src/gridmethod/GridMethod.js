@@ -61,25 +61,54 @@ export let GridMethod = () => {
                 </table>
             </div>
             <div class="controls">
-                <div class="control">
-                    <input type="file" accept="image/*" onChange={handleFileInputChange} />
-                </div>
-                <div class="control">
-                    <label>Grid:</label>
-                    <input type="checkbox" checked={grid} onChange={handleGridCheckboxChange} />
-                </div>
-                <div class="control">
-                    <label>Color:</label>
-                    <input type="text" value={color} onChange={handleColorInputChange} />
-                </div>
-                <div class="control">
-                    <label>Rows:</label>
-                    <input type="number" value={rows} onChange={handleRowsInputChange} />
-                </div>
-                <div class="control">
-                    <label>Columns:</label>
-                    <input type="number" value={cols} onChange={handleColsInputChange} />
-                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Photo:</label>
+                            </td>
+                            <td>
+                                <input type="file" accept="image/*" onChange={handleFileInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Grid:</label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" checked={grid} onChange={handleGridCheckboxChange} />
+                                    {' '}
+                                    <span>{grid ? '(visible)' : '(hidden)'}</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Color:</label>
+                            </td>
+                            <td>
+                                <input type="text" value={color} onChange={handleColorInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Rows:</label>
+                            </td>
+                            <td>
+                                <input type="number" value={rows} onChange={handleRowsInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Columns:</label>
+                            </td>
+                            <td>
+                                <input type="number" value={cols} onChange={handleColsInputChange} />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     )

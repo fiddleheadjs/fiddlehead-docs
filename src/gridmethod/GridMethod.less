@@ -8,20 +8,6 @@ body {
 }
 
 .GridMethod {
-    .controls {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 1rem;
-        gap: 1rem;
-
-        .control {
-            display: flex;
-            flex-direction: row;
-            gap: 0.5rem;
-        }
-    }
-
     .canvas {
         overflow: hidden;
         
@@ -36,12 +22,19 @@ body {
             border-collapse: collapse;
 
             td {
-                border: 0.5px solid currentColor;
+                border: 1px solid currentColor;
 
                 svg {
                     display: block;
                 }
             }
+        }
+    }
+
+    .controls {
+        table {
+            border-collapse: separate;
+            border-spacing: 1rem;
         }
     }
 }
