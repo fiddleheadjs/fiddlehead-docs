@@ -1,6 +1,9 @@
 import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
+let percentageOptions = new Array(31).fill().map((_, i) => 10 * i);
+let percentageOver100Options = new Array(31).fill().map((_, i) => 10 * i);
+
 export let GridMethod = () => {
     let [
         {
@@ -10,8 +13,9 @@ export let GridMethod = () => {
             color,
             opacity,
             grayscale,
-            brightness,
             saturate,
+            brightness,
+            contrast,
         },
         setOptions
     ] = useState(
@@ -24,6 +28,7 @@ export let GridMethod = () => {
             grayscale: 0,
             brightness: 100,
             saturate: 100,
+            contrast: 100,
         }
     );
 
@@ -85,8 +90,9 @@ export let GridMethod = () => {
                         style={{
                             filter: [
                                 `grayscale(${grayscale}%)`,
-                                `brightness(${brightness}%)`,
                                 `saturate(${saturate}%)`,
+                                `brightness(${brightness}%)`,
+                                `contrast(${contrast}%)`,
                             ].join(' ')
                         }}
                     />
@@ -115,9 +121,13 @@ export let GridMethod = () => {
                 <table>
                     <tbody>
                         <tr>
-                            <th>Photo:</th>
-                            <td>
+                            <td colspan="2">
                                 <input name="photo" type="file" accept="image/*" onChange={handleFileInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong># Grid options</strong>
                             </td>
                         </tr>
                         <tr>
@@ -164,12 +174,17 @@ export let GridMethod = () => {
                                     name="opacity"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                    {percentageOptions.map(value => (
                                         <option value={value} selected={value === opacity}>
                                             {value}
                                         </option>
                                     ))}
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong># Photo options</strong>
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +194,7 @@ export let GridMethod = () => {
                                     name="grayscale"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                    {percentageOptions.map(value => (
                                         <option value={value} selected={value === grayscale}>
                                             {value}
                                         </option>
@@ -194,7 +209,7 @@ export let GridMethod = () => {
                                     name="brightness"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                    {percentageOver100Options.map(value => (
                                         <option value={value} selected={value === brightness}>
                                             {value}
                                         </option>
@@ -209,7 +224,7 @@ export let GridMethod = () => {
                                     name="saturate"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                    {percentageOver100Options.map(value => (
                                         <option value={value} selected={value === saturate}>
                                             {value}
                                         </option>
@@ -217,7 +232,21 @@ export let GridMethod = () => {
                                 </select>
                             </td>
                         </tr>
-
+                        <tr>
+                            <th>Contrast:</th>
+                            <td>
+                                <select
+                                    name="contrast"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {percentageOver100Options.map(value => (
+                                        <option value={value} selected={value === contrast}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

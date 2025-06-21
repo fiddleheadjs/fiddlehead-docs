@@ -15,7 +15,6 @@ select {
     font-size: inherit;
     color: currentColor;
     border: 1px solid darkgray;
-    width: 10em;
     padding: 0.2em;
     border-radius: 3px;
     appearance: none;
@@ -26,11 +25,7 @@ select {
 input[type="file"],
 input[type="file"]::file-selector-button {
     font-family: inherit;
-    font-size: small;
-}
-
-input[type="file"] {
-    max-width: 200px;
+    font-size: inherit;
 }
 
 .GridMethod {
@@ -64,10 +59,20 @@ input[type="file"] {
         table {
             border-collapse: separate;
             border-spacing: 0.5rem;
+            width: 100%;
 
             th {
                 text-align: left;
                 font-weight: normal;
+            }
+
+            td {
+                input[type="text"],
+                input[type="number"],
+                input[type="file"],
+                select {
+                    width: 100%;
+                }
             }
         }
     }
