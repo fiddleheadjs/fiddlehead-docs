@@ -4,8 +4,4 @@
 import {render} from 'fiddlehead';
 import {CoTuongPc1} from '../cotuongpc1/CoTuongPc1';
 
-let App = () => {
-    return <CoTuongPc1 />;
-};
-
-render(<App/>, document.getElementById('root'));
+render(<CoTuongPc1 />, document.getElementById('root'));

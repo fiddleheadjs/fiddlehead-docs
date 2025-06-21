@@ -9,6 +9,8 @@ app.use(compression());
 
 app.use(express.static('public'));
 
+app.use('/gridmethod', require('./gridmethod'));
+
 app.use('/gomoku', require('./gomoku'));
 
 app.use('/cotuongpc1', require('./cotuongpc1'));

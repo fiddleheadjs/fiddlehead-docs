@@ -1,0 +1,47 @@
+* {
+    position: relative;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.GridMethod {
+    .controls {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1rem;
+        gap: 1rem;
+
+        .control {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+        }
+    }
+
+    .canvas {
+        overflow: hidden;
+        
+        img {
+            position: absolute;
+            display: block;
+            width: 100%;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            td {
+                border: 1px solid currentColor;
+
+                svg {
+                    display: block;
+                }
+            }
+        }
+    }
+}
