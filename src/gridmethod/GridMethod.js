@@ -1,8 +1,8 @@
 import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
-let percentageOptions = new Array(31).fill().map((_, i) => 10 * i);
-let percentageOver100Options = new Array(31).fill().map((_, i) => 10 * i);
+let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
+let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
 
 export let GridMethod = () => {
     let [
@@ -33,7 +33,7 @@ export let GridMethod = () => {
     );
 
     let handleOptionInputChange = (event) => {
-        let { type, name, value, checked } = event.target;
+        let {type, name, value, checked} = event.target;
         let normalizedValue;
         switch (type) {
             case 'number':
@@ -174,9 +174,9 @@ export let GridMethod = () => {
                                     name="opacity"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {percentageOptions.map(value => (
+                                    {limitedPercentages.map(value => (
                                         <option value={value} selected={value === opacity}>
-                                            {value}
+                                            {value}%
                                         </option>
                                     ))}
                                 </select>
@@ -194,9 +194,9 @@ export let GridMethod = () => {
                                     name="grayscale"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {percentageOptions.map(value => (
+                                    {limitedPercentages.map(value => (
                                         <option value={value} selected={value === grayscale}>
-                                            {value}
+                                            {value}%
                                         </option>
                                     ))}
                                 </select>
@@ -209,9 +209,9 @@ export let GridMethod = () => {
                                     name="brightness"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {percentageOver100Options.map(value => (
+                                    {unlimitedPercentages.map(value => (
                                         <option value={value} selected={value === brightness}>
-                                            {value}
+                                            {value}%
                                         </option>
                                     ))}
                                 </select>
@@ -224,9 +224,9 @@ export let GridMethod = () => {
                                     name="saturate"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {percentageOver100Options.map(value => (
+                                    {unlimitedPercentages.map(value => (
                                         <option value={value} selected={value === saturate}>
-                                            {value}
+                                            {value}%
                                         </option>
                                     ))}
                                 </select>
@@ -239,9 +239,9 @@ export let GridMethod = () => {
                                     name="contrast"
                                     onChange={handleOptionInputChange}
                                 >
-                                    {percentageOver100Options.map(value => (
+                                    {unlimitedPercentages.map(value => (
                                         <option value={value} selected={value === contrast}>
-                                            {value}
+                                            {value}%
                                         </option>
                                     ))}
                                 </select>
