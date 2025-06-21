@@ -20,16 +20,13 @@ export let GridMethod = () => {
     };
 
     let [grid, setGrid] = useState(true);
-    let [color, setColor] = useState('black');
     let [rows, setRows] = useState(10);
     let [cols, setCols] = useState(10);
+    let [color, setColor] = useState('black');
+    let [opacity, setOpacity] = useState(50);
 
     let handleGridCheckboxChange = (event) => {
         setGrid(event.target.checked);
-    };
-
-    let handleColorInputChange = (event) => {
-        setColor(event.target.value);
     };
 
     let handleRowsInputChange = (event) => {
@@ -40,13 +37,27 @@ export let GridMethod = () => {
         setCols(Number(event.target.value));
     };
 
+    let handleColorInputChange = (event) => {
+        setColor(event.target.value);
+    };
+
+    let handleOpacityInputChange = (event) => {
+        setOpacity(Number(event.target.value));
+    };
+
     return (
         <div class="GridMethod">
             <div class="canvas">
                 {imageData != null && (
                     <img src={imageData} />
                 )}
-                <table style={{color: color, visibility: grid ? 'visible' : 'hidden'}}>
+                <table
+                    style={{
+                        color: color,
+                        visibility: grid ? 'visible' : 'hidden',
+                        opacity: opacity / 100,
+                    }}
+                >
                     <tbody>
                         {new Array(rows).fill().map(() => (
                             <tr>
@@ -80,12 +91,6 @@ export let GridMethod = () => {
                             </td>
                         </tr>
                         <tr>
-                            <th>Color:</th>
-                            <td>
-                                <input name="color" type="text" value={color} onChange={handleColorInputChange} />
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Rows:</th>
                             <td>
                                 <input name="rows" type="number" value={rows} onChange={handleRowsInputChange} />
@@ -95,6 +100,18 @@ export let GridMethod = () => {
                             <th>Columns:</th>
                             <td>
                                 <input name="cols" type="number" value={cols} onChange={handleColsInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Color:</th>
+                            <td>
+                                <input name="color" type="text" value={color} onChange={handleColorInputChange} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Opacity:</th>
+                            <td>
+                                <input name="opacity" type="number" value={opacity} onChange={handleOpacityInputChange} />
                             </td>
                         </tr>
                     </tbody>
