@@ -2,32 +2,6 @@ import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
 export let GridMethod = () => {
-    let [grid, setGrid] = useState(true);
-    let [rows, setRows] = useState(6);
-    let [cols, setCols] = useState(10);
-    let [color, setColor] = useState('white');
-    let [opacity, setOpacity] = useState(20);
-
-    let handleGridCheckboxChange = (event) => {
-        setGrid(event.target.checked);
-    };
-
-    let handleRowsInputChange = (event) => {
-        setRows(Number(event.target.value));
-    };
-
-    let handleColsInputChange = (event) => {
-        setCols(Number(event.target.value));
-    };
-
-    let handleColorInputChange = (event) => {
-        setColor(event.target.value);
-    };
-
-    let handleOpacityInputChange = (event) => {
-        setOpacity(Number(event.target.value));
-    };
-
     let [imageData, setImageData] = useState(null);
 
     let reader = useMemo(() => {
@@ -47,8 +21,58 @@ export let GridMethod = () => {
 
     let handleImageLoad = (event) => {
         const {naturalWidth, naturalHeight} = event.target;
-        const defaultRows = Math.ceil(cols * naturalHeight / naturalWidth);
+        const defaultRows = Math.ceil(columns * naturalHeight / naturalWidth);
         setRows(defaultRows);
+    };
+
+    let [
+        {
+            grid,
+            rows,
+            columns,
+            color,
+            opacity,
+            grayscale,
+            brightness,
+            saturate,
+        },
+        setOptions
+    ] = useState(
+        {
+            grid: true,
+            rows: 6,
+            columns: 10,
+            color: 'white',
+            opacity: 20,
+            grayscale: 0,
+            brightness: 100,
+            saturate: 100
+        }
+    );
+
+    let handleOptionInputChange = (event) => {
+        let { type, name, value, checked } = event.target;
+        
+        let normalizedValue;
+
+        switch (type) {
+            case 'number':
+                normalizedValue = Number(value);
+                break;
+            case 'checkbox':
+            case 'radio':
+                normalizedValue = checked;
+                break;
+            case 'text':
+            case 'select-one':
+            default:
+                normalizedValue = value;
+        }
+
+        setOptions(options => ({
+            ...options,
+            [name]: normalizedValue
+        }));
     };
 
     return (
@@ -58,6 +82,13 @@ export let GridMethod = () => {
                     <img
                         src={imageData}
                         onLoad={handleImageLoad}
+                        style={{
+                            filter: [
+                                `grayscale(${grayscale}%)`,
+                                `brightness(${brightness}%)`,
+                                `saturate(${saturate}%)`,
+                            ].join(' ')
+                        }}
                     />
                 )}
                 <table
@@ -70,7 +101,7 @@ export let GridMethod = () => {
                     <tbody>
                         {new Array(rows).fill().map(() => (
                             <tr>
-                                {new Array(cols).fill().map(() => (
+                                {new Array(columns).fill().map(() => (
                                     <td>
                                         <svg viewBox="0 0 1 1" />
                                     </td>
@@ -93,7 +124,7 @@ export let GridMethod = () => {
                             <th>Grid:</th>
                             <td>
                                 <label>
-                                    <input name="grid" type="checkbox" checked={grid} onChange={handleGridCheckboxChange} />
+                                    <input name="grid" type="checkbox" checked={grid} onChange={handleOptionInputChange} />
                                     {' '}
                                     <span>{grid ? '(visible)' : '(hidden)'}</span>
                                 </label>
@@ -102,13 +133,13 @@ export let GridMethod = () => {
                         <tr>
                             <th>Rows:</th>
                             <td>
-                                <input name="rows" type="number" value={rows} onChange={handleRowsInputChange} />
+                                <input name="rows" type="number" value={rows} onChange={handleOptionInputChange} />
                             </td>
                         </tr>
                         <tr>
-                            <th>Cols:</th>
+                            <th>Columns:</th>
                             <td>
-                                <input name="cols" type="number" value={cols} onChange={handleColsInputChange} />
+                                <input name="columns" type="number" value={columns} onChange={handleOptionInputChange} />
                             </td>
                         </tr>
                         <tr>
@@ -116,7 +147,7 @@ export let GridMethod = () => {
                             <td>
                                 <select
                                     name="color"
-                                    onChange={handleColorInputChange}
+                                    onChange={handleOptionInputChange}
                                 >
                                     {['black', 'white', 'red', 'green', 'blue'].map(value => (
                                         <option value={value} selected={value === color}>
@@ -131,7 +162,7 @@ export let GridMethod = () => {
                             <td>
                                 <select
                                     name="opacity"
-                                    onChange={handleOpacityInputChange}
+                                    onChange={handleOptionInputChange}
                                 >
                                     {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
                                         <option value={value} selected={value === opacity}>
@@ -141,6 +172,52 @@ export let GridMethod = () => {
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Grayscale:</th>
+                            <td>
+                                <select
+                                    name="grayscale"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                        <option value={value} selected={value === grayscale}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Brightness:</th>
+                            <td>
+                                <select
+                                    name="brightness"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                        <option value={value} selected={value === brightness}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Saturate:</th>
+                            <td>
+                                <select
+                                    name="saturate"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                        <option value={value} selected={value === saturate}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
