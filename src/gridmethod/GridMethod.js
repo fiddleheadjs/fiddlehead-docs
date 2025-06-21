@@ -2,29 +2,6 @@ import {useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
 export let GridMethod = () => {
-    let [imageData, setImageData] = useState(null);
-
-    let reader = useMemo(() => {
-        let reader = new FileReader();
-        reader.onload = (event) => {
-            setImageData(event.target.result);
-        };
-        return reader;
-    }, []);
-
-    let handleFileInputChange = (event) => {
-        let [file] = event.target.files;
-        if (file != null && file.type.startsWith('image/')) {
-            reader.readAsDataURL(file);
-        }
-    };
-
-    let handleImageLoad = (event) => {
-        const {naturalWidth, naturalHeight} = event.target;
-        const defaultRows = Math.ceil(columns * naturalHeight / naturalWidth);
-        setRows(defaultRows);
-    };
-
     let [
         {
             grid,
@@ -46,15 +23,13 @@ export let GridMethod = () => {
             opacity: 20,
             grayscale: 0,
             brightness: 100,
-            saturate: 100
+            saturate: 100,
         }
     );
 
     let handleOptionInputChange = (event) => {
         let { type, name, value, checked } = event.target;
-        
         let normalizedValue;
-
         switch (type) {
             case 'number':
                 normalizedValue = Number(value);
@@ -68,10 +43,35 @@ export let GridMethod = () => {
             default:
                 normalizedValue = value;
         }
-
         setOptions(options => ({
             ...options,
             [name]: normalizedValue
+        }));
+    };
+
+    let [imageData, setImageData] = useState(null);
+
+    let reader = useMemo(() => {
+        let reader = new FileReader();
+        reader.onload = (event) => {
+            setImageData(event.target.result);
+        };
+        return reader;
+    }, []);
+
+    let handleFileInputChange = (event) => {
+        let [file] = event.target.files;
+        if (file != null && file.type.startsWith('image/')) {
+            reader.readAsDataURL(file);
+        }
+    };
+
+    let handleImageLoad = (event) => {
+        const {naturalWidth, naturalHeight} = event.target;
+        const defaultRows = Math.ceil(columns * naturalHeight / naturalWidth);
+        setOptions(options => ({
+            ...options,
+            rows: defaultRows
         }));
     };
 
