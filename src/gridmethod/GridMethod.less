@@ -8,12 +8,28 @@ body {
     font-size: 18px;
 }
 
-input,
-select,
-input::file-selector-button {
+input[type="text"],
+input[type="number"],
+select {
     font-family: inherit;
     font-size: inherit;
-    max-width: 12em;
+    color: currentColor;
+    border: 1px solid darkgray;
+    width: 10em;
+    padding: 0.2em;
+    border-radius: 3px;
+    appearance: none;
+    background: none;
+    box-shadow: none;
+}
+
+input[type="file"],
+input[type="file"]::file-selector-button {
+    font-family: inherit;
+}
+
+input[type="file"] {
+    max-width: 13em;
 }
 
 .GridMethod {

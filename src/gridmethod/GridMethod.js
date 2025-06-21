@@ -111,7 +111,16 @@ export let GridMethod = () => {
                         <tr>
                             <th>Opacity:</th>
                             <td>
-                                <input name="opacity" type="number" value={opacity} onChange={handleOpacityInputChange} />
+                                <select
+                                    name="opacity"
+                                    onChange={handleOpacityInputChange}
+                                >
+                                    {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(value => (
+                                        <option value={value} selected={value === opacity}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
                             </td>
                         </tr>
                     </tbody>
