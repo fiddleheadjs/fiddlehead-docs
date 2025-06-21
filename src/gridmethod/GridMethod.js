@@ -23,7 +23,7 @@ export let GridMethod = () => {
     let [rows, setRows] = useState(10);
     let [cols, setCols] = useState(10);
     let [color, setColor] = useState('black');
-    let [opacity, setOpacity] = useState(50);
+    let [opacity, setOpacity] = useState(20);
 
     let handleGridCheckboxChange = (event) => {
         setGrid(event.target.checked);
