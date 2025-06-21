@@ -19,9 +19,18 @@ export let GridMethod = () => {
         }
     };
 
+    let [grid, setGrid] = useState(true);
+    let [color, setColor] = useState('black');
     let [rows, setRows] = useState(10);
     let [cols, setCols] = useState(10);
-    let [color, setColor] = useState('gray');
+
+    let handleGridCheckboxChange = (event) => {
+        setGrid(event.target.checked);
+    };
+
+    let handleColorInputChange = (event) => {
+        setColor(event.target.value);
+    };
 
     let handleRowsInputChange = (event) => {
         setRows(Number(event.target.value));
@@ -31,17 +40,13 @@ export let GridMethod = () => {
         setCols(Number(event.target.value));
     };
 
-    let handleColorInputChange = (event) => {
-        setColor(event.target.value);
-    };
-
     return (
         <div class="GridMethod">
             <div class="canvas">
                 {imageData != null && (
                     <img src={imageData} />
                 )}
-                <table style={{color: color}}>
+                <table style={{color: color, visibility: grid ? 'visible' : 'hidden'}}>
                     <tbody>
                         {new Array(rows).fill().map(() => (
                             <tr>
@@ -60,16 +65,20 @@ export let GridMethod = () => {
                     <input type="file" accept="image/*" onChange={handleFileInputChange} />
                 </div>
                 <div class="control">
+                    <label>Grid:</label>
+                    <input type="checkbox" checked={grid} onChange={handleGridCheckboxChange} />
+                </div>
+                <div class="control">
+                    <label>Color:</label>
+                    <input type="text" value={color} onChange={handleColorInputChange} />
+                </div>
+                <div class="control">
                     <label>Rows:</label>
                     <input type="number" value={rows} onChange={handleRowsInputChange} />
                 </div>
                 <div class="control">
                     <label>Columns:</label>
                     <input type="number" value={cols} onChange={handleColsInputChange} />
-                </div>
-                <div class="control">
-                    <label>Color:</label>
-                    <input type="text" value={color} onChange={handleColorInputChange} />
                 </div>
             </div>
         </div>
