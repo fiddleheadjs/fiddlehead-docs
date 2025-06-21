@@ -20,7 +20,7 @@ export let GridMethod = () => {
     };
 
     let [grid, setGrid] = useState(true);
-    let [rows, setRows] = useState(10);
+    let [rows, setRows] = useState(15);
     let [cols, setCols] = useState(10);
     let [color, setColor] = useState('black');
     let [opacity, setOpacity] = useState(20);
