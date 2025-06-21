@@ -15,15 +15,20 @@ select {
     font-family: inherit;
     font-size: inherit;
     color: currentColor;
-    border: 1px solid darkgray;
+    border: 1px solid lightgray;
     padding: 0.2em;
     border-radius: 3px;
     appearance: none;
     background: none;
     box-shadow: none;
+    outline: none;
 
     &[readonly] {
         border-color: transparent;
+    }
+
+    &:focus {
+        border-color: darkgray;
     }
 }
 
@@ -39,7 +44,6 @@ label.browse-file {
     border: 1px solid lightgray;
     border-radius: 3px;
 
-    &:hover,
     &:active {
         border-color: darkgray;
     }
