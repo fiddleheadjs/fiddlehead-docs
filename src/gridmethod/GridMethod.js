@@ -97,7 +97,7 @@ export let GridMethod = () => {
                             </td>
                         </tr>
                         <tr>
-                            <th>Columns:</th>
+                            <th>Cols:</th>
                             <td>
                                 <input name="cols" type="number" value={cols} onChange={handleColsInputChange} />
                             </td>
@@ -105,7 +105,16 @@ export let GridMethod = () => {
                         <tr>
                             <th>Color:</th>
                             <td>
-                                <input name="color" type="text" value={color} onChange={handleColorInputChange} />
+                                <select
+                                    name="color"
+                                    onChange={handleColorInputChange}
+                                >
+                                    {['black', 'white', 'red', 'green', 'blue'].map(value => (
+                                        <option value={value} selected={value === color}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
                             </td>
                         </tr>
                         <tr>
