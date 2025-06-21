@@ -64,17 +64,13 @@ export let GridMethod = () => {
                 <table>
                     <tbody>
                         <tr>
-                            <td>
-                                <label>Photo:</label>
-                            </td>
+                            <th>Photo:</th>
                             <td>
                                 <input type="file" accept="image/*" onChange={handleFileInputChange} />
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label>Grid:</label>
-                            </td>
+                            <th>Grid:</th>
                             <td>
                                 <label>
                                     <input type="checkbox" checked={grid} onChange={handleGridCheckboxChange} />
@@ -84,25 +80,19 @@ export let GridMethod = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label>Color:</label>
-                            </td>
+                            <th>Color:</th>
                             <td>
                                 <input type="text" value={color} onChange={handleColorInputChange} />
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label>Rows:</label>
-                            </td>
+                            <th>Rows:</th>
                             <td>
                                 <input type="number" value={rows} onChange={handleRowsInputChange} />
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label>Columns:</label>
-                            </td>
+                            <th>Columns:</th>
                             <td>
                                 <input type="number" value={cols} onChange={handleColsInputChange} />
                             </td>
