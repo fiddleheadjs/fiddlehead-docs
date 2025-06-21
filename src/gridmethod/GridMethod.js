@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'fiddlehead';
+import {useEffect, useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
 let gridColumns = new Array(29).fill().map((_, i) => i + 2);
@@ -7,29 +7,38 @@ let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
 
 export let GridMethod = () => {
     let [
-        {
-            grid,
-            columns,
-            color,
-            opacity,
-            grayscale,
-            saturate,
-            brightness,
-            contrast,
-        },
+        options,
         setOptions
-    ] = useState(
-        {
-            grid: true,
-            columns: 10,
-            color: 'white',
-            opacity: 20,
-            grayscale: 0,
-            brightness: 100,
-            saturate: 100,
-            contrast: 100,
+    ] = useState(() => {
+        try {
+            let jsonInvalidValue = '';
+            return JSON.parse(
+                sessionStorage.getItem('gridmethod:options') ?? jsonInvalidValue
+            );
+        } catch (thrown) {
+            return {
+                grid: true,
+                columns: 10,
+                color: 'white',
+                opacity: 20,
+                grayscale: 0,
+                brightness: 100,
+                saturate: 100,
+                contrast: 100,
+            };
         }
-    );
+    });
+
+    const {
+        grid,
+        columns,
+        color,
+        opacity,
+        grayscale,
+        saturate,
+        brightness,
+        contrast,
+    } = options;
 
     let handleOptionInputChange = (event) => {
         let {name, value, checked} = event.target;
@@ -50,8 +59,8 @@ export let GridMethod = () => {
         }));
     };
 
-    let [imageData, setImageData] = useState(null);
-    let [aspectRatio, setAspectRatio] = useState(1.618);
+    let [imageData, setImageData] = useState(sessionStorage.getItem('gridmethod:imageData'));
+    let [aspectRatio, setAspectRatio] = useState(Number(sessionStorage.getItem('gridmethod:aspectRatio') ?? '1.618'));
 
     let reader = useMemo(() => {
         let reader = new FileReader();
@@ -74,6 +83,17 @@ export let GridMethod = () => {
     };
 
     let rows = Math.ceil(columns / aspectRatio);
+
+    useEffect(() => {
+        sessionStorage.setItem('gridmethod:options', JSON.stringify(options));
+    }, [options]);
+
+    useEffect(() => {
+        if (imageData.length <= 4 * 1024 * 1024) {
+            sessionStorage.setItem('gridmethod:imageData', imageData);
+            sessionStorage.setItem('gridmethod:aspectRatio', aspectRatio.toString());
+        }
+    }, [imageData, aspectRatio]);
 
     return (
         <div class="GridMethod">
