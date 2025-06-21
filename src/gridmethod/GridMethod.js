@@ -6,10 +6,7 @@ let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
 let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
 
 export let GridMethod = () => {
-    let [
-        options,
-        setOptions
-    ] = useState(() => {
+    let [options, setOptions] = useState(() => {
         try {
             let jsonInvalidValue = '';
             return JSON.parse(
