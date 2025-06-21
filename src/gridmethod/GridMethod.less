@@ -27,10 +27,29 @@ select {
     }
 }
 
-input[type="file"],
-input[type="file"]::file-selector-button {
+input[type="file"] {
     font-family: inherit;
     font-size: inherit;
+}
+
+label.browse-file {
+    input {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        position: absolute;
+    }
+
+    span {
+        display: inline-block;
+        padding: 0.2em 0.5em;
+        border: 1px solid lightgray;
+        border-radius: 3px;
+
+        &:active {
+            border-color: darkgray;
+        }
+    }
 }
 
 .GridMethod {

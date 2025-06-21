@@ -136,8 +136,12 @@ export let GridMethod = () => {
                 <table>
                     <tbody>
                         <tr>
-                            <td colspan="2">
-                                <input name="photo" type="file" accept="image/*" onChange={handleFileInputChange} />
+                            <th>Photo:</th>
+                            <td>
+                                <label class="browse-file">
+                                    <input name="photo" type="file" accept="image/*" onChange={handleFileInputChange} />
+                                    <span>browse file</span>
+                                </label>
                             </td>
                         </tr>
                         <tr>
@@ -208,7 +212,7 @@ export let GridMethod = () => {
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <strong># Photo options</strong>
+                                <strong># Photo filters</strong>
                             </td>
                         </tr>
                         <tr>
