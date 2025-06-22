@@ -5,7 +5,7 @@ import './GridMethod.less';
  * @type {WakeLockSentinel}
  */
 let screenWakeLock = null;
-let requestScreenWakeLock = () => {
+let requestScreenWakeLock = (callback) => {
     if (!('wakeLock' in navigator)) {
         return;
     }
@@ -14,13 +14,18 @@ let requestScreenWakeLock = () => {
     }
     navigator.wakeLock.request('screen').then((sentinel) => {
         screenWakeLock = sentinel;
+    }).finally(() => {
+        callback && callback(screenWakeLock?.released ?? true);
     });
 };
-let releaseScreenWakeLock = () => {
+let releaseScreenWakeLock = (callback) => {
     if (screenWakeLock === null) {
         return;
     }
-    screenWakeLock.release();
+    screenWakeLock.release().finally(() => {
+        callback && callback(screenWakeLock.released);
+        screenWakeLock = null;
+    });
 };
 
 let gridColumns = new Array(29).fill().map((_, i) => i + 2);
@@ -125,14 +130,6 @@ export let GridMethod = () => {
         }
     }, [imageData, aspectRatio]);
 
-    useEffect(() => {
-        if (imageData.length > 0) {
-            requestScreenWakeLock();
-        } else {
-            releaseScreenWakeLock();
-        }
-    }, [imageData]);
-
     let handleResetGrid = () => {
         setOptions(options => ({
             ...options,
@@ -147,6 +144,16 @@ export let GridMethod = () => {
         }));
         setImageData('');
         setAspectRatio(defaultAspectRatio);
+    };
+
+    let [swlReleased, setSwlReleased] = useState(true);
+
+    let handleToggleSwl = () => {
+        if (swlReleased) {
+            requestScreenWakeLock(setSwlReleased);
+        } else {
+            releaseScreenWakeLock(setSwlReleased);
+        }
     };
 
     return (
@@ -335,6 +342,27 @@ export let GridMethod = () => {
                                         </option>
                                     ))}
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <strong># Other</strong>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Wake lock:</th>
+                            <td>
+                                <button type="button" class="button" onClick={handleToggleSwl}>
+                                    <span class={swlReleased ? 'faded' : null}>enabled</span>
+                                    {' '}
+                                    <span class="faded">&middot;</span>
+                                    {' '}
+                                    <span class={swlReleased ? null : 'faded'}>disabled</span>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
