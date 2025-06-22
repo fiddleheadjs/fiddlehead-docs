@@ -10,15 +10,21 @@ let requestScreenWakeLock = (callback = () => undefined) => {
         callback(false);
         return;
     }
-    if (screenWakeLock != null) {
+    if (screenWakeLock != null && !screenWakeLock.released) {
         callback(!screenWakeLock.released);
         return;
     }
     navigator.wakeLock.request('screen').then((sentinel) => {
         screenWakeLock = sentinel;
+    }).finally(() => {
+        if (screenWakeLock == null) {
+            callback(false);
+            return;
+        }
         callback(!screenWakeLock.released);
-    }).catch(() => {
-        callback(false);
+        screenWakeLock.onrelease = () => {
+            callback(!screenWakeLock.released);
+        };
     });
 };
 let releaseScreenWakeLock = (callback = () => undefined) => {
@@ -28,7 +34,6 @@ let releaseScreenWakeLock = (callback = () => undefined) => {
     }
     screenWakeLock.release().finally(() => {
         callback(!screenWakeLock.released);
-        screenWakeLock = null;
     });
 };
 
