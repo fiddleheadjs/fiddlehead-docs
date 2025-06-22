@@ -37,7 +37,7 @@ let releaseScreenWakeLock = (callback = () => undefined) => {
     });
 };
 
-let gridColumns = new Array(29).fill().map((_, i) => i + 2);
+let gridColumns = new Array(99).fill().map((_, i) => i + 2);
 let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
 let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
 let defaultGridOptions = {
