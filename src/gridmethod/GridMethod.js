@@ -51,6 +51,7 @@ let defaultPhotoOptions = {
     brightness: 100,
     saturate: 100,
     contrast: 100,
+    blur: 0
 };
 let defaultAspectRatio = 12 / 5;
 
@@ -78,6 +79,7 @@ export let GridMethod = () => {
         saturate,
         brightness,
         contrast,
+        blur
     } = options;
 
     let handleOptionInputChange = (event) => {
@@ -181,6 +183,7 @@ export let GridMethod = () => {
                                 `saturate(${saturate}%)`,
                                 `brightness(${brightness}%)`,
                                 `contrast(${contrast}%)`,
+                                `blur(${blur}px)`,
                             ].join(' ')
                         }}
                     />
@@ -348,6 +351,21 @@ export let GridMethod = () => {
                                     {unlimitedPercentages.map(value => (
                                         <option value={value} selected={value === contrast}>
                                             {value}%
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Blur:</th>
+                            <td>
+                                <select
+                                    name="blur"
+                                    onChange={handleOptionInputChange}
+                                >
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(value => (
+                                        <option value={value} selected={value === blur}>
+                                            {value}px
                                         </option>
                                     ))}
                                 </select>
