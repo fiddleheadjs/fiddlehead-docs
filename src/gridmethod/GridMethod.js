@@ -4,6 +4,19 @@ import './GridMethod.less';
 let gridColumns = new Array(29).fill().map((_, i) => i + 2);
 let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
 let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
+let defaultGridOptions = {
+    grid: true,
+    columns: 12,
+    color: 'white',
+    opacity: 20,
+};
+let defaultPhotoOptions = {
+    grayscale: 0,
+    brightness: 100,
+    saturate: 100,
+    contrast: 100,
+};
+let defaultAspectRatio = 12 / 7;
 
 export let GridMethod = () => {
     let [options, setOptions] = useState(() => {
@@ -14,14 +27,8 @@ export let GridMethod = () => {
             );
         } catch (thrown) {
             return {
-                grid: true,
-                columns: 10,
-                color: 'white',
-                opacity: 20,
-                grayscale: 0,
-                brightness: 100,
-                saturate: 100,
-                contrast: 100,
+                ...defaultGridOptions,
+                ...defaultPhotoOptions,
             };
         }
     });
@@ -56,8 +63,12 @@ export let GridMethod = () => {
         }));
     };
 
-    let [imageData, setImageData] = useState(sessionStorage.getItem('gridmethod:imageData'));
-    let [aspectRatio, setAspectRatio] = useState(Number(sessionStorage.getItem('gridmethod:aspectRatio') ?? '1.618'));
+    let [imageData, setImageData] = useState(
+        sessionStorage.getItem('gridmethod:imageData') ?? ''
+    );
+    let [aspectRatio, setAspectRatio] = useState(
+        Number(sessionStorage.getItem('gridmethod:aspectRatio')) || defaultAspectRatio
+    );
 
     let reader = useMemo(() => {
         let reader = new FileReader();
@@ -92,10 +103,29 @@ export let GridMethod = () => {
         }
     }, [imageData, aspectRatio]);
 
+    let handleResetGrid = () => {
+        setOptions(options => ({
+            ...options,
+            ...defaultGridOptions,
+        }));
+    };
+
+    let handleResetPhoto = () => {
+        setOptions(options => ({
+            ...options,
+            ...defaultPhotoOptions,
+        }));
+        setImageData('');
+        setAspectRatio(defaultAspectRatio);
+    };
+
     return (
         <div class="GridMethod">
             <div class="canvas">
-                {imageData != null && (
+                {imageData === '' && (
+                    <h1>Grid Method</h1>
+                )}
+                {imageData !== '' && (
                     <img
                         src={imageData}
                         onLoad={handleImageLoad}
@@ -133,27 +163,20 @@ export let GridMethod = () => {
                 <table>
                     <tbody>
                         <tr>
-                            <th>Photo:</th>
+                            <th>
+                                <strong># Grid</strong>
+                            </th>
                             <td>
-                                <label class="browse-file">
-                                    <input name="photo" type="file" accept="image/*" onChange={handleFileInputChange} />
-                                    <span>browse file</span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <strong># Grid options</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Grid:</th>
-                            <td>
-                                <label>
+                                <label class="button">
                                     <input name="grid" type="checkbox" checked={grid} onChange={handleOptionInputChange} />
+                                    <span class={grid ? null : 'faded'}>visible</span>
                                     {' '}
-                                    <span>{grid ? '(visible)' : '(hidden)'}</span>
+                                    <span class="faded">&middot;</span>
+                                    {' '}
+                                    <span class={grid ? 'faded' : null}>hidden</span>
                                 </label>
+                                {' '}
+                                <button type="button" class="button" onClick={handleResetGrid}>reset</button>
                             </td>
                         </tr>
                         <tr>
@@ -208,8 +231,20 @@ export let GridMethod = () => {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <strong># Photo filters</strong>
+                            <th>&nbsp;</th>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <strong># Photo</strong>
+                            </th>
+                            <td>
+                                <label class="button">
+                                    <input name="photo" type="file" accept="image/*" onChange={handleFileInputChange} />
+                                    <span>browse file</span>
+                                </label>
+                                {' '}
+                                <button type="button" class="button" onClick={handleResetPhoto}>reset</button>
                             </td>
                         </tr>
                         <tr>
