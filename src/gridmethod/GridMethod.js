@@ -1,6 +1,28 @@
 import {useEffect, useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
 
+/**
+ * @type {WakeLockSentinel}
+ */
+let screenWakeLock = null;
+let requestScreenWakeLock = () => {
+    if (!('wakeLock' in navigator)) {
+        return;
+    }
+    if (screenWakeLock !== null) {
+        return;
+    }
+    navigator.wakeLock.request('screen').then((sentinel) => {
+        screenWakeLock = sentinel;
+    });
+};
+let releaseScreenWakeLock = () => {
+    if (screenWakeLock === null) {
+        return;
+    }
+    screenWakeLock.release();
+};
+
 let gridColumns = new Array(29).fill().map((_, i) => i + 2);
 let limitedPercentages = new Array(11).fill().map((_, i) => 10 * i);
 let unlimitedPercentages = new Array(31).fill().map((_, i) => 10 * i);
@@ -102,6 +124,14 @@ export let GridMethod = () => {
             sessionStorage.setItem('gridmethod:aspectRatio', aspectRatio.toString());
         }
     }, [imageData, aspectRatio]);
+
+    useEffect(() => {
+        if (imageData.length > 0) {
+            requestScreenWakeLock();
+        } else {
+            releaseScreenWakeLock();
+        }
+    }, [imageData]);
 
     let handleResetGrid = () => {
         setOptions(options => ({
