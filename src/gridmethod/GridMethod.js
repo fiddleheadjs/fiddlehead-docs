@@ -8,7 +8,7 @@ let defaultGridOptions = {
     grid: true,
     columns: 12,
     color: 'white',
-    opacity: 20,
+    opacity: 10,
 };
 let defaultPhotoOptions = {
     grayscale: 0,
