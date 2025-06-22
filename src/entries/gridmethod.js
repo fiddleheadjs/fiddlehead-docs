@@ -1,5 +1,6 @@
-// Grid Method
-// Grid Method - Make grid for your photo
+// title: Grid Method
+// description: Grid Method - Drawing using the grid method
+// themeColor: midnightblue
 
 import {render} from 'fiddlehead';
 import {GridMethod} from '../gridmethod/GridMethod';

@@ -21,19 +21,21 @@ fs.readdirSync(entriesDir).map(filename => {
     let content = fs.readFileSync(path.resolve(entriesDir, filename), 'utf-8');
     content = content.trim();
 
-    let title = pkg.description;
-    if (content.startsWith('//')) {
+    let metadata = {};
+    while (content.startsWith('//')) {
         let firstLine = content.split('\n', 1)[0];
-        title = firstLine.substring(2).trim();
         content = content.substring(firstLine.length).trim();
+        let metaName = firstLine.substring(2).split(':', 1)[0];
+        let metaValue = firstLine.substring(3 + metaName.length);
+        metaName = metaName.trim();
+        metaValue = metaValue.trim();
+        metadata[metaName] = metaValue;
     }
-
-    let description = title;
-    if (content.startsWith('//')) {
-        let firstLine = content.split('\n', 1)[0];
-        description = firstLine.substring(2).trim();
-        content = content.substring(firstLine.length).trim();
-    }
+    let {
+        title = pkg.title,
+        description = pkg.title,
+        themeColor = 'white',
+    } = metadata;
 
     configs.push({
         mode: isDev ? 'development' : 'production',
@@ -77,8 +79,9 @@ fs.readdirSync(entriesDir).map(filename => {
                 __srcFiddleheadStore__: JSON.stringify(srcFiddleheadStore),
             }),
             new HtmlWebpackPlugin({
-                title: title,
-                description: description,
+                title,
+                description,
+                themeColor,
                 template: path.resolve(rootDir, 'src/template.ejs'),
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',

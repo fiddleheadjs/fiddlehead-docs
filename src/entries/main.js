@@ -1,5 +1,6 @@
-// Fiddlehead
-// Fiddlehead - building UI with JSX and hooks
+// title: Fiddlehead
+// description: Fiddlehead - building UI with JSX and hooks
+// themeColor: white
 
 import '../style/common.less';
 import '../style/prism.less';
