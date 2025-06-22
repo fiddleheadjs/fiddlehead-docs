@@ -16,7 +16,7 @@ let defaultPhotoOptions = {
     saturate: 100,
     contrast: 100,
 };
-let defaultAspectRatio = 12 / 7;
+let defaultAspectRatio = 12 / 5;
 
 export let GridMethod = () => {
     let [options, setOptions] = useState(() => {
