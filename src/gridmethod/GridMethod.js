@@ -1,29 +1,33 @@
-import {useEffect, useMemo, useState} from 'fiddlehead';
 import './GridMethod.less';
+import {useEffect, useMemo, useState} from 'fiddlehead';
 
 /**
  * @type {WakeLockSentinel}
  */
 let screenWakeLock = null;
-let requestScreenWakeLock = (callback) => {
+let requestScreenWakeLock = (callback = () => undefined) => {
     if (!('wakeLock' in navigator)) {
+        callback(false);
         return;
     }
-    if (screenWakeLock !== null) {
+    if (screenWakeLock != null) {
+        callback(!screenWakeLock.released);
         return;
     }
     navigator.wakeLock.request('screen').then((sentinel) => {
         screenWakeLock = sentinel;
-    }).finally(() => {
-        callback && callback(screenWakeLock?.released ?? true);
+        callback(!screenWakeLock.released);
+    }).catch(() => {
+        callback(false);
     });
 };
-let releaseScreenWakeLock = (callback) => {
-    if (screenWakeLock === null) {
+let releaseScreenWakeLock = (callback = () => undefined) => {
+    if (screenWakeLock == null) {
+        callback(false);
         return;
     }
     screenWakeLock.release().finally(() => {
-        callback && callback(screenWakeLock.released);
+        callback(!screenWakeLock.released);
         screenWakeLock = null;
     });
 };
@@ -146,13 +150,13 @@ export let GridMethod = () => {
         setAspectRatio(defaultAspectRatio);
     };
 
-    let [swlReleased, setSwlReleased] = useState(true);
+    let [wakeLockEnabled, setWakeLockEnabled] = useState(false);
 
-    let handleToggleSwl = () => {
-        if (swlReleased) {
-            requestScreenWakeLock(setSwlReleased);
+    let handleToggleWakeLock = () => {
+        if (wakeLockEnabled) {
+            releaseScreenWakeLock(setWakeLockEnabled);
         } else {
-            releaseScreenWakeLock(setSwlReleased);
+            requestScreenWakeLock(setWakeLockEnabled);
         }
     };
 
@@ -356,12 +360,12 @@ export let GridMethod = () => {
                         <tr>
                             <th>Wake lock:</th>
                             <td>
-                                <button type="button" class="button" onClick={handleToggleSwl}>
-                                    <span class={swlReleased ? 'faded' : null}>enabled</span>
+                                <button type="button" class="button" onClick={handleToggleWakeLock}>
+                                    <span class={wakeLockEnabled ? null : 'faded'}>enabled</span>
                                     {' '}
                                     <span class="faded">&middot;</span>
                                     {' '}
-                                    <span class={swlReleased ? null : 'faded'}>disabled</span>
+                                    <span class={wakeLockEnabled ? 'faded' : null}>disabled</span>
                                 </button>
                             </td>
                         </tr>
