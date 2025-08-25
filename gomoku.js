@@ -285,11 +285,14 @@ let handleMoveRequest = (req, res) => {
 
     state.matrix[rx][cx] = teamId;
     state.moveSequence.push([rx, cx]);
+
     state.thinkingTeamId = teamId === 0 ? 1 : 0;
-    if (state.thinkingUserIndexes[state.thinkingTeamId] < teams[state.thinkingTeamId].length - 1) {
-        state.thinkingUserIndexes[state.thinkingTeamId]++;
-    } else {
-        state.thinkingUserIndexes[state.thinkingTeamId] = 0;
+    if (state.moveSequence.length > 1) {
+        if (state.thinkingUserIndexes[state.thinkingTeamId] < teams[state.thinkingTeamId].length - 1) {
+            state.thinkingUserIndexes[state.thinkingTeamId]++;
+        } else {
+            state.thinkingUserIndexes[state.thinkingTeamId] = 0;
+        }
     }
     substituteThinkingUsersIfDisconnected(now);
 
