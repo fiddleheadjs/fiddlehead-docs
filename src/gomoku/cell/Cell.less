@@ -5,15 +5,28 @@
     text-align: center;
     vertical-align: middle;
     cursor: default;
-
     .fix-square(2rem);
+    
+    &::after {
+        font-family: Chalkboard, Arial Rounded MT Bold, Arial Rounded MT;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
 
     .media-current(@screen-tablet-small, {
         .fix-square(1.7rem);
+
+        &::after {
+            font-size: 1.1em;
+        }
     });
     
     .media-current(@screen-mobile, {
         .fix-square(1.3rem);
+
+        &::after {
+            font-size: 1em;
+        }
     });
     
     &:not(.view-only){
@@ -33,13 +46,11 @@
     &[data-value="0"]::after {
         content: "O";
         color: red;
-        font-weight: bold;
     }
 
     &[data-value="1"]::after {
         content: "X";
         color: blue;
-        font-weight: bold;
     }
 
     &.last-move-highlighted {
