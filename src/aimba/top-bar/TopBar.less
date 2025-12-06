@@ -1,0 +1,44 @@
+.TopBar {
+    background: white;
+
+    .container {
+        max-width: 1000px;
+        padding: 15px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+
+        a, button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 12px;
+            min-height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button {
+            font-weight: 700;
+        }
+
+        button.login {
+            color: #1E469E;
+            background: #E6F1FD;
+        }
+
+        button.signup {
+            color: white;
+            background: linear-gradient(to right, #1E459D, #28A8E0);
+        }
+    }
+}
