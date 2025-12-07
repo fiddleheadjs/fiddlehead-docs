@@ -28,23 +28,25 @@ export let StudySystem = () => {
                 </div>
             </div>
             <div class="numbers">
-                <div class="content-bar">
-                    <ul>
-                        {[
-                            ['1048+', 'Case Study', 'Tình huống thực tế'],
-                            ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
-                            ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
-                            ['100+', 'Tips quản trị', 'Bí quyết tạo nên khác biệt'],
-                            ['15', 'Module chuyên biệt', 'Từ cơ bản đến nâng cao'],
-                            ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch'],
-                        ].map(([quantity, unit, description]) => (
-                            <li key={unit}>
-                                <div class="quantity">{quantity}</div>
-                                <div class="unit">{unit}</div>
-                                <div class="description">{description}</div>
-                            </li>
-                        ))}
-                    </ul>
+                <div class="container">
+                    <div class="content-bar">
+                        <ul>
+                            {[
+                                ['1048+', 'Case Study', 'Tình huống thực tế'],
+                                ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
+                                ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
+                                ['100+', 'Tips quản trị', 'Bí quyết tạo nên khác biệt'],
+                                ['15', 'Module chuyên biệt', 'Từ cơ bản đến nâng cao'],
+                                ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch'],
+                            ].map(([quantity, unit, description]) => (
+                                <li key={unit}>
+                                    <div class="quantity">{quantity}</div>
+                                    <div class="unit">{unit}</div>
+                                    <div class="description">{description}</div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
