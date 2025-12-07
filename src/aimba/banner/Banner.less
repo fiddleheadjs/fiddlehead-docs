@@ -1,70 +1,112 @@
 .Banner {
-    background: #1E4AA3;
-
     .container {
         margin: auto;
         width: 1200px;
-        height: 560px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
     }
 
-    .overlay {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        color: white;
+    .messages {
+        background: #1E4AA3;
 
-        .group {
-            width: 570px;
-        }
-
-        .headline {
+        .container {
+            height: 560px;
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
         }
 
-        .brand {
-            span {
-                display: inline-block;
-                height: 80px;
-                line-height: 70px;
-                padding: 0 0 10px;
-                font-size: 74px;
+        .overlay {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            color: white;
+
+            .group {
+                width: 570px;
+            }
+
+            .headline {
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .brand {
+                span {
+                    display: inline-block;
+                    height: 80px;
+                    line-height: 70px;
+                    padding: 0 0 10px;
+                    font-size: 74px;
+                    font-weight: 700;
+                    background-image: linear-gradient(to bottom, #FFB81F, #FFE8A8);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    color: #FFB81F;
+                    border-bottom: 2px solid white;
+                }
+            }
+
+            .slogan {
+                font-size: 34px;
                 font-weight: 700;
-                background-image: linear-gradient(to bottom, #FFB81F, #FFE8A8);
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-                color: #FFB81F;
-                border-bottom: 2px solid white;
+            }
+
+            .description {
+                font-size: 28px;
+                font-weight: 600;
+            }
+
+            ul.checklist {
+                list-style: none;
+                display: grid;
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 18px 40px;
+
+                li {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    align-items: flex-start;
+                    max-height: 22px;
+                }
             }
         }
+    }
 
-        .slogan {
-            font-size: 34px;
-            font-weight: 700;
+    .numbers {
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            transform: translateY(-41px);
         }
 
-        .description {
-            font-size: 28px;
-            font-weight: 600;
-        }
+        .item {
+            min-height: 82px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 33.33%;
+            background: white;
+            box-shadow: 0 0 16px 0 #00000040;
+            border-radius: 6px;
 
-        ul.checklist {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 18px 40px;
+            .content {
+                text-align: center;
+            }
 
-            li {
-                display: flex;
-                flex-direction: row;
-                gap: 10px;
-                align-items: flex-start;
-                max-height: 22px;
+            b {
+                color: #28A8E0;
+                font-weight: 700;
+                font-size: 32px;
+            }
+
+            span {
+                color: #1E459D;
+                font-weight: 700;
+                font-size: 20px;
             }
         }
     }

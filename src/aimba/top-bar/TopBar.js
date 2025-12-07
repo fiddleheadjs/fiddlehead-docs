@@ -3,7 +3,7 @@ import './TopBar.less';
 
 export let TopBar = () => {
     return (
-        <div class="TopBar">
+        <section class="TopBar">
             <div class="container">
                 <Logo />
                 <div class="nav">
@@ -16,6 +16,6 @@ export let TopBar = () => {
                     <button class="signup">Đăng ký</button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
