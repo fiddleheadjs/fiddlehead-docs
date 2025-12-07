@@ -1,0 +1,36 @@
+.Slider {
+    .slides {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        flex-flow: row nowrap;
+        overflow: hidden;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+    }
+
+    .slide {
+        flex: none;
+        scroll-snap-align: center;
+    }
+
+    button.back,
+    button.next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button.back {
+        left: 0;
+    }
+
+    button.next {
+        right: 0;
+    }
+}

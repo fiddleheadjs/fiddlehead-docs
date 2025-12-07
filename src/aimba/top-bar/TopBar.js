@@ -1,4 +1,4 @@
-import {Logo} from '../logo/Logo';
+import {Logo} from '../pictogram';
 import './TopBar.less';
 
 export let TopBar = () => {
@@ -12,8 +12,8 @@ export let TopBar = () => {
                     <a>Hệ sinh thái</a>
                     <a>Module</a>
                     <a>Ưu đãi</a>
-                    <button class="login">Đăng nhập</button>
-                    <button class="signup">Đăng ký</button>
+                    <button class="login" type="button">Đăng nhập</button>
+                    <button class="signup" type="button">Đăng ký</button>
                 </div>
             </div>
         </section>
