@@ -37,7 +37,7 @@ export let StudySystem = () => {
                                 ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
                                 ['100+', 'Tips quản trị', 'Bí quyết tạo nên khác biệt'],
                                 ['15', 'Module chuyên biệt', 'Từ cơ bản đến nâng cao'],
-                                ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch'],
+                                ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch']
                             ].map(([quantity, unit, description]) => (
                                 <li key={unit}>
                                     <div class="quantity">{quantity}</div>
