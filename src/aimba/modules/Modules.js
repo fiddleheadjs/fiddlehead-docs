@@ -49,6 +49,11 @@ export let Modules = () => {
                     />
                 </div>
             </div>
+            <div class="actions">
+                <div class="container">
+                    <button class="signup" type="button">Đăng ký</button>
+                </div>
+            </div>
         </section>
     );
 };
