@@ -1,0 +1,50 @@
+.TreeView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 98px;
+}
+
+.Card {
+    border-radius: 6px;
+    overflow: hidden;
+
+    .heading {
+        background: #04A9FB;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        padding: 10px 15px 10px 25px;
+        min-height: 70px;
+        cursor: pointer;
+
+        .title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .indicator {
+
+        }
+    }
+
+    .body {
+        overflow: hidden;
+        
+        .description {
+            background: white;
+            color: #474747;
+            font-size: 15px;
+            padding: 15px 25px;
+            overflow: hidden;
+        }
+    }
+
+    &.collapsed {
+        .body {
+            height: 0;
+        }
+    }
+}

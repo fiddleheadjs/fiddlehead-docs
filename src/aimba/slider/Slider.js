@@ -2,7 +2,7 @@ import {useRef} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
 import './Slider.less';
 
-export let Slider = ({slideItems, slideWidth, slideHeight, gap}) => {
+export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px'}) => {
     let slidesRef = useRef(null);
 
     let valueInPixels = (value) => {
@@ -26,7 +26,7 @@ export let Slider = ({slideItems, slideWidth, slideHeight, gap}) => {
 
     return (
         <div class="Slider">
-            <div class="slides" style={{gap, padding: `0 ${gap}`}} ref={slidesRef}>
+            <div class="slides" style={{gap, padding: `0px ${gap}`}} ref={slidesRef}>
                 {slideItems.map(item => (
                     <div class="slide" key={item.id} style={{width: slideWidth, height: slideHeight}}>
                         {item.render()}

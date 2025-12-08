@@ -3,7 +3,8 @@ import './AiMba.less';
 import {Banner} from './banner';
 import {StudySystem} from './study-system';
 import {TopBar} from './top-bar';
-import {Resources} from './resources/Resources';
+import {Resources} from './resources';
+import {Modules as M} from './modules';
 
 export let AiMba = () => {
     return (
@@ -12,6 +13,7 @@ export let AiMba = () => {
             <Banner />
             <StudySystem />
             <Resources />
+            <M />
         </div>
     );
 };

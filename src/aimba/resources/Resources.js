@@ -87,7 +87,6 @@ export let Resources = () => {
                         </div>
                         <div class="screenshots">
                             <Slider
-                                gap="0px"
                                 slideWidth="590px"
                                 slideHeight="390px"
                                 slideItems={screenshots.map(background => ({
