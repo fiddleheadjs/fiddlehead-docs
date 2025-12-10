@@ -1,6 +1,7 @@
 import {CircleCheck} from '../icons/CircleCheck';
 import {CircleCheckOutline} from '../icons/CircleCheckOutline';
 import {TriangleRight} from '../icons/TriangleRight';
+import {Macbook} from '../pictogram';
 import './OurSolution.less';
 
 export let OurSolution = () => {
@@ -19,21 +20,21 @@ export let OurSolution = () => {
                         <div class="questions">
                             <ul>
                                 <li>
-                                    <CircleCheckOutline />
+                                    <i><CircleCheckOutline /></i>
                                     <span>Làm sao áp dụng SWOT khi đối thủ là doanh nghiệp gia đình với mạng lưới quan hệ phức tạp?</span>
                                 </li>
                                 <li>
-                                    <CircleCheckOutline />
-                                    <span>Làm sao áp dụng SWOT khi đối thủ là doanh nghiệp gia đình với mạng lưới quan hệ phức tạp?</span>
+                                    <i><CircleCheckOutline /></i>
+                                    <span>Làm sao thuyết phục đội ngũ thay đổi khi văn hóa “cả nể” đang kìm hãm?</span>
                                 </li>
                                 <li>
-                                    <CircleCheckOutline />
-                                    <span>Làm sao áp dụng SWOT khi đối thủ là doanh nghiệp gia đình với mạng lưới quan hệ phức tạp?</span>
+                                    <i><CircleCheckOutline /></i>
+                                    <span>Làm sao triển khai Design Thinking trong một tổ chức phân cấp cao, nơi mà nhân sự ngại đổi mới?</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="solution">
-                            <TriangleRight />
+                            <i><TriangleRight /></i>
                             <span>Và AIMBA - Hệ thống đào tạo mô phỏng MBA thực chiến tích hợp AI chính là giải pháp được TACA thiết kế để đồng hành cùng bạn.</span>
                         </div>
                     </div>
@@ -42,12 +43,12 @@ export let OurSolution = () => {
                     </div>
                 </div>
             </div>
-            <div class="fit-your-needs">
+            <div class="your-needs">
                 <div class="container">
                     <div class="title">Phát triển năng lực quản trị chuẩn MBA theo cách linh hoạt, thực chiến và tối đa hóa ROI</div>
                     <div class="content">
                         <div class="photos">
-                            <img />
+                            <Macbook />
                         </div>
                         <div class="details">
                             <div class="checklist">
@@ -61,7 +62,7 @@ export let OurSolution = () => {
                                         'Vừa học vừa tăng hiệu quả công việc'
                                     ].map(text => (
                                         <li key={text}>
-                                            <CircleCheck />
+                                            <i><CircleCheck /></i>
                                             <span>{text}</span>
                                         </li>
                                     ))}
