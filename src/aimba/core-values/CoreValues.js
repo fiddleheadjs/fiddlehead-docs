@@ -22,7 +22,7 @@ export let CoreValues = () => {
 
     return (
         <section class="CoreValues">
-            <div class="title">Giá trị nhận được khi đầu tư AiMBA</div>
+            <h2 class="title">Giá trị nhận được khi đầu tư AiMBA</h2>
             <div class="divider" />
             <div class="values">
                 <ul>

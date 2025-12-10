@@ -10,7 +10,7 @@ export let OurSolution = () => {
             <div class="why-us">
                 <div class="container">
                     <div class="details">
-                        <div class="title">Tại sao nên chọn AiMBA?</div>
+                        <h2 class="title">Tại sao nên chọn AiMBA?</h2>
                         <div class="description">
                             Thực tế cho thấy, nhiều lãnh đạo thành công nhờ kinh nghiệm thực chiến,
                             va chạm thị trường, học hỏi từ sai lầm – chứ không phải chỉ nhờ bằng cấp.
@@ -45,7 +45,7 @@ export let OurSolution = () => {
             </div>
             <div class="your-needs">
                 <div class="container">
-                    <div class="title">Phát triển năng lực quản trị chuẩn MBA theo cách linh hoạt, thực chiến và tối đa hóa ROI</div>
+                    <h2 class="title">Phát triển năng lực quản trị chuẩn MBA theo cách linh hoạt, thực chiến và tối đa hóa ROI</h2>
                     <div class="content">
                         <div class="photos">
                             <Macbook />

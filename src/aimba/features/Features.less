@@ -1,0 +1,139 @@
+.Features {
+    padding: 60px 0 30px;
+    background: linear-gradient(to bottom, #EAF8FF, white 60%, white);
+
+    .heading {
+        max-width: 1200px;
+        padding: 0 15px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .divider {
+            background: #008FD4;
+            height: 2px;
+            width: 105px;
+            margin-top: 21px;
+        }
+    }
+
+    .visualisation {
+        margin: auto;
+        max-width: 1200px;
+        padding: 30px 15px;
+        
+        .grid {
+            min-height: 700px;
+            display: grid;
+            grid-template:
+                "lt central rt"
+                "lm central rm"
+                "lb central rb"
+                / 1fr 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .central {
+            grid-area: central;
+
+            svg.Logo {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+        }
+
+        .card {
+            position: absolute;
+            width: 300px;
+            overflow: hidden;
+            border-radius: 14px;
+            box-shadow: 0 16px 32px #0C0C0D1A;
+
+            .title {
+                background: gray;
+                color: white;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+                padding: 6px 20px;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+            }
+
+            .description {
+                background: white;
+                padding: 13px 22px 18px;
+                color: #474747;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            &.lt {
+                grid-area: lt;
+                margin-left: 70px;
+            }
+
+            &.lm {
+                grid-area: lm;
+                margin-right: 20px;
+            }
+
+            &.lb {
+                grid-area: lb;
+                margin-left: 70px;
+            }
+
+            &.rt {
+                grid-area: rt;
+                margin-right: 70px;
+            }
+
+            &.rm {
+                grid-area: rm;
+                margin-left: 20px;
+            }
+
+            &.rb {
+                grid-area: rb;
+                margin-right: 70px;
+            }
+            
+            &.lt .title {
+                background: #3CC1D0;
+            }
+            
+            &.lm .title {
+                background: #3B97C8;
+            }
+            
+            &.lb .title {
+                background: #3B72C2;
+            }
+            
+            &.rt .title {
+                background: #4962BF;
+            }
+            
+            &.rm .title {
+                background: #6949B8;
+            }
+            
+            &.rb .title {
+                background: #A544C7;
+            }
+        }
+    }
+}

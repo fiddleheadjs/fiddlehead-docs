@@ -7,6 +7,7 @@ import {Resources} from './resources';
 import {Modules} from './modules';
 import {OurSolution} from './our-solution';
 import {CoreValues} from './core-values';
+import {Features} from './features';
 
 export let AiMba = () => {
     return (
@@ -18,6 +19,7 @@ export let AiMba = () => {
             <Modules />
             <OurSolution />
             <CoreValues />
+            <Features />
         </div>
     );
 };
