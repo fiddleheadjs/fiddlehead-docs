@@ -2,10 +2,10 @@ import './CoreValues.less';
 
 export let CoreValues = () => {
     return (
-        <div class="CoreValues">
+        <section class="CoreValues">
             <div class="container">
                 
             </div>
-        </div>
+        </section>
     );
 };

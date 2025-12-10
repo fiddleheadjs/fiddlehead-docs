@@ -6,7 +6,7 @@ import './OurSolution.less';
 
 export let OurSolution = () => {
     return (
-        <div class="OurSolution">
+        <section class="OurSolution">
             <div class="why-us">
                 <div class="container">
                     <div class="details">
@@ -75,6 +75,6 @@ export let OurSolution = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
