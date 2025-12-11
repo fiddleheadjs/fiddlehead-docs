@@ -1,7 +1,4 @@
-import {ArrowTopRight} from '../icons';
-import {BachelorCap} from '../icons/BachelorCap';
-import {FileChart} from '../icons/FileChart';
-import {PeoplePlus} from '../icons/PeoplePlus';
+import {ArrowTopRight, BachelorCap, FileChart, PeoplePlus} from '../icons';
 import './TargetAudience.less';
 
 export let TargetAudience = () => {

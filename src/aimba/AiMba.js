@@ -9,6 +9,7 @@ import {OurSolution} from './our-solution';
 import {CoreValues} from './core-values';
 import {Features} from './features';
 import {LearningStrategy} from './learning-strategy';
+import {TargetAudience} from './target-audience';
 
 export let AiMba = () => {
     return (
@@ -22,6 +23,7 @@ export let AiMba = () => {
             <CoreValues />
             <Features />
             <LearningStrategy />
+            <TargetAudience />
         </div>
     );
 };
