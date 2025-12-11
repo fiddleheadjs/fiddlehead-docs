@@ -48,7 +48,9 @@
 
             ul {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template:
+                    "1fr 1fr" 1fr
+                    "1fr 1fr" 1fr;
                 gap: 22px 25px;
                 max-width: 826px;
 
@@ -57,8 +59,6 @@
                     background: #FFFFFF26;
                     border: 1px solid #FFFDFD66;
                     border-radius: 14px;
-                    width: 402px;
-                    min-height: 168px;
                     
                     &.no-01 {
                         border-bottom-right-radius: 0;

@@ -16,10 +16,10 @@ export let TargetAudience = () => {
 
     return (
         <section class="TargetAudience">
-            <heading>
+            <div class="heading">
                 <h2 class="title">AiMBA được thiết kế đặc biệt dành cho</h2>
                 <div class="divider" />
-            </heading>
+            </div>
             <div class="grid">
                 <ul>
                     {['central', 'left', 'right'].map(position => {
