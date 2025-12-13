@@ -7,3 +7,4 @@ export * from './TriangleDown';
 export * from './BachelorCap';
 export * from './FileChart';
 export * from './PeoplePlus';
+export * from './BadgeCheck';
