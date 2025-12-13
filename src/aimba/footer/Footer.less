@@ -1,12 +1,21 @@
 .Footer {
+    .soft-edge {
+        overflow: hidden;
+
+        svg {
+            display: block;
+            margin-bottom: -5px;
+        }
+    }
+
     .main-area {
         color: white;
-        background: linear-gradient(to right, #1E469E, #28A7DF);
+        background: linear-gradient(to right, #1E469E, #1E469E 25%, #28A7DF);
         
         .container {
             margin: auto;
             max-width: 1200px;
-            padding: 35px 15px 70px;
+            padding: 0 15px 70px;
             display: grid;
             grid-template-columns: 6fr 4fr;
             gap: 30px;
@@ -31,6 +40,7 @@
                 font-size: 15px;
                 line-height: 25px;
                 text-align: justify;
+                max-width: 580px;
             }
         }
 
@@ -46,6 +56,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: flex-end;
+                gap: 30px;
 
                 ul {
                     display: flex;
