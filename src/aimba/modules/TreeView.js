@@ -1,8 +1,6 @@
 import {useState} from 'fiddlehead';
-import {Minus} from '../icons/Minus';
-import {Plus} from '../icons/Plus';
+import {TriangleDown, TriangleUp, Minus, Plus} from '../icons';
 import './TreeView.less';
-import {TriangleDown, TriangleUp} from '../icons';
 
 export let TreeView = ({data}) => {
     let [variableExpandedIndexes, setVariableExpandedIndexes] = useState([]);
@@ -31,42 +29,33 @@ export let TreeView = ({data}) => {
         <div class="TreeView">
             <div class="growth-path">
                 <TriangleUp />
-                <div class="line"/>
+                <div class="line" />
                 <TriangleDown />
             </div>
             <div class="cards">
-                {data.map(([title, description], index) => (
-                    <Card
-                        key={title}
-                        title={title}
-                        description={description}
-                        expanded={expandedIndexes.includes(index)}
-                        toggleExpanded={() => toggleExpanded(index)}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-};
-
-let Card = ({title, description, expanded, toggleExpanded}) => {
-    return (
-        <div class={`Card ${expanded ? 'expanded' : 'collapsed'}`}>
-            <div class="heading" onClick={toggleExpanded}>
-                <div class="content">
-                    <div class="title">
-                        {title}
-                    </div>
-                    <div class="indicator">
-                        {expanded ? <Minus /> : <Plus />}
-                    </div>
-                </div>
-                <div class="pointer"/>
-            </div>
-            <div class="body">
-                <div class="description">
-                    {description}
-                </div>
+                {data.map(([title, description], index) => {
+                    let expanded = expandedIndexes.includes(index);
+                    return (
+                        <div class={`card ${expanded ? 'expanded' : 'collapsed'}`} key={title}>
+                            <div class="heading" onClick={() => toggleExpanded(index)}>
+                                <div class="content">
+                                    <div class="title">
+                                        {title}
+                                    </div>
+                                    <div class="indicator">
+                                        {expanded ? <Minus /> : <Plus />}
+                                    </div>
+                                </div>
+                                <div class="pointer" />
+                            </div>
+                            <div class="body">
+                                <div class="description">
+                                    {description}
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

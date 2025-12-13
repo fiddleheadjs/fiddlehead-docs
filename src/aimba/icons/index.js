@@ -12,3 +12,5 @@ export * from './BadgeCheck';
 export * from './CircleCheck';
 export * from './CircleCheckOutline';
 export * from './Gift';
+export * from './Minus';
+export * from './Plus';
