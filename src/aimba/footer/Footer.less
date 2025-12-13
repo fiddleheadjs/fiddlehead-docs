@@ -1,3 +1,99 @@
 .Footer {
+    .main-area {
+        color: white;
+        background: linear-gradient(to right, #1E469E, #28A7DF);
+        
+        .container {
+            margin: auto;
+            max-width: 1200px;
+            padding: 35px 15px 70px;
+            display: grid;
+            grid-template-columns: 6fr 4fr;
+            gap: 30px;
+        }
+
+        .about-us {
+            .brand {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 11px;
+
+                .slogan {
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 140%;
+                }
+            }
+
+            .mission {
+                margin-top: 19px;
+                font-size: 15px;
+                line-height: 25px;
+                text-align: justify;
+            }
+        }
+
+        .contact {
+            .headline {
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .info {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+
+                    li {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 12px;
+                    }
+                }
+
+                .qrcode {
+                    width: 82px;
+                    height: 82px;
+                    border: 1px solid white;
+                }
+            }
+        }
+    }
     
+    .bottom-line {
+        color: white;
+        background: #0A328D;
+        
+        .container {
+            margin: auto;
+            max-width: 1200px;
+            padding: 10px 15px;
+            min-height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: 6fr 4fr;
+            gap: 30px;
+
+            li {
+                font-size: 14px;
+                display: flex;
+                flex-direction: row;
+                gap: 7px;
+            }
+        }
+    }
 }
