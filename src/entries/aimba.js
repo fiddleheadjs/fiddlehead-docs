@@ -3,6 +3,6 @@
 // themeColor: white
 
 import {render} from 'fiddlehead';
-import {AiMba} from '../aimba/AiMba';
+import {AiMBA} from '../aimba/AiMBA';
 
-render(<AiMba />, document.getElementById('root'));
+render(<AiMBA />, document.getElementById('root'));
