@@ -24,7 +24,7 @@ export let Footer = () => {
                             <div class="slogan">
                                 AiMBA - Agile & Immersive
                                 <br aria-hidden="true" />
-                                MBA level -Tranning
+                                MBA level - Tranning
                             </div>
                         </div>
                         <div class="mission">
