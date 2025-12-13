@@ -1,5 +1,4 @@
-import {CircleCheck} from '../icons/CircleCheck';
-import {Gift} from '../icons/gift';
+import {CircleCheck, Gift} from '../icons';
 import './Enrollment.less';
 
 export let Enrollment = () => {
@@ -24,8 +23,14 @@ export let Enrollment = () => {
                         </div>
                         <div class="tips">
                             <ul>
-                                <li>Đã bao gồm VAT</li>
-                                <li>Quyền truy cập 1 năm</li>
+                                <li>
+                                    <i />
+                                    <span>Đã bao gồm VAT</span>
+                                </li>
+                                <li>
+                                    <i />
+                                    <span>Quyền truy cập 1 năm</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -40,21 +45,27 @@ export let Enrollment = () => {
                         </ul>
                     </div>
                 </div>
-                <div class="form">
-                    <div class="heading">
-                        <div class="line"><Gift /> Chỉ từ <strong>699.000 VNĐ</strong></div>
-                        <div class="line">Dành cho 50 học viên đầu tiên!</div>
+                <div class="form-box">
+                    <div class="headlines">
+                        <p><Gift /> Chỉ từ <strong>699.000</strong> <b>VNĐ</b></p>
+                        <p>Dành cho 50 học viên đầu tiên!</p>
                     </div>
                     <div class="timing">
                         <div class="description">Ưu đãi có hạn, đăng ký ngay để không bỏ lỡ</div>
                         <div class="countdown">
-                            <b>14</b> <i>Giờ</i>
-                            <b>24</b> <i>Phút</i>
-                            <b>44</b> <i>Giây</i>
+                            <b class="hv">14</b> <i class="hu">Giờ</i>
+                            <b class="mv">24</b> <i class="mu">Phút</i>
+                            <b class="sv">44</b> <i class="su">Giây</i>
                         </div>
                     </div>
                     <form>
-                        
+                        <div class="fields">
+                            <input type="text" placeholder="Họ và tên*" required />
+                            <input type="text" placeholder="Email*" required />
+                            <input type="text" placeholder="Số điện thoại*" required />
+                            <input type="text" placeholder="Địa chỉ" />
+                        </div>
+                        <button type="submit">Đăng ký</button>
                     </form>
                 </div>
             </div>

@@ -1,6 +1,4 @@
-import {CircleCheck} from '../icons/CircleCheck';
-import {CircleCheckOutline} from '../icons/CircleCheckOutline';
-import {TriangleRight} from '../icons/TriangleRight';
+import {CircleCheck, CircleCheckOutline, TriangleRight} from '../icons';
 import {Macbook} from '../pictogram';
 import './OurSolution.less';
 

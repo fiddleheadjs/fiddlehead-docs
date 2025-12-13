@@ -1,4 +1,4 @@
-import {CircleCheck} from '../icons/CircleCheck';
+import {CircleCheck} from '../icons';
 import {Slider} from '../slider';
 import './Resources.less';
 
