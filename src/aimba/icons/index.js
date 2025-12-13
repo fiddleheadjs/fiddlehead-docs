@@ -14,3 +14,8 @@ export * from './CircleCheckOutline';
 export * from './Gift';
 export * from './Minus';
 export * from './Plus';
+export * from './Home';
+export * from './Headset';
+export * from './Clock';
+export * from './Envelop';
+export * from './PhoneCall';
