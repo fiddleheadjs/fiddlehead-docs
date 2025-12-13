@@ -1,9 +1,9 @@
 import {SquareCheck} from '../icons';
-import './Banner.less';
+import './Header.less';
 
-export let Banner = () => {
+export let Header = () => {
     return (
-        <section class="Banner">
+        <header class="Header">
             <div class="messages">
                 <div class="container">
                     <div class="overlay">
@@ -66,6 +66,6 @@ export let Banner = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
     );
 };
