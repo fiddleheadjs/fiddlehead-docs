@@ -28,7 +28,7 @@ export let Footer = () => {
                             </div>
                         </div>
                         <div class="mission">
-                            AIMBA tiên phong định nghĩa lại phương pháp phát triển năng lực cho chuyên gia, nhà quản trị và đội nhóm thông qua một triết lý đào tạo khác biệt: kết nối tri thức nền tảng với thực tế thông qua các tình huống mô phỏng chân thực.
+                            AiMBA tiên phong định nghĩa lại phương pháp phát triển năng lực cho chuyên gia, nhà quản trị và đội nhóm thông qua một triết lý đào tạo khác biệt: kết nối tri thức nền tảng với thực tế thông qua các tình huống mô phỏng chân thực.
                         </div>
                     </div>
                     <div class="contact">
