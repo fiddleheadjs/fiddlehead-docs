@@ -1,5 +1,5 @@
 .Slider {
-    .slides {
+    .scroll-view {
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -15,6 +15,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    &[data-scrolling="false"] .slide[data-active="false"] {
+        opacity: 0;
     }
 
     button.back,

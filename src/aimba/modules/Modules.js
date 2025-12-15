@@ -40,6 +40,7 @@ export let Modules = () => {
                 <div class="container">
                     <Slider
                         gap="60px"
+                        padX="60px"
                         slideWidth="1100px"
                         slideHeight="620px"
                         slideItems={['#def', '#edf', '#fde'].map(background => ({

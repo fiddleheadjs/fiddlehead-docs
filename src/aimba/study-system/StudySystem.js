@@ -18,6 +18,7 @@ export let StudySystem = () => {
                 <div class="container">
                     <Slider
                         gap="60px"
+                        padX="60px"
                         slideWidth="1200px"
                         slideHeight="550px"
                         slideItems={['#def', '#dfe', '#fde'].map(background => ({
