@@ -84,7 +84,7 @@ export let Slider = ({
         clearTimeout(scrollingEndDebounceRef.current);
         scrollingEndDebounceRef.current = setTimeout(() => {
             setScrolling(false);
-        }, 100);
+        }, 200);
     };
 
     let findNextSlide = () => {
@@ -125,10 +125,16 @@ export let Slider = ({
         if (slide == null) {
             return;
         }
-        scrollViewRef.current.scrollTo({
+        let scrollView = scrollViewRef.current;
+        let scrollSnapType = scrollView.style.scrollSnapType;
+        scrollView.style.scrollSnapType = 'none';
+        scrollView.scrollTo({
             left: slide.offsetLeft - valueInPixels(padX),
-            behavior: 'smooth'
+            behavior: 'auto'
         });
+        setTimeout(() => {
+            scrollView.style.scrollSnapType = scrollSnapType;
+        }, 200);
     };
 
     let onBack = () => {
