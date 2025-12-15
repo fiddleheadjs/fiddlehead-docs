@@ -2,8 +2,26 @@ import {useEffect, useRef, useState} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
 import './Slider.less';
 
-export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px', padX = '0px'}) => {
+let renderContent = ({ scrollView, backButton, nextButton, dotNavigation  }) => {
+    return (
+        <>
+            {scrollView()}
+            {backButton()}
+            {nextButton()}
+        </>
+    );
+};
+
+export let Slider = ({
+    slideItems,
+    slideWidth,
+    slideHeight,
+    gap = '0px',
+    padX = '0px',
+    children = renderContent
+}) => {
     let scrollViewRef = useRef(null);
+    let dotNavigationRef = useRef(null);
 
     let valueInPixels = (value) => {
         // Currently, only 'px' is supported
@@ -15,6 +33,13 @@ export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px', padX = '
             return null;
         }
         return scrollViewRef.current.querySelector(`.slide[data-id="${slideId}"]`);
+    };
+
+    let getDotById = (slideId) => {
+        if (dotNavigationRef.current == null) {
+            return null;
+        }
+        return dotNavigationRef.current.querySelector(`button[data-id="${slideId}"]`);
     };
 
     let isSlideActive = (slide) => {
@@ -31,16 +56,22 @@ export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px', padX = '
         );
     };
 
-    let setActiveStatusForSlides = () => {
+    let refreshActiveStatusForSlides = () => {
         for (let item of slideItems) {
             let slide = getSlideById(item.id);
             let active = isSlideActive(slide);
-            slide.dataset.active = String(active);
+            if (slide != null) {
+                slide.dataset.active = String(active);
+            }
+            let dot = getDotById(item.id);
+            if (dot != null) {
+                dot.dataset.active = String(active);
+            }
         }
     };
 
     useEffect(() => {
-        setActiveStatusForSlides();
+        refreshActiveStatusForSlides();
     });
 
     let [scrolling, setScrolling] = useState(false);
@@ -49,6 +80,7 @@ export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px', padX = '
 
     let onScroll = () => {
         setScrolling(true);
+        refreshActiveStatusForSlides();
         clearTimeout(scrollingEndDebounceRef.current);
         scrollingEndDebounceRef.current = setTimeout(() => {
             setScrolling(false);
@@ -107,32 +139,60 @@ export let Slider = ({slideItems, slideWidth, slideHeight, gap = '0px', padX = '
         scrollToSlide(findNextSlide());
     };
 
+    let scrollView = () => (
+        <div
+            ref={scrollViewRef}
+            class="scroll-view"
+            style={{gap, padding: `0px ${padX}`}}
+            onScroll={onScroll}
+        >
+            {slideItems.map(item => (
+                <div
+                    key={item.id}
+                    class="slide"
+                    data-id={item.id}
+                    data-active={String(isSlideActive(getSlideById(item.id)))}
+                    style={{width: slideWidth, height: slideHeight}}
+                >
+                    {item.render()}
+                </div>
+            ))}
+        </div>
+    );
+
+    let backButton = () => (
+        <button class="back" type="button" onClick={onBack}>
+            <ArrowLeft />
+        </button>
+    );
+
+    let nextButton = () => (
+        <button class="next" type="button" onClick={onNext}>
+            <ArrowRight />
+        </button>
+    );
+
+    let dotNavigation = () => (
+        <div ref={dotNavigationRef} class="dot-navigation">
+            {slideItems.map(item => (
+                <button
+                    key={item.id}
+                    type="button"
+                    data-id={item.id}
+                    data-active={String(isSlideActive(getSlideById(item.id)))}
+                    onClick={() => {
+                        scrollToSlide(getSlideById(item.id));
+                    }}
+                >
+                    <i />
+                </button>
+            ))}
+        </div>
+    );
+
     return (
         <div class="Slider" data-scrolling={String(scrolling)}>
-            <div
-                ref={scrollViewRef}
-                class="scroll-view"
-                style={{gap, padding: `0px ${padX}`}}
-                onScroll={onScroll}
-            >
-                {slideItems.map(item => (
-                    <div
-                        key={item.id}
-                        class="slide"
-                        data-id={item.id}
-                        data-active={String(isSlideActive(getSlideById(item.id)))}
-                        style={{width: slideWidth, height: slideHeight}}
-                    >
-                        {item.render()}
-                    </div>
-                ))}
-            </div>
-            <button class="back" type="button" onClick={onBack}>
-                <ArrowLeft />
-            </button>
-            <button class="next" type="button" onClick={onNext}>
-                <ArrowRight />
-            </button>
+            {children({ scrollView, backButton, nextButton, dotNavigation })}
         </div>
     );
 };

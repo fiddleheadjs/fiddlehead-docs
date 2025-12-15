@@ -1,5 +1,6 @@
 import {CircleCheck, CircleCheckOutline, TriangleRight} from '../icons';
 import {Macbook} from '../pictogram';
+import {Slider} from '../slider';
 import './OurSolution.less';
 
 export let OurSolution = () => {
@@ -46,7 +47,22 @@ export let OurSolution = () => {
                     <h2 class="title">Phát triển năng lực quản trị chuẩn MBA theo cách linh hoạt, thực chiến và tối đa hóa ROI</h2>
                     <div class="content">
                         <div class="photos">
-                            <Macbook />
+                            <Slider
+                                slideWidth="448px"
+                                slideHeight="294px"
+                                slideItems={['#def', '#dfe', '#fde', '#ddd'].map(background => ({
+                                    id: background,
+                                    render: () => <img style={{background}} />
+                                }))}
+                            >
+                                {({scrollView, dotNavigation}) => (
+                                    <>
+                                        <Macbook />
+                                        {scrollView()}
+                                        {dotNavigation()}
+                                    </>
+                                )}
+                            </Slider>
                         </div>
                         <div class="details">
                             <div class="checklist">
