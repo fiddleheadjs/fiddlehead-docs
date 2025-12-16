@@ -39,9 +39,7 @@ export let Modules = () => {
             <div class="videos">
                 <div class="container">
                     <Slider
-                        gap="60px"
                         padX="60px"
-                        slideHeight="620px"
                         slideItems={['#def', '#edf', '#fde'].map(background => ({
                             id: background,
                             render: () => <div class="video-wrapper"><img style={{background}} /></div>

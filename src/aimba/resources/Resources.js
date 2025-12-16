@@ -87,7 +87,6 @@ export let Resources = () => {
                         </div>
                         <div class="screenshots">
                             <Slider
-                                slideHeight="390px"
                                 slideItems={screenshots.map(background => ({
                                     id: background,
                                     render: () => <img style={{background}} />

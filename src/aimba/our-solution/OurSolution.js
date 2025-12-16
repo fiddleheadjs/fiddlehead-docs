@@ -48,7 +48,6 @@ export let OurSolution = () => {
                     <div class="content">
                         <div class="photos">
                             <Slider
-                                slideHeight="294px"
                                 slideItems={['#def', '#dfe', '#fde', '#ddd'].map(background => ({
                                     id: background,
                                     render: () => <img style={{background}} />

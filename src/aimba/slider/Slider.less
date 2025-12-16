@@ -1,6 +1,7 @@
 .Slider {
-    .slides {
+    .SliderSlides {
         overflow: hidden;
+        height: var(--slide-height);
     }
 
     .scroll-view {
@@ -11,6 +12,7 @@
         overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
+        gap: var(--slide-spacing);
     }
 
     .slide {
@@ -19,14 +21,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        width: var(--slide-width);
+        height: var(--slide-height);
     }
     
     &[data-scrolling="false"] .slide[data-in-view="false"] {
         opacity: 0;
     }
 
-    button.back,
-    button.next {
+    .SliderBackButton,
+    .SliderNextButton {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -37,15 +41,15 @@
         cursor: pointer;
     }
 
-    button.back {
+    .SliderBackButton {
         left: 0;
     }
 
-    button.next {
+    .SliderNextButton {
         right: 0;
     }
 
-    .dot-navigation {
+    .SliderDotNavigation {
         display: flex;
         flex-direction: row;
         align-items: center;

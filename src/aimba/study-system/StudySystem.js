@@ -17,9 +17,7 @@ export let StudySystem = () => {
             <div class="screenshots">
                 <div class="container">
                     <Slider
-                        gap="60px"
                         padX="60px"
-                        slideHeight="550px"
                         slideItems={['#def', '#dfe', '#fde'].map(background => ({
                             id: background,
                             render: () => <img style={{background}} />

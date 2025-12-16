@@ -14,8 +14,6 @@ let renderContent = ({slides, backButton, nextButton, dotNavigation}) => {
 
 export let Slider = ({
     slideItems,
-    slideHeight,
-    gap = '0px',
     padX = '0px',
     children = renderContent
 }) => {
@@ -28,20 +26,7 @@ export let Slider = ({
     };
 
     let padXPx = valueInPixels(padX);
-
-    let getSlideById = (slideId) => {
-        if (scrollViewRef.current == null) {
-            return null;
-        }
-        return scrollViewRef.current.querySelector(`.slide[data-id="${slideId}"]`);
-    };
-
-    let getDotById = (slideId) => {
-        if (dotNavigationRef.current == null) {
-            return null;
-        }
-        return dotNavigationRef.current.querySelector(`button[data-id="${slideId}"]`);
-    };
+    let buffer = 10;
 
     let isSlideActive = (slide) => {
         if (slide == null) {
@@ -49,10 +34,9 @@ export let Slider = ({
         }
         let {offsetLeft, offsetWidth} = slide;
         let {clientWidth, scrollLeft} = scrollViewRef.current;
-        let buffer = 10;
         return (
             offsetLeft >= padXPx + scrollLeft - buffer &&
-            offsetLeft + offsetWidth <= scrollLeft + clientWidth + padXPx + buffer
+            offsetLeft + offsetWidth <= scrollLeft + clientWidth - padXPx + buffer
         );
     };
 
@@ -62,14 +46,13 @@ export let Slider = ({
         }
         let {offsetLeft, offsetWidth} = slide;
         let {clientWidth, scrollLeft} = scrollViewRef.current;
-        let buffer = 10;
         return (
             offsetLeft + offsetWidth > padXPx + scrollLeft - buffer &&
-            offsetLeft + padXPx < scrollLeft + clientWidth + buffer
+            offsetLeft < scrollLeft + clientWidth - padXPx + buffer
         );
     };
 
-    let refreshActiveStatusForSlides = () => {
+    let refreshSlideFlags = () => {
         for (let item of slideItems) {
             let slide = getSlideById(item.id);
             let active = isSlideActive(slide);
@@ -85,7 +68,7 @@ export let Slider = ({
     };
 
     useEffect(() => {
-        refreshActiveStatusForSlides();
+        refreshSlideFlags();
     });
 
     let [scrolling, setScrolling] = useState(false);
@@ -98,6 +81,20 @@ export let Slider = ({
         scrollingEndDebounceRef.current = setTimeout(() => {
             setScrolling(false);
         }, 200);
+    };
+
+    let getSlideById = (slideId) => {
+        if (scrollViewRef.current == null) {
+            return null;
+        }
+        return scrollViewRef.current.querySelector(`.slide[data-id="${slideId}"]`);
+    };
+
+    let getDotById = (slideId) => {
+        if (dotNavigationRef.current == null) {
+            return null;
+        }
+        return dotNavigationRef.current.querySelector(`button[data-id="${slideId}"]`);
     };
 
     let findNextSlide = () => {
@@ -159,11 +156,11 @@ export let Slider = ({
     };
 
     let slides = () => (
-        <div class="slides" style={{height: slideHeight}}>
+        <div class="SliderSlides">
             <div
                 ref={scrollViewRef}
                 class="scroll-view"
-                style={{gap, padding: `0px ${padX}`}}
+                style={{padding: `0px ${padX}`}}
                 onScroll={onScroll}
             >
                 {slideItems.map(item => {
@@ -175,7 +172,6 @@ export let Slider = ({
                             data-id={item.id}
                             data-active={String(isSlideActive(slide))}
                             data-in-view={String(isSlideInView(slide))}
-                            style={{height: slideHeight}}
                         >
                             {item.render()}
                         </div>
@@ -186,19 +182,19 @@ export let Slider = ({
     );
 
     let backButton = () => (
-        <button class="back" type="button" onClick={onBack}>
+        <button class="SliderBackButton" type="button" onClick={onBack}>
             <ArrowLeft />
         </button>
     );
 
     let nextButton = () => (
-        <button class="next" type="button" onClick={onNext}>
+        <button class="SliderNextButton" type="button" onClick={onNext}>
             <ArrowRight />
         </button>
     );
 
     let dotNavigation = () => (
-        <div ref={dotNavigationRef} class="dot-navigation">
+        <div ref={dotNavigationRef} class="SliderDotNavigation">
             {slideItems.map(item => (
                 <button
                     key={item.id}
