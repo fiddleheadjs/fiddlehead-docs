@@ -55,8 +55,7 @@ export let OurSolution = () => {
                             >
                                 {({slideShow, dotNavigation}) => (
                                     <>
-                                        <Macbook />
-                                        {slideShow()}
+                                        <Macbook>{slideShow()}</Macbook>
                                         {dotNavigation()}
                                     </>
                                 )}
