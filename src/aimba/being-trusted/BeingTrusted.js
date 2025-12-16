@@ -77,7 +77,6 @@ export let BeingTrusted = () => {
                 <Slider
                     gap="30px"
                     padX="60px"
-                    slideWidth="369px"
                     slideHeight="488px"
                     slideItems={feedbackData.map(({avatar, name, description, feedback}) => ({
                         id: `${name}, ${avatar}`,

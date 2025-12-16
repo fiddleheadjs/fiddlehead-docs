@@ -1,10 +1,14 @@
 .Slider {
+    .slides {
+        overflow: hidden;
+    }
+
     .scroll-view {
         display: flex;
         flex-direction: row;
         align-items: stretch;
         flex-flow: row nowrap;
-        overflow: hidden;
+        overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
     }
@@ -17,7 +21,7 @@
         align-items: center;
     }
     
-    &[data-scrolling="false"] .slide[data-active="false"] {
+    &[data-scrolling="false"] .slide[data-in-view="false"] {
         opacity: 0;
     }
 

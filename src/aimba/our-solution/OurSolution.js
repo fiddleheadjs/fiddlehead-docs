@@ -48,17 +48,16 @@ export let OurSolution = () => {
                     <div class="content">
                         <div class="photos">
                             <Slider
-                                slideWidth="448px"
                                 slideHeight="294px"
                                 slideItems={['#def', '#dfe', '#fde', '#ddd'].map(background => ({
                                     id: background,
                                     render: () => <img style={{background}} />
                                 }))}
                             >
-                                {({scrollView, dotNavigation}) => (
+                                {({slides, dotNavigation}) => (
                                     <>
                                         <Macbook />
-                                        {scrollView()}
+                                        {slides()}
                                         {dotNavigation()}
                                     </>
                                 )}
