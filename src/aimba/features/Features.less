@@ -1,9 +1,11 @@
+@import '../media.less';
+
 .Features {
     padding: 60px 0 30px;
     background: linear-gradient(to bottom, #EAF8FF, white 60%, white);
 
     > .heading {
-        max-width: 1200px;
+        max-width: 1170px;
         padding: 0 15px;
         margin: auto;
         display: flex;
@@ -26,8 +28,9 @@
 
     > .visualisation {
         margin: auto;
-        max-width: 1200px;
+        max-width: 1170px;
         padding: 30px 15px;
+        overflow: hidden;
         
         .grid {
             min-height: 700px;
@@ -39,7 +42,17 @@
                 / 1fr 1fr 1fr;
             align-items: center;
             justify-items: center;
+            
+            .media-current-max(800px, {
+                grid-template:
+                    "lt rt"
+                    "lm rm"
+                    "lb rb"
+                    / 1fr 1fr;
+                gap: 20px;
+            });
         }
+
 
         .central {
             grid-area: central;
@@ -52,6 +65,10 @@
                 right: 0;
                 margin: auto;
             }
+
+            .media-current-max(800px, {
+                display: none;
+            });
         }
 
         .card {
@@ -60,6 +77,11 @@
             overflow: hidden;
             border-radius: 14px;
             box-shadow: 0 16px 32px #0C0C0D1A;
+
+            .media-current-max(800px, {
+                width: 40vw;
+                margin: 0 !important;
+            });
 
             .title {
                 background: gray;

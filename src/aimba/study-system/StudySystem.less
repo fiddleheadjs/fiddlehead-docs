@@ -5,7 +5,8 @@
         background: #F6F6F6;
 
         .container {
-            width: 1150px;
+            max-width: 1200px;
+            padding: 0 15px;
             margin: auto;
         }
 
@@ -35,15 +36,18 @@
         background: #F6F6F6;
         color: #474747;
 
-        .container {
-            margin: auto;
-            max-width: 1320px;
-        }
-
         .Slider {
-            --slide-width: 1200px;
-            --slide-height: 550px;
+            --slide-width: ~'min(1170px, calc(90vw - 120px))';
+            --slide-height: calc(var(--slide-width) / 117 * 55);
             --slide-spacing: 60px;
+            --slide-padding: 60px;
+            max-width: calc(var(--slide-width) + 2 * var(--slide-padding));
+            margin: auto;
+            
+            .media-current-max(1290px, {
+                --slide-padding: 0;
+                max-width: ~'calc(90vw - 120px)';
+            });
         }
 
         img {

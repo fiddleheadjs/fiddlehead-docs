@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .TreeView {
     .growth-path {
         position: absolute;
@@ -12,6 +14,10 @@
         font-size: 7px;
         color: white;
 
+        .media-current-max(600px, {
+            display: none;
+        });
+
         .line {
             flex-grow: 1;
             background: white;
@@ -24,6 +30,14 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px 98px;
+
+        .media-current-max(1000px, {
+            gap: 16px 40px;
+        });
+
+        .media-current-max(600px, {
+            grid-template-columns: 1fr;
+        });
     }
 
     .card {
@@ -49,8 +63,7 @@
                     font-weight: 700;
                 }
         
-                .indicator {
-                }
+                .indicator {}
             }
 
             .pointer {
@@ -59,10 +72,11 @@
                 height: 14px;
                 border-radius: 7px;
                 position: absolute;
-                margin: auto;
-                top: 0;
-                bottom: 0;
+                top: calc((70px - 14px) / 2);
 
+                .media-current-max(600px, {
+                    display: none;
+                });
             }
         }
 
@@ -105,5 +119,15 @@
         &:nth-child(2n + 1) .pointer {
             right: -56px;
         }
+
+        .media-current-max(1000px, {
+            &:nth-child(2n) .pointer {
+                left: -27px;
+            }
+
+            &:nth-child(2n + 1) .pointer {
+                right: -27px;
+            }
+        });
     }
 }

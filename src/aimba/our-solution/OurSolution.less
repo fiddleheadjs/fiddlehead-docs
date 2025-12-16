@@ -1,15 +1,21 @@
+@import '../media.less';
+
 .OurSolution {
     margin-top: 65px;
 
     .why-us {
         .container {
             margin: auto;
-            max-width: 1200px;
+            max-width: 1170px;
             padding: 0 15px;
             display: flex;
             flex-direction: row;
             align-items: flex-end;
             gap: 30px;
+
+            .media-current-max(1000px, {
+                flex-direction: column;
+            });
         }
 
         .details {
@@ -91,7 +97,7 @@
 
         .container {
             margin: auto;
-            max-width: 1200px;
+            max-width: 1170px;
             padding: 0 15px;
         }
 
@@ -106,6 +112,10 @@
             display: flex;
             flex-direction: row;
             align-items: flex-start;
+
+            .media-current-max(1000px, {
+                flex-direction: column;
+            });
         }
 
         .photos {
@@ -113,6 +123,7 @@
                 --slide-width: 448px;
                 --slide-height: 292px;
                 --slide-spacing: 0;
+                --slide-padding: 0;
 
                 .SliderSlideShow {
                     position: absolute;
@@ -172,6 +183,5 @@
                 }
             }
         }
-
     }
 }

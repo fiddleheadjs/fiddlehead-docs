@@ -4,36 +4,39 @@ import './Slider.less';
 
 export let Slider = ({
     slideItems,
-    padX = '0px',
     children = renderContent
 }) => {
     let scrollViewRef = useRef(null);
     let dotNavigationRef = useRef(null);
+    let buffer = 2;
 
-    let valueInPixels = (value) => {
-        // Currently, only 'px' is supported
-        return parseFloat(value);
+    let getSlidePadding = () => {
+        let style = getComputedStyle(scrollViewRef.current);
+        return parseFloat(style.paddingLeft);
     };
 
-    let padXPx = valueInPixels(padX);
-    let buffer = 10;
+    let getScrollViewData = () => {
+        let {clientWidth, scrollLeft} = scrollViewRef.current;
+        let padX = getSlidePadding();
+        let innerWidth = clientWidth - 2 * padX;
+        let start = padX + scrollLeft;
+        let end = start + innerWidth;
+        let midpoint = start + innerWidth / 2;
+        return { scrollLeft, innerWidth, start, end, midpoint };
+    };
 
     let isSlideActive = (slide) => {
         if (slide == null) {
             return false;
         }
         let {offsetLeft, offsetWidth} = slide;
-        let {clientWidth, scrollLeft} = scrollViewRef.current;
-        let innerWidth = clientWidth - 2 * padXPx;
-        let start = padXPx + scrollLeft;
-        let end = start + innerWidth;
+        let {innerWidth, start, end, midpoint} = getScrollViewData();
         if (innerWidth >= offsetWidth - buffer) {
             return (
                 offsetLeft >= start - buffer &&
                 offsetLeft + offsetWidth <= end + buffer
             );
         }
-        let midpoint = start + innerWidth / 2;
         return (
             offsetLeft <= midpoint + buffer &&
             offsetLeft + offsetWidth >= end - buffer
@@ -51,10 +54,7 @@ export let Slider = ({
             return false;
         }
         let {offsetLeft, offsetWidth} = slide;
-        let {clientWidth, scrollLeft} = scrollViewRef.current;
-        let innerWidth = clientWidth - 2 * padXPx;
-        let start = padXPx + scrollLeft;
-        let end = start + innerWidth;
+        let {start, end} = getScrollViewData();
         return (
             offsetLeft + offsetWidth > start - buffer &&
             offsetLeft < end + buffer
@@ -148,7 +148,7 @@ export let Slider = ({
         let scrollSnapType = scrollView.style.scrollSnapType;
         scrollView.style.scrollSnapType = 'none';
         scrollView.scrollTo({
-            left: slide.offsetLeft - padXPx,
+            left: slide.offsetLeft - getSlidePadding(),
             behavior: 'auto'
         });
         setTimeout(() => {
@@ -169,7 +169,6 @@ export let Slider = ({
             <div
                 ref={scrollViewRef}
                 class="scroll-view"
-                style={{padding: `0px ${padX}`}}
                 onScroll={onScroll}
             >
                 {slideItems.map(item => {

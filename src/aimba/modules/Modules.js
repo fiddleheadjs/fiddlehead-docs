@@ -37,15 +37,12 @@ export let Modules = () => {
                 </div>
             </div>
             <div class="videos">
-                <div class="container">
-                    <Slider
-                        padX="60px"
-                        slideItems={['#def', '#edf', '#fde'].map(background => ({
-                            id: background,
-                            render: () => <div class="video-wrapper"><img style={{background}} /></div>
-                        }))}
-                    />
-                </div>
+                <Slider
+                    slideItems={['#def', '#edf', '#fde'].map(background => ({
+                        id: background,
+                        render: () => <div class="video-wrapper"><img style={{background}} /></div>
+                    }))}
+                />
             </div>
             <div class="actions">
                 <div class="container">

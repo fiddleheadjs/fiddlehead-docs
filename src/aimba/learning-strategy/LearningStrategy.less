@@ -1,7 +1,14 @@
+@import '../media.less';
+
 .LearningStrategy {
     display: grid;
     grid-template-columns: 1fr 1fr;
     background: linear-gradient(to right, #10469E, #10469E 60%, #14A6DF);
+
+    .media-current-max(1000px, {
+        display: flex;
+        flex-direction: column;
+    });
 
     > .cover {
 

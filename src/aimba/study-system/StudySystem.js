@@ -15,15 +15,12 @@ export let StudySystem = () => {
                 </div>
             </div>
             <div class="screenshots">
-                <div class="container">
-                    <Slider
-                        padX="60px"
-                        slideItems={['#def', '#dfe', '#fde'].map(background => ({
-                            id: background,
-                            render: () => <img style={{background}} />
-                        }))}
-                    />
-                </div>
+                <Slider
+                    slideItems={['#def', '#dfe', '#fde'].map(background => ({
+                        id: background,
+                        render: () => <img style={{background}} />
+                    }))}
+                />
             </div>
             <div class="numbers">
                 <div class="container">

@@ -1,9 +1,11 @@
+@import '../media.less';
+
 .Enrollment {
     background: linear-gradient(to right, #122D6E, #166690);
     
     > .container {
         margin: auto;
-        width: 1230px;
+        max-width: 1230px;
         padding: 54px 30px;
         display: flex;
         flex-direction: row;
@@ -11,8 +13,12 @@
         justify-content: space-between;
         gap: 36px;
 
+        .media-current-max(1000px, {
+            flex-direction: column;
+        });
+
         .details {
-            width: 600px;
+            max-width: 600px;
 
             .title {
                 font-size: 36px;

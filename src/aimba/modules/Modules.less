@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .Modules {
     background: #003195;
     padding: 82px 0 41px;
@@ -5,7 +7,8 @@
     > .heading {
         .container {
             margin: auto;
-            width: 1200px;
+            max-width: 1200px;
+            padding: 0 15px;
         }
 
         .title {
@@ -28,23 +31,28 @@
 
         .container {
             margin: auto;
-            width: 1200px;
+            max-width: 1200px;
+            padding: 0 15px;
         }
     }
 
     > .videos {
         margin-top: 60px;
-        color: white;
-
-        .container {
-            margin: auto;
-            width: 1220px;
-        }
-
+        
         .Slider {
-            --slide-width: 1100px;
-            --slide-height: 620px;
+            --slide-width: min(1100px, 90vw);
+            --slide-height: calc(var(--slide-width) / 110 * 62);
             --slide-spacing: 60px;
+            --slide-padding: 60px;
+            max-width: calc(var(--slide-width) + 2 * var(--slide-padding));
+            margin: auto;
+            color: white;
+
+            .media-current-max(1220px, {
+                --slide-padding: 0;
+                max-width: var(--slide-width);
+                color: #474747;
+            });
         }
 
         .video-wrapper {
@@ -68,7 +76,8 @@
 
         .container {
             margin: auto;
-            width: 1200px;
+            max-width: 1200px;
+            padding: 0 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;

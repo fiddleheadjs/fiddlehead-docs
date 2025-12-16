@@ -1,9 +1,11 @@
+@import '../media.less';
+
 .Resources {
     padding-bottom: 104px;
     
     .container {
         margin: auto;
-        width: 1200px;
+        max-width: 1170px;
     }
 
     .heading {
@@ -32,6 +34,14 @@
         &.layout-reserve {
             flex-direction: row-reverse;
         }
+
+        .media-current-max(1000px, {
+            flex-direction: column;
+
+            &.layout-reserve {
+                flex-direction: column;
+            }
+        });
 
         .details {
             width: 50%;
@@ -69,14 +79,17 @@
         .screenshots {
             width: 50%;
             min-width: 590px;
-            border-radius: 4px;
-            outline: 3px solid #57C9FA99;
-            overflow: hidden;
-
+            
             .Slider {
-                --slide-width: 590px;
-                --slide-height: 390px;
+                --slide-width: min(590px, 90vw);
+                --slide-height: calc(var(--slide-width) / 59 * 39);
                 --slide-spacing: 0;
+                --slide-padding: 0;
+                width: var(--slide-width);
+                margin: auto;
+                outline: 3px solid #57C9FA99;
+                border-radius: 4px;
+                overflow: hidden;
             }
 
             img {
