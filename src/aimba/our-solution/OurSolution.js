@@ -53,10 +53,10 @@ export let OurSolution = () => {
                                     render: () => <img style={{background}} />
                                 }))}
                             >
-                                {({slides, dotNavigation}) => (
+                                {({slideShow, dotNavigation}) => (
                                     <>
                                         <Macbook />
-                                        {slides()}
+                                        {slideShow()}
                                         {dotNavigation()}
                                     </>
                                 )}

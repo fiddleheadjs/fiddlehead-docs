@@ -2,16 +2,6 @@ import {useEffect, useRef, useState} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
 import './Slider.less';
 
-let renderContent = ({slides, backButton, nextButton, dotNavigation}) => {
-    return (
-        <>
-            {slides()}
-            {backButton()}
-            {nextButton()}
-        </>
-    );
-};
-
 export let Slider = ({
     slideItems,
     padX = '0px',
@@ -34,9 +24,25 @@ export let Slider = ({
         }
         let {offsetLeft, offsetWidth} = slide;
         let {clientWidth, scrollLeft} = scrollViewRef.current;
+        let innerWidth = clientWidth - 2 * padXPx;
+        let start = padXPx + scrollLeft;
+        let end = start + innerWidth;
+        if (innerWidth >= offsetWidth - buffer) {
+            return (
+                offsetLeft >= start - buffer &&
+                offsetLeft + offsetWidth <= end + buffer
+            );
+        }
+        let midpoint = start + innerWidth / 2;
         return (
-            offsetLeft >= padXPx + scrollLeft - buffer &&
-            offsetLeft + offsetWidth <= scrollLeft + clientWidth - padXPx + buffer
+            offsetLeft <= midpoint + buffer &&
+            offsetLeft + offsetWidth >= end - buffer
+            ||
+            offsetLeft <= start + buffer &&
+            offsetLeft + offsetWidth >= midpoint - buffer
+            ||
+            offsetLeft <= start + buffer &&
+            offsetLeft + offsetWidth >= end - buffer
         );
     };
 
@@ -46,9 +52,12 @@ export let Slider = ({
         }
         let {offsetLeft, offsetWidth} = slide;
         let {clientWidth, scrollLeft} = scrollViewRef.current;
+        let innerWidth = clientWidth - 2 * padXPx;
+        let start = padXPx + scrollLeft;
+        let end = start + innerWidth;
         return (
-            offsetLeft + offsetWidth > padXPx + scrollLeft - buffer &&
-            offsetLeft < scrollLeft + clientWidth - padXPx + buffer
+            offsetLeft + offsetWidth > start - buffer &&
+            offsetLeft < end + buffer
         );
     };
 
@@ -155,8 +164,8 @@ export let Slider = ({
         scrollToSlide(findNextSlide());
     };
 
-    let slides = () => (
-        <div class="SliderSlides">
+    let slideShow = () => (
+        <div class="SliderSlideShow">
             <div
                 ref={scrollViewRef}
                 class="scroll-view"
@@ -213,7 +222,17 @@ export let Slider = ({
 
     return (
         <div class="Slider" data-scrolling={String(scrolling)}>
-            {children({slides, backButton, nextButton, dotNavigation})}
+            {children({slideShow, backButton, nextButton, dotNavigation})}
         </div>
+    );
+};
+
+let renderContent = ({slideShow, backButton, nextButton, dotNavigation}) => {
+    return (
+        <>
+            {slideShow()}
+            {backButton()}
+            {nextButton()}
+        </>
     );
 };
