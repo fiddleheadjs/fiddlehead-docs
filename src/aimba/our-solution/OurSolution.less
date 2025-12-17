@@ -135,8 +135,8 @@
 
         .photos {    
             .Slider {
-                --slide-width: 448px;
-                --slide-height: 292px;
+                --slide-width: 100%;
+                --slide-aspect: calc(448 / 292);
                 --slide-spacing: 0;
                 --slide-padding: 0;
                 margin: auto;
@@ -145,10 +145,21 @@
                     width: 100%;
                     max-width: 600px;
                 });
-                
-                svg {
-                    display: block;
-                    width: 100%;
+
+                .macbook-simulator {
+                    svg {
+                        display: block;
+                    }
+
+                    .macbook-screen {
+                        position: absolute;
+                        width: calc(100% * 448 / 600);
+                        height: calc(100% * 292 / 345);
+                        top: calc(100% * 17.823 / 345);
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                    }
                 }
 
                 .SliderSlideShow {
@@ -205,9 +216,6 @@
                 margin: 37px auto 0;
 
                 .media-current-max(1000px, {
-                    // margin: 37px 0 0;
-                    // display: flex;
-                    // justify-content: center;
                     max-width: 600px;
                 });
 

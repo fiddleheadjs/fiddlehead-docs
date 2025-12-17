@@ -55,7 +55,12 @@ export let OurSolution = () => {
                             >
                                 {({slideShow, dotNavigation}) => (
                                     <>
-                                        <Macbook>{slideShow()}</Macbook>
+                                        <div class="macbook-simulator">
+                                            <Macbook />
+                                            <div class="macbook-screen">
+                                                {slideShow()}
+                                            </div>
+                                        </div>
                                         {dotNavigation()}
                                     </>
                                 )}
