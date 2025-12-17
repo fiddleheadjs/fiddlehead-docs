@@ -31,6 +31,11 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
 
+            .media-current-max(600px, {
+                display: flex;
+                flex-direction: column;
+            });
+
             li {
                 border-radius: 10px;
                 background: #0891D8;
@@ -41,8 +46,9 @@
                 align-items: flex-start;
                 justify-content: flex-start;
 
-                .media-current-max(800px, {
+                .media-current-between(601px, 800px, {
                     flex-direction: column;
+                    align-items: center;
                 });
 
                 .pictogram {
@@ -58,14 +64,16 @@
                 }
 
                 .divider {
-                    height: 72px;
                     margin: 4px 0;
-                    width: 1px;
                     background: white;
+                    height: 72px;
+                    min-width: 1px;
+                    max-width: 1px;
 
-                    .media-current-max(800px, {
+                    .media-current-between(601px, 800px, {
                         height: 1px;
-                        width: 72px;
+                        min-width: 72px;
+                        max-width: 72px;
                     });
                 }
 
