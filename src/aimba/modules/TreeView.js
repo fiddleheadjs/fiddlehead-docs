@@ -54,7 +54,9 @@ export let TreeView = ({data}) => {
                                         {expanded ? <Minus /> : <Plus />}
                                     </div>
                                 </div>
-                                <div class="pointer" />
+                                <div class="pointer-wrapper">
+                                    <div class="pointer" />
+                                </div>
                             </div>
                             <div class="body">
                                 <div class="description">

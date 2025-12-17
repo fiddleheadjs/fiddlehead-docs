@@ -38,7 +38,7 @@
         gap: 16px 98px;
 
         .media-current-max(1000px, {
-            gap: 16px 40px;
+            gap: 16px 50px;
         });
 
         .media-current-max(600px, {
@@ -59,8 +59,7 @@
                 align-items: center;
                 justify-content: space-between;
                 gap: 25px;
-                padding: 5px 15px 5px 25px;
-                min-height: 70px;
+                padding: 12px 15px 12px 25px;
                 cursor: pointer;
                 border-radius: 6px;
 
@@ -72,13 +71,25 @@
                 .indicator {}
             }
 
+            .pointer-wrapper {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                pointer-events: none;
+
+            }
+
             .pointer {
                 background: #04A9FB;
                 width: 14px;
                 height: 14px;
                 border-radius: 7px;
                 position: absolute;
-                top: calc((70px - 14px) / 2);
+                top: 0;
+                bottom: 0;
+                margin: auto;
             }
         }
 
@@ -96,6 +107,14 @@
         }
 
         &.collapsed {
+            .heading {
+                height: 100%;
+
+                .content {
+                    height: 100%;
+                }
+            }
+            
             .body {
                 height: 0;
                 visibility: hidden;
@@ -114,27 +133,26 @@
             }
         }
 
-        &:nth-child(even) .pointer {
-            left: -56px;
-        }
-
-        &:nth-child(odd) .pointer {
-            right: -56px;
-        }
-
-        .media-current-max(1000px, {
-            &:nth-child(even) .pointer {
-                left: -27px;
-            }
-
+        .media-current-min(1001px, {
             &:nth-child(odd) .pointer {
-                right: -27px;
+                right: -56px;
+            }
+        });
+
+        .media-current-between(601px, 1000px, {
+            &:nth-child(odd) .pointer {
+                right: -32px;
+            }
+        });
+
+        .media-current-min(601px, {
+            &:nth-child(even) .pointer {
+                display: none;
             }
         });
 
         .media-current-max(600px, {
-            &:nth-child(even) .pointer,
-            &:nth-child(odd) .pointer {
+            .pointer {
                 left: -40px;
             }
         });
