@@ -23,23 +23,23 @@ export let Header = () => {
                         <div class="group">
                             <ul class="checklist">
                                 <li>
-                                    <SquareCheck />
+                                    <i><SquareCheck /></i>
                                     <span>Cung cấp hệ thống kiến thức</span>
                                 </li>
                                 <li>
-                                    <SquareCheck />
+                                    <i><SquareCheck /></i>
                                     <span>Mài sắc tư duy quản lý</span>
                                 </li>
                                 <li>
-                                    <SquareCheck />
+                                    <i><SquareCheck /></i>
                                     <span>Kỹ năng và công cụ quản trị</span>
                                 </li>
                                 <li>
-                                    <SquareCheck />
+                                    <i><SquareCheck /></i>
                                     <span>Trợ lý AI giải quyết nhanh công việc</span>
                                 </li>
                                 <li>
-                                    <SquareCheck />
+                                    <i><SquareCheck /></i>
                                     <span>Năng lực quản trị chuẩn quốc tế</span>
                                 </li>
                             </ul>

@@ -48,12 +48,46 @@
                     -webkit-text-fill-color: transparent;
                     color: #FFB81F;
                     border-bottom: 2px solid white;
+
+                    .media-current-max(590px, {
+                        font-size: 55px;
+                        line-height: 100%;
+                        height: auto;
+                    });
+
+                    .media-current-max(500px, {
+                        font-size: 50px;
+                    });
+
+                    .media-current-max(410px, {
+                        font-size: 40px;
+                    });
+
+                    .media-current-max(370px, {
+                        font-size: 40px;
+                    });
                 }
             }
 
             .slogan {
                 font-size: 34px;
                 font-weight: 700;
+
+                .media-current-max(610px, {
+                    font-size: 30px;
+                });
+
+                .media-current-max(520px, {
+                    font-size: 24px;
+                });
+
+                .media-current-max(450px, {
+                    font-size: 20px;
+                });
+
+                .media-current-max(370px, {
+                    font-size: 18px;
+                });
             }
 
             .description {
@@ -65,14 +99,24 @@
                 list-style: none;
                 display: grid;
                 grid-template-columns: 1.1fr 0.9fr;
-                gap: 18px 40px;
+                grid-auto-rows: 1fr;
+                gap: 10px 40px;
+                
+                .media-current-max(450px, {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 10px 20px;
+                });
+
+                .media-current-max(370px, {
+                    grid-template-columns: 1fr;
+                    grid-auto-rows: auto;
+                });
 
                 li {
                     display: flex;
                     flex-direction: row;
                     gap: 10px;
                     align-items: flex-start;
-                    max-height: 22px;
                 }
             }
         }
