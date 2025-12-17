@@ -5,6 +5,14 @@
     grid-template-columns: 1fr 1fr;
     background: linear-gradient(to right, #10469E, #10469E 60%, #14A6DF);
 
+    .media-current-max(1600px, {
+        grid-template-columns: 2fr 3fr;
+    });
+
+    .media-current-max(1400px, {
+        grid-template-columns: 1fr 2fr;
+    });
+
     .media-current-max(1000px, {
         display: flex;
         flex-direction: column;
@@ -16,6 +24,10 @@
 
     > .details {
         padding: 60px 60px 66px;
+        
+        .media-current-max(450px, {
+            padding: 60px 30px 66px; 
+        });
 
         > .heading {
             max-width: 826px;
@@ -24,7 +36,9 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                align-items: flex-end;
                 color: white;
+                gap: 10px;
 
                 .title {
                     font-size: 32px;
@@ -32,13 +46,19 @@
                 }
 
                 button {
+                    padding: 0 20px;
                     min-width: 134px;
                     min-height: 40px;
                     border-radius: 20px;
                     border: 1px solid white;
                     font-size: 15px;
                     font-weight: 700;
+                    white-space: nowrap;
                     cursor: pointer;
+
+                    .media-current-max(600px, {
+                        min-width: 0;
+                    });
                 }
             }
 
@@ -61,12 +81,21 @@
                 gap: 22px 25px;
                 max-width: 826px;
 
+                .media-current-max(600px, {
+                    grid-template: ".";
+                    // max-width: 400px;
+                });
+
                 li {
                     padding: 14px 22px;
                     background: #FFFFFF26;
                     border: 1px solid #FFFDFD66;
                     border-radius: 14px;
-                    
+
+                    .media-current-max(600px, {
+                        border-radius: 14px !important;
+                    });
+
                     &.no-01 {
                         border-bottom-right-radius: 0;
                     }
