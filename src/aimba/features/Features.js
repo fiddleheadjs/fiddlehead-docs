@@ -20,15 +20,18 @@ export let Features = () => {
             <div class="visualisation">
                 <div class="grid">
                     <div class="central">
-                        <CircleFeatures />
-                        <Logo />
+                        <CircleFeatures>
+                            <Logo x="193" />
+                        </CircleFeatures>
                     </div>
                     {['lt', 'lm', 'lb', 'rt', 'rm', 'rb'].map(position => {
                         let [title, description] = data[position];
                         return (
                             <div key={position} class={`card ${position}`}>
                                 <div class="title">{title}</div>
-                                <div class="description">{description}</div>
+                                <div class="description">
+                                    <div class="content">{description}</div>
+                                </div>
                             </div>
                         );
                     })}

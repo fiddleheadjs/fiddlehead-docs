@@ -56,14 +56,15 @@
 
         .central {
             grid-area: central;
+            display: grid;
+            grid-template-areas: "A";
+            align-content: center;
 
-            svg.Logo {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin: auto;
+            svg {
+                max-width: 110%;
+                grid-area: A;
+                align-self: center;
+                justify-self: center;
             }
 
             .media-current-max(800px, {
@@ -77,6 +78,14 @@
             overflow: hidden;
             border-radius: 14px;
             box-shadow: 0 16px 32px #0C0C0D1A;
+
+            .media-current-max(1200px, {
+                width: 250px;
+            });
+
+            .media-current-max(1000px, {
+                width: 200px;
+            });
 
             .media-current-max(800px, {
                 width: 40vw;
@@ -98,10 +107,17 @@
 
             .description {
                 background: white;
-                padding: 13px 22px 18px;
+                padding: 13px 12px 18px;
                 color: #474747;
                 font-size: 15px;
                 text-align: justify;
+
+                .content {
+                    padding: 0 10px;
+                    max-height: 120px;
+                    overflow: auto;
+                    scrollbar-width: thin;
+                }
             }
 
             &.lt {

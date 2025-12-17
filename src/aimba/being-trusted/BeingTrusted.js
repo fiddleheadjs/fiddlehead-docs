@@ -85,7 +85,9 @@ export let BeingTrusted = () => {
                                 </div>
                                 <div class="name">{name}</div>
                                 <div class="description">{description}</div>
-                                <div class="feedback">{feedback}</div>
+                                <div class="feedback">
+                                    <div class="content">{feedback}</div>
+                                </div>
                             </div>
                         )
                     }))}

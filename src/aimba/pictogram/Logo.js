@@ -1,11 +1,11 @@
-export let Logo = ({ monochrome }) => {
+export let Logo = ({ monochrome, x, y }) => {
     let colorA1 = monochrome ?? '#28A8E0';
     let colorA2 = monochrome ?? '#0E72B0';
     let colorI = monochrome ?? '#0E72B0';
     let colorMBA = monochrome ?? '#1E459D';
 
     return (
-        <svg class="Logo" width="150" height="32" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="Logo" x={x} y={y} width="150" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_2_1889)">
                 <path d="M43.5112 22.1477L37.5702 32H14.8557L19.9613 23.6056C20.5093 22.7002 21.4916 22.1477 22.5542 22.1477H43.5112Z" fill={colorA1} />
                 <path d="M0 32H10.1711C11.2336 32 12.2227 31.4475 12.7706 30.5355L24.726 10.7244L18.7851 0.872061L0 32Z" fill={colorA1} />
