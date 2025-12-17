@@ -47,11 +47,11 @@ export let Enrollment = () => {
                 </div>
                 <div class="form-box">
                     <div class="headlines">
-                        <p><Gift /> Chỉ từ <strong>699.000</strong> <b>VNĐ</b></p>
-                        <p>Dành cho 50 học viên đầu tiên!</p>
+                        <p><Gift /> Chỉ từ <no-break><strong>699.000</strong> <b>VNĐ</b></no-break></p>
+                        <p>Dành cho 50 học viên <no-break class="nobreak">đầu tiên!</no-break></p>
                     </div>
                     <div class="timing">
-                        <div class="description">Ưu đãi có hạn, đăng ký ngay để không bỏ lỡ</div>
+                        <div class="description">Ưu đãi có hạn, đăng ký ngay để <no-break>không bỏ lỡ</no-break></div>
                         <div class="countdown">
                             <b class="hv">14</b> <i class="hu">Giờ</i>
                             <b class="mv">24</b> <i class="mu">Phút</i>
