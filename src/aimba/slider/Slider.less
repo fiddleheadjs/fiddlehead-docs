@@ -13,12 +13,11 @@
         flex-direction: row;
         align-items: stretch;
         flex-flow: row nowrap;
+        gap: var(--slide-spacing);
+        padding: 0 var(--slide-padding);
         overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
-        scroll-snap-align: start;
-        gap: var(--slide-spacing);
-        padding: 0 var(--slide-padding);
 
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -30,7 +29,8 @@
 
     .slide {
         flex: none;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
+        scroll-margin: var(--slide-padding);
         display: flex;
         justify-content: center;
         align-items: center;
