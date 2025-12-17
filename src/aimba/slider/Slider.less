@@ -56,6 +56,13 @@
         cursor: pointer;
     }
 
+    &[data-scrollable="false"] {
+        .SliderBackButton,
+        .SliderNextButton {
+            display: none;
+        }
+    }
+
     .SliderBackButton {
         left: 0;
     }

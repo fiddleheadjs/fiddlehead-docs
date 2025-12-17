@@ -8,6 +8,7 @@ export let Slider = ({
 }) => {
     let scrollViewRef = useRef(null);
     let dotNavigationRef = useRef(null);
+    let [scrollable, setScrollable] = useState(false);
     let buffer = 2;
 
     let getSlidePadding = () => {
@@ -73,6 +74,11 @@ export let Slider = ({
             if (dot != null) {
                 dot.dataset.active = String(active);
             }
+        }
+
+        if (scrollViewRef.current != null) {
+            let { scrollWidth, clientWidth } = scrollViewRef.current;
+            setScrollable(scrollWidth > clientWidth);
         }
     };
 
@@ -244,7 +250,7 @@ export let Slider = ({
     );
 
     return (
-        <div class="Slider" data-scrolling={String(scrolling)}>
+        <div class="Slider" data-scrollable={String(scrollable)} data-scrolling={String(scrolling)}>
             {children({slideShow, backButton, nextButton, dotNavigation})}
         </div>
     );
