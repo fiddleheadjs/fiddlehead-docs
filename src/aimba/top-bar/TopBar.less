@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .TopBar {
     background: white;
 
@@ -41,5 +43,11 @@
             color: white;
             background: linear-gradient(to right, #1E459D, #28A8E0);
         }
+
+        .media-current-max(600px, {
+            a {
+                display: none;
+            }
+        });
     }
 }
