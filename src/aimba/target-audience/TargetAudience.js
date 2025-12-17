@@ -24,7 +24,7 @@ export let TargetAudience = () => {
     return (
         <section class="TargetAudience">
             <div class="heading">
-                <h2 class="title">AiMBA được thiết kế đặc biệt dành cho</h2>
+                <h2 class="title">AiMBA được thiết kế đặc biệt <no-break>dành cho</no-break></h2>
                 <div class="divider" />
             </div>
             <div class="audience">
@@ -57,20 +57,22 @@ export let TargetAudience = () => {
                 </ul>
             </div>
             <div class="certificate">
-                <h2 class="title">Chứng nhận - cam kết</h2>
-                <div class="content">
-                    <div class="details">
-                        <ul>
-                            {certificateData.map(statement => (
-                                <li key={statement}>
-                                    <i><BadgeCheck /></i>
-                                    <span>{statement}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div class="photos">
-                        
+                <div class="big-card">
+                    <h2 class="title">Chứng nhận - cam kết</h2>
+                    <div class="content">
+                        <div class="details">
+                            <ul>
+                                {certificateData.map(statement => (
+                                    <li key={statement}>
+                                        <i><BadgeCheck /></i>
+                                        <span>{statement}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div class="photos">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
