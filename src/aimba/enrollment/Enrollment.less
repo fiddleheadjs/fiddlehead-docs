@@ -253,6 +253,19 @@
                     background: white;
                     border: 1px solid #DDD9D9;
                     border-radius: 4px;
+
+                    &::placeholder {
+                        color: #595454;
+                    }
+
+                    &:focus {
+                        border-color: #2669DD;
+                        outline: 3px solid #2669DD66;
+
+                        &::placeholder {
+                            color: #ADAAAA;
+                        }
+                    }
                 }
 
                 button {
@@ -269,6 +282,10 @@
                     font-size: 18px;
                     font-weight: 900;
                     color: white;
+
+                    &:focus {
+                        outline: 3px solid #2669DD66;
+                    }
                 }
             }
         }
