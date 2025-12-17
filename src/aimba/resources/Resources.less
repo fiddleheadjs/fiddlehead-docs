@@ -5,7 +5,8 @@
     
     .container {
         margin: auto;
-        max-width: 1170px;
+        max-width: 1230px;
+        padding: 0 30px;
     }
 
     .heading {
@@ -47,6 +48,15 @@
             width: 50%;
             padding: 0 20px;
 
+            .media-current-max(1000px, {
+                width: 100%;
+                max-width: 600px;
+            });
+
+            .media-current-max(500px, {
+                padding: 0;
+            });
+
             .title {
                 font-size: 26px;
                 font-weight: 700;
@@ -78,11 +88,15 @@
 
         .screenshots {
             width: 50%;
-            min-width: 590px;
+
+            .media-current-max(1000px, {
+                width: 100%;
+                max-width: 600px;
+            });
             
             .Slider {
-                --slide-width: min(590px, 90vw);
-                --slide-height: calc(var(--slide-width) / 59 * 39);
+                --slide-width: 100%;
+                --slide-aspect: 1.5;
                 --slide-spacing: 0;
                 --slide-padding: 0;
                 width: var(--slide-width);
