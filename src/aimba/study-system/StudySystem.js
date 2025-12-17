@@ -6,7 +6,7 @@ export let StudySystem = () => {
         <section class="StudySystem">
             <div class="heading">
                 <div class="container">
-                    <h2 class="title">Hệ sinh thái học tập toàn diện</h2>
+                    <h2 class="title">Hệ sinh thái học tập <no-break>toàn diện</no-break></h2>
                     <div class="divider" />
                     <div class="description">
                         Không còn lý thuyết suông - Mọi kiến thức đều được kết nối với bối cảnh kinh doanh thật.

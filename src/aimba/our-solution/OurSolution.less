@@ -8,13 +8,13 @@
             margin: auto;
             max-width: 1170px;
             padding: 0 15px;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
 
-            .media-current-max(1000px, {
-                flex-direction: column;
+            .media-current-max(800px, {
+                grid-template-columns: 1fr;
+                max-width: 600px;
             });
         }
 
@@ -83,7 +83,8 @@
         .photos {
             img {
                 display: block;
-                width: 570px;
+                width: 100%;
+                max-width: 570px;
                 height: 450px;
                 background: #def;
             }
@@ -97,7 +98,7 @@
 
         .container {
             margin: auto;
-            max-width: 1170px;
+            max-width: 1200px;
             padding: 0 15px;
         }
 
@@ -105,15 +106,21 @@
             font-size: 32px;
             font-weight: 700;
             max-width: 960px;
+            
+            .media-current-max(1000px, {
+                text-align: center;
+                margin: auto;
+                max-width: 700px;
+            });
         }
 
         .content {
             margin-top: 46px;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-
+            display: grid;
+            grid-template-columns: 1.11112fr 1fr;
+            
             .media-current-max(1000px, {
+                display: flex;
                 flex-direction: column;
                 align-items: stretch;
                 gap: 30px;
@@ -126,7 +133,7 @@
                 --slide-height: 292px;
                 --slide-spacing: 0;
                 --slide-padding: 0;
-                width: 600px;
+                margin: auto;
     
                 .media-current-max(1000px, {
                     width: 100%;
@@ -172,7 +179,13 @@
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 26px 30px;
-    
+                    
+                    .media-current-max(1000px, {
+                        grid-template-columns: 1fr;
+                        max-width: 600px;
+                        margin: auto;
+                    });
+
                     li {
                         display: flex;
                         flex-direction: row;
@@ -183,9 +196,17 @@
             }
             
             .actions {
-                margin: 37px 0 0 34px;
+                margin: 37px auto 0;
+
+                .media-current-max(1000px, {
+                    // margin: 37px 0 0;
+                    // display: flex;
+                    // justify-content: center;
+                    max-width: 600px;
+                });
 
                 button {
+                    margin: 0 34px;
                     border-radius: 6px;
                     background: linear-gradient(to right, #1E459D, #28A8E0);
                     font-size: 16px;
