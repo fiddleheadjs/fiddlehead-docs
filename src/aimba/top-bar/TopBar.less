@@ -10,6 +10,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 15px;
+    }
+
+    .brand {
+        .Logo {
+            .media-current-max(600px, {
+                width: 100px;
+            });
+            
+            .media-current-max(400px, {
+                width: 80px;
+            });
+        }
     }
 
     .nav {
@@ -18,15 +31,34 @@
         justify-content: flex-end;
         gap: 10px;
 
+        .links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
         a, button {
             display: inline-flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 12px;
+            padding: 6px 12px;
             min-height: 40px;
             border-radius: 6px;
             cursor: pointer;
+        }
+
+        a {
+            &:hover {
+                color: #1E469E;
+            }
         }
 
         button {
@@ -44,9 +76,25 @@
             background: linear-gradient(to right, #1E459D, #28A8E0);
         }
 
-        .media-current-max(600px, {
-            a {
+        .media-current-max(1000px, {
+            .links {
                 display: none;
+            }
+        });
+
+        .media-current-max(600px, {
+            button {
+                min-width: auto;
+                min-height: 35px;
+                font-size: 12px;
+            }
+        });
+
+        .media-current-max(400px, {
+            button {
+                min-width: auto;
+                min-height: 30px;
+                font-size: 11px;
             }
         });
     }
