@@ -5,7 +5,9 @@ export let TopBar = () => {
     return (
         <section class="TopBar">
             <div class="container">
-                <Logo />
+                <div class="logo-wrapper">
+                    <Logo />
+                </div>
                 <div class="nav">
                     <a>Giá trị</a>
                     <a>Cách học</a>

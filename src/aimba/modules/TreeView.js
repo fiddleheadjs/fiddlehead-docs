@@ -1,27 +1,35 @@
-import {useState} from 'fiddlehead';
+import {useRef, useState} from 'fiddlehead';
 import {TriangleDown, TriangleUp, Minus, Plus} from '../icons';
 import './TreeView.less';
 
 export let TreeView = ({data}) => {
-    let [variableExpandedIndexes, setVariableExpandedIndexes] = useState([]);
-    let fixedExpandedIndexes = [0, 1];
+    let [variableExpandedIndexes, setVariableExpandedIndexes] = useState([0, 1]);
+    let fixedExpandedIndexes = [];
     let expandedIndexes = [...fixedExpandedIndexes, ...variableExpandedIndexes];
+
+    let cardsRef = useRef(null);
+    
+    let isSingleColumn = () => {
+        let style = getComputedStyle(cardsRef.current);
+        let columns = style.gridTemplateColumns.split(' ');
+        return columns.length === 1;
+    };
 
     let toggleExpanded = (index) => {
         if (fixedExpandedIndexes.includes(index)) {
             return;
         }
 
-        setVariableExpandedIndexes(() => {
+        let targetIndexes = isSingleColumn() ? [index] : (
+            index % 2 === 0 ? [index, index + 1] : [index - 1, index]
+        );
+
+        setVariableExpandedIndexes((prevValue) => {
             if (variableExpandedIndexes.includes(index)) {
-                return [];
+                return prevValue.filter(idx => !targetIndexes.includes(idx));
             }
 
-            if (index % 2 === 0) {
-                return [index, index + 1];
-            } else {
-                return [index - 1, index];
-            }
+            return targetIndexes;
         });
     };
 
@@ -32,7 +40,7 @@ export let TreeView = ({data}) => {
                 <div class="line" />
                 <TriangleDown />
             </div>
-            <div class="cards">
+            <div class="cards" ref={cardsRef}>
                 {data.map(([title, description], index) => {
                     let expanded = expandedIndexes.includes(index);
                     return (

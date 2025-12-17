@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .CoreValues {
     background: #0F46A2;
     padding: 48px 0 56px;
@@ -37,7 +39,11 @@
                 display: flex;
                 flex-direction: row;
                 align-items: flex-start;
-                justify-content: space-between;
+                justify-content: flex-start;
+
+                .media-current-max(800px, {
+                    flex-direction: column;
+                });
 
                 .pictogram {
                     border-radius: 100%;
@@ -56,6 +62,11 @@
                     margin: 4px 0;
                     width: 1px;
                     background: white;
+
+                    .media-current-max(800px, {
+                        height: 1px;
+                        width: 72px;
+                    });
                 }
 
                 .text {
