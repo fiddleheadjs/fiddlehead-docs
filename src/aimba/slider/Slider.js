@@ -80,6 +80,35 @@ export let Slider = ({
         refreshSlideFlags();
     });
 
+    useEffect(() => {
+        if (typeof ResizeObserver === 'undefined') {
+            return;
+        }
+        let scrollView = scrollViewRef.current;
+        if (scrollView == null) {
+            return;
+        }
+        let previousWidth = 0;
+        let previousHeight = 0;
+        let observer = new ResizeObserver(([ entry ]) => {
+            if (entry.contentRect) {
+                let {width, height} = entry.contentRect;
+                let widthChange = Math.abs(width - previousWidth);
+                let heightChange = Math.abs(height - previousHeight);
+                let threshold = 2;
+                if (widthChange > threshold || heightChange > threshold) {
+                    refreshSlideFlags();
+                    previousWidth = width;
+                    previousHeight = height;
+                }
+            }
+        });
+        observer.observe(scrollView);
+        return () => {
+            observer.unobserve(scrollView);
+        };
+    }, []);
+
     let [scrolling, setScrolling] = useState(false);
 
     let scrollingEndDebounceRef = useRef(null);
@@ -96,7 +125,7 @@ export let Slider = ({
         if (scrollViewRef.current == null) {
             return null;
         }
-        return scrollViewRef.current.querySelector(`.slide[data-id="${slideId}"]`);
+        return scrollViewRef.current.querySelector(`.SliderSlide[data-id="${slideId}"]`);
     };
 
     let getDotById = (slideId) => {
@@ -145,15 +174,10 @@ export let Slider = ({
             return;
         }
         let scrollView = scrollViewRef.current;
-        let scrollSnapType = scrollView.style.scrollSnapType;
-        scrollView.style.scrollSnapType = 'none';
         scrollView.scrollTo({
             left: slide.offsetLeft - getSlidePadding(),
             behavior: 'auto'
         });
-        setTimeout(() => {
-            scrollView.style.scrollSnapType = scrollSnapType;
-        }, 200);
     };
 
     let onBack = () => {
@@ -176,7 +200,7 @@ export let Slider = ({
                     return (
                         <div
                             key={item.id}
-                            class="slide"
+                            class="SliderSlide"
                             data-id={item.id}
                             data-active={String(isSlideActive(slide))}
                             data-in-view={String(isSlideInView(slide))}

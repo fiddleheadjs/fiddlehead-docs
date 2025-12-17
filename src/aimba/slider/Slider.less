@@ -1,6 +1,8 @@
 .Slider {
+    position: relative;
+    
     .SliderSlideShow {  
-        overflow: hidden;
+        margin: auto;
         height: var(--slide-height);
         padding-bottom: calc(100% / var(--slide-aspect));
     }
@@ -27,7 +29,7 @@
         }
     }
 
-    .slide {
+    .SliderSlide {
         flex: none;
         scroll-snap-align: start;
         scroll-margin: var(--slide-padding);
@@ -38,7 +40,7 @@
         height: var(--slide-height);
     }
     
-    &[data-scrolling="false"] .slide[data-in-view="false"] {
+    &[data-scrolling="false"] .SliderSlide[data-in-view="false"] {
         opacity: 0;
     }
 
