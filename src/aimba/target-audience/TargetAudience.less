@@ -123,6 +123,7 @@
             margin: auto;
             padding: 37px 70px 42px 48px;
             border-radius: 15px;
+            overflow: hidden;
             background: linear-gradient(to right, #1E469E, #25A5DE);
             box-shadow: 0 6px 10px #00000026;
             color: white;
@@ -131,8 +132,19 @@
                 max-width: 500px;
                 padding: 37px 30px 42px 30px;
             });
-        }
 
+            .Background {
+                img {
+                    transform: rotateY(180deg);
+                }
+
+                layer-upper {
+                    background: #0d3796;
+                    background-blend-mode: darken;
+                    opacity: 36%;
+                }
+            }
+        }
 
         .title {
             font-size: 32px;

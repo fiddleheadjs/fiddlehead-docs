@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {ArrowTopRight, BachelorCap, BadgeCheck, FileChart, PeoplePlus} from '../icons';
 import {ImageView} from '../image-view';
 import './TargetAudience.less';
@@ -61,6 +62,7 @@ export let TargetAudience = () => {
             </div>
             <div class="certificate">
                 <div class="big-card">
+                    <Background image="/aimba/img/background-05.jpg" lazy />
                     <h2 class="title">Chứng nhận - cam kết</h2>
                     <div class="content">
                         <div class="details">

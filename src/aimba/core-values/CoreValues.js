@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {DocumentReport, GearChecklist, HandMoney, PersonGrowth, RobotSmile, StudentLaptop} from '../pictogram';
 import './CoreValues.less';
 
@@ -22,6 +23,7 @@ export let CoreValues = () => {
 
     return (
         <section class="CoreValues">
+            <Background image="/aimba/img/background-03.jpg" lazy />
             <h2 class="title">Giá trị nhận được khi đầu tư AiMBA</h2>
             <div class="divider" />
             <div class="values">

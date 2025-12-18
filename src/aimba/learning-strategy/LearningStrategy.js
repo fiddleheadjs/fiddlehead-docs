@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import './LearningStrategy.less';
 
 export let LearningStrategy = () => {
@@ -14,6 +15,7 @@ export let LearningStrategy = () => {
         <section class="LearningStrategy">
             <div class="container">
                 <div class="details">
+                    <Background image="/aimba/img/background-04.jpg" lazy />
                     <div class="heading">
                         <div class="content">
                             <h2 class="title">Cách thức học tập tại AiMBA</h2>
