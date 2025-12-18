@@ -1,5 +1,5 @@
 import './common.less';
-import './AiMBA.less';
+import './AiMBA_.less';
 import {TopBar} from './top-bar';
 import {Header} from './header';
 import {EcoSystem} from './eco-system';
