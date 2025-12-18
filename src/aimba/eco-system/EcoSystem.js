@@ -3,9 +3,9 @@ import './EcoSystem.less';
 
 export let EcoSystem = () => {
     let screenshots = [
-        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
-        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
         ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
+        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
+        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
     ];
 
     let numbers = [

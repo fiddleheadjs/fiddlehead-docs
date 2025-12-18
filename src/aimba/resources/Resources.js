@@ -102,12 +102,14 @@ export let Resources = () => {
                             </div>
                         </div>
                         <div class="screenshots">
-                            <Slider
-                                slideItems={screenshots.map(([src, alt]) => ({
-                                    id: src,
-                                    render: () => <img src={src} alt={alt} loading="lazy" />
-                                }))}
-                            />
+                            <div class="slider-wrapper">
+                                <Slider
+                                    slideItems={screenshots.map(([src, alt]) => ({
+                                        id: src,
+                                        render: () => <img src={src} alt={alt} loading="lazy" />
+                                    }))}
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
