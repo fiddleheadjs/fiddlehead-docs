@@ -41,12 +41,12 @@
             --slide-width: min(1170px, 100%);
             --slide-aspect: 2.1;
             --slide-spacing: 80px;
-            --slide-padding: 60px;
-            max-width: calc(var(--slide-width) + 2 * var(--slide-padding));
+            --slide-margin: 60px;
+            max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
             margin: auto;
             
             .media-current-max(800px, {
-                --slide-padding: 0;
+                --slide-margin: 0;
             });
         }
 

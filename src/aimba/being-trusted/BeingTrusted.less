@@ -29,18 +29,18 @@
         .Slider {
             --slide-width: 370px;
             --slide-spacing: 30px;
-            --slide-padding: 60px;
+            --slide-margin: 60px;
             margin: auto;
 
             .media-current-max(400px, {
                 --slide-width: 100%;
-                --slide-padding: 30px;
+                --slide-margin: 30px;
             });
 
             .media-current-between(401px, 600px, {
                 --slide-width: 100%;
                 --slide-spacing: 60px;
-                --slide-padding: 30px;
+                --slide-margin: 30px;
 
                 .SliderSlideShow {
                     width: 100%;
@@ -50,7 +50,7 @@
 
             .media-current-between(900px, 1100px, {
                 width: 100%;
-                max-width: calc(2 * var(--slide-width) + var(--slide-spacing) + 2 * var(--slide-padding));
+                max-width: calc(2 * var(--slide-width) + var(--slide-spacing) + 2 * var(--slide-margin));
             });
 
             .SliderSlide {

@@ -11,14 +11,14 @@ export let Slider = ({
     let [scrollable, setScrollable] = useState(false);
     let buffer = 2;
 
-    let getSlidePadding = () => {
+    let getSlideMargin = () => {
         let style = getComputedStyle(scrollViewRef.current);
-        return parseFloat(style.paddingLeft);
+        return parseFloat(style.getPropertyValue('--slide-margin'));
     };
 
     let getScrollViewData = () => {
         let {clientWidth, scrollLeft} = scrollViewRef.current;
-        let padX = getSlidePadding();
+        let padX = getSlideMargin();
         let innerWidth = clientWidth - 2 * padX;
         let start = padX + scrollLeft;
         let end = start + innerWidth;
@@ -180,8 +180,16 @@ export let Slider = ({
             return;
         }
         let scrollView = scrollViewRef.current;
+        let snapAlign = getComputedStyle(slide).scrollSnapAlign;
+        let surrounding = scrollView.clientWidth - slide.offsetWidth - 2 * getSlideMargin();
+        let scrollLeft = slide.offsetLeft - getSlideMargin();
+        if (snapAlign === 'center') {
+            scrollLeft -= surrounding / 2;
+        } else if (snapAlign === 'end') {
+            scrollLeft -= surrounding;
+        }
         scrollView.scrollTo({
-            left: slide.offsetLeft - getSlidePadding(),
+            left: scrollLeft,
             behavior: 'auto'
         });
     };
@@ -216,7 +224,9 @@ export let Slider = ({
                     );
                 })}
             </div>
-            <div class="aspect-ratio" />
+            <div class="aspect">
+                <div class="ratio" />
+            </div>
         </div>
     );
 
