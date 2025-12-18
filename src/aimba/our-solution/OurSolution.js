@@ -64,7 +64,7 @@ export let OurSolution = () => {
                             <Slider
                                 slideItems={screenshots.map(([src, alt]) => ({
                                     id: src,
-                                    render: () => <img src={src} alt={alt} />
+                                    render: () => <img src={src} alt={alt} loading="lazy" />
                                 }))}
                             >
                                 {({slideShow, dotNavigation}) => (
