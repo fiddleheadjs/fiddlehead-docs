@@ -7,6 +7,9 @@ export let Header = () => {
         <header class="Header">
             <div class="messages">
                 <Background image="/aimba/img/background-07.jpg" />
+                <div class="banner">
+                    <img src="/aimba/img/header-banner.jpg" alt="AiMBA banner" />
+                </div>
                 <div class="container">
                     <div class="overlay">
                         <div class="group">
