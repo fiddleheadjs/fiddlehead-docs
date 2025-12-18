@@ -145,7 +145,6 @@
         }
 
         .item {
-            min-height: 82px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -154,6 +153,10 @@
             box-shadow: 0 0 16px 0 #00000040;
             border-radius: 6px;
             padding: 10px;
+
+            .media-current-min(1001px, {
+                min-height: 82px;
+            });
 
             .media-current-max(1000px, {
                 justify-content: flex-start;
@@ -174,6 +177,7 @@
                     flex-direction: column;
                     justify-content: flex-start;
                     text-align: center;
+                    gap: 0.5em;
                 });
             }
 
