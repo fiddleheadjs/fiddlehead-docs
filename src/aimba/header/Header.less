@@ -23,7 +23,7 @@
             color: white;
 
             .group {
-                max-width: 570px;
+                max-width: 590px;
             }
 
             .headline {
@@ -45,23 +45,27 @@
                     -webkit-text-fill-color: transparent;
                     color: #FFB81F;
                     border-bottom: 2px solid white;
-
-                    .media-current-max(590px, {
+                    
+                    .media-current-max(650px, {
                         font-size: 55px;
                         line-height: 100%;
                         height: auto;
                     });
 
-                    .media-current-max(500px, {
+                    .media-current-max(570px, {
                         font-size: 50px;
                     });
 
-                    .media-current-max(410px, {
+                    .media-current-max(500px, {
+                        font-size: 45px;
+                    });
+
+                    .media-current-max(430px, {
                         font-size: 40px;
                     });
 
-                    .media-current-max(370px, {
-                        font-size: 40px;
+                    .media-current-max(380px, {
+                        font-size: 30px;
                     });
                 }
             }
@@ -70,26 +74,50 @@
                 font-size: 34px;
                 font-weight: 700;
 
-                .media-current-max(610px, {
-                    font-size: 30px;
+                .media-current-max(650px, {
+                    font-size: 32px;
                 });
 
-                .media-current-max(520px, {
-                    font-size: 24px;
+                .media-current-max(570px, {
+                    font-size: 26px;
                 });
 
-                .media-current-max(450px, {
+                .media-current-max(500px, {
                     font-size: 20px;
                 });
 
-                .media-current-max(370px, {
-                    font-size: 18px;
+                .media-current-max(430px, {
+                    font-size: 16px;
+                });
+
+                .media-current-max(380px, {
+                    font-size: 14px;
                 });
             }
 
             .description {
                 font-size: 28px;
                 font-weight: 600;
+
+                .media-current-max(650px, {
+                    font-size: 24px;
+                });
+
+                .media-current-max(570px, {
+                    font-size: 22px;
+                });
+
+                .media-current-max(500px, {
+                    font-size: 20px;
+                });
+
+                .media-current-max(430px, {
+                    font-size: 18px;
+                });
+
+                .media-current-max(380px, {
+                    font-size: 16px;
+                });
             }
 
             ul.checklist {
@@ -102,11 +130,13 @@
                 .media-current-max(500px, {
                     grid-template-columns: 1fr 1fr;
                     gap: 10px 20px;
+                    font-size: 15px;
                 });
 
-                .media-current-max(370px, {
+                .media-current-max(380px, {
                     grid-template-columns: 1fr;
                     grid-auto-rows: auto;
+                    font-size: 15px;
                 });
 
                 li {

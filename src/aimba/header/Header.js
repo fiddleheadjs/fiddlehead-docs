@@ -13,7 +13,7 @@ export let Header = () => {
                                     <span>AiMBA</span>
                                 </div>
                                 <div class="slogan">
-                                    Agile & Immersive MBA-level training
+                                    <no-break>Agile & Immersive</no-break> <no-break>MBA-level training</no-break>
                                 </div>
                             </div>
                         </div>

@@ -31,9 +31,15 @@ export let EcoSystem = () => {
             </div>
             <div class="screenshots">
                 <Slider
-                    slideItems={screenshots.map(([src, alt]) => ({
+                    slideItems={screenshots.map(([src, alt], index) => ({
                         id: src,
-                        render: () => <img src={src} alt={alt} loading="lazy" />
+                        render: () => (
+                            <img
+                                src={src}
+                                alt={alt}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                            />
+                        )
                     }))}
                 />
             </div>
