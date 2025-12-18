@@ -39,7 +39,7 @@
         .Slider {
             --slide-growth: absolute;
             --slide-width: min(1170px, 100%);
-            --slide-aspect: 2.1;
+            --slide-aspect: 2.2;
             --slide-spacing: 80px;
             --slide-margin: 60px;
             max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
@@ -68,12 +68,21 @@
         }
 
         .content-bar {
-            background: #1E4AA3;
+            background: #1F459D;
             color: white;
             border-radius: 14px;
+            overflow: hidden;
             transform: translateY(-72px);
-        }
 
+            .Background {
+                layer-one {
+                    background: #1F459D;
+                    background-blend-mode: screen;
+                    opacity: 68%;
+                }
+            }
+        }
+        
         ul {
             margin: auto;
             max-width: 1260px;
