@@ -40,18 +40,25 @@
         margin-top: 60px;
         
         .Slider {
-            --slide-width: min(1100px, 90vw);
-            --slide-height: calc(var(--slide-width) / 110 * 62);
+            --slide-growth: absolute;
+            --slide-width: min(1100px, 100%);
+            --slide-aspect: (110 / 62);
             --slide-spacing: 60px;
-            --slide-padding: 60px;
-            max-width: calc(var(--slide-width) + 2 * var(--slide-padding));
+            --slide-margin: 60px;
+            max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
             margin: auto;
-            color: white;
 
-            .media-current-max(1220px, {
-                --slide-padding: 0;
-                max-width: var(--slide-width);
-                color: #474747;
+            button {
+                color: white;
+            }
+
+            .media-current-max(600px, {
+                --slide-margin: 15px;
+                max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
+
+                button {
+                    color: #474747;
+                }
             });
         }
 

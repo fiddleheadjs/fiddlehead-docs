@@ -5,11 +5,14 @@
         margin: auto;
     }
     
-    .aspect-ratio {  
-        width: 100%;
-        padding-bottom: calc(100% / var(--slide-aspect));
+    .aspect {
+        padding: 0 var(--slide-margin);
         pointer-events: none;
         visibility: hidden;
+
+        .ratio {
+            padding-bottom: calc(100% / var(--slide-aspect));
+        }
     }
 
     .scroll-view {
@@ -26,7 +29,7 @@
         align-items: stretch;
         flex-flow: row nowrap;
         gap: var(--slide-spacing);
-        padding: 0 var(--slide-padding);
+        padding: 0 var(--slide-margin);
         overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
@@ -43,12 +46,11 @@
         flex: none;
         scroll-snap-align: start;
         scroll-snap-align: var(--slide-align);
-        scroll-margin: var(--slide-padding);
+        scroll-margin: var(--slide-margin);
         display: flex;
         justify-content: center;
         align-items: center;
         width: var(--slide-width);
-        height: var(--slide-height);
     }
     
     &[data-scrolling="false"] .SliderSlide[data-in-view="false"] {

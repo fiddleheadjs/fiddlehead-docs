@@ -40,7 +40,11 @@ export let Modules = () => {
                 <Slider
                     slideItems={['#def', '#edf', '#fde'].map(background => ({
                         id: background,
-                        render: () => <div class="video-wrapper"><img style={{background}} /></div>
+                        render: () => (
+                            <div class="video-wrapper">
+                                <img style={{background}} />
+                            </div>
+                        )
                     }))}
                 />
             </div>

@@ -56,8 +56,10 @@ export let TreeView = ({data}) => {
                                         {expanded ? <Minus /> : <Plus />}
                                     </div>
                                 </div>
-                                <div class="pointer-wrapper">
-                                    <div class="pointer" />
+                                <div class="milestone-wrapper">
+                                    <div class="milestone" onClick={() => toggleExpanded(index)}>
+                                        <i />
+                                    </div>
                                 </div>
                             </div>
                             <div class="body">
