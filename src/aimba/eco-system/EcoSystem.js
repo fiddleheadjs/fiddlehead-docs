@@ -2,6 +2,21 @@ import {Slider} from '../slider';
 import './EcoSystem.less';
 
 export let EcoSystem = () => {
+    let screenshots = [
+        ['/aimba/shared-screenshot-01.jpg', 'Screenshot 01'],
+        ['/aimba/shared-screenshot-02.jpg', 'Screenshot 02'],
+        ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
+    ];
+
+    let numbers = [
+        ['1048+', 'Case Study', 'Tình huống thực tế'],
+        ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
+        ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
+        ['100+', 'Tips quản trị', 'Bí quyết tạo nên khác biệt'],
+        ['15', 'Module chuyên biệt', 'Từ cơ bản đến nâng cao'],
+        ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch']
+    ];
+
     return (
         <section class="EcoSystem">
             <div class="heading">
@@ -16,9 +31,9 @@ export let EcoSystem = () => {
             </div>
             <div class="screenshots">
                 <Slider
-                    slideItems={['#def', '#dfe', '#fde'].map(background => ({
-                        id: background,
-                        render: () => <img style={{background}} />
+                    slideItems={screenshots.map(([src, alt]) => ({
+                        id: src,
+                        render: () => <img src={src} alt={alt} />
                     }))}
                 />
             </div>
@@ -26,14 +41,7 @@ export let EcoSystem = () => {
                 <div class="container">
                     <div class="content-bar">
                         <ul>
-                            {[
-                                ['1048+', 'Case Study', 'Tình huống thực tế'],
-                                ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
-                                ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
-                                ['100+', 'Tips quản trị', 'Bí quyết tạo nên khác biệt'],
-                                ['15', 'Module chuyên biệt', 'Từ cơ bản đến nâng cao'],
-                                ['365', 'Ngày truy cập', 'Học linh hoạt theo lịch']
-                            ].map(([quantity, unit, description]) => (
+                            {numbers.map(([quantity, unit, description]) => (
                                 <li key={unit}>
                                     <div class="quantity">{quantity}</div>
                                     <div class="unit">{unit}</div>
