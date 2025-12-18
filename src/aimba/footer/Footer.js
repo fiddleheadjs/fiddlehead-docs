@@ -1,8 +1,11 @@
 import {Headset, Home, Clock, Envelop, PhoneCall} from '../icons';
+import {ImageView} from '../image-view';
 import {Logo} from '../pictogram';
 import './Footer.less';
 
 export let Footer = () => {
+    let imgQrcodeTacasoft = '/aimba/qrcode-tacasoft.png';
+
     return (
         <footer class="Footer">
             <div class="soft-edge">
@@ -55,7 +58,9 @@ export let Footer = () => {
                                 </li>
                             </ul>
                             <div class="qrcode">
-                                <img />
+                                <ImageView>
+                                    <img src={imgQrcodeTacasoft} alt="Tacasoft QR code" loading="lazy" />
+                                </ImageView>
                             </div>
                         </div>
                     </div>

@@ -3,12 +3,12 @@ import './Enrollment.less';
 
 export let Enrollment = () => {
     const data = [
-        'Truy cập đầy đủ 1048+ case study',
-        '250+ khối lý thuyết được kiến giải chi tiết',
-        'Kho tài nguyên: 50+ Brand Stories, 40+ Business Models',
-        '24+ phân tích sách kinh doanh nổi tiếng',
-        'Cố vấn AI thông minh',
-        'Chứng nhận hoàn thành cho từng module'
+        'Truy cập đầy đủ <b>1048+ case study</b>',
+        '<b>250+ khối lý thuyết</b> được kiến giải chi tiết',
+        'Kho tài nguyên: <b>50+</b> Brand Stories, <b>40+</b> Business Models',
+        '<b>24+ phân tích</b> sách kinh doanh nổi tiếng',
+        '<b>Cố vấn AI</b> thông minh',
+        '<b>Chứng nhận hoàn thành</b> cho từng module'
     ];
 
     return (
@@ -38,8 +38,8 @@ export let Enrollment = () => {
                         <ul>
                             {data.map(text => (
                                 <li key={text}>
-                                    <i><CircleCheck /></i>
-                                    <span>{text}</span>
+                                    <i><CircleCheck checkColor="currentColor" circleColor="white" /></i>
+                                    <span innerHTML={text} />
                                 </li>
                             ))}
                         </ul>
