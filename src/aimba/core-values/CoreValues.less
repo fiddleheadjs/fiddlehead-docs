@@ -1,0 +1,88 @@
+@import '../media.less';
+
+.CoreValues {
+    background: #0F46A2;
+    padding: 48px 0 56px;
+
+    > .title {
+        margin: auto;
+        max-width: 1170px;
+        padding: 0 15px;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+
+    > .divider {
+        margin: 19px auto 0;
+        width: 105px;
+        height: 2px;
+        background: white;
+    }
+
+    > .values {
+        margin: 39px auto 0;
+        max-width: 1170px;
+        padding: 0 15px;
+
+        ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+
+            .media-current-max(600px, {
+                display: flex;
+                flex-direction: column;
+            });
+
+            li {
+                border-radius: 10px;
+                background: #0891D8;
+                padding: 24px 20px;
+                gap: 18px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+
+                .media-current-between(601px, 800px, {
+                    flex-direction: column;
+                    align-items: center;
+                });
+
+                .pictogram {
+                    border-radius: 100%;
+                    background: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80px;
+                    height: 80px;
+                    min-width: 80px;
+                    min-height: 80px;
+                }
+
+                .divider {
+                    margin: 4px 0;
+                    background: white;
+                    height: 72px;
+                    min-width: 1px;
+                    max-width: 1px;
+
+                    .media-current-between(601px, 800px, {
+                        height: 1px;
+                        min-width: 72px;
+                        max-width: 72px;
+                    });
+                }
+
+                .text {
+                    font-size: 17px;
+                    line-height: 24px;
+                    color: white;
+                }
+            }
+        }
+    }
+}

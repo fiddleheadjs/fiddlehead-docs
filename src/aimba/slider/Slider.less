@@ -1,0 +1,105 @@
+.Slider {
+    position: relative;
+    
+    .SliderSlideShow {  
+        margin: auto;
+        height: var(--slide-height);
+        padding-bottom: calc(100% / var(--slide-aspect));
+    }
+
+    .scroll-view {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        flex-flow: row nowrap;
+        gap: var(--slide-spacing);
+        padding: 0 var(--slide-padding);
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .SliderSlide {
+        flex: none;
+        scroll-snap-align: start;
+        scroll-margin: var(--slide-padding);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--slide-width);
+        height: var(--slide-height);
+    }
+    
+    &[data-scrolling="false"] .SliderSlide[data-in-view="false"] {
+        opacity: 0;
+    }
+
+    .SliderBackButton,
+    .SliderNextButton {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    &[data-scrollable="false"] {
+        .SliderBackButton,
+        .SliderNextButton {
+            display: none;
+        }
+    }
+
+    .SliderBackButton {
+        left: 0;
+    }
+
+    .SliderNextButton {
+        right: 0;
+    }
+
+    .SliderDotNavigation {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+
+        button {
+            padding: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            cursor: pointer;
+
+            i {
+                display: block;
+                width: 10px;
+                height: 10px;
+                border-radius: 100%;
+                background: #BAB8B8;
+            }
+            
+            &:hover i {
+                background: #CDCACA;
+            }
+
+            &[data-active="true"] i {
+                background: #848181;
+            }
+        }
+    }
+}

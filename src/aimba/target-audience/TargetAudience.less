@@ -1,0 +1,180 @@
+@import '../media.less';
+
+.TargetAudience {
+    padding: 75px 0 35px;
+    background: linear-gradient(to bottom, #EAF8FF, white 654px, white);
+
+    > .heading {
+        margin: auto;
+        max-width: 1200px;
+        padding: 0 15px;
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        .divider {
+            margin: 21px auto 0;
+            width: 105px;
+            height: 2px;
+            background: #008FD4;
+        }
+    }
+
+    > .audience {
+        margin: auto;
+        max-width: 1230px;
+        padding: 0 30px;
+
+        ul {
+            margin-top: 60px;
+            display: grid;
+            grid-template: "left central right" / 1fr 1fr 1fr;
+            gap: 30px;
+
+            .media-current-max(800px, {
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+                grid-template: "central" "left" "right";
+            });
+
+            li {
+                padding: 16px 16px 37px 32px;
+                border-radius: 14px;
+                box-shadow: 0 16px 32px #0C0C0D1A;
+                
+                .icons {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .arrow-pie {
+                        width: 47px;
+                        height: 47px;
+                        border-radius: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .title {
+                    margin-top: 27px;
+                    font-size: 21px;
+                    font-weight: 700;
+                }
+
+                .description {
+                    margin-top: 15px;
+                    font-size: 16px;
+                    line-height: 25px;
+                }
+
+                &.central {
+                    grid-area: central;
+                }
+
+                &.left {
+                    grid-area: left;
+                }
+
+                &.right {
+                    grid-area: right;
+                }
+
+                &.central {
+                    background: linear-gradient(to right, #1E469E, #25A5DE);
+                    color: white;
+
+                    .arrow-pie {
+                        background: white;
+                        color: #1F49A0;
+                    }
+                }
+
+                &.left,
+                &.right {
+                    background: white;
+
+                    .arrow-pie {
+                        background: #1F49A0;
+                        color: white;
+                    }
+
+                    .description {
+                        color: #474747;
+                    }
+                }
+            }
+        }
+    }
+
+    > .certificate {
+        margin: 52px auto 0;
+        max-width: 1230px;
+        padding: 0 30px;
+        
+        .big-card {
+            margin: auto;
+            padding: 37px 70px 42px 48px;
+            border-radius: 15px;
+            background: linear-gradient(to right, #1E469E, #25A5DE);
+            box-shadow: 0 6px 10px #00000026;
+            color: white;
+
+            .media-current-max(800px, {
+                max-width: 500px;
+                padding: 37px 30px 42px 30px;
+            });
+        }
+
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        .content {
+            margin-top: 39px;
+            display: grid;
+            grid-template-columns: 6fr 5fr;
+            gap: 36px;
+
+            .media-current-max(800px, {
+                grid-template-columns: 1fr;
+            });
+
+            .details {
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 17px;
+
+                    li {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        gap: 14px;
+
+                        span {
+                            font-size: 15px;
+                            line-height: 22px;
+                            text-align: justify;
+                        }
+                    }
+                }
+            }
+
+            .photos {
+                
+            }
+        }
+    }
+}

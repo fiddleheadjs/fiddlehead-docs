@@ -1,0 +1,185 @@
+@import '../media.less';
+
+.Features {
+    padding: 60px 0 30px;
+    background: linear-gradient(to bottom, #EAF8FF, white 60%, white);
+
+    > .heading {
+        max-width: 1170px;
+        padding: 0 15px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .divider {
+            background: #008FD4;
+            height: 2px;
+            width: 105px;
+            margin-top: 21px;
+        }
+    }
+
+    > .visualisation {
+        margin: auto;
+        max-width: 1170px;
+        padding: 60px 15px;
+        overflow: hidden;
+        
+        .grid {
+            display: grid;
+            grid-template:
+                "lt central rt"
+                "lm central rm"
+                "lb central rb"
+                / 1fr 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+            gap: 60px 0;
+
+            .media-current-max(1200px, {
+                gap: 40px 0;
+            });
+
+            .media-current-max(1000px, {
+                gap: 20px 0;
+            });
+
+            .media-current-max(800px, {
+                grid-template:
+                    "lt rt"
+                    "lm rm"
+                    "lb rb"
+                    / 1fr 1fr;
+                gap: 30px 15px;
+            });
+        }
+
+        .central {
+            grid-area: central;
+            display: grid;
+            grid-template-areas: "A";
+            align-content: center;
+
+            svg {
+                max-width: 110%;
+                grid-area: A;
+                align-self: center;
+                justify-self: center;
+            }
+
+            .media-current-max(800px, {
+                display: none;
+            });
+        }
+
+        .card {
+            width: 300px;
+            overflow: hidden;
+            border-radius: 14px;
+            box-shadow: 0 16px 32px #0C0C0D1A;
+            height: 100%;
+
+            .media-current-max(1200px, {
+                width: 250px;
+            });
+
+            .media-current-max(1000px, {
+                width: 200px;
+            });
+
+            .media-current-max(800px, {
+                width: 100%;
+                margin: 0 !important;
+            });
+
+            .title {
+                background: gray;
+                color: white;
+                font-size: 18px;
+                font-weight: 700;
+                padding: 6px 20px;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .description {
+                background: white;
+                padding: 13px 12px 18px;
+                color: #474747;
+                font-size: 15px;
+                text-align: justify;
+
+                .content {
+                    padding: 0 10px;
+                    max-height: 150px;
+                    overflow: auto;
+                    scrollbar-width: thin;
+                }
+            }
+
+            &.lt {
+                grid-area: lt;
+                margin-left: 70px;
+            }
+
+            &.lm {
+                grid-area: lm;
+                margin-right: 20px;
+            }
+
+            &.lb {
+                grid-area: lb;
+                margin-left: 70px;
+            }
+
+            &.rt {
+                grid-area: rt;
+                margin-right: 70px;
+            }
+
+            &.rm {
+                grid-area: rm;
+                margin-left: 20px;
+            }
+
+            &.rb {
+                grid-area: rb;
+                margin-right: 70px;
+            }
+            
+            &.lt .title {
+                background: #3CC1D0;
+            }
+            
+            &.lm .title {
+                background: #3B97C8;
+            }
+            
+            &.lb .title {
+                background: #3B72C2;
+            }
+            
+            &.rt .title {
+                background: #4962BF;
+            }
+            
+            &.rm .title {
+                background: #6949B8;
+            }
+            
+            &.rb .title {
+                background: #A544C7;
+            }
+        }
+    }
+}

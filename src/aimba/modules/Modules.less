@@ -1,0 +1,102 @@
+@import '../media.less';
+
+.Modules {
+    background: #003195;
+    padding: 82px 0 41px;
+
+    > .heading {
+        .container {
+            margin: auto;
+            max-width: 1200px;
+            padding: 0 15px;
+        }
+
+        .title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .description {
+            margin-top: 13px;
+            color: white;
+            font-size: 17px;
+            text-align: center;
+        }
+    }
+
+    > .roadmap {
+        margin-top: 26px;
+
+        .container {
+            margin: auto;
+            max-width: 1200px;
+            padding: 0 15px;
+        }
+    }
+
+    > .videos {
+        margin-top: 60px;
+        
+        .Slider {
+            --slide-width: min(1100px, 90vw);
+            --slide-height: calc(var(--slide-width) / 110 * 62);
+            --slide-spacing: 60px;
+            --slide-padding: 60px;
+            max-width: calc(var(--slide-width) + 2 * var(--slide-padding));
+            margin: auto;
+            color: white;
+
+            .media-current-max(1220px, {
+                --slide-padding: 0;
+                max-width: var(--slide-width);
+                color: #474747;
+            });
+        }
+
+        .video-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    > .actions {
+        margin-top: 38px;
+
+        .container {
+            margin: auto;
+            max-width: 1200px;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button.signup {
+            min-height: 50px;
+            min-width: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px;
+            background: linear-gradient(to bottom, #FAA714, #D37101);
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+}

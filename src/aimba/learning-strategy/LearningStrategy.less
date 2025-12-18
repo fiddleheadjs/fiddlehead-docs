@@ -1,0 +1,151 @@
+@import '../media.less';
+
+.LearningStrategy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: linear-gradient(to right, #10469E, #10469E 60%, #14A6DF);
+
+    .media-current-max(1600px, {
+        grid-template-columns: 2fr 3fr;
+    });
+
+    .media-current-max(1400px, {
+        grid-template-columns: 1fr 2fr;
+    });
+
+    .media-current-max(1000px, {
+        display: flex;
+        flex-direction: column;
+    });
+
+    > .cover {
+
+    }
+
+    > .details {
+        padding: 60px 60px 66px;
+        
+        .media-current-max(450px, {
+            padding: 60px 30px 66px; 
+        });
+
+        > .heading {
+            max-width: 826px;
+
+            .content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
+                color: white;
+                gap: 10px;
+
+                .title {
+                    font-size: 32px;
+                    font-weight: 700;
+                }
+
+                button {
+                    padding: 0 20px;
+                    min-width: 134px;
+                    min-height: 40px;
+                    border-radius: 20px;
+                    border: 1px solid white;
+                    font-size: 15px;
+                    font-weight: 700;
+                    white-space: nowrap;
+                    cursor: pointer;
+
+                    .media-current-max(600px, {
+                        min-width: 0;
+                    });
+                }
+            }
+
+            .divider {
+                width: 105px;
+                height: 2px;
+                background: white;
+                margin-top: 17px;
+            }
+        }
+
+        > .grid {
+            margin-top: 48px;
+
+            ul {
+                display: grid;
+                grid-template:
+                    "1fr 1fr" 1fr
+                    "1fr 1fr" 1fr;
+                gap: 22px 25px;
+                max-width: 826px;
+
+                .media-current-max(600px, {
+                    grid-template: ".";
+                    // max-width: 400px;
+                });
+
+                li {
+                    padding: 14px 22px;
+                    background: #FFFFFF26;
+                    border: 1px solid #FFFDFD66;
+                    border-radius: 14px;
+
+                    .media-current-max(600px, {
+                        border-radius: 14px !important;
+                    });
+
+                    &.no-01 {
+                        border-bottom-right-radius: 0;
+                    }
+
+                    &.no-02 {
+                        border-bottom-left-radius: 0;
+                    }
+
+                    &.no-03 {
+                        border-top-right-radius: 0;
+                    }
+
+                    &.no-04 {
+                        border-top-left-radius: 0;
+                    }
+
+                    > .heading {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        gap: 15px;
+
+                        .number {
+                            min-width: 48px;
+                            min-height: 48px;
+                            border-radius: 4px;
+                            background: white;
+                            color: #1273C2;
+                            font-size: 24px;
+                            font-weight: 700;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .title {
+                            font-size: 19px;
+                            font-weight: 700;
+                            color: white;
+                        }
+                    }
+
+                    > .description {
+                        margin-top: 12px;
+                        font-size: 16px;
+                        line-height: 22px;
+                        color: white;
+                    }
+                }
+            } 
+        }
+    }
+}
