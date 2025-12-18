@@ -11,7 +11,33 @@
             }
 
             layer-lower {
-                background: linear-gradient(296deg, #1E459D 38%, #28A8E0 123%);
+                background: linear-gradient(296deg, #1E459D 58%, #28A8E0 100%);
+            }
+        }
+
+        .banner {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            max-width: 3000px;
+
+            .media-current-max(1200px, {
+                display: none;
+            });
+
+            img {
+                display: block;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: 50%;
+                height: 100%;
+                clip-path: polygon(15% 0%, 5% 100%, 100% 100%, 100% 0%);
             }
         }
 
