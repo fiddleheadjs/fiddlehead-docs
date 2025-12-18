@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {CircleCheck, Gift} from '../icons';
 import './Enrollment.less';
 
@@ -13,6 +14,7 @@ export let Enrollment = () => {
 
     return (
         <section class="Enrollment">
+            <Background image="/aimba/img/background-06.jpg" lazy />
             <div class="container">
                 <div class="details">
                     <h2 class="title">Gói ưu đãi đặc biệt</h2>

@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {SquareCheck} from '../icons';
 import './Header.less';
 
@@ -5,6 +6,7 @@ export let Header = () => {
     return (
         <header class="Header">
             <div class="messages">
+                <Background image="/aimba/img/background-07.jpg" />
                 <div class="container">
                     <div class="overlay">
                         <div class="group">

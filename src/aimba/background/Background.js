@@ -7,6 +7,7 @@ export let Background = ({image, lazy}) => {
 
     return (
         <div class={`Background ${loaded ? 'loaded' : ''} ${failed ? 'failed' : ''}`}>
+            <layer-lower />
             <img
                 src={image}
                 alt="background"
@@ -15,7 +16,7 @@ export let Background = ({image, lazy}) => {
                 onLoad={() => setLoaded(true)}
                 onError={() => setFailed(true)}
             />
-            <layer-one />
+            <layer-upper />
         </div>
     );
 };

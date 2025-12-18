@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {Slider} from '../slider';
 import {VideoPlayer} from '../video-player';
 import './Modules.less';
@@ -30,6 +31,7 @@ export let Modules = () => {
 
     return (
         <section class="Modules">
+            <Background image="/aimba/img/background-02.jpg" lazy />
             <div class="heading">
                 <div class="container">
                     <div class="title">60–80 giờ học theo mỗi Module chuyên biệt của AiMBA</div>
