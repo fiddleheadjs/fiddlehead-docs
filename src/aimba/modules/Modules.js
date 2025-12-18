@@ -23,9 +23,9 @@ export let Modules = () => {
     ];
 
     let videos = [
-        ['/aimba/modules-video-01.mp4', '/aimba/modules-poster-01.jpg'],
-        ['/aimba/modules-video-02.mp4', '/aimba/modules-poster-02.jpg'],
-        ['/aimba/modules-video-03.mp4', '/aimba/modules-poster-03.jpg'],
+        ['/aimba/video/modules-video-01.mp4', '/aimba/img/modules-poster-01.jpg'],
+        ['/aimba/video/modules-video-02.mp4', '/aimba/img/modules-poster-02.jpg'],
+        ['/aimba/video/modules-video-03.mp4', '/aimba/img/modules-poster-03.jpg'],
     ];
 
     return (

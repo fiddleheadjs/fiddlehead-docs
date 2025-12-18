@@ -4,7 +4,7 @@ import {Logo} from '../pictogram';
 import './Footer.less';
 
 export let Footer = () => {
-    let imgQrcodeTacasoft = '/aimba/qrcode-tacasoft.png';
+    let imgQrcodeTacasoft = '/aimba/img/qrcode-tacasoft.png';
 
     return (
         <footer class="Footer">

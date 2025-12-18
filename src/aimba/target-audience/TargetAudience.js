@@ -22,7 +22,7 @@ export let TargetAudience = () => {
         'Nắm vững các kỹ năng cốt yếu, rèn luyện tư duy phân tích nhạy bén và am hiểu sâu sắc các xu hướng chuyển đổi số doanh nghiệp nhằm phân tích, phát hiện, xây dựng giải pháp kinh doanh đổi mới, bắt kịp các xu hướng mới.'
     ];
 
-    let imgCertificate = '/aimba/target-audience-certificate.png';
+    let imgCertificate = '/aimba/img/target-audience-certificate.png';
 
     return (
         <section class="TargetAudience">

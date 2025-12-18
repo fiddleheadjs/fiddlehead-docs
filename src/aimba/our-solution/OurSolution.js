@@ -5,15 +5,15 @@ import {Slider} from '../slider';
 import './OurSolution.less';
 
 export let OurSolution = () => {
-    let imgWhyUs = '/aimba/our-solution-why-us.jpg';
+    let imgWhyUs = '/aimba/img/our-solution-why-us.jpg';
 
     let screenshots = [
-        ['/aimba/shared-screenshot-01.jpg', 'Screenshot 01'],
-        ['/aimba/shared-screenshot-02.jpg', 'Screenshot 02'],
-        ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
-        ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
-        ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
-        ['/aimba/shared-screenshot-06.jpg', 'Screenshot 06'],
+        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
+        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
+        ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
+        ['/aimba/img/shared-screenshot-04.jpg', 'Screenshot 04'],
+        ['/aimba/img/shared-screenshot-05.jpg', 'Screenshot 05'],
+        ['/aimba/img/shared-screenshot-06.jpg', 'Screenshot 06'],
     ];
     
     return (
