@@ -2,7 +2,7 @@ import './common.less';
 import './AiMBA.less';
 import {TopBar} from './top-bar';
 import {Header} from './header';
-import {StudySystem} from './study-system';
+import {EcoSystem} from './eco-system';
 import {Resources} from './resources';
 import {Modules} from './modules';
 import {OurSolution} from './our-solution';
@@ -20,7 +20,7 @@ export let AiMBA = () => {
         <div class="AiMBA">
             <TopBar />
             <Header />
-            <StudySystem />
+            <EcoSystem />
             <Resources />
             <Modules />
             <OurSolution />

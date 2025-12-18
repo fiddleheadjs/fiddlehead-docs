@@ -1,9 +1,9 @@
 import {Slider} from '../slider';
-import './StudySystem.less';
+import './EcoSystem.less';
 
-export let StudySystem = () => {
+export let EcoSystem = () => {
     return (
-        <section class="StudySystem">
+        <section class="EcoSystem">
             <div class="heading">
                 <div class="container">
                     <h2 class="title">Hệ sinh thái học tập <no-break>toàn diện</no-break></h2>

@@ -1,6 +1,8 @@
 import './LearningStrategy.less';
 
 export let LearningStrategy = () => {
+    let imgCover = '/img/aimba/learning-strategy-cover.jpg';
+
     let data = {
         '01': ['Chọn module phù hợp với mục tiêu hiện tại', 'Lựa chọn từ 15 chương trình chuyên biệt theo vị trí và mục tiêu sự nghiệp của bạn'],
         '02': ['Thực hành với các case study thực tế', 'Giải quyết các tình huống dựa trên 1048+ case study thực tế tại Việt Nam'],
@@ -10,9 +12,6 @@ export let LearningStrategy = () => {
 
     return (
         <section class="LearningStrategy">
-            <div class="cover">
-                <img />
-            </div>
             <div class="details">
                 <div class="heading">
                     <div class="content">
@@ -39,6 +38,9 @@ export let LearningStrategy = () => {
                         })}
                     </ul>
                 </div>
+            </div>
+            <div class="cover">
+                <img src={imgCover} alt="Cách thức học tập tại AiMBA" loading="lazy" />
             </div>
         </section>
     );
