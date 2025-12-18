@@ -5,6 +5,8 @@ import {Slider} from '../slider';
 import './OurSolution.less';
 
 export let OurSolution = () => {
+    let imgWhyUs = '/img/aimba/OurSolution_whyUs.jpg';
+
     return (
         <section class="OurSolution">
             <div class="why-us">
@@ -40,7 +42,7 @@ export let OurSolution = () => {
                     </div>
                     <div class="photos">
                         <ImageView>
-                            <img />
+                            <img src={imgWhyUs} alt="Tại sao nên chọn AiMBA?" />
                         </ImageView>
                     </div>
                 </div>
