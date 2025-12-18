@@ -180,8 +180,16 @@ export let Slider = ({
             return;
         }
         let scrollView = scrollViewRef.current;
+        let snapAlign = getComputedStyle(slide).scrollSnapAlign;
+        let surrounding = scrollView.clientWidth - slide.offsetWidth - 2 * getSlidePadding();
+        let scrollLeft = slide.offsetLeft - getSlidePadding();
+        if (snapAlign === 'center') {
+            scrollLeft -= surrounding / 2;
+        } else if (snapAlign === 'end') {
+            scrollLeft -= surrounding;
+        }
         scrollView.scrollTo({
-            left: slide.offsetLeft - getSlidePadding(),
+            left: scrollLeft,
             behavior: 'auto'
         });
     };
