@@ -78,7 +78,7 @@ export let Resources = () => {
                                 <ul>
                                     {checklist.map(content => (
                                         <li key={content}>
-                                            <CircleCheck />
+                                            <i><CircleCheck /></i>
                                             <span>{content}</span>
                                         </li>
                                     ))}
