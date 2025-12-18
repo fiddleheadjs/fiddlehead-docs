@@ -1,4 +1,5 @@
 import {CircleCheck, CircleCheckOutline, TriangleRight} from '../icons';
+import {ImageView} from '../image-view';
 import {Macbook} from '../pictogram';
 import {Slider} from '../slider';
 import './OurSolution.less';
@@ -38,7 +39,9 @@ export let OurSolution = () => {
                         </div>
                     </div>
                     <div class="photos">
-                        <img />
+                        <ImageView>
+                            <img />
+                        </ImageView>
                     </div>
                 </div>
             </div>
