@@ -13,7 +13,11 @@ let data = [
             'Vingroup: Tốc Độ Thần Kỳ và Khát Vọng',
             'MoMo: Chiến Thắng Cuộc Chiến Siêu Ứng Dụng'
         ],
-        screenshots: ['#def', '#dfe', '#fde'],
+        screenshots: [
+            ['/aimba/shared-screenshot-02.jpg', 'Screenshot 02'],
+            ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
+            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
+        ],
         layout: 'standard',
         themeColor: '#EAF8FF'
     },
@@ -27,7 +31,11 @@ let data = [
             'Managed Services Model - Mô hình Dịch vụ Quản lý',
             'Manufacturing Model - Mô hình Sản xuất'
         ],
-        screenshots: ['#def', '#dfe', '#fde'],
+        screenshots: [
+            ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
+            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
+            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
+        ],
         layout: 'reserve',
         themeColor: '#FAE8E8'
     },
@@ -41,7 +49,11 @@ let data = [
             'Luận giải cuốn sách Contagious',
             'Luận giải cuốn sách Positioning'
         ],
-        screenshots: ['#def', '#dfe', '#fde'],
+        screenshots: [
+            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
+            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
+            ['/aimba/shared-screenshot-06.jpg', 'Screenshot 06'],
+        ],
         layout: 'standard',
         themeColor: '#E8F7E6'
     },
@@ -55,7 +67,11 @@ let data = [
             'ESG Framework - Khung ESG',
             'Three Horizons Framework - Khung Ba Chân trời'
         ],
-        screenshots: ['#def', '#dfe', '#fde'],
+        screenshots: [
+            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
+            ['/aimba/shared-screenshot-06.jpg', 'Screenshot 06'],
+            ['/aimba/shared-screenshot-01.jpg', 'Screenshot 01'],
+        ],
         layout: 'reserve',
         themeColor: '#F4E9F8'
     }
@@ -87,9 +103,9 @@ export let Resources = () => {
                         </div>
                         <div class="screenshots">
                             <Slider
-                                slideItems={screenshots.map(background => ({
-                                    id: background,
-                                    render: () => <img style={{background}} />
+                                slideItems={screenshots.map(([src, alt]) => ({
+                                    id: src,
+                                    render: () => <img src={src} alt={alt} loading="lazy" />
                                 }))}
                             />
                         </div>
