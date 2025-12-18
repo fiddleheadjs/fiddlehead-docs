@@ -216,6 +216,7 @@ export let Slider = ({
                     );
                 })}
             </div>
+            <div class="aspect-ratio" />
         </div>
     );
 
