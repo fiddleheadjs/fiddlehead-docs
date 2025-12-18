@@ -14,9 +14,9 @@ let data = [
             'MoMo: Chiến Thắng Cuộc Chiến Siêu Ứng Dụng'
         ],
         screenshots: [
-            ['/aimba/shared-screenshot-02.jpg', 'Screenshot 02'],
-            ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
-            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
+            ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
+            ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
+            ['/aimba/img/shared-screenshot-04.jpg', 'Screenshot 04'],
         ],
         layout: 'standard',
         themeColor: '#EAF8FF'
@@ -32,9 +32,9 @@ let data = [
             'Manufacturing Model - Mô hình Sản xuất'
         ],
         screenshots: [
-            ['/aimba/shared-screenshot-03.jpg', 'Screenshot 03'],
-            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
-            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
+            ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
+            ['/aimba/img/shared-screenshot-04.jpg', 'Screenshot 04'],
+            ['/aimba/img/shared-screenshot-05.jpg', 'Screenshot 05'],
         ],
         layout: 'reserve',
         themeColor: '#FAE8E8'
@@ -50,9 +50,9 @@ let data = [
             'Luận giải cuốn sách Positioning'
         ],
         screenshots: [
-            ['/aimba/shared-screenshot-04.jpg', 'Screenshot 04'],
-            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
-            ['/aimba/shared-screenshot-06.jpg', 'Screenshot 06'],
+            ['/aimba/img/shared-screenshot-04.jpg', 'Screenshot 04'],
+            ['/aimba/img/shared-screenshot-05.jpg', 'Screenshot 05'],
+            ['/aimba/img/shared-screenshot-06.jpg', 'Screenshot 06'],
         ],
         layout: 'standard',
         themeColor: '#E8F7E6'
@@ -68,9 +68,9 @@ let data = [
             'Three Horizons Framework - Khung Ba Chân trời'
         ],
         screenshots: [
-            ['/aimba/shared-screenshot-05.jpg', 'Screenshot 05'],
-            ['/aimba/shared-screenshot-06.jpg', 'Screenshot 06'],
-            ['/aimba/shared-screenshot-01.jpg', 'Screenshot 01'],
+            ['/aimba/img/shared-screenshot-05.jpg', 'Screenshot 05'],
+            ['/aimba/img/shared-screenshot-06.jpg', 'Screenshot 06'],
+            ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
         ],
         layout: 'reserve',
         themeColor: '#F4E9F8'
