@@ -1,3 +1,4 @@
+import {Background} from '../background';
 import {Slider} from '../slider';
 import './EcoSystem.less';
 
@@ -46,6 +47,7 @@ export let EcoSystem = () => {
             <div class="numbers">
                 <div class="container">
                     <div class="content-bar">
+                        <Background image="/aimba/img/background-01.jpg" lazy />
                         <ul>
                             {numbers.map(([quantity, unit, description]) => (
                                 <li key={unit}>
