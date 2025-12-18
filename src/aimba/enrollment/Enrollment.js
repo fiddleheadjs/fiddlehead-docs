@@ -15,7 +15,7 @@ export let Enrollment = () => {
         <section class="Enrollment">
             <div class="container">
                 <div class="details">
-                    <h2 class="title">Gói ưu đãi <no-break>đặc biệt</no-break></h2>
+                    <h2 class="title">Gói ưu đãi đặc biệt</h2>
                     <div class="pricing">
                         <div class="price">
                             <div class="sale-price">Còn: 1.490.000 VNĐ</div>
