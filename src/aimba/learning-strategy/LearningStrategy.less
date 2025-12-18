@@ -1,17 +1,22 @@
 @import '../media.less';
 
 .LearningStrategy {
-    display: grid;
-    grid-template: "cover details" / 1fr 1fr;
-    background: linear-gradient(to right, #10469E, #10469E 60%, #14A6DF);
+    background: linear-gradient(to right, #10469E 60%, #14A6DF);
+    
+    > .container {
+        max-width: 2000px;
+        margin: auto;
+        display: grid;
+        grid-template: "cover details" / 1fr 1fr;
+    
+        .media-current-max(1360px, {
+            display: flex;
+            flex-direction: column-reverse;
+        });
+    }
 
-    .media-current-max(1360px, {
-        display: flex;
-        flex-direction: column-reverse;
-    });
-
-    > .details {
-        grid-area: 'details';
+    .details {
+        grid-area: details;
         padding: 60px 60px 66px;
         
         .media-current-max(450px, {
@@ -139,7 +144,7 @@
         }
     }
 
-    > .cover {
+    .cover {
         grid-area: cover;
         background: linear-gradient(to bottom, white, #EAF8FF);
 

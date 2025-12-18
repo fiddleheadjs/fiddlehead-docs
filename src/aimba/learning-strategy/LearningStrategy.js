@@ -12,35 +12,37 @@ export let LearningStrategy = () => {
 
     return (
         <section class="LearningStrategy">
-            <div class="details">
-                <div class="heading">
-                    <div class="content">
-                        <h2 class="title">Cách thức học tập tại AiMBA</h2>
-                        <div class="actions">
-                            <button type="button">Đăng ký</button>
+            <div class="container">
+                <div class="details">
+                    <div class="heading">
+                        <div class="content">
+                            <h2 class="title">Cách thức học tập tại AiMBA</h2>
+                            <div class="actions">
+                                <button type="button">Đăng ký</button>
+                            </div>
                         </div>
+                        <div class="divider" />
                     </div>
-                    <div class="divider" />
+                    <div class="grid">
+                        <ul>
+                            {['01', '02', '03', '04'].map((number) => {
+                                const [title, description] = data[number];
+                                return (
+                                    <li key={number} class={`no-${number}`}>
+                                        <div class="heading">
+                                            <div class="number">{number}</div>
+                                            <div class="title">{title}</div>
+                                        </div>
+                                        <div class="description">{description}</div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
-                <div class="grid">
-                    <ul>
-                        {['01', '02', '03', '04'].map((number) => {
-                            const [title, description] = data[number];
-                            return (
-                                <li key={number} class={`no-${number}`}>
-                                    <div class="heading">
-                                        <div class="number">{number}</div>
-                                        <div class="title">{title}</div>
-                                    </div>
-                                    <div class="description">{description}</div>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                <div class="cover">
+                    <img src={imgCover} alt="Cách thức học tập tại AiMBA" loading="lazy" />
                 </div>
-            </div>
-            <div class="cover">
-                <img src={imgCover} alt="Cách thức học tập tại AiMBA" loading="lazy" />
             </div>
         </section>
     );
