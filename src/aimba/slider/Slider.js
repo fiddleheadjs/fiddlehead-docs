@@ -211,15 +211,17 @@ export let Slider = ({
             >
                 {slideItems.map(item => {
                     let slide = getSlideById(item.id);
+                    let active = isSlideActive(slide);
+                    let inView = isSlideInView(slide);
                     return (
                         <div
                             key={item.id}
                             class="SliderSlide"
                             data-id={item.id}
-                            data-active={String(isSlideActive(slide))}
-                            data-in-view={String(isSlideInView(slide))}
+                            data-active={String(active)}
+                            data-in-view={String(inView)}
                         >
-                            {item.render()}
+                            {item.render({ active, inView })}
                         </div>
                     );
                 })}

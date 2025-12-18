@@ -1,4 +1,5 @@
 import {Slider} from '../slider';
+import {VideoPlayer} from '../video-player';
 import './Modules.less';
 import {TreeView} from './TreeView';
 
@@ -21,6 +22,12 @@ export let Modules = () => {
         ['Module 15 - AI & Tech 4.0 trong Quản trị Kinh doanh', 'Xây dựng tư duy chuyển đổi số và trang bị kiến thức nền tảng về Trí tuệ nhân tạo (AI) và tự động hóa. Người học sẽ khám phá các ứng dụng thực tế của AI, học cách phân tích quy trình và làm việc với dữ liệu để tìm ra cơ hội cải tiến. Khóa học cung cấp lộ trình để bắt đầu tự động hóa các tác vụ, ra quyết định dựa trên dữ liệu và dẫn dắt các sáng kiến công nghệ.'],
     ];
 
+    let videos = [
+        ['/aimba/modules-video-01.mp4', '/aimba/modules-poster-01.jpg'],
+        ['/aimba/modules-video-02.mp4', '/aimba/modules-poster-02.jpg'],
+        ['/aimba/modules-video-03.mp4', '/aimba/modules-poster-03.jpg'],
+    ];
+
     return (
         <section class="Modules">
             <div class="heading">
@@ -38,12 +45,10 @@ export let Modules = () => {
             </div>
             <div class="videos">
                 <Slider
-                    slideItems={['#def', '#edf', '#fde'].map(background => ({
-                        id: background,
-                        render: () => (
-                            <div class="video-wrapper">
-                                <img style={{background}} />
-                            </div>
+                    slideItems={videos.map(([src, poster]) => ({
+                        id: src,
+                        render: ({ active }) => (
+                            <VideoPlayer src={src} poster={poster} active={active} />
                         )
                     }))}
                 />
