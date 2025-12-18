@@ -51,11 +51,70 @@
                 align-items: center;
                 gap: 11px;
 
+                .logo-wrapper {
+                    width: 156px;
+
+                    svg {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+
                 .slogan {
                     font-size: 16px;
                     font-weight: 700;
                     line-height: 140%;
                 }
+
+                .media-current-between(701px, 800px, {
+                    .logo-wrapper {
+                        width: 110px;
+                    }
+
+                    .slogan {
+                        font-size: 13px;
+                    }
+                });
+
+                .media-current-between(621px, 700px, {
+                    .logo-wrapper {
+                        width: 90px;
+                    }
+
+                    .slogan {
+                        font-size: 11px;
+                    }
+                });
+
+                .media-current-max(620px, {
+                    .logo-wrapper {
+                        width: 130px;
+                    }
+
+                    .slogan {
+                        font-size: 14px;
+                    }
+                });
+
+                .media-current-max(400px, {
+                    .logo-wrapper {
+                        width: 110px;
+                    }
+
+                    .slogan {
+                        font-size: 13px;
+                    }
+                });
+
+                .media-current-max(370px, {
+                    .logo-wrapper {
+                        width: 90px;
+                    }
+
+                    .slogan {
+                        font-size: 11px;
+                    }
+                });
             }
 
             .mission {

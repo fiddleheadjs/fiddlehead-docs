@@ -34,14 +34,14 @@
         
         .grid {
             display: grid;
+            align-items: center;
+            justify-items: center;
+            gap: 60px 0;
             grid-template:
                 "lt central rt"
                 "lm central rm"
                 "lb central rb"
                 / 1fr 1fr 1fr;
-            align-items: center;
-            justify-items: center;
-            gap: 60px 0;
 
             .media-current-max(1200px, {
                 gap: 40px 0;
@@ -52,31 +52,38 @@
             });
 
             .media-current-max(800px, {
+                gap: 30px 15px;
                 grid-template:
+                    "central central"
                     "lt rt"
                     "lm rm"
                     "lb rb"
                     / 1fr 1fr;
-                gap: 30px 15px;
+            });
+
+            .media-current-max(400px, {
+                display: flex;
+                flex-direction: column;
             });
         }
 
         .central {
             grid-area: central;
             display: grid;
-            grid-template-areas: "A";
+            grid-template-areas: "svg";
             align-content: center;
 
             svg {
                 max-width: 110%;
-                grid-area: A;
+                grid-area: svg;
                 align-self: center;
                 justify-self: center;
-            }
 
-            .media-current-max(800px, {
-                display: none;
-            });
+                .media-current-max(800px, {
+                    width: 80%;
+                    max-width: 350px;
+                });
+            }
         }
 
         .card {
@@ -104,7 +111,7 @@
                 color: white;
                 font-size: 18px;
                 font-weight: 700;
-                padding: 6px 20px;
+                padding: 10px 20px;
                 min-height: 60px;
                 display: flex;
                 align-items: center;

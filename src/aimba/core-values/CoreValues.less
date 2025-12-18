@@ -51,6 +51,11 @@
                     align-items: center;
                 });
 
+                .media-current-max(400px, {
+                    flex-direction: column;
+                    align-items: center;
+                });
+
                 .pictogram {
                     border-radius: 100%;
                     background: white;
@@ -71,6 +76,12 @@
                     max-width: 1px;
 
                     .media-current-between(601px, 800px, {
+                        height: 1px;
+                        min-width: 72px;
+                        max-width: 72px;
+                    });
+
+                    .media-current-max(400px, {
                         height: 1px;
                         min-width: 72px;
                         max-width: 72px;
