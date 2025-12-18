@@ -6,18 +6,17 @@
     }
     
     .aspect {
-        padding: 0 var(--slide-margin);
+        padding: 0 var(--slide-margin, 0);
         pointer-events: none;
         visibility: hidden;
 
         .ratio {
-            padding-bottom: calc(100% / var(--slide-aspect));
+            padding-bottom: calc(100% / var(--slide-aspect, infinity));
         }
     }
 
     .scroll-view {
-        position: relative;
-        position: var(--slide-growth);
+        position: var(--slide-growth, relative);
         top: 0;
         bottom: 0;
         left: 0;
@@ -28,8 +27,8 @@
         flex-direction: row;
         align-items: stretch;
         flex-flow: row nowrap;
-        gap: var(--slide-spacing);
-        padding: 0 var(--slide-margin);
+        gap: var(--slide-spacing, 0);
+        padding: 0 var(--slide-margin, 0);
         overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
@@ -44,13 +43,12 @@
 
     .SliderSlide {
         flex: none;
-        scroll-snap-align: start;
-        scroll-snap-align: var(--slide-align);
-        scroll-margin: var(--slide-margin);
+        scroll-snap-align: var(--slide-align, start);
+        scroll-margin: var(--slide-margin, 0);
         display: flex;
         justify-content: center;
         align-items: center;
-        width: var(--slide-width);
+        width: var(--slide-width, auto);
     }
     
     &[data-scrolling="false"] .SliderSlide[data-in-view="false"] {
