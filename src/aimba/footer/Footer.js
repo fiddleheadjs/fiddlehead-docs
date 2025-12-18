@@ -20,7 +20,9 @@ export let Footer = () => {
                 <div class="container">
                     <div class="about-us">
                         <div class="brand">
-                            <Logo monochrome="currentColor" />
+                            <div class="logo-wrapper">
+                                <Logo monochrome="currentColor" />
+                            </div>
                             <div class="slogan">
                                 AiMBA - Agile & Immersive
                                 <br aria-hidden="true" />

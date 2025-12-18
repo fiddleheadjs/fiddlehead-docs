@@ -14,7 +14,7 @@ export let Features = () => {
     return (
         <section class="Features">
             <div class="heading">
-                <h2 class="title">Cách AiMBA giúp bạn bứt phá</h2>
+                <h2 class="title">Cách AiMBA giúp bạn <no-break>bứt phá</no-break></h2>
                 <div class="divider"/>
             </div>
             <div class="visualisation">
