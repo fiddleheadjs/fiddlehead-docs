@@ -97,7 +97,7 @@
                 width: 100%;
                 max-width: 600px;
             });
-            
+
             .Slider {
                 --slide-growth: absolute;
                 --slide-width: 100%;
@@ -109,8 +109,13 @@
                 outline: 3px solid #57C9FA99;
                 border-radius: 4px;
                 overflow: hidden;
-            }
 
+                .media-current-max(600px, {
+                    --slide-width: calc(100% + 100px);
+                    margin: 0 -50px;
+                });
+            }
+            
             img {
                 display: block;
                 position: absolute;
