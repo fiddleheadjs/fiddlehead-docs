@@ -2,27 +2,16 @@
 
 .LearningStrategy {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template: "cover details" / 1fr 1fr;
     background: linear-gradient(to right, #10469E, #10469E 60%, #14A6DF);
 
-    .media-current-max(1600px, {
-        grid-template-columns: 2fr 3fr;
-    });
-
-    .media-current-max(1400px, {
-        grid-template-columns: 1fr 2fr;
-    });
-
-    .media-current-max(1000px, {
+    .media-current-max(1360px, {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     });
-
-    > .cover {
-
-    }
 
     > .details {
+        grid-area: 'details';
         padding: 60px 60px 66px;
         
         .media-current-max(450px, {
@@ -30,7 +19,8 @@
         });
 
         > .heading {
-            max-width: 826px;
+            max-width: 800px;
+            margin: auto;
 
             .content {
                 display: flex;
@@ -79,11 +69,11 @@
                     "1fr 1fr" 1fr
                     "1fr 1fr" 1fr;
                 gap: 22px 25px;
-                max-width: 826px;
+                max-width: 800px;
+                margin: auto;
 
                 .media-current-max(600px, {
                     grid-template: ".";
-                    // max-width: 400px;
                 });
 
                 li {
@@ -146,6 +136,26 @@
                     }
                 }
             } 
+        }
+    }
+
+    > .cover {
+        grid-area: cover;
+        background: linear-gradient(to bottom, white, #EAF8FF);
+
+        .media-current-max(1360px, {
+            height: 400px;
+        });
+
+        img {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+
+            .media-current-min(1361px, {
+                position: absolute;
+            });
         }
     }
 }
