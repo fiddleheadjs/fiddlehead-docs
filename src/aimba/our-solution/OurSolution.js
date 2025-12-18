@@ -5,7 +5,7 @@ import {Slider} from '../slider';
 import './OurSolution.less';
 
 export let OurSolution = () => {
-    let imgWhyUs = '/img/aimba/our-solution-why-us.jpg';
+    let imgWhyUs = '/aimba/our-solution-why-us.jpg';
 
     return (
         <section class="OurSolution">

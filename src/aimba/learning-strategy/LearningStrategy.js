@@ -1,7 +1,7 @@
 import './LearningStrategy.less';
 
 export let LearningStrategy = () => {
-    let imgCover = '/img/aimba/learning-strategy-cover.jpg';
+    let imgCover = '/aimba/learning-strategy-cover.jpg';
 
     let data = {
         '01': ['Chọn module phù hợp với mục tiêu hiện tại', 'Lựa chọn từ 15 chương trình chuyên biệt theo vị trí và mục tiêu sự nghiệp của bạn'],
