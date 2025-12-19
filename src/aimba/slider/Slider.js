@@ -288,8 +288,8 @@ export let Slider = ({
 let renderContent = ({slideShow, backButton, nextButton, dotNavigation}) => {
     return (
         <>
-            {backButton()}
             {slideShow()}
+            {backButton()}
             {nextButton()}
         </>
     );

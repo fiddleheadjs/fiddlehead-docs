@@ -1,4 +1,5 @@
 import {Background} from '../background';
+import {ImageView} from '../image-view';
 import {Slider} from '../slider';
 import './EcoSystem.less';
 
@@ -35,11 +36,13 @@ export let EcoSystem = () => {
                     slideItems={screenshots.map(([src, alt], index) => ({
                         id: src,
                         render: () => (
-                            <img
-                                src={src}
-                                alt={alt}
-                                loading={index === 0 ? 'eager' : 'lazy'}
-                            />
+                            <ImageView>
+                                <img
+                                    src={src}
+                                    alt={alt}
+                                    loading={index === 0 ? 'eager' : 'lazy'}
+                                />
+                            </ImageView>
                         )
                     }))}
                 />

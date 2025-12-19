@@ -50,11 +50,11 @@ export let Footer = () => {
                                 </li>
                                 <li>
                                     <i><Envelop /></i>
-                                    <span>gateway@bcanvas.vn</span>
+                                    <a href="mailto:gateway@bcanvas.vn">gateway@bcanvas.vn</a>
                                 </li>
                                 <li>
                                     <i><PhoneCall /></i>
-                                    <span>0948.088.586</span>
+                                    <a href="tel:0948.088.586">0948.088.586</a>
                                 </li>
                             </ul>
                             <div class="qrcode">
