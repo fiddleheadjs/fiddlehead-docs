@@ -21,7 +21,7 @@ export let FrequentlyAskedQuestions = () => {
     };
 
     return (
-        <section class="FrequentlyAskedQuestions">
+        <section class="FrequentlyAskedQuestions" id="FrequentlyAskedQuestions">
             <div class="container">
                 <h2 class="title">Câu hỏi thường gặp</h2>
                 <div class="content">
