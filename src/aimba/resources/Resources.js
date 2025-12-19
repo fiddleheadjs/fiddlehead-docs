@@ -79,7 +79,7 @@ let data = [
 
 export let Resources = () => {
     return (
-        <section class="Resources" id="Resources">
+        <section class="Resources" id="Resources" role="section">
             <div class="container">
                 <div class="heading">
                     <h2 class="title">Kho tài nguyên lớn <com-word>chất lượng</com-word></h2>

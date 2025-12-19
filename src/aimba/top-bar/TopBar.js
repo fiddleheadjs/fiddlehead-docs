@@ -3,25 +3,25 @@ import './TopBar.less';
 
 export let TopBar = () => {
     return (
-        <section class="TopBar">
+        <header class="TopBar">
             <div class="container">
                 <div class="brand">
                     <Logo />
                 </div>
-                <div class="nav">
+                <nav class="navigation" role="navigation">
                     <div class="links">
-                        <a class="x-button" href="#CoreValues">Giá trị</a>
-                        <a class="x-button" href="#LearningStrategy">Cách học</a>
-                        <a class="x-button" href="#EcoSystem">Hệ sinh thái</a>
-                        <a class="x-button" href="#Modules">Module</a>
-                        <a class="x-button" href="#Enrollment">Ưu đãi</a>
+                        <a role="button" class="x-button" href="#CoreValues">Giá trị</a>
+                        <a role="button" class="x-button" href="#LearningStrategy">Cách học</a>
+                        <a role="button" class="x-button" href="#EcoSystem">Hệ sinh thái</a>
+                        <a role="button" class="x-button" href="#Modules">Module</a>
+                        <a role="button" class="x-button" href="#Enrollment">Ưu đãi</a>
                     </div>
                     <div class="actions">
                         <button type="button" class="x-button login">Đăng nhập</button>
                         <button type="button" class="x-button signup">Đăng ký</button>
                     </div>
-                </div>
+                </nav>
             </div>
-        </section>
+        </header>
     );
 };

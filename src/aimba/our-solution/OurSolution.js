@@ -17,7 +17,7 @@ export let OurSolution = () => {
     ];
     
     return (
-        <section class="OurSolution" id="OurSolution">
+        <section class="OurSolution" id="OurSolution" role="section">
             <div class="why-us">
                 <div class="container">
                     <div class="details">
@@ -99,7 +99,7 @@ export let OurSolution = () => {
                                 </ul>
                             </div>
                             <div class="actions">
-                                <a class="x-button" href="#Enrollment">Đăng ký</a>
+                                <a role="button" class="x-button" href="#Enrollment">Đăng ký</a>
                             </div>
                         </div>
                     </div>

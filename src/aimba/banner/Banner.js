@@ -1,14 +1,14 @@
 import {Background} from '../background';
 import {SquareCheck} from '../icons';
-import './Header.less';
+import './Banner.less';
 
-export let Header = () => {
+export let Banner = () => {
     return (
-        <header class="Header">
+        <section class="Banner" role="banner">
             <div class="messages">
                 <Background image="/aimba/img/background-07.jpg" />
-                <div class="banner">
-                    <img src="/aimba/img/header-banner.jpg" alt="AiMBA banner" />
+                <div class="illustration">
+                    <img src="/aimba/img/banner-illustration.jpg" alt="AiMBA illustration" />
                 </div>
                 <div class="container">
                     <div class="overlay">
@@ -71,6 +71,6 @@ export let Header = () => {
                     </div>
                 </div>
             </div>
-        </header>
+        </section>
     );
 };
