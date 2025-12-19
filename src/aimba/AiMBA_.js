@@ -1,7 +1,7 @@
 import './common.less';
 import './AiMBA_.less';
 import {TopBar} from './top-bar';
-import {Header} from './header';
+import {Banner} from './banner';
 import {EcoSystem} from './eco-system';
 import {Resources} from './resources';
 import {Modules} from './modules';
@@ -19,18 +19,20 @@ export let AiMBA = () => {
     return (
         <div class="AiMBA">
             <TopBar />
-            <Header />
-            <EcoSystem />
-            <Resources />
-            <Modules />
-            <OurSolution />
-            <CoreValues />
-            <Features />
-            <LearningStrategy />
-            <TargetAudience />
-            <BeingTrusted />
-            <Enrollment />
-            <FrequentlyAskedQuestions />
+            <main role="main">
+                <Banner />
+                <EcoSystem />
+                <Resources />
+                <Modules />
+                <OurSolution />
+                <CoreValues />
+                <Features />
+                <LearningStrategy />
+                <TargetAudience />
+                <BeingTrusted />
+                <Enrollment />
+                <FrequentlyAskedQuestions />
+            </main>
             <Footer />
         </div>
     );

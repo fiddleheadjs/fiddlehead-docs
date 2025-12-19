@@ -67,7 +67,7 @@ export let BeingTrusted = () => {
     ];
 
     return (
-        <section class="BeingTrusted" id="BeingTrusted">
+        <section class="BeingTrusted" id="BeingTrusted" role="section">
             <div class="heading">
                 <h2 class="title">Được tin tưởng bởi hơn 1.024 <com-word>chuyên gia</com-word>/<com-word>managers</com-word>/<com-word>CEOs</com-word></h2>
                 <div class="description">Truy cập mở đến kho tàng tri thức kinh doanh</div>

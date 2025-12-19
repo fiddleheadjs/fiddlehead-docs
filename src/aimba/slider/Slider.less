@@ -38,6 +38,10 @@
         &::-webkit-scrollbar {
             display: none;
         }
+
+        &:focus {
+            outline: 3px solid var(--touchable-focus-color, transparent);
+        }
     }
 
     .SliderSlide {
@@ -66,6 +70,7 @@
         max-width: 60px;
         border-radius: 6px;
         cursor: pointer;
+        z-index: 1;
     }
 
     &[data-scrollable="false"] {

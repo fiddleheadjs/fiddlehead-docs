@@ -14,7 +14,7 @@ export let Enrollment = () => {
     ];
 
     return (
-        <section class="Enrollment" id="Enrollment">
+        <section class="Enrollment" id="Enrollment" role="section">
             <Background image="/aimba/img/background-06.jpg" lazy />
             <div class="container">
                 <div class="details">

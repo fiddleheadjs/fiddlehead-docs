@@ -12,7 +12,7 @@ export let LearningStrategy = () => {
     };
 
     return (
-        <section class="LearningStrategy" id="LearningStrategy">
+        <section class="LearningStrategy" id="LearningStrategy" role="section">
             <div class="container">
                 <div class="details">
                     <Background image="/aimba/img/background-04.jpg" lazy />
@@ -20,7 +20,7 @@ export let LearningStrategy = () => {
                         <div class="content">
                             <h2 class="title">Cách thức học tập tại AiMBA</h2>
                             <div class="actions">
-                                <a class="x-button" href="#Enrollment">Đăng ký</a>
+                                <a role="button" class="x-button" href="#Enrollment">Đăng ký</a>
                             </div>
                         </div>
                         <div class="divider" />

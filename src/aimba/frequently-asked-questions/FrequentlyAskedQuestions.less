@@ -25,7 +25,7 @@
             background: white;
             border: 1px solid #E2E1E1;
             border-radius: 5px;
-            overflow: hidden;
+            --touchable-focus-color: #28A8E088;
     
             .heading {
                 padding: 20px 25px;
@@ -34,6 +34,9 @@
                 flex-direction: row;
                 align-items: center;
                 cursor: pointer;
+                border-radius: 5px;
+                width: 100%;
+                text-align: left;
     
                 .question {
                     flex-grow: 1;
@@ -47,7 +50,7 @@
             }
     
             .body {
-                overflow: hidden;
+                border-radius: 5px;
                 
                 .answer {
                     padding: 12px 25px;
@@ -60,6 +63,11 @@
             &.expanded {
                 .heading {
                     border-bottom: 1px solid #E2E1E1;
+                    border-radius: 5px 5px 0 0;
+                }
+
+                .body {
+                    border-radius: 0 0 5px 5px;
                 }
             }
 

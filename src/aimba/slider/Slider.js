@@ -233,13 +233,13 @@ export let Slider = ({
     );
 
     let backButton = () => (
-        <button class="SliderBackButton" type="button" aria-label="Back" onClick={onBack}>
+        <button class="SliderBackButton x-button" type="button" aria-label="Back" onClick={onBack}>
             <ArrowLeft />
         </button>
     );
 
     let nextButton = () => (
-        <button class="SliderNextButton" type="button" aria-label="Next" onClick={onNext}>
+        <button class="SliderNextButton x-button" type="button" aria-label="Next" onClick={onNext}>
             <ArrowRight />
         </button>
     );
@@ -250,6 +250,7 @@ export let Slider = ({
                 <button
                     key={item.id}
                     type="button"
+                    class="x-button"
                     aria-label={`Scroll to ${item.id}`}
                     data-id={item.id}
                     data-active={String(isSlideActive(getSlideById(item.id)))}
@@ -273,8 +274,8 @@ export let Slider = ({
 let renderContent = ({slideShow, backButton, nextButton, dotNavigation}) => {
     return (
         <>
-            {slideShow()}
             {backButton()}
+            {slideShow()}
             {nextButton()}
         </>
     );

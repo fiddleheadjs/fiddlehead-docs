@@ -21,7 +21,7 @@ export let FrequentlyAskedQuestions = () => {
     };
 
     return (
-        <section class="FrequentlyAskedQuestions" id="FrequentlyAskedQuestions">
+        <section class="FrequentlyAskedQuestions" id="FrequentlyAskedQuestions" role="section">
             <div class="container">
                 <h2 class="title">Câu hỏi thường gặp</h2>
                 <div class="content">
@@ -29,18 +29,24 @@ export let FrequentlyAskedQuestions = () => {
                         {data.map(([question, answer]) => {
                             let expanded = expandedQuestions.includes(question);
                             return (
-                            <li class={expanded ? 'expanded' : 'collapsed'} key={question}>
-                                <div class="heading" onClick={() => toggleExpanded(question)}>
-                                    <div class="question">{question}</div>
-                                    <div class="indicator">
-                                        {expanded ? <Minus /> : <Plus />}
+                                <li class={expanded ? 'expanded' : 'collapsed'} key={question}>
+                                    <button
+                                        class="heading x-touchable"
+                                        type="button"
+                                        tabIndex="0"
+                                        aria-expanded={String(expanded)}
+                                        onClick={() => toggleExpanded(question)}
+                                    >
+                                        <div class="question">{question}</div>
+                                        <div class="indicator">
+                                            {expanded ? <Minus /> : <Plus />}
+                                        </div>
+                                    </button>
+                                    <div class="body">
+                                        <div class="answer">{answer}</div>
                                     </div>
-                                </div>
-                                <div class="body">
-                                    <div class="answer">{answer}</div>
-                                </div>
-                            </li>
-                        );
+                                </li>
+                            );
                         })}
                     </ul>
                 </div>

@@ -77,15 +77,19 @@ com-word {
     display: inline-block;
 }
 
+.x-touchable {
+    cursor: pointer;
+    
+    &:active,
+    &:focus {
+        outline: 3px solid var(--touchable-focus-color, transparent);
+    }
+}
+
 .x-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    cursor: pointer;
-
-    &:active,
-    &:focus {
-        outline: 3px solid var(--active-outline-color, transparent);
-    }
+    .x-touchable();
 }

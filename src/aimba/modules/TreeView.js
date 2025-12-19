@@ -47,20 +47,31 @@ export let TreeView = ({data}) => {
                     let expanded = expandedIndexes.includes(index);
                     return (
                         <div class={`card ${expanded ? 'expanded' : 'collapsed'}`} key={title}>
-                            <div class="heading" onClick={() => toggleExpanded(index)}>
+                            <div class="heading">
                                 <div class="milestone-wrapper">
-                                    <div class="milestone" onClick={() => toggleExpanded(index)}>
+                                    <button
+                                        class="milestone x-button"
+                                        type="button"
+                                        aria-label={title}
+                                        onClick={() => toggleExpanded(index)}
+                                    >
                                         <i />
-                                    </div>
+                                    </button>
                                 </div>
-                                <div class="content">
+                                <button
+                                    class="content x-touchable"
+                                    type="button"
+                                    tabIndex="0"
+                                    aria-expanded={String(expanded)}
+                                    onClick={() => toggleExpanded(index)}
+                                >
                                     <div class="title">
                                         {title}
                                     </div>
                                     <div class="indicator">
                                         {expanded ? <Minus /> : <Plus />}
                                     </div>
-                                </div>
+                                </button>
                             </div>
                             <div class="body">
                                 <div class="description">
