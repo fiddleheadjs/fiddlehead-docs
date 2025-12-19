@@ -48,17 +48,17 @@ export let TreeView = ({data}) => {
                     return (
                         <div class={`card ${expanded ? 'expanded' : 'collapsed'}`} key={title}>
                             <div class="heading" onClick={() => toggleExpanded(index)}>
+                                <div class="milestone-wrapper">
+                                    <div class="milestone" onClick={() => toggleExpanded(index)}>
+                                        <i />
+                                    </div>
+                                </div>
                                 <div class="content">
                                     <div class="title">
                                         {title}
                                     </div>
                                     <div class="indicator">
                                         {expanded ? <Minus /> : <Plus />}
-                                    </div>
-                                </div>
-                                <div class="milestone-wrapper">
-                                    <div class="milestone" onClick={() => toggleExpanded(index)}>
-                                        <i />
                                     </div>
                                 </div>
                             </div>
