@@ -38,8 +38,6 @@ fs.readdirSync(entriesDir).map(filename => {
         themeColor = 'white',
     } = metadata;
 
-    console.log(metadata);
-
     configs.push({
         mode: isDev ? 'development' : 'production',
         devtool: 'cheap-module-source-map',
