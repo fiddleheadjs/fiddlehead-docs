@@ -45,8 +45,7 @@
     }
 
     > .videos {
-        margin-top: 50px;
-        --focus-color: #FFFFFF55;
+        margin-top: 45px;
 
         .Slider {
             --slide-width: min(1100px, 100%);
@@ -65,10 +64,22 @@
             });
         }
 
+        .SliderSlide,
+        .SliderNextButton,
+        .SliderBackButton {
+            --focus-color: #FFFFFF55;
+        }
+        
+        .media-current-min(1300px, {
+            .SliderScrollView {
+                --focus-color: #FFFFFF55;
+            }
+        });
+
         .VideoPlayer {
             --aspect-ratio: (16 / 9);
             width: 100%;
-            padding: 10px 0;
+            padding: 15px 0;
 
             img,
             video {
@@ -78,7 +89,7 @@
     }
 
     > .actions {
-        margin-top: 28px;
+        margin-top: 23px;
 
         .container {
             margin: auto;
