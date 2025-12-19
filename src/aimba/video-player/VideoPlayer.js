@@ -51,8 +51,6 @@ export let VideoPlayer = ({ src, poster, active }) => {
             class="VideoPlayer"
             onMouseEnter={showControls}
             onMouseLeave={hideControls}
-            onTouchStart={showControls}
-            onTouchEnd={hideControls}
         >
             <Aspect>
                 <img
