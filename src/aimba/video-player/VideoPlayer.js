@@ -1,16 +1,17 @@
+import './VideoPlayer.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {Aspect} from '../aspect';
-import './VideoPlayer.less';
 import {useClickAwayListener} from '../use-click-away-listener';
 
 export let VideoPlayer = ({ src, poster, active }) => {
+    let rootRef = useRef(null);
     let videoRef = useRef(null);
     let [inViewPort, setInViewPort] = useState(false);
     let [controls, setControls] = useState(false);
     let showControls = () => setControls(true);
     let hideControls = () => setControls(false);
     
-    useClickAwayListener(videoRef, hideControls);
+    useClickAwayListener(rootRef, hideControls);
     
     useEffect(() => {
         let video = videoRef.current;
@@ -49,6 +50,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
 
     return (
         <div
+            ref={rootRef}
             class="VideoPlayer"
             onMouseEnter={showControls}
             onTouchStart={showControls}
@@ -60,7 +62,13 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     loading="lazy"
                     aria-hidden="true"
                 />
-                <video controls={controls} ref={videoRef} autoplay={active} muted playsinline>
+                <video
+                    ref={videoRef}
+                    controls={controls}
+                    autoplay={active}
+                    playsinline
+                    muted
+                >
                     <source
                         src={src}
                         poster={poster}
