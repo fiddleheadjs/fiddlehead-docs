@@ -54,9 +54,11 @@ export let PromoCountdown = () => {
     let [hours, minutes, seconds] = getClockValues(remainTime);
 
     return (
-        <div class="PromoCountdown">
+        <div class="PromoCountdown" role="timer" aria-atomic="true">
             <b class="hv">{hours}</b> <i class="hu">Giờ</i>
+            {' '}
             <b class="mv">{minutes}</b> <i class="mu">Phút</i>
+            {' '}
             <b class="sv">{seconds}</b> <i class="su">Giây</i>
         </div>
     );

@@ -100,10 +100,7 @@
 
             .slider-wrapper {
                 margin: auto;
-                outline: 3px solid #57C9FA99;
-                border-radius: 4px;
-                overflow: hidden;
-                
+
                 .media-current-max(600px, {
                     width: calc(100% + 100px);
                     margin: 0 -50px;
@@ -118,7 +115,16 @@
                 --slide-margin: 0;
                 --focus-color: #88888888;
             }
-            
+
+            .SliderScrollView {
+                border-radius: 4px;
+                outline: 3px solid #57C9FA99;
+                
+                &:focus {
+                    outline-width: 6px;
+                }
+            }
+
             img {
                 display: block;
                 position: absolute;

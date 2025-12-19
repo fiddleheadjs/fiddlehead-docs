@@ -45,13 +45,11 @@
     }
 
     > .videos {
-        margin-top: 60px;
-        --focus-color: #FFFFFF44;
+        margin-top: 50px;
+        --focus-color: #FFFFFF55;
 
         .Slider {
-            --slide-growth: absolute;
             --slide-width: min(1100px, 100%);
-            --slide-aspect: (16 / 9);
             --slide-spacing: 60px;
             --slide-margin: 60px;
             max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
@@ -69,22 +67,18 @@
 
         .VideoPlayer {
             --aspect-ratio: (16 / 9);
-            border-radius: 10px;
-            position: absolute;
             width: 100%;
-            height: 100%;
-        }
+            padding: 10px 0;
 
-        img {
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            img,
+            video {
+                border-radius: 10px;
+            }
         }
     }
 
     > .actions {
-        margin-top: 38px;
+        margin-top: 28px;
 
         .container {
             margin: auto;

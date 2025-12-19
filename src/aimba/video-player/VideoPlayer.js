@@ -53,7 +53,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
             ref={rootRef}
             class="VideoPlayer"
             onMouseEnter={showControls}
-            onTouchStart={showControls}
+            onClick={showControls}
         >
             <Aspect>
                 <img
@@ -68,6 +68,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     autoplay={active}
                     playsinline
                     muted
+                    tabIndex="0"
                 >
                     <source
                         src={src}
