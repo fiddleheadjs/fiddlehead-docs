@@ -26,7 +26,7 @@ export let EcoSystem = () => {
                     <div class="divider" />
                     <div class="description">
                         Không còn lý thuyết suông - Mọi kiến thức đều được kết nối với bối cảnh kinh doanh thật.
-                        Tự mở rộng tình huống thực tế không giới hạn với case builder.
+                        Tự mở rộng tình huống thực tế không giới hạn với <com-word>case builder.</com-word>
                     </div>
                 </div>
             </div>
