@@ -26,7 +26,7 @@ export let TargetAudience = () => {
     let imgCertificate = '/aimba/img/target-audience-certificate.png';
 
     return (
-        <section class="TargetAudience">
+        <section class="TargetAudience" id="TargetAudience">
             <div class="heading">
                 <h2 class="title">AiMBA được thiết kế đặc biệt <com-word>dành cho</com-word></h2>
                 <div class="divider" />
