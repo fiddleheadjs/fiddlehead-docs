@@ -1,5 +1,6 @@
 import {Background} from '../background';
 import {CircleCheck, Gift} from '../icons';
+import {PromoCountdown} from './PromoCountdown';
 import './Enrollment.less';
 
 export let Enrollment = () => {
@@ -54,11 +55,7 @@ export let Enrollment = () => {
                     </div>
                     <div class="timing">
                         <div class="description">Ưu đãi có hạn, đăng ký ngay để <no-break>không bỏ lỡ</no-break></div>
-                        <div class="countdown">
-                            <b class="hv">14</b> <i class="hu">Giờ</i>
-                            <b class="mv">24</b> <i class="mu">Phút</i>
-                            <b class="sv">44</b> <i class="su">Giây</i>
-                        </div>
+                        <PromoCountdown />
                     </div>
                     <form>
                         <div class="fields">
