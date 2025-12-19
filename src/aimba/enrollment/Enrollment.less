@@ -34,12 +34,16 @@
                 font-size: 36px;
                 font-weight: 700;
                 text-transform: uppercase;
-                background-image: linear-gradient(to bottom, #FDE2A3, #FAA714);
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
-                color: #FAA714;
                 text-align: center;
-                text-shadow: 0 4px 4px 0 #00000040;
+                
+                &,
+                & * {
+                    background-image: linear-gradient(to bottom, #FDE2A3, #FAA714);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    color: #FAA714;
+                    text-shadow: 0 4px 4px 0 #00000040;
+                }
             }
 
             .pricing {

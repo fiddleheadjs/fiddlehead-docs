@@ -22,7 +22,7 @@ export let EcoSystem = () => {
         <section class="EcoSystem">
             <div class="heading">
                 <div class="container">
-                    <h2 class="title">Hệ sinh thái học tập <no-break>toàn diện</no-break></h2>
+                    <h2 class="title">Hệ sinh thái học tập <com-word>toàn diện</com-word></h2>
                     <div class="divider" />
                     <div class="description">
                         Không còn lý thuyết suông - Mọi kiến thức đều được kết nối với bối cảnh kinh doanh thật.

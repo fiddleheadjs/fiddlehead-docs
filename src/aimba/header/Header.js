@@ -18,7 +18,7 @@ export let Header = () => {
                                     <span>AiMBA</span>
                                 </div>
                                 <div class="slogan">
-                                    <no-break>Agile & Immersive</no-break> <no-break>MBA-level training</no-break>
+                                    <com-word>Agile & Immersive</com-word> <com-word>MBA-level training</com-word>
                                 </div>
                             </div>
                         </div>

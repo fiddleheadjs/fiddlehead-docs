@@ -82,7 +82,7 @@ export let Resources = () => {
         <section class="Resources">
             <div class="container">
                 <div class="heading">
-                    <h2 class="title">Kho tài nguyên lớn <no-break>chất lượng</no-break></h2>
+                    <h2 class="title">Kho tài nguyên lớn <com-word>chất lượng</com-word></h2>
                     <div class="description">Truy cập mở đến kho tàng tri thức kinh doanh</div>
                 </div>
                 {data.map(({title, description, checklist, screenshots, layout, themeColor}) => (

@@ -19,8 +19,12 @@
                 width: 100px;
             });
             
-            .media-current-max(400px, {
-                width: 80px;
+            .media-current-max(480px, {
+                width: 90px;
+            });
+            
+            .media-current-max(360px, {
+                width: 85px;
             });
         }
     }
@@ -64,6 +68,27 @@
         button {
             min-width: 120px;
             font-weight: 700;
+
+            .media-current-max(600px, {
+                min-width: auto;
+                min-height: 34px;
+                padding: 6px 10px;
+                font-size: 13px;
+            });
+
+            .media-current-max(480px, {
+                min-width: auto;
+                min-height: 32px;
+                padding: 6px 8px;
+                font-size: 12px;
+            });
+            
+            .media-current-max(360px, {
+                min-width: auto;
+                min-height: 30px;
+                padding: 6px;
+                font-size: 11px;
+            });
         }
 
         button.login {
@@ -79,22 +104,6 @@
         .media-current-max(1000px, {
             .links {
                 display: none;
-            }
-        });
-
-        .media-current-max(600px, {
-            button {
-                min-width: auto;
-                min-height: 35px;
-                font-size: 12px;
-            }
-        });
-
-        .media-current-max(400px, {
-            button {
-                min-width: auto;
-                min-height: 30px;
-                font-size: 11px;
             }
         });
     }

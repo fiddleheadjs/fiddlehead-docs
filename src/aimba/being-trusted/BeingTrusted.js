@@ -69,7 +69,7 @@ export let BeingTrusted = () => {
     return (
         <section class="BeingTrusted">
             <div class="heading">
-                <h2 class="title">Được tin tưởng bởi hơn 1.024 <no-break>chuyên gia</no-break>/<no-break>managers</no-break>/<no-break>CEOs</no-break></h2>
+                <h2 class="title">Được tin tưởng bởi hơn 1.024 <com-word>chuyên gia</com-word>/<com-word>managers</com-word>/<com-word>CEOs</com-word></h2>
                 <div class="description">Truy cập mở đến kho tàng tri thức kinh doanh</div>
             </div>
             <div class="feedbacks">
