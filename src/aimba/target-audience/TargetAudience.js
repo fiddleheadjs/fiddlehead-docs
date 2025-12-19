@@ -28,7 +28,7 @@ export let TargetAudience = () => {
     return (
         <section class="TargetAudience">
             <div class="heading">
-                <h2 class="title">AiMBA được thiết kế đặc biệt <no-break>dành cho</no-break></h2>
+                <h2 class="title">AiMBA được thiết kế đặc biệt <com-word>dành cho</com-word></h2>
                 <div class="divider" />
             </div>
             <div class="audience">

@@ -18,7 +18,7 @@ export let Enrollment = () => {
             <Background image="/aimba/img/background-06.jpg" lazy />
             <div class="container">
                 <div class="details">
-                    <h2 class="title">Gói ưu đãi đặc biệt</h2>
+                    <h2 class="title">Gói ưu đãi <com-word>đặc biệt</com-word></h2>
                     <div class="pricing">
                         <div class="price">
                             <div class="sale-price">Còn: 1.490.000 VNĐ</div>
@@ -50,11 +50,11 @@ export let Enrollment = () => {
                 </div>
                 <div class="form-box">
                     <div class="headlines">
-                        <p><Gift /> Chỉ từ <no-break><strong>699.000</strong> <b>VNĐ</b></no-break></p>
-                        <p>Dành cho 50 học viên <no-break class="nobreak">đầu tiên!</no-break></p>
+                        <p><Gift /> Chỉ từ <com-word><strong>699.000</strong> <b>VNĐ</b></com-word></p>
+                        <p>Dành cho 50 học viên <com-word class="nobreak">đầu tiên!</com-word></p>
                     </div>
                     <div class="timing">
-                        <div class="description">Ưu đãi có hạn, đăng ký ngay để <no-break>không bỏ lỡ</no-break></div>
+                        <div class="description">Ưu đãi có hạn, đăng ký ngay để <com-word>không bỏ lỡ</com-word></div>
                         <PromoCountdown />
                     </div>
                     <form>
