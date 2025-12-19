@@ -60,7 +60,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     loading="lazy"
                     aria-hidden="true"
                 />
-                <video controls={controls} ref={videoRef} autoplay={active} muted playsinline>
+                <video ref={videoRef} controls={controls} autoplay={active} muted playsinline>
                     <source
                         src={src}
                         poster={poster}
