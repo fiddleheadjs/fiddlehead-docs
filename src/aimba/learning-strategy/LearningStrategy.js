@@ -28,7 +28,7 @@ export let LearningStrategy = () => {
                     <div class="grid">
                         <ul>
                             {['01', '02', '03', '04'].map((number) => {
-                                const [title, description] = data[number];
+                                let [title, description] = data[number];
                                 return (
                                     <li key={number} class={`no-${number}`}>
                                         <div class="heading">
