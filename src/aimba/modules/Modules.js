@@ -57,7 +57,7 @@ export let Modules = () => {
             </div>
             <div class="actions">
                 <div class="container">
-                    <a role="button" class="x-button" href="#Enrollment">Đăng ký</a>
+                    <a role="button" class="x-button" tabIndex="0" href="#Enrollment">Đăng ký</a>
                 </div>
             </div>
         </section>
