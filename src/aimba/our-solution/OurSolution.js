@@ -99,7 +99,7 @@ export let OurSolution = () => {
                                 </ul>
                             </div>
                             <div class="actions">
-                                <button type="button">Đăng ký</button>
+                                <a class="x-button" href="#Enrollment">Đăng ký</a>
                             </div>
                         </div>
                     </div>

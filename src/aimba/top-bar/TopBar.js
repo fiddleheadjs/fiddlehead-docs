@@ -10,15 +10,15 @@ export let TopBar = () => {
                 </div>
                 <div class="nav">
                     <div class="links">
-                        <a href="#CoreValues">Giá trị</a>
-                        <a href="#LearningStrategy">Cách học</a>
-                        <a href="#EcoSystem">Hệ sinh thái</a>
-                        <a href="#Modules">Module</a>
-                        <a href="#Enrollment">Ưu đãi</a>
+                        <a class="x-button" href="#CoreValues">Giá trị</a>
+                        <a class="x-button" href="#LearningStrategy">Cách học</a>
+                        <a class="x-button" href="#EcoSystem">Hệ sinh thái</a>
+                        <a class="x-button" href="#Modules">Module</a>
+                        <a class="x-button" href="#Enrollment">Ưu đãi</a>
                     </div>
                     <div class="actions">
-                        <button class="login" type="button">Đăng nhập</button>
-                        <button class="signup" type="button">Đăng ký</button>
+                        <button type="button" class="x-button login">Đăng nhập</button>
+                        <button type="button" class="x-button signup">Đăng ký</button>
                     </div>
                 </div>
             </div>

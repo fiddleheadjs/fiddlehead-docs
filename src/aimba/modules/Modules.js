@@ -57,7 +57,7 @@ export let Modules = () => {
             </div>
             <div class="actions">
                 <div class="container">
-                    <button class="signup" type="button">Đăng ký</button>
+                    <a class="x-button" href="#Enrollment">Đăng ký</a>
                 </div>
             </div>
         </section>
