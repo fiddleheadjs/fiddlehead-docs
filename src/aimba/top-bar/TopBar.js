@@ -20,7 +20,7 @@ export let TopBar = () => {
                     </div>
                     <div class="actions">
                         <button type="button" tabIndex="0" class="x-button login">Đăng nhập</button>
-                        <button type="button" tabIndex="0" class="x-button signup">Đăng ký</button>
+                        <button type="button" tabIndex="0" class="x-button register">Đăng ký</button>
                     </div>
                 </nav>
             </div>
