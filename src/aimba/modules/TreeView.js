@@ -52,6 +52,7 @@ export let TreeView = ({data}) => {
                                     <button
                                         class="milestone x-button"
                                         type="button"
+                                        tabIndex="0"
                                         aria-label={title}
                                         onClick={() => toggleExpanded(index)}
                                     >

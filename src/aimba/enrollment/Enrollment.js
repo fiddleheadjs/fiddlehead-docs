@@ -59,12 +59,12 @@ export let Enrollment = () => {
                     </div>
                     <form>
                         <div class="fields">
-                            <input type="text" placeholder="Họ và tên*" required />
-                            <input type="text" placeholder="Email*" required />
-                            <input type="text" placeholder="Số điện thoại*" required />
+                            <input type="text" placeholder="Họ và tên *" required />
+                            <input type="text" placeholder="Email *" required />
+                            <input type="text" placeholder="Số điện thoại *" required />
                             <input type="text" placeholder="Địa chỉ" />
                         </div>
-                        <button type="submit" class="x-button">Đăng ký</button>
+                        <button type="submit" class="x-button" tabIndex="0">Đăng ký</button>
                     </form>
                 </div>
             </div>

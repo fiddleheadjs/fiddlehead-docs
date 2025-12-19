@@ -20,7 +20,7 @@ export let LearningStrategy = () => {
                         <div class="content">
                             <h2 class="title">Cách thức học tập tại AiMBA</h2>
                             <div class="actions">
-                                <a role="button" class="x-button" href="#Enrollment">Đăng ký</a>
+                                <a role="button" class="x-button" tabIndex="0" href="#Enrollment">Đăng ký</a>
                             </div>
                         </div>
                         <div class="divider" />
