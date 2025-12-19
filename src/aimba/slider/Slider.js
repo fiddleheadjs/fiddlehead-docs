@@ -206,7 +206,8 @@ export let Slider = ({
         <div class="SliderSlideShow">
             <div
                 ref={scrollViewRef}
-                class="scroll-view"
+                class="SliderScrollView"
+                tabIndex="0"
                 onScroll={onScroll}
             >
                 {slideItems.map(item => {
@@ -233,13 +234,25 @@ export let Slider = ({
     );
 
     let backButton = () => (
-        <button class="SliderBackButton x-button" type="button" tabIndex="0" aria-label="Back" onClick={onBack}>
+        <button
+            class="SliderBackButton x-button"
+            type="button"
+            tabIndex="0"
+            aria-label="Back"
+            onClick={onBack}
+        >
             <ArrowLeft />
         </button>
     );
 
     let nextButton = () => (
-        <button class="SliderNextButton x-button" type="button" tabIndex="0" aria-label="Next" onClick={onNext}>
+        <button
+            class="SliderNextButton x-button"
+            type="button"
+            tabIndex="0"
+            aria-label="Next"
+            onClick={onNext}
+        >
             <ArrowRight />
         </button>
     );

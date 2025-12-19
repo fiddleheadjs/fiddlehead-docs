@@ -6,7 +6,9 @@ export let TopBar = () => {
         <header class="TopBar">
             <div class="container">
                 <div class="brand">
-                    <Logo />
+                    <a role="button" tabIndex="0" title="AiMBA" class="x-button" href="#">
+                        <Logo />
+                    </a>
                 </div>
                 <nav class="navigation" role="navigation">
                     <div class="links">
