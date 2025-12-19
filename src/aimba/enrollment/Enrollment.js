@@ -64,7 +64,7 @@ export let Enrollment = () => {
                             <input type="text" placeholder="Số điện thoại*" required />
                             <input type="text" placeholder="Địa chỉ" />
                         </div>
-                        <button type="submit">Đăng ký</button>
+                        <button type="submit" class="x-button">Đăng ký</button>
                     </form>
                 </div>
             </div>

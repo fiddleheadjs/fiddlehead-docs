@@ -227,23 +227,14 @@
                 }
 
                 button {
-                    display: block;
                     width: 100%;
                     min-height: 50px;
                     border-radius: 25px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    cursor: pointer;
-                    background: linear-gradient(to bottom, #FAA714, #D37101);
                     font-size: 18px;
                     font-weight: 900;
                     color: white;
-
-                    &:focus {
-                        outline: 3px solid #2669DD66;
-                    }
+                    background: linear-gradient(to bottom, #FAA714, #D37101);
+                    --active-outline-color: #D37101DD;
                 }
             }
         }

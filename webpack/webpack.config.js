@@ -32,6 +32,7 @@ fs.readdirSync(entriesDir).map(filename => {
         metadata[metaName] = metaValue;
     }
     let {
+        lang = 'en',
         title = pkg.title,
         description = pkg.title,
         themeColor = 'white',
@@ -79,6 +80,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 __srcFiddleheadStore__: JSON.stringify(srcFiddleheadStore),
             }),
             new HtmlWebpackPlugin({
+                lang,
                 title,
                 description,
                 themeColor,

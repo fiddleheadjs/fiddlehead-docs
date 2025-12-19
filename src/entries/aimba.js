@@ -1,3 +1,4 @@
+// lang: vi-VN
 // title: AI MBA
 // description: AI MBA
 // themeColor: white
