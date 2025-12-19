@@ -1,7 +1,7 @@
+import './Modules.less';
 import {Background} from '../background';
 import {Slider} from '../slider';
 import {VideoPlayer} from '../video-player';
-import './Modules.less';
 import {TreeView} from './TreeView';
 
 export let Modules = () => {

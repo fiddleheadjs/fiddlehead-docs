@@ -181,68 +181,6 @@
                     font-weight: 700;
                     text-align: center;
                 }
-
-                .countdown {
-                    display: grid;
-                    grid-template:
-                        "hv mv sv"
-                        "hu mu su"
-                        / 1fr 1fr 1fr;
-                    gap: 7px 19px;
-                    align-items: center;
-                    justify-content: center;
-
-                    .media-current-max(400px, {
-                        gap: 7px 10px;
-                    });
-
-                    .hv { grid-area: hv; }
-                    .hu { grid-area: hu; }
-                    
-                    .mv { grid-area: mv; }
-                    .mu { grid-area: mu; }
-                    
-                    .sv { grid-area: sv; }
-                    .su { grid-area: su; }
-
-                    b {
-                        display: block;
-                        width: 64px;
-                        height: 48px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-align: center;
-                        background: linear-gradient(to bottom, #1F50A4, #2669DD);
-                        color: white;
-                        font-size: 22px;
-                        font-weight: 700;
-                        border-radius: 5px;
-                        align-self: center;
-                        justify-self: center;
-
-                        .media-current-max(400px, {
-                            width: 40px;
-                            height: 30px;
-                            font-size: 20px;
-                        });
-                    }
-
-                    i {
-                        display: block;
-                        width: 100%;
-                        font-style: normal;
-                        font-size: 15px;
-                        color: #595454;
-                        text-align: center;
-                        align-self: center;
-                        justify-self: center;
-
-                        .media-current-max(400px, {
-                            width: 40px;
-                        });
-                    }
-                }
             }
 
             form {
