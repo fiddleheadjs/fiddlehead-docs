@@ -1,6 +1,6 @@
 export let Play = () => {
     return (
-        <svg width="54" height="55" viewBox="0 0 54 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="1em" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill="#E16B5A" d="M27 54a27 27 0 1 0 0-54 27 27 0 0 0 0 54Z" />
             <path fill="#D16354" d="M48.64 43.35 42.1 27.11a.7.7 0 0 0-.06-.2.88.88 0 0 0-.43-.6L19.14 11.58c-.58-.39-1.06-.13-1.06.57v30.1l4.57 11.52a27.12 27.12 0 0 0 26-10.43Z" />
             <path fill="#F5F5F5" d="M18.08 12.16c0-.7.48-.95 1.06-.57L41.6 26.3a.77.77 0 0 1 0 1.4L19.14 42.4c-.58.38-1.06.13-1.06-.57V12.16Z" />
