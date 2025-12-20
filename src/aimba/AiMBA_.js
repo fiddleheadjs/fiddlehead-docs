@@ -21,7 +21,7 @@ export let AiMBA = () => {
 
     useEffect(() => {
         if (renderPhase < 4) {
-            setRenderPhase(value => value + 1);
+            setRenderPhase(renderPhase + 1);
         }
     }, [renderPhase]);
 
