@@ -17,42 +17,34 @@ import {BeingTrusted} from './being-trusted';
 import {useEffect, useState} from 'fiddlehead';
 
 export let AiMBA = () => {
-    let [renderPhase, setRenderPhase] = useState(1);
+    let [phase, setPhase] = useState(1);
 
     useEffect(() => {
-        if (renderPhase < 4) {
-            setRenderPhase(renderPhase + 1);
+        if (phase < 5) {
+            setPhase(phase + 1);
         }
-    }, [renderPhase]);
+    }, [phase]);
 
     return (
         <div class="AiMBA">
             <TopBar />
             <main role="main">
                 <Banner />
-                {renderPhase > 1 && (
-                    <>
-                        <EcoSystem />
-                        <Resources />
-                    </>
-                )}
-                {renderPhase > 2 && (
-                    <>
-                        <Modules />
-                        <OurSolution />
-                        <CoreValues />
-                    </>
-                )}
-                {renderPhase > 3 && (
-                    <>
-                        <Features />
-                        <LearningStrategy />
-                        <TargetAudience />
-                        <BeingTrusted />
-                        <Enrollment />
-                        <FrequentlyAskedQuestions />
-                    </>
-                )}
+                
+                {phase > 1 && <EcoSystem />}
+                
+                {phase > 2 && <Resources />}
+                {phase > 2 && <Modules />}
+                
+                {phase > 3 && <OurSolution />}
+                {phase > 3 && <CoreValues />}
+                {phase > 3 && <Features />}
+
+                {phase > 4 && <LearningStrategy />}
+                {phase > 4 && <TargetAudience />}
+                {phase > 4 && <BeingTrusted />}
+                {phase > 4 && <Enrollment />}
+                {phase > 4 && <FrequentlyAskedQuestions />}
             </main>
             <Footer />
         </div>
