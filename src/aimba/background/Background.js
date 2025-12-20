@@ -10,20 +10,28 @@ export let Background = ({image, lazy}) => {
     let sources = image instanceof Array ? image : [[null, image]];
 
     return (
-        <div class={`Background ${loaded ? 'loaded' : ''} ${failed ? 'failed' : ''}`}>
-            <picture>
-                {sources.map(([media, srcSet]) => (
-                    <source key={media} media={media} srcSet={srcSet} />
-                ))}
-                <img
-                    src={onePixel}
-                    alt="background"
-                    aria-hidden="true"
-                    loading={lazy ? 'lazy' : null}
-                    onLoad={() => setLoaded(true)}
-                    onError={() => setFailed(true)}
-                />
-            </picture>
+        <div
+            class={[
+                'Background',
+                lazy && 'lazy',
+                loaded && 'loaded'
+            ].filter(Boolean).join(' ')}
+        >
+            {failed || (
+                <picture>
+                    {sources.map(([media, srcSet]) => (
+                        <source key={media} media={media} srcSet={srcSet} />
+                    ))}
+                    <img
+                        src={onePixel}
+                        alt="background"
+                        aria-hidden="true"
+                        loading={lazy ? 'lazy' : null}
+                        onLoad={() => setLoaded(true)}
+                        onError={() => setFailed(true)}
+                    />
+                </picture>
+            )}
             <div class="filter" />
         </div>
     );
