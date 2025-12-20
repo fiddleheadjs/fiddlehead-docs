@@ -44,8 +44,6 @@ export let VideoPlayer = ({ src, poster, active }) => {
                 setInViewPort(intersectionRatio >= 0.8);
             });
         }, {
-            root: null,
-            rootMargin: '0px',
             threshold: [0.01, 0.8]
         });
         observer.observe(root);

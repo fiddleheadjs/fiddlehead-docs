@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .Background {
     position: absolute;
     top: 0;
@@ -24,21 +26,33 @@
     img {
         object-fit: cover;
         opacity: 0;
-        transition-property: opacity, transform;
-        transition-duration: 2s;
-        transition-timing-function: ease-in-out;
     }
 
     &.loaded {
         img {
             opacity: 1;
-            transform: scale(1.1);
         }
     }
 
-    &.failed {
+    .animation() {
         img {
-            display: none;
+            transition-property: opacity, transform;
+            transition-duration: 2s;
+            transition-timing-function: ease-in-out;
+        }
+
+        &.loaded {
+            img {
+                transform: scale(1.1);
+            }
         }
     }
+
+    &.lazy {
+        .animation();
+    }
+
+    .media-current-min(601px, {
+        .animation();
+    });
 }
