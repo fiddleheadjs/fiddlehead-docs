@@ -2,35 +2,65 @@
     font-family: "Inter";
     src: url("/aimba/font/Inter_18pt-Regular.ttf");
     font-weight: 400;
-    font-display: fallback;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Inter";
     src: url("/aimba/font/Inter_18pt-Medium.ttf");
     font-weight: 500;
-    font-display: fallback;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Inter";
     src: url("/aimba/font/Inter_18pt-SemiBold.ttf");
     font-weight: 600;
-    font-display: fallback;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Inter";
     src: url("/aimba/font/Inter_18pt-Bold.ttf");
     font-weight: 700;
-    font-display: fallback;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Inter";
     src: url("/aimba/font/Inter_18pt-Black.ttf");
     font-weight: 900;
-    font-display: fallback;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter-Fallback';
+    src: local('Arial');
+    size-adjust: 104.5%;
+    ascent-override: 93%;
+    descent-override: 22.5%;
+    line-gap-override: 0%;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Inter-Fallback';
+    src: local('Arial Bold'), local('Arial-BoldMT');
+    size-adjust: 98%; 
+    ascent-override: 101%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Inter-Fallback';
+    src: local('Arial Bold'), local('Arial-BoldMT');
+    size-adjust: 100%;
+    ascent-override: 98%;
+    descent-override: 22.5%;
+    line-gap-override: 0%;
+    font-weight: 700;
 }
 
 * {
@@ -41,7 +71,7 @@
 }
 
 html {
-    font-family: Inter, Arial, sans-serif;
+    font-family: Inter, Inter-Fallback, Arial, sans-serif;
     font-size: 16px;
     color: #1F1F1F;
     scroll-behavior: smooth;
