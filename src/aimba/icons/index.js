@@ -19,3 +19,4 @@ export * from './Headset';
 export * from './Clock';
 export * from './Envelop';
 export * from './PhoneCall';
+export * from './Play';
