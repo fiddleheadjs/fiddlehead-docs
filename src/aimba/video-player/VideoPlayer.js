@@ -1,7 +1,7 @@
 import './VideoPlayer.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {Aspect} from '../aspect';
-import {useClickAwayListener} from '../use-click-away-listener';
+import {useClickAwayListener} from '../click-away';
 import {Play} from '../icons';
 
 export let VideoPlayer = ({ src, poster, active }) => {
@@ -9,7 +9,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
     let videoRef = useRef(null);
     let [inViewPort, setInViewPort] = useState(false);
     let [controls, setControls] = useState(false);
-    let [ended, setEnded] = useState(true);
+    let [ongoing, setOngoing] = useState(false);
     
     useClickAwayListener(rootRef, () => {
         setControls(false);
@@ -74,15 +74,15 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     playsinline
                     tabIndex="0"
                     onPlaying={() => {
-                        setEnded(false);
+                        setOngoing(true);
                     }}
                     onEnded={() => {
-                        setEnded(true);
+                        setOngoing(false);
                     }}
                 >
                     <source src={src} poster={poster} />
                 </video>
-                {ended && (
+                {!controls && !ongoing && (
                     <div class="overlay">
                         <Play />
                     </div>
