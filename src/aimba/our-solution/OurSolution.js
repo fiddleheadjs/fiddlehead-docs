@@ -17,7 +17,7 @@ export let OurSolution = () => {
     ];
     
     return (
-        <section class="OurSolution" id="OurSolution" role="section">
+        <section class="OurSolution" id="OurSolution">
             <div class="why-us">
                 <div class="container">
                     <div class="details">

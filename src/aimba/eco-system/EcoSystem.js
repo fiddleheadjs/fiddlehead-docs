@@ -20,7 +20,7 @@ export let EcoSystem = () => {
     ];
 
     return (
-        <section class="EcoSystem" id="EcoSystem" role="section">
+        <section class="EcoSystem" id="EcoSystem">
             <div class="heading">
                 <div class="container">
                     <h2 class="title">Hệ sinh thái học tập <com-word>toàn diện</com-word></h2>

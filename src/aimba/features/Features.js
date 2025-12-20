@@ -12,7 +12,7 @@ export let Features = () => {
     };
 
     return (
-        <section class="Features" id="Features" role="section">
+        <section class="Features" id="Features">
             <div class="heading">
                 <h2 class="title">Cách AiMBA giúp bạn <com-word>bứt phá</com-word></h2>
                 <div class="divider"/>
