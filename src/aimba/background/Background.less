@@ -25,7 +25,7 @@
 
     img {
         object-fit: cover;
-        opacity: 0;
+        opacity: 0.1;
     }
 
     &.loaded {
@@ -37,13 +37,13 @@
     .animation() {
         img {
             transition-property: opacity, transform;
-            transition-duration: 1s;
+            transition-duration: 2s;
             transition-timing-function: ease-out;
         }
 
         &.loaded {
             img {
-                transform: scale(1.02);
+                transform: scale(1.05);
             }
         }
     }
