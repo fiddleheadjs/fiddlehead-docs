@@ -70,17 +70,23 @@
             --focus-color: #FFFFFF55;
         }
         
-        .media-current-min(1300px, {
-            .SliderScrollView {
+        .SliderScrollView {
+            .media-current-min(1300px, {
                 --focus-color: #FFFFFF55;
-            }
-        });
+            });
+        }
 
-        .VideoPlayer {
-            --aspect-ratio: (16 / 9);
+        .SliderSlide {
             width: 100%;
             padding: 15px 0;
+        }
 
+        .VideoPlayer {
+            width: 100%;
+            background: #00000055;
+            --aspect-ratio: (16 / 9);
+
+            &,
             img,
             video {
                 border-radius: 10px;
