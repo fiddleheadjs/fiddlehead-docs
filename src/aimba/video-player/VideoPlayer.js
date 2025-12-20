@@ -9,9 +9,11 @@ export let VideoPlayer = ({ src, poster, active }) => {
     let videoRef = useRef(null);
     let [inViewPort, setInViewPort] = useState(false);
     let [controls, setControls] = useState(false);
-    let [overlay, setOverlay] = useState(true);
+    let [ended, setEnded] = useState(true);
     
-    useClickAwayListener(rootRef, () => setControls(false));
+    useClickAwayListener(rootRef, () => {
+        setControls(false);
+    });
     
     useEffect(() => {
         let video = videoRef.current;
@@ -52,8 +54,12 @@ export let VideoPlayer = ({ src, poster, active }) => {
         <div
             ref={rootRef}
             class="VideoPlayer"
-            onMouseEnter={() => setControls(true)}
-            onClick={() => setControls(true)}
+            onMouseEnter={() => {
+                setControls(true);
+            }}
+            onClick={() => {
+                setControls(true);
+            }}
         >
             <Aspect>
                 <img
@@ -67,12 +73,16 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     controls={controls}
                     playsinline
                     tabIndex="0"
-                    onPlaying={() => setOverlay(false)}
-                    onEnded={() => setOverlay(true)}
+                    onPlaying={() => {
+                        setEnded(false);
+                    }}
+                    onEnded={() => {
+                        setEnded(true);
+                    }}
                 >
                     <source src={src} poster={poster} />
                 </video>
-                {overlay && (
+                {ended && (
                     <div class="overlay">
                         <Play />
                     </div>
