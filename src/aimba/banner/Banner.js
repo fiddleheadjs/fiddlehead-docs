@@ -6,7 +6,11 @@ export let Banner = () => {
     return (
         <section class="Banner" role="banner">
             <div class="messages">
-                <Background image="/aimba/img/background-07.jpg" />
+                <Background
+                    image="/aimba/img/background-07.jpg"
+                    imageSet="/aimba/img/background-07-800w.jpg 800w, /aimba/img/background-07-2000w.jpg 2000w"
+                    imageSizes="(max-width: 400px) 200px"
+                />
                 <div class="illustration">
                     <img src="/aimba/img/banner-illustration.jpg" alt="AiMBA illustration" />
                 </div>

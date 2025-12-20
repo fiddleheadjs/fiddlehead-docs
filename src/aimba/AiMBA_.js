@@ -17,10 +17,10 @@ import {BeingTrusted} from './being-trusted';
 import {useEffect, useState} from 'fiddlehead';
 
 export let AiMBA = () => {
-    let [phase, setPhase] = useState(1);
+    let [phase, setPhase] = useState(3);
 
     useEffect(() => {
-        if (phase < 5) {
+        if (phase < 3) {
             setPhase(phase + 1);
         }
     }, [phase]);
@@ -32,19 +32,17 @@ export let AiMBA = () => {
                 <Banner />
                 
                 {phase > 1 && <EcoSystem />}
-                
-                {phase > 2 && <Resources />}
-                {phase > 2 && <Modules />}
-                
-                {phase > 3 && <OurSolution />}
-                {phase > 3 && <CoreValues />}
-                {phase > 3 && <Features />}
+                {phase > 1 && <Resources />}
+                {phase > 1 && <Modules />}
+                {phase > 1 && <OurSolution />}
+                {phase > 1 && <CoreValues />}
 
-                {phase > 4 && <LearningStrategy />}
-                {phase > 4 && <TargetAudience />}
-                {phase > 4 && <BeingTrusted />}
-                {phase > 4 && <Enrollment />}
-                {phase > 4 && <FrequentlyAskedQuestions />}
+                {phase > 2 && <Features />}
+                {phase > 2 && <LearningStrategy />}
+                {phase > 2 && <TargetAudience />}
+                {phase > 2 && <BeingTrusted />}
+                {phase > 2 && <Enrollment />}
+                {phase > 2 && <FrequentlyAskedQuestions />}
             </main>
             <Footer />
         </div>
