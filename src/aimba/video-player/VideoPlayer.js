@@ -2,16 +2,16 @@ import './VideoPlayer.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {Aspect} from '../aspect';
 import {useClickAwayListener} from '../use-click-away-listener';
+import {Play} from '../icons';
 
 export let VideoPlayer = ({ src, poster, active }) => {
     let rootRef = useRef(null);
     let videoRef = useRef(null);
     let [inViewPort, setInViewPort] = useState(false);
     let [controls, setControls] = useState(false);
-    let showControls = () => setControls(true);
-    let hideControls = () => setControls(false);
+    let [overlay, setOverlay] = useState(true);
     
-    useClickAwayListener(rootRef, hideControls);
+    useClickAwayListener(rootRef, () => setControls(false));
     
     useEffect(() => {
         let video = videoRef.current;
@@ -52,29 +52,31 @@ export let VideoPlayer = ({ src, poster, active }) => {
         <div
             ref={rootRef}
             class="VideoPlayer"
-            onMouseEnter={showControls}
-            onClick={showControls}
+            onMouseEnter={() => setControls(true)}
+            onClick={() => setControls(true)}
         >
             <Aspect>
                 <img
                     src={poster}
-                    alt="Video poster"
+                    alt="video poster"
                     loading="lazy"
                     aria-hidden="true"
                 />
                 <video
                     ref={videoRef}
                     controls={controls}
-                    autoplay={active}
                     playsinline
-                    muted
                     tabIndex="0"
+                    onPlaying={() => setOverlay(false)}
+                    onEnded={() => setOverlay(true)}
                 >
-                    <source
-                        src={src}
-                        poster={poster}
-                    />
+                    <source src={src} poster={poster} />
                 </video>
+                {overlay && (
+                    <div class="overlay">
+                        <Play />
+                    </div>
+                )}
             </Aspect>
         </div>
     );
