@@ -1,7 +1,7 @@
 import './Background.less';
 import {useState} from 'fiddlehead';
 
-export let Background = ({image, lazy}) => {
+export let Background = ({image, imageSet, imageSizes, lazy}) => {
     let [loaded, setLoaded] = useState(false);
     let [failed, setFailed] = useState(false);
 
@@ -10,6 +10,8 @@ export let Background = ({image, lazy}) => {
             <layer-lower />
             <img
                 src={image}
+                srcSet={imageSet}
+                sizes={imageSizes}
                 alt="background"
                 aria-hidden="true"
                 loading={lazy ? 'lazy' : null}
