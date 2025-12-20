@@ -20,7 +20,7 @@ export let AiMBA = () => {
     let [renderPhase, setRenderPhase] = useState(1);
 
     useEffect(() => {
-        if (renderPhase < 3) {
+        if (renderPhase < 4) {
             setRenderPhase(value => value + 1);
         }
     }, [renderPhase]);
@@ -31,14 +31,20 @@ export let AiMBA = () => {
             <main role="main">
                 <Banner />
                 {renderPhase > 1 && (
-                    <EcoSystem />
+                    <>
+                        <EcoSystem />
+                        <Resources />
+                    </>
                 )}
                 {renderPhase > 2 && (
                     <>
-                        <Resources />
                         <Modules />
                         <OurSolution />
                         <CoreValues />
+                    </>
+                )}
+                {renderPhase > 3 && (
+                    <>
                         <Features />
                         <LearningStrategy />
                         <TargetAudience />

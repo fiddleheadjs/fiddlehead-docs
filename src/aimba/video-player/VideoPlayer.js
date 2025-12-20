@@ -7,6 +7,7 @@ import {Play} from '../icons';
 export let VideoPlayer = ({ src, poster, active }) => {
     let rootRef = useRef(null);
     let videoRef = useRef(null);
+    let [rendersVideo, setRendersVideo] = useState(false);
     let [inViewPort, setInViewPort] = useState(false);
     let [controls, setControls] = useState(false);
     let [ongoing, setOngoing] = useState(false);
@@ -31,22 +32,25 @@ export let VideoPlayer = ({ src, poster, active }) => {
         if (typeof IntersectionObserver === 'undefined') {
             return;
         }
-        let video = videoRef.current;
-        if (video == null) {
+        let root = rootRef.current;
+        if (root == null) {
             return;
         }
         let observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                setInViewPort(entry.isIntersecting);
+            entries.forEach(({ intersectionRatio }) => {
+                if (intersectionRatio > 0) {
+                    setRendersVideo(true);
+                }
+                setInViewPort(intersectionRatio >= 0.8);
             });
         }, {
             root: null,
             rootMargin: '0px',
-            threshold: 0.5
+            threshold: [0.01, 0.8]
         });
-        observer.observe(video);
+        observer.observe(root);
         return () => {
-            observer.unobserve(video);
+            observer.unobserve(root);
         };
     }, []);
 
@@ -68,20 +72,22 @@ export let VideoPlayer = ({ src, poster, active }) => {
                     loading="lazy"
                     aria-hidden="true"
                 />
-                <video
-                    ref={videoRef}
-                    controls={controls}
-                    playsinline
-                    tabIndex="0"
-                    onPlaying={() => {
-                        setOngoing(true);
-                    }}
-                    onEnded={() => {
-                        setOngoing(false);
-                    }}
-                >
-                    <source src={src} poster={poster} />
-                </video>
+                {rendersVideo && (
+                    <video
+                        ref={videoRef}
+                        controls={controls}
+                        playsinline
+                        tabIndex="0"
+                        onPlaying={() => {
+                            setOngoing(true);
+                        }}
+                        onEnded={() => {
+                            setOngoing(false);
+                        }}
+                    >
+                        <source src={src} poster={poster} />
+                    </video>
+                )}
                 {!controls && !ongoing && (
                     <div class="overlay">
                         <Play />
