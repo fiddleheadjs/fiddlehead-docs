@@ -3,11 +3,12 @@ let fs = require('fs');
 let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
 let configs = [];
-let isDev = process.env.NODE_ENV !== 'production';
+let isProd = process.env.NODE_ENV === 'production';
 let rootDir = path.resolve(__dirname, '..');
 let entriesDir = path.resolve(rootDir, 'src/entries');
 
@@ -39,12 +40,13 @@ fs.readdirSync(entriesDir).map(filename => {
     } = metadata;
 
     configs.push({
-        mode: isDev ? 'development' : 'production',
+        mode: isProd ? 'production' : 'development',
         devtool: 'cheap-module-source-map',
-        entry: path.resolve(entriesDir, filename),
+        entry: {
+            [fname]: path.resolve(entriesDir, filename)
+        },
         output: {
-            path: path.resolve(rootDir, 'public/assets'),
-            filename: filename
+            path: path.resolve(rootDir, 'public/assets')
         },
         target: ['web', 'es5'],
         module: {
@@ -55,7 +57,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders(isDev)
+                    use: getLessLoaders(isProd)
                 },
                 {
                     test: /\.md$/,
@@ -75,7 +77,7 @@ fs.readdirSync(entriesDir).map(filename => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                __DEV__: isDev,
+                __DEV__: !isProd,
                 __srcFiddlehead__: JSON.stringify(srcFiddlehead),
                 __srcFiddleheadStore__: JSON.stringify(srcFiddleheadStore),
             }),
@@ -88,7 +90,7 @@ fs.readdirSync(entriesDir).map(filename => {
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
             }),
-            !isDev && new MiniCssExtractPlugin(),
+            new MiniCssExtractPlugin(),
         ].filter(Boolean),
         resolve: {
             alias: {
@@ -99,7 +101,14 @@ fs.readdirSync(entriesDir).map(filename => {
                 // 'fiddlehead$': path.resolve(rootDir, '../fiddlehead/lib/core'),
                 // 'fiddlehead/store$': path.resolve(rootDir, '../fiddlehead/lib/store'),
             }
-        }
+        },
+        optimization: {
+            minimizer: [
+                // For webpack@5 you can use the '...' syntax to extend existing minimizers (i.e. 'terser-webpack-plugin').
+                '...',
+                new CssMinimizerPlugin(),
+            ],
+        },
     });
 });
 

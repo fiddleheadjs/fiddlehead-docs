@@ -16,17 +16,16 @@ function getJsLoaders() {
     ];
 }
 
-function getLessLoaders(isDev) {
+function getLessLoaders() {
     return [
-        // isDev && 
-        {
-            loader: 'style-loader',
-            options: {
-                injectType: 'singletonStyleTag',
-            }
-        },
-        // !isDev && 
-        // MiniCssExtractPlugin.loader,
+        // Use css extract instead of style-loader
+        MiniCssExtractPlugin.loader,
+        // {
+        //     loader: 'style-loader',
+        //     options: {
+        //         injectType: 'singletonStyleTag',
+        //     }
+        // },
         {
             loader: 'css-loader',
             options: {
