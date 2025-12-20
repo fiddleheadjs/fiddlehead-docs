@@ -4,6 +4,8 @@ let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 let CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+let HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
+let HtmlInlineCssPlugin = require("html-inline-css-webpack-plugin").default;
 let {getJsLoaders, getLessLoaders, getMarkdownLoaders, getScandirLoaders, getHtmlLoaders} = require('./loaders.config');
 let pkg = require('../package.json');
 
@@ -38,6 +40,8 @@ fs.readdirSync(entriesDir).map(filename => {
         description = pkg.title,
         themeColor = 'white',
     } = metadata;
+
+    let isAiMBA = fname === 'aimba'; 
 
     configs.push({
         mode: isProd ? 'production' : 'development',
@@ -89,8 +93,13 @@ fs.readdirSync(entriesDir).map(filename => {
                 template: path.resolve(rootDir, 'src/template.ejs'),
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
+                minify: false, // Do not minify html,
+                inject: isAiMBA ? 'body' : 'head',
+                scriptLoading: isAiMBA ? 'blocking' : 'defer',
             }),
+            isAiMBA && new HtmlInlineScriptPlugin(),
             new MiniCssExtractPlugin(),
+            new HtmlInlineCssPlugin(),
         ].filter(Boolean),
         resolve: {
             alias: {
