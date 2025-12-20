@@ -12,7 +12,7 @@ export let LearningStrategy = () => {
     };
 
     return (
-        <section class="LearningStrategy" id="LearningStrategy" role="section">
+        <section class="LearningStrategy" id="LearningStrategy">
             <div class="container">
                 <div class="details">
                     <Background image="/aimba/img/background-04.jpg" lazy />

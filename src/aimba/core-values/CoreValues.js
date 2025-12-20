@@ -22,7 +22,7 @@ export let CoreValues = () => {
     };
 
     return (
-        <section class="CoreValues" id="CoreValues" role="section">
+        <section class="CoreValues" id="CoreValues">
             <Background image="/aimba/img/background-03.jpg" lazy />
             <h2 class="title">Giá trị nhận được khi đầu tư AiMBA</h2>
             <div class="divider" />

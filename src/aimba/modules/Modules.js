@@ -30,7 +30,7 @@ export let Modules = () => {
     ];
 
     return (
-        <section class="Modules" id="Modules" role="section">
+        <section class="Modules" id="Modules">
             <Background image="/aimba/img/background-02.jpg" lazy />
             <div class="heading">
                 <div class="container">
