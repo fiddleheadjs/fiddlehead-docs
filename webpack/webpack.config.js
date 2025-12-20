@@ -41,6 +41,8 @@ fs.readdirSync(entriesDir).map(filename => {
         themeColor = 'white',
     } = metadata;
 
+    let isAiMBA = fname === 'aimba'; 
+
     configs.push({
         mode: isProd ? 'production' : 'development',
         devtool: 'cheap-module-source-map',
@@ -91,11 +93,11 @@ fs.readdirSync(entriesDir).map(filename => {
                 template: path.resolve(rootDir, 'src/template.ejs'),
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
-                inject: 'body', // inject script at the bottom of body
-                scriptLoading: 'blocking',
-                minify: false // Do not minify html
+                minify: false, // Do not minify html,
+                inject: isAiMBA ? 'body' : 'head',
+                scriptLoading: isAiMBA ? 'blocking' : 'defer',
             }),
-            new HtmlInlineScriptPlugin(),
+            isAiMBA && new HtmlInlineScriptPlugin(),
             new MiniCssExtractPlugin(),
             new HtmlInlineCssPlugin(),
         ].filter(Boolean),
