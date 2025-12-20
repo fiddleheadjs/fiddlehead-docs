@@ -25,7 +25,8 @@
 
     img {
         object-fit: cover;
-        opacity: 0.1;
+        // Opacity animated from a non-zero value to not impact LCP score
+        opacity: 0.01;
     }
 
     &.loaded {
