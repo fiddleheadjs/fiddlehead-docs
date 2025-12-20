@@ -8,9 +8,9 @@
     height: 100%;
     overflow: hidden;
 
+    picture,
     img,
-    layer-lower,
-    layer-upper {
+    .filter {
         display: block;
         position: absolute;
         top: 0;
@@ -24,11 +24,15 @@
     img {
         object-fit: cover;
         opacity: 0;
+        transition-property: opacity, transform;
+        transition-duration: 2s;
+        transition-timing-function: ease-in-out;
     }
 
     &.loaded {
         img {
             opacity: 1;
+            transform: scale(1.1);
         }
     }
 
