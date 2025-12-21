@@ -8,7 +8,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
     let rootRef = useRef(null);
     let videoRef = useRef(null);
     let [rendersVideo, setRendersVideo] = useState(false);
-    let [inViewPort, setInViewPort] = useState(false);
+    let [inViewport, setInViewport] = useState(false);
     let [controls, setControls] = useState(false);
     let [ongoing, setOngoing] = useState(false);
     
@@ -21,12 +21,12 @@ export let VideoPlayer = ({ src, poster, active }) => {
         if (video == null) {
             return;
         }
-        if (active && inViewPort) {
+        if (active && inViewport) {
             video.play();
         } else {
             video.pause();
         }
-    }, [active, inViewPort]);
+    }, [active, inViewport]);
 
     useEffect(() => {
         if (typeof IntersectionObserver === 'undefined') {
@@ -41,7 +41,7 @@ export let VideoPlayer = ({ src, poster, active }) => {
                 if (intersectionRatio > 0) {
                     setRendersVideo(true);
                 }
-                setInViewPort(intersectionRatio >= 0.8);
+                setInViewport(intersectionRatio >= 0.8);
             });
         }, {
             threshold: [0.01, 0.8]
