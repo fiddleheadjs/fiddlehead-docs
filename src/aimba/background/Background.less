@@ -27,27 +27,16 @@
         object-fit: cover;
         // Opacity animated from a non-zero value to not impact LCP score
         opacity: 0.01;
+        transition-property: opacity, transform;
+        transition-timing-function: ease-out;
+        transition-delay: 1s;
+        transition-duration: 2s;
     }
 
-    &.loaded {
+    &.loaded.in-viewport {
         img {
             opacity: 1;
+            transform: scale(1.08);
         }
     }
-
-    .animation() {
-        img {
-            transition-property: opacity, transform;
-            transition-duration: 2s;
-            transition-timing-function: ease-out;
-        }
-
-        &.loaded {
-            img {
-                transform: scale(1.05);
-            }
-        }
-    }
-
-    .animation();
 }
