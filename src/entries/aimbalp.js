@@ -1,7 +1,4 @@
-// lang: vi-VN
-// title: AI MBA
-// description: AI MBA
-// themeColor: white
+// cssClassPrefix: lP-
 
 import {render} from 'fiddlehead';
 import {AiMBA} from '../aimba/AiMBA';

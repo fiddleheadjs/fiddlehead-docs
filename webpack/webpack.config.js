@@ -41,14 +41,18 @@ fs.readdirSync(entriesDir).map(filename => {
         themeColor = 'white',
         headAppend1,
         headAppend2,
+        cssClassPrefix
     } = metadata;
 
     let inlinesOptions = [(isProd ? 'prod' : 'dev'), '*'];
     let inlinesJs = inlinesOptions.includes(metadata.inlinesJs);
     let inlinesCss = inlinesOptions.includes(metadata.inlinesCss);
 
+    let classnameOptions = cssClassPrefix && {
+        classPrefix: cssClassPrefix
+    };
+
     configs.push({
-        
         mode: isProd ? 'production' : 'development',
         devtool: 'cheap-module-source-map',
         entry: {
@@ -62,11 +66,11 @@ fs.readdirSync(entriesDir).map(filename => {
             rules: [
                 {
                     test: /\.js$/,
-                    use: getJsLoaders()
+                    use: getJsLoaders({classnameOptions})
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders(isProd)
+                    use: getLessLoaders({classnameOptions})
                 },
                 {
                     test: /\.md$/,
