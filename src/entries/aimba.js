@@ -2,8 +2,12 @@
 // title: AI MBA
 // description: AI MBA
 // themeColor: white
+// inlinesJs: prod
+// inlinesCss: prod
 
 import {render} from 'fiddlehead';
-import {AiMBA} from '../aimba/AiMBA_';
+import {AiMBA} from '../aimba/AiMBA';
+import {sampleConfig} from '../aimba/sampleConfig';
+import '../aimba/common.less';
 
-render(<AiMBA />, document.getElementById('root'));
+render(<AiMBA {...sampleConfig} />, document.getElementById('root'));

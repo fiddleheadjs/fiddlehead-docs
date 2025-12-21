@@ -1,0 +1,3 @@
+[submodule "webpack/bundling"]
+	path = webpack/bundling
+	url = git@github.com:quyettvq/bundling-extensions.git

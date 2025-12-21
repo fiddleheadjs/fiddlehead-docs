@@ -1,9 +1,15 @@
+import './Registration.less';
 import {Background} from '../background';
 import {CircleCheck, Gift} from '../icons';
 import {PromoCountdown} from './PromoCountdown';
-import './Enrollment.less';
+import {RegistrationForm} from './RegistrationForm';
 
-export let Enrollment = () => {
+export let Registration = ({
+    onRegistrationFormSubmit,
+    sections: {
+        registration: {backgroundImage}
+    }
+}) => {
     const data = [
         'Truy cập đầy đủ <b>1048+ case study</b>',
         '<b>250+ khối lý thuyết</b> được kiến giải chi tiết',
@@ -14,8 +20,8 @@ export let Enrollment = () => {
     ];
 
     return (
-        <section class="Enrollment" id="Enrollment">
-            <Background image="/aimba/img/background-06.jpg" lazy />
+        <section class="Registration" id="Registration">
+            <Background image={backgroundImage.src} lazy />
             <div class="container">
                 <div class="details">
                     <h2 class="title">Gói ưu đãi <com-word>đặc biệt</com-word></h2>
@@ -57,15 +63,7 @@ export let Enrollment = () => {
                         <div class="description">Ưu đãi có hạn, đăng ký ngay để <com-word>không bỏ lỡ</com-word></div>
                         <PromoCountdown />
                     </div>
-                    <form>
-                        <div class="fields">
-                            <input type="text" placeholder="Họ và tên *" required />
-                            <input type="text" placeholder="Email *" required />
-                            <input type="text" placeholder="Số điện thoại *" required />
-                            <input type="text" placeholder="Địa chỉ" />
-                        </div>
-                        <button type="submit" class="x-button" tabIndex="0">Đăng ký</button>
-                    </form>
+                    <RegistrationForm onSubmit={onRegistrationFormSubmit} />
                 </div>
             </div>
         </section>

@@ -2,7 +2,11 @@ import {Background} from '../background';
 import {DocumentReport, GearChecklist, HandMoney, PersonGrowth, RobotSmile, StudentLaptop} from '../pictogram';
 import './CoreValues.less';
 
-export let CoreValues = () => {
+export let CoreValues = ({
+    sections: {
+        coreValues: {backgroundImage}
+    }
+}) => {
     let data = [
         ['DocumentReport', 'Nắm vững hệ thống kiến thức nền tảng MBA chuẩn quốc tế: quản trị nhân sự, marketing, tài chính, chiến lược và vận hành.'],
         ['PersonGrowth', 'Mài sắc tư duy quản lý – rèn luyện trực tiếp qua hàng trăm tình huống thực chiến, ứng dụng tạo hiệu quả công việc ngay.'],
@@ -23,7 +27,7 @@ export let CoreValues = () => {
 
     return (
         <section class="CoreValues" id="CoreValues">
-            <Background image="/aimba/img/background-03.jpg" lazy />
+            <Background image={backgroundImage.src} lazy />
             <h2 class="title">Giá trị nhận được khi đầu tư AiMBA</h2>
             <div class="divider" />
             <div class="values">

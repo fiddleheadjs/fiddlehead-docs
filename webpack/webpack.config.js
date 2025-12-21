@@ -39,10 +39,18 @@ fs.readdirSync(entriesDir).map(filename => {
         title = pkg.title,
         description = pkg.title,
         themeColor = 'white',
+        headAppend1,
+        headAppend2,
+        cssClassPrefix
     } = metadata;
 
-    let inlinesJS = isProd && fname === 'aimba';
-    let inlinesCSS = isProd;
+    let inlinesOptions = [(isProd ? 'prod' : 'dev'), '*'];
+    let inlinesJs = inlinesOptions.includes(metadata.inlinesJs);
+    let inlinesCss = inlinesOptions.includes(metadata.inlinesCss);
+
+    let classnameOptions = cssClassPrefix && {
+        classPrefix: cssClassPrefix
+    };
 
     configs.push({
         mode: isProd ? 'production' : 'development',
@@ -58,11 +66,11 @@ fs.readdirSync(entriesDir).map(filename => {
             rules: [
                 {
                     test: /\.js$/,
-                    use: getJsLoaders()
+                    use: getJsLoaders({classnameOptions})
                 },
                 {
                     test: /\.less$/,
-                    use: getLessLoaders(isProd)
+                    use: getLessLoaders({classnameOptions})
                 },
                 {
                     test: /\.md$/,
@@ -91,16 +99,17 @@ fs.readdirSync(entriesDir).map(filename => {
                 title,
                 description,
                 themeColor,
+                headAppends: [headAppend1, headAppend2],
                 template: path.resolve(rootDir, 'src/template.ejs'),
                 filename: path.resolve(rootDir, `dist/${fname}.html`),
                 publicPath: '/assets/',
                 minify: false, // Do not minify html,
-                inject: inlinesJS ? 'body' : 'head',
-                scriptLoading: inlinesJS ? 'blocking' : 'defer',
+                inject: inlinesJs ? 'body' : 'head',
+                scriptLoading: inlinesJs ? 'blocking' : 'defer',
             }),
             new MiniCssExtractPlugin(),
-            inlinesJS && new HtmlInlineScriptPlugin(),
-            inlinesCSS && new HtmlInlineCssPlugin(),
+            inlinesJs && new HtmlInlineScriptPlugin(),
+            inlinesCss && new HtmlInlineCssPlugin(),
         ].filter(Boolean),
         resolve: {
             alias: {

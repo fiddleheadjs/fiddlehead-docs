@@ -3,14 +3,12 @@ import {ImageView} from '../image-view';
 import {Slider} from '../slider';
 import './EcoSystem.less';
 
-export let EcoSystem = () => {
-    let screenshots = [
-        ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
-        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
-        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
-    ];
-
-    let numbers = [
+export let EcoSystem = ({
+    sections: {
+        ecoSystem: {slideImages, highlightsBackgroundImage}
+    }
+}) => {
+    let highlights = [
         ['1048+', 'Case Study', 'Tình huống thực tế'],
         ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
         ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
@@ -33,7 +31,7 @@ export let EcoSystem = () => {
             </div>
             <div class="screenshots">
                 <Slider
-                    slideItems={screenshots.map(([src, alt], index) => ({
+                    slideItems={slideImages.map(({src, alt}, index) => ({
                         id: src,
                         render: () => (
                             <ImageView>
@@ -56,12 +54,12 @@ export let EcoSystem = () => {
                     )}
                 </Slider>
             </div>
-            <div class="numbers">
+            <div class="highlights">
                 <div class="container">
                     <div class="content-bar">
-                        <Background image="/aimba/img/background-01.jpg" lazy />
+                        <Background image={highlightsBackgroundImage.src} lazy />
                         <ul>
-                            {numbers.map(([quantity, unit, description]) => (
+                            {highlights.map(([quantity, unit, description]) => (
                                 <li key={unit}>
                                     <div class="quantity">{quantity}</div>
                                     <div class="unit">{unit}</div>

@@ -3,9 +3,11 @@ import {Headset, Home, Clock, Envelop, PhoneCall} from '../icons';
 import {ImageView} from '../image-view';
 import {Logo, Wave} from '../pictogram';
 
-export let Footer = () => {
-    let imgQrcodeTacasoft = '/aimba/img/qrcode-tacasoft.png';
-
+export let Footer = ({
+    sections: {
+        footer: {qrCodeImage}
+    }
+}) => {
     return (
         <footer class="Footer" role="contentinfo">
             <div class="wave-background">
@@ -51,7 +53,7 @@ export let Footer = () => {
                             </ul>
                             <div class="qrcode">
                                 <ImageView>
-                                    <img src={imgQrcodeTacasoft} alt="Tacasoft QR code" loading="lazy" />
+                                    <img src={qrCodeImage.src} alt={qrCodeImage.alt} loading="lazy" />
                                 </ImageView>
                             </div>
                         </div>

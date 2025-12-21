@@ -131,7 +131,7 @@ export let Slider = ({
         if (scrollViewRef.current == null) {
             return null;
         }
-        return scrollViewRef.current.querySelector(`.SliderSlide[data-id="${slideId}"]`);
+        return scrollViewRef.current.querySelector(`slider-slide[data-id="${slideId}"]`);
     };
 
     let getDotById = (slideId) => {
@@ -215,7 +215,7 @@ export let Slider = ({
                     let active = isSlideActive(slide);
                     let inView = isSlideInView(slide);
                     return (
-                        <div
+                        <slider-slide
                             key={item.id}
                             class="SliderSlide"
                             data-id={item.id}
@@ -223,7 +223,7 @@ export let Slider = ({
                             data-in-view={String(inView)}
                         >
                             {item.render({ active, inView })}
-                        </div>
+                        </slider-slide>
                     );
                 })}
             </div>

@@ -2,19 +2,26 @@ import {Background, onePixel} from '../background';
 import {SquareCheck} from '../icons';
 import './Banner.less';
 
-export let Banner = () => {
+export let Banner = ({
+    sections: {
+        banner: {
+            backgroundImage,
+            coverImage
+        }
+    }
+}) => {
     return (
         <section class="Banner" role="banner">
             <div class="messages">
                 <Background
                     image={[
-                        ['(min-width: 601px)', '/aimba/img/background-07-landscape.jpg'],
-                        ['(max-width: 600px)', '/aimba/img/background-07-portrait.jpg'],
+                        ['(min-width: 601px)', backgroundImage.landscape.src],
+                        ['(max-width: 600px)', backgroundImage.portrait.src],
                     ]}
                 />
                 <picture class="illustration">
-                    <source media="(min-width: 1201px)" srcset="/aimba/img/banner-illustration.jpg" />
-                    <img src={onePixel} alt="pixel" aria-hidden="true" />
+                    <source media="(min-width: 1201px)" srcset={coverImage.src} />
+                    <img src={onePixel} alt={coverImage.alt} aria-hidden="true" />
                 </picture>
                 <div class="container">
                     <div class="overlay">
@@ -58,7 +65,7 @@ export let Banner = () => {
                     </div>
                 </div>
             </div>
-            <div class="numbers">
+            <div class="highlights">
                 <div class="container">
                     <div class="item">
                         <div class="content">

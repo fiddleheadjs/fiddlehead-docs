@@ -9,6 +9,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon-precomposed" href="/img/fiddlehead_128.png" />
+        <% htmlWebpackPlugin.options.headAppends.forEach(function(line) { %>
+        <%= line %>
+        <% }); %>
     </head>
     <body>
         <div id="root"></div>
