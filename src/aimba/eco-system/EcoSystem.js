@@ -45,7 +45,16 @@ export let EcoSystem = () => {
                             </ImageView>
                         )
                     }))}
-                />
+                >
+                    {({ slideShow, backButton, nextButton, dotNavigation }) => (
+                        <>
+                            {slideShow()}
+                            {backButton()}
+                            {nextButton()}
+                            {dotNavigation()}
+                        </>
+                    )}
+                </Slider>
             </div>
             <div class="numbers">
                 <div class="container">

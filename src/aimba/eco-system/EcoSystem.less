@@ -16,6 +16,7 @@
         .title {
             font-weight: 700;
             font-size: 38px;
+            line-height: (46 / 38);
             text-align: center;
         }
 
@@ -30,6 +31,7 @@
             font-weight: 700;
             font-style: italic;
             font-size: 24px;
+            line-height: (34 / 24);
             text-align: center;
 
             .media-current-max(1000px, {
@@ -55,13 +57,24 @@
             --slide-width: min(1170px, 100%);
             --slide-spacing: 80px;
             --slide-margin: 60px;
-            --focus-color: #88888888;
+            --focus-color: #28A8E088;
             max-width: calc(var(--slide-width) + 2 * var(--slide-margin));
             margin: auto;
+
+            .media-current-min(801px, {
+                .SliderDotNavigation {
+                    display: none;
+                }
+            });
             
             .media-current-max(800px, {
                 --slide-margin: 0;
                 --slide-spacing: 0;
+
+                .SliderBackButton,
+                .SliderNextButton {
+                    display: none;
+                }
             });
         }
         
