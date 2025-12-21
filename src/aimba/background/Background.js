@@ -18,11 +18,23 @@ export let Background = ({image, lazy}) => {
             return;
         }
         let observer = new IntersectionObserver((entries) => {
-            entries.forEach(({ intersectionRatio }) => {
-                setInViewport(intersectionRatio >= 0.5);
+            entries.forEach(({ intersectionRatio, target }) => {
+                let appliedThreshold;
+                let t = target.offsetHeight;
+                let w = window.innerHeight;
+                if (t > 2 * w) {
+                    appliedThreshold = 0.1;
+                } else if (t > w) {
+                    appliedThreshold = 0.3;  
+                } else if (t > w / 2) {
+                    appliedThreshold = 0.5;
+                } else {
+                    appliedThreshold = 0.7;
+                }
+                setInViewport(intersectionRatio >= appliedThreshold);
             });
         }, {
-            threshold: [0.5]
+            threshold: [0.1, 0.3, 0.5, 0.7]
         });
         observer.observe(root);
         return () => {
