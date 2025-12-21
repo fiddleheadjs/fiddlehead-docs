@@ -2,24 +2,32 @@ import {useState} from 'fiddlehead';
 import './RegistrationForm.less';
 
 export let RegistrationForm = ({onSubmit}) => {
-    let [error, setError] = useState(null);
+    let [feedback, setFeedback] = useState(null);
 
-    let onFeedback = (error) => {
-        setError(error);
+    let handleSubmit = (event) => {
+        event.preventDefault();
+        setFeedback(null);
+        let form = event.target;
+        let formData = new FormData(form);
+        let onFeedback = (feedback) => {
+            setFeedback(feedback);
+            if (feedback.type === 'success') {
+                form.reset();
+            }
+        };
+        onSubmit({formData, onFeedback});
+    };
+
+    let handleChange = () => {
+        setFeedback(null);
     };
 
     return (
         <form
             class="RegistrationForm"
             method="POST"
-            onSubmit={(event) => {
-                event.preventDefault();
-                let formData = new FormData(event.target);
-                onSubmit({
-                    formData,
-                    onFeedback
-                });
-            }}
+            onSubmit={handleSubmit}
+            onChange={handleChange}
         >
             <div class="fields">
                 <input
@@ -50,6 +58,11 @@ export let RegistrationForm = ({onSubmit}) => {
                     autocomplete="off"
                 />
             </div>
+            {feedback !== null && ['success', 'error'].includes(feedback.type) && (
+                <div class="feedback" data-type={feedback.type}>
+                    {feedback.message}
+                </div>
+            )}
             <button
                 type="submit"
                 class="x-button"

@@ -37,6 +37,20 @@
             }
         }
     }
+    
+    .feedback {
+        padding: 0 18px;
+        text-align: center;
+        font-weight: 600;
+
+        &[data-type="success"] {
+            color: green;
+        }
+        
+        &[data-type="error"] {
+            color: orangered;
+        }
+    }
 
     button {
         width: 100%;

@@ -16,16 +16,26 @@ let props = {
         location.href = '#Enrollment';
     },
     onLoginRequest() {
-        alert('Demo yêu cầu đăng nhập');
+        alert('Giả lập yêu cầu đăng nhập');
     },
     onRegistrationFormSubmit({formData, onFeedback}) {
-        let data = {};
+        let values = {};
         for (let [name, value] of formData.entries()) {
-            data[name] = value;
+            values[name] = value;
         }
-        console.log('form data', data);
-        let error = prompt('Demo form đăng ký, nhập thông báo lỗi để giả lập lỗi hoặc để trống nếu đăng ký thành công');
-        onFeedback(error || null);
+        console.log('Registration form data:', values);
+        let feedback = prompt(
+            'Giả lập xử lý form đăng ký, data được log trong console.\n' +
+            'Nhập một trong các phản hồi sau để kết thúc quá trình:\n' +
+            '- success: <thông báo thành công>\n' +
+            '- error: <thông báo lỗi>\n' +
+            '- abort'
+        );
+        let [type, ...messageChunks] = feedback.split(':').map(t => t.trim());
+        onFeedback({
+            type,
+            message: messageChunks.join()
+        });
     },
     sections: {
         ecoSystem: {
