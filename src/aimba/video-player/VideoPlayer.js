@@ -1,21 +1,21 @@
 import './VideoPlayer.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {Aspect} from '../aspect';
-import {useClickAwayListener} from '../click-away';
+import {useClickAwayListener, useIntersectionObserver} from '../utils';
 import {Play} from '../icons';
 
-export let VideoPlayer = ({ src, poster, active }) => {
+export let VideoPlayer = ({src, poster, active}) => {
     let rootRef = useRef(null);
     let videoRef = useRef(null);
     let [rendersVideo, setRendersVideo] = useState(false);
     let [inViewport, setInViewport] = useState(false);
     let [controls, setControls] = useState(false);
     let [ongoing, setOngoing] = useState(false);
-    
+
     useClickAwayListener(rootRef, () => {
         setControls(false);
     });
-    
+
     useEffect(() => {
         let video = videoRef.current;
         if (video == null) {
@@ -28,29 +28,15 @@ export let VideoPlayer = ({ src, poster, active }) => {
         }
     }, [active, inViewport]);
 
-    useEffect(() => {
-        if (typeof IntersectionObserver === 'undefined') {
-            return;
+    useIntersectionObserver(rootRef, {
+        threshold: [0.01, 0.8],
+        callback: ({intersectionRatio}) => {
+            if (intersectionRatio > 0) {
+                setRendersVideo(true);
+            }
+            setInViewport(intersectionRatio >= 0.8);
         }
-        let root = rootRef.current;
-        if (root == null) {
-            return;
-        }
-        let observer = new IntersectionObserver((entries) => {
-            entries.forEach(({ intersectionRatio }) => {
-                if (intersectionRatio > 0) {
-                    setRendersVideo(true);
-                }
-                setInViewport(intersectionRatio >= 0.8);
-            });
-        }, {
-            threshold: [0.01, 0.8]
-        });
-        observer.observe(root);
-        return () => {
-            observer.unobserve(root);
-        };
-    }, []);
+    });
 
     return (
         <div

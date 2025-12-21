@@ -7,3 +7,4 @@ export * from './PersonGrowth';
 export * from './RobotSmile';
 export * from './StudentLaptop';
 export * from './CircleFeatures';
+export * from './Wave';
