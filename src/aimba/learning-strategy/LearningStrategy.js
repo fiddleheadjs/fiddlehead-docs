@@ -1,9 +1,14 @@
 import {Background} from '../background';
 import './LearningStrategy.less';
 
-export let LearningStrategy = () => {
-    let imgCover = '/aimba/img/learning-strategy-cover.jpg';
-
+export let LearningStrategy = ({
+    sections: {
+        learningStrategy: {
+            coverImage
+        }
+    },
+    onRegistrationRequest
+}) => {
     let data = {
         '01': ['Chọn module phù hợp với mục tiêu hiện tại', 'Lựa chọn từ 15 chương trình chuyên biệt theo vị trí và mục tiêu sự nghiệp của bạn'],
         '02': ['Thực hành với các case study thực tế', 'Giải quyết các tình huống dựa trên 1048+ case study thực tế tại Việt Nam'],
@@ -20,7 +25,14 @@ export let LearningStrategy = () => {
                         <div class="content">
                             <h2 class="title">Cách thức học tập tại AiMBA</h2>
                             <div class="actions">
-                                <button type="button" tabIndex="0" class="x-button">Đăng ký</button>
+                                <button
+                                    type="button"
+                                    tabIndex="0"
+                                    class="x-button"
+                                    onClick={onRegistrationRequest}
+                                >
+                                    Đăng ký
+                                </button>
                             </div>
                         </div>
                         <div class="divider" />
@@ -43,7 +55,7 @@ export let LearningStrategy = () => {
                     </div>
                 </div>
                 <div class="cover">
-                    <img src={imgCover} alt="Cách thức học tập tại AiMBA" loading="lazy" />
+                    <img src={coverImage.src} alt={coverImage.alt} loading="lazy" />
                 </div>
             </div>
         </section>

@@ -4,18 +4,15 @@ import {Macbook} from '../pictogram';
 import {Slider} from '../slider';
 import './OurSolution.less';
 
-export let OurSolution = () => {
-    let imgWhyUs = '/aimba/img/our-solution-why-us.jpg';
-
-    let screenshots = [
-        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
-        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
-        ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
-        ['/aimba/img/shared-screenshot-04.jpg', 'Screenshot 04'],
-        ['/aimba/img/shared-screenshot-05.jpg', 'Screenshot 05'],
-        ['/aimba/img/shared-screenshot-06.jpg', 'Screenshot 06'],
-    ];
-    
+export let OurSolution = ({
+    sections: {
+        ourSolution: {
+            coverImage,
+            slideImages
+        }
+    },
+    onRegistrationRequest
+}) => {
     return (
         <section class="OurSolution" id="OurSolution">
             <div class="why-us">
@@ -51,7 +48,7 @@ export let OurSolution = () => {
                     </div>
                     <div class="photos">
                         <ImageView>
-                            <img src={imgWhyUs} alt="Tại sao nên chọn AiMBA?" loading="lazy" />
+                            <img src={coverImage.src} alt={coverImage.alt} loading="lazy" />
                         </ImageView>
                     </div>
                 </div>
@@ -62,7 +59,7 @@ export let OurSolution = () => {
                     <div class="content">
                         <div class="photos">
                             <Slider
-                                slideItems={screenshots.map(([src, alt]) => ({
+                                slideItems={slideImages.map(({src, alt}) => ({
                                     id: src,
                                     render: () => <img src={src} alt={alt} loading="lazy" />
                                 }))}
@@ -99,7 +96,7 @@ export let OurSolution = () => {
                                 </ul>
                             </div>
                             <div class="actions">
-                                <button type="button" tabIndex="0" class="x-button">Đăng ký</button>
+                                <button type="button" tabIndex="0" class="x-button" onClick={onRegistrationRequest}>Đăng ký</button>
                             </div>
                         </div>
                     </div>

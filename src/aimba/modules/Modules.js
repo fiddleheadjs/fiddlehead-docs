@@ -4,7 +4,14 @@ import {Slider} from '../slider';
 import {VideoPlayer} from '../video-player';
 import {TreeView} from './TreeView';
 
-export let Modules = () => {
+export let Modules = ({
+    sections: {
+        modules: {
+            slideVideos
+        }
+    },
+    onRegistrationRequest
+}) => {
     let roadmap = [
         ['Module 1 - Nền tảng kĩ năng chuyên nghiệp', 'Trang bị tư duy, tác phong chuyên nghiệp cùng các kỹ năng mềm cốt lõi như giao tiếp, giải quyết vấn đề và làm việc nhóm. Đây là bước đầu tư nền tảng để khai phá tiềm năng và tối đa hóa hiệu suất ngay từ những ngày đầu tiên.'],
         ['Module 2 - Chuyên Gia Bán Hàng & Đàm Phán', 'Nâng tầm kỹ năng bán hàng và đàm phán lên đỉnh cao, đi sâu vào tâm lý khách hàng, chiến lược phức hợp và nghệ thuật xây dựng mối quan hệ bền vững để mang lại tăng trưởng doanh thu đột phá.'],
@@ -21,12 +28,6 @@ export let Modules = () => {
         ['Module 13 - Hoạch định & Đổi mới Chiến lược', 'Dành cho các nhà lãnh đạo cấp cao, những người kiến tạo tương lai của doanh nghiệp.Chương trình này tập trung thuần túy vào tư duy chiến lược, các mô hình phân tích kinh điển và phương pháp đổi mới tiên tiến. Bạn sẽ học cách phân tích sâu sắc môi trường kinh doanh, xác định lợi thế cốt lõi, xây dựng các mô hình kinh doanh đột phá và dẫn dắt sự chuyển đổi chiến lược để đạt được thành công bền vững.'],
         ['Module 14 - M&A và phân tích đầu tư', 'Cung cấp kiến thức chuyên sâu và công cụ thực tiễn để thực hiện toàn bộ quy trình M&A, từ xác định mục tiêu, định giá, đàm phán đến tích hợp sau sáp nhập.'],
         ['Module 15 - AI & Tech 4.0 trong Quản trị Kinh doanh', 'Xây dựng tư duy chuyển đổi số và trang bị kiến thức nền tảng về Trí tuệ nhân tạo (AI) và tự động hóa. Người học sẽ khám phá các ứng dụng thực tế của AI, học cách phân tích quy trình và làm việc với dữ liệu để tìm ra cơ hội cải tiến. Khóa học cung cấp lộ trình để bắt đầu tự động hóa các tác vụ, ra quyết định dựa trên dữ liệu và dẫn dắt các sáng kiến công nghệ.'],
-    ];
-
-    let videos = [
-        ['/aimba/video/modules-video-01.mp4', '/aimba/img/modules-poster-01.jpg'],
-        ['/aimba/video/modules-video-02.mp4', '/aimba/img/modules-poster-02.jpg'],
-        ['/aimba/video/modules-video-03.mp4', '/aimba/img/modules-poster-03.jpg'],
     ];
 
     return (
@@ -47,7 +48,7 @@ export let Modules = () => {
             </div>
             <div class="videos">
                 <Slider
-                    slideItems={videos.map(([src, poster]) => ({
+                    slideItems={slideVideos.map(({src, poster}) => ({
                         id: src,
                         render: ({ active }) => (
                             <VideoPlayer src={src} poster={poster} active={active} />
@@ -57,7 +58,7 @@ export let Modules = () => {
             </div>
             <div class="actions">
                 <div class="container">
-                    <button type="button" tabIndex="0" class="x-button">Đăng ký</button>
+                    <button type="button" tabIndex="0" class="x-button" onClick={onRegistrationRequest}>Đăng ký</button>
                 </div>
             </div>
         </section>

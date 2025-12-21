@@ -3,7 +3,13 @@ import {ArrowTopRight, BachelorCap, BadgeCheck, FileChart, PeoplePlus} from '../
 import {ImageView} from '../image-view';
 import './TargetAudience.less';
 
-export let TargetAudience = () => {
+export let TargetAudience = ({
+    sections: {
+        targetAudience: {
+            certificateImage
+        }
+    }
+}) => {
     let icons = {
         PeoplePlus,
         FileChart,
@@ -22,8 +28,6 @@ export let TargetAudience = () => {
         'Am hiểu và biết cách ứng dụng công nghệ AI vào các khía cạnh của quản trị kinh doanh nhằm phân tích, phát hiện, xây dựng giải pháp giải quyết các vấn đề quản trị.',
         'Nắm vững các kỹ năng cốt yếu, rèn luyện tư duy phân tích nhạy bén và am hiểu sâu sắc các xu hướng chuyển đổi số doanh nghiệp nhằm phân tích, phát hiện, xây dựng giải pháp kinh doanh đổi mới, bắt kịp các xu hướng mới.'
     ];
-
-    let imgCertificate = '/aimba/img/target-audience-certificate.png';
 
     return (
         <section class="TargetAudience" id="TargetAudience">
@@ -77,7 +81,7 @@ export let TargetAudience = () => {
                         </div>
                         <div class="photos">
                             <ImageView>
-                                <img src={imgCertificate} alt="Chứng nhận hoàn thành khóa học" loading="lazy" />
+                                <img src={certificateImage.src} alt={certificateImage.alt} loading="lazy" />
                             </ImageView>
                         </div>
                     </div>

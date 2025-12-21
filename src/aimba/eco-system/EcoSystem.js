@@ -3,13 +3,11 @@ import {ImageView} from '../image-view';
 import {Slider} from '../slider';
 import './EcoSystem.less';
 
-export let EcoSystem = () => {
-    let screenshots = [
-        ['/aimba/img/shared-screenshot-03.jpg', 'Screenshot 03'],
-        ['/aimba/img/shared-screenshot-02.jpg', 'Screenshot 02'],
-        ['/aimba/img/shared-screenshot-01.jpg', 'Screenshot 01'],
-    ];
-
+export let EcoSystem = ({
+    sections: {
+        ecoSystem: {slideImages}
+    }
+}) => {
     let numbers = [
         ['1048+', 'Case Study', 'Tình huống thực tế'],
         ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
@@ -33,7 +31,7 @@ export let EcoSystem = () => {
             </div>
             <div class="screenshots">
                 <Slider
-                    slideItems={screenshots.map(([src, alt], index) => ({
+                    slideItems={slideImages.map(({src, alt}, index) => ({
                         id: src,
                         render: () => (
                             <ImageView>

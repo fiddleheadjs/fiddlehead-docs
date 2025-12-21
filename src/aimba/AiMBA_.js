@@ -10,13 +10,13 @@ import {CoreValues} from './core-values';
 import {Features} from './features';
 import {LearningStrategy} from './learning-strategy';
 import {TargetAudience} from './target-audience';
-import {Enrollment} from './enrollment';
+import {Registration} from './registration';
 import {FrequentlyAskedQuestions} from './frequently-asked-questions';
 import {Footer} from './footer';
 import {BeingTrusted} from './being-trusted';
 import {useEffect, useState} from 'fiddlehead';
 
-export let AiMBA = () => {
+export let AiMBA = (props) => {
     let [phase, setPhase] = useState(3);
 
     useEffect(() => {
@@ -27,24 +27,24 @@ export let AiMBA = () => {
 
     return (
         <div class="AiMBA">
-            <TopBar />
+            <TopBar {...props} />
             <main role="main">
-                <Banner />
+                <Banner {...props} />
                 
-                {phase > 1 && <EcoSystem />}
-                {phase > 1 && <Resources />}
-                {phase > 1 && <Modules />}
-                {phase > 1 && <OurSolution />}
-                {phase > 1 && <CoreValues />}
+                {phase > 1 && <EcoSystem {...props} />}
+                {phase > 1 && <Resources {...props} />}
+                {phase > 1 && <Modules {...props} />}
+                {phase > 1 && <OurSolution {...props} />}
+                {phase > 1 && <CoreValues {...props} />}
 
-                {phase > 2 && <Features />}
-                {phase > 2 && <LearningStrategy />}
-                {phase > 2 && <TargetAudience />}
-                {phase > 2 && <BeingTrusted />}
-                {phase > 2 && <Enrollment />}
-                {phase > 2 && <FrequentlyAskedQuestions />}
+                {phase > 2 && <Features {...props} />}
+                {phase > 2 && <LearningStrategy {...props} />}
+                {phase > 2 && <TargetAudience {...props} />}
+                {phase > 2 && <BeingTrusted {...props} />}
+                {phase > 2 && <Registration {...props} />}
+                {phase > 2 && <FrequentlyAskedQuestions {...props} />}
             </main>
-            <Footer />
+            <Footer {...props} />
         </div>
     );
 };
