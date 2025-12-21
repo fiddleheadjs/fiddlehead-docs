@@ -120,25 +120,22 @@
             padding: 30px;
             list-style: none;
             
-            .media-current-max(1000px, {
-                flex-wrap: wrap;
-                justify-content: center;
+            .media-current-max(1300px, {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            });
+            
+            .media-current-max(800px, {
+                grid-template-columns: 1fr 1fr;
             });
 
             li {
+                align-self: flex-start;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
 
-                .media-current-max(1000px, {
-                    width: calc((100% - 2 * 30px) / 3);
-                });
-                
-                .media-current-max(800px, {
-                    width: calc((100% - 1 * 30px) / 2);
-                });
-                
                 .quantity {
                     font-weight: 700;
                     font-size: 30px;
