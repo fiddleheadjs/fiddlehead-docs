@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist/aimba.html'));
 });
 
+router.get('/integration-demo', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'dist/aimbalpdemo.html'));
+});
+
 module.exports = router;

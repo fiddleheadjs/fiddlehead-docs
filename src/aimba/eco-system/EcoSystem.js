@@ -5,10 +5,10 @@ import './EcoSystem.less';
 
 export let EcoSystem = ({
     sections: {
-        ecoSystem: {slideImages}
+        ecoSystem: {slideImages, highlightsBackgroundImage}
     }
 }) => {
-    let numbers = [
+    let highlights = [
         ['1048+', 'Case Study', 'Tình huống thực tế'],
         ['250+', 'Khối lý thuyết', 'Được chắt lọc cẩn thận'],
         ['500+', 'Mini Quiz', 'Kiểm tra nắm chắc kiến thức'],
@@ -54,12 +54,12 @@ export let EcoSystem = ({
                     )}
                 </Slider>
             </div>
-            <div class="numbers">
+            <div class="highlights">
                 <div class="container">
                     <div class="content-bar">
-                        <Background image="/aimba/img/background-01.jpg" lazy />
+                        <Background image={highlightsBackgroundImage.src} lazy />
                         <ul>
-                            {numbers.map(([quantity, unit, description]) => (
+                            {highlights.map(([quantity, unit, description]) => (
                                 <li key={unit}>
                                     <div class="quantity">{quantity}</div>
                                     <div class="unit">{unit}</div>

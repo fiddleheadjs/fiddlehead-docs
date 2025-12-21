@@ -1,12 +1,12 @@
 import {Logo} from '../pictogram';
 import './TopBar.less';
 
-export let TopBar = ({homeUrl, onLoginRequest, onRegistrationRequest}) => {
+export let TopBar = ({onLoginRequest, onRegistrationRequest}) => {
     return (
         <header class="TopBar">
             <div class="container">
                 <div class="brand">
-                    <a role="button" tabIndex="0" title="AiMBA" class="x-button" href={homeUrl}>
+                    <a role="button" tabIndex="0" title="AiMBA" class="x-button" href="">
                         <Logo />
                     </a>
                 </div>

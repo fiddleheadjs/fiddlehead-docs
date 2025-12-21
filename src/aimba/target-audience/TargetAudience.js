@@ -6,6 +6,7 @@ import './TargetAudience.less';
 export let TargetAudience = ({
     sections: {
         targetAudience: {
+            backgroundImage,
             certificateImage
         }
     }
@@ -66,7 +67,7 @@ export let TargetAudience = ({
             </div>
             <div class="certificate">
                 <div class="big-card">
-                    <Background image="/aimba/img/background-05.jpg" lazy />
+                    <Background image={backgroundImage.src} lazy />
                     <h2 class="title">Chứng nhận - cam kết</h2>
                     <div class="content">
                         <div class="details">

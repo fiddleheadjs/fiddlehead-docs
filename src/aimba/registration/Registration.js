@@ -4,7 +4,12 @@ import {CircleCheck, Gift} from '../icons';
 import {PromoCountdown} from './PromoCountdown';
 import {RegistrationForm} from './RegistrationForm';
 
-export let Registration = ({ onRegistrationFormSubmit }) => {
+export let Registration = ({
+    onRegistrationFormSubmit,
+    sections: {
+        registration: {backgroundImage}
+    }
+}) => {
     const data = [
         'Truy cập đầy đủ <b>1048+ case study</b>',
         '<b>250+ khối lý thuyết</b> được kiến giải chi tiết',
@@ -16,7 +21,7 @@ export let Registration = ({ onRegistrationFormSubmit }) => {
 
     return (
         <section class="Registration" id="Registration">
-            <Background image="/aimba/img/background-06.jpg" lazy />
+            <Background image={backgroundImage.src} lazy />
             <div class="container">
                 <div class="details">
                     <h2 class="title">Gói ưu đãi <com-word>đặc biệt</com-word></h2>

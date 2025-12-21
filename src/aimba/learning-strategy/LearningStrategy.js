@@ -4,6 +4,7 @@ import './LearningStrategy.less';
 export let LearningStrategy = ({
     sections: {
         learningStrategy: {
+            backgroundImage,
             coverImage
         }
     },
@@ -20,7 +21,7 @@ export let LearningStrategy = ({
         <section class="LearningStrategy" id="LearningStrategy">
             <div class="container">
                 <div class="details">
-                    <Background image="/aimba/img/background-04.jpg" lazy />
+                    <Background image={backgroundImage.src} lazy />
                     <div class="heading">
                         <div class="content">
                             <h2 class="title">Cách thức học tập tại AiMBA</h2>

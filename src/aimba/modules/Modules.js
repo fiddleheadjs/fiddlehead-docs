@@ -7,6 +7,7 @@ import {TreeView} from './TreeView';
 export let Modules = ({
     sections: {
         modules: {
+            backgroundImage,
             slideVideos
         }
     },
@@ -32,7 +33,7 @@ export let Modules = ({
 
     return (
         <section class="Modules" id="Modules">
-            <Background image="/aimba/img/background-02.jpg" lazy />
+            <Background image={backgroundImage.src} lazy />
             <div class="heading">
                 <div class="container">
                     <div class="title">60–80 giờ học theo mỗi Module chuyên biệt của AiMBA</div>
