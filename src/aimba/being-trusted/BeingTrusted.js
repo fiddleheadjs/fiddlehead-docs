@@ -3,7 +3,7 @@ import {Slider} from '../slider';
 import {ImageView} from '../image-view';
 
 export let BeingTrusted = ({
-    sections: {
+    contents: {
         beingTrusted: {
             testimonials
         }

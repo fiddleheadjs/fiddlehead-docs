@@ -4,7 +4,7 @@ import {ImageView} from '../image-view';
 import './TargetAudience.less';
 
 export let TargetAudience = ({
-    sections: {
+    contents: {
         targetAudience: {
             backgroundImage,
             certificateImage

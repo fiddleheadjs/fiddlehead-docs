@@ -4,7 +4,7 @@ import {Slider} from '../slider';
 import './EcoSystem.less';
 
 export let EcoSystem = ({
-    sections: {
+    contents: {
         ecoSystem: {slideImages, highlightsBackgroundImage}
     }
 }) => {

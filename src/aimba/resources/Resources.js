@@ -3,7 +3,7 @@ import {Slider} from '../slider';
 import './Resources.less';
 
 export let Resources = ({
-    sections: {
+    contents: {
         resources: {
             brandStories,
             businessModels,

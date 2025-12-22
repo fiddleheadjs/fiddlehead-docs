@@ -3,7 +3,7 @@ import {SquareCheck} from '../icons';
 import './Banner.less';
 
 export let Banner = ({
-    sections: {
+    contents: {
         banner: {
             backgroundImage,
             coverImage
