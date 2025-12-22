@@ -2,14 +2,27 @@ import './Footer.less';
 import {Headset, Home, Clock, Envelop, PhoneCall} from '../icons';
 import {ImageView} from '../image-view';
 import {Logo, Wave} from '../pictogram';
+import {useRef, useState} from 'fiddlehead';
+import {FloatingActionButtons} from './FloatingActionButtons';
+import {useIntersectionObserver} from '../utils';
 
 export let Footer = ({
     contents: {
         footer: {qrCode}
     }
 }) => {
+    let rootRef = useRef(null);
+    let [hidesFABs, setHidesFABs] = useState(false);
+
+    useIntersectionObserver(rootRef, {
+        threshold: 0,
+        callback: ({intersectionRatio}) => {
+            setHidesFABs(intersectionRatio > 0);
+        }
+    });
+
     return (
-        <footer class="Footer" role="contentinfo">
+        <footer class="Footer" role="contentinfo" ref={rootRef}>
             <div class="wave-background">
                 <Wave active />
             </div>
@@ -82,6 +95,7 @@ export let Footer = ({
                     </ul>
                 </div>
             </div>
+            <FloatingActionButtons hidden={hidesFABs} />
         </footer>
     );
 };
