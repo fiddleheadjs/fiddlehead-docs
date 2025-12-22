@@ -4,7 +4,7 @@ import {ImageView} from '../image-view';
 import {Logo, Wave} from '../pictogram';
 
 export let Footer = ({
-    sections: {
+    contents: {
         footer: {qrCodeImage}
     }
 }) => {

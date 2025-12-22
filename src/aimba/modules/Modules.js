@@ -5,7 +5,7 @@ import {VideoPlayer} from '../video-player';
 import {TreeView} from './TreeView';
 
 export let Modules = ({
-    sections: {
+    contents: {
         modules: {
             backgroundImage,
             slideVideos

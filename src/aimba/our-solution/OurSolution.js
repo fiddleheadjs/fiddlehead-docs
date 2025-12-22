@@ -5,7 +5,7 @@ import {Slider} from '../slider';
 import './OurSolution.less';
 
 export let OurSolution = ({
-    sections: {
+    contents: {
         ourSolution: {
             coverImage,
             slideImages

@@ -23,13 +23,16 @@ export let sampleConfig = {
             '- error: <thông báo lỗi>\n' +
             '- abort'
         );
+        if (feedback === null) {
+            return;
+        }
         let [type, ...messageChunks] = feedback.split(':').map(t => t.trim());
         onFeedback({
             type,
             message: messageChunks.join()
         });
     },
-    sections: {
+    contents: {
         banner: {
             backgroundImage: {
                 landscape: {

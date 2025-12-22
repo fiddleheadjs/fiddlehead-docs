@@ -6,7 +6,7 @@ import {RegistrationForm} from './RegistrationForm';
 
 export let Registration = ({
     onRegistrationFormSubmit,
-    sections: {
+    contents: {
         registration: {backgroundImage}
     }
 }) => {

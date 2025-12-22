@@ -2,7 +2,7 @@ import {Background} from '../background';
 import './LearningStrategy.less';
 
 export let LearningStrategy = ({
-    sections: {
+    contents: {
         learningStrategy: {
             backgroundImage,
             coverImage

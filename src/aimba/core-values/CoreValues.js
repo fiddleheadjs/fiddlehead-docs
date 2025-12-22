@@ -3,7 +3,7 @@ import {DocumentReport, GearChecklist, HandMoney, PersonGrowth, RobotSmile, Stud
 import './CoreValues.less';
 
 export let CoreValues = ({
-    sections: {
+    contents: {
         coreValues: {backgroundImage}
     }
 }) => {
