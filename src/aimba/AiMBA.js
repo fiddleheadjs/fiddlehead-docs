@@ -14,6 +14,7 @@ import {FrequentlyAskedQuestions} from './frequently-asked-questions';
 import {Footer} from './footer';
 import {BeingTrusted} from './being-trusted';
 import {useEffect, useState} from 'fiddlehead';
+import {FloatingActionButtons} from './floating-action-buttons';
 
 export let AiMBA = (props) => {
     let [phase, setPhase] = useState(3);
@@ -43,7 +44,8 @@ export let AiMBA = (props) => {
                 {phase > 2 && <Registration {...props} />}
                 {phase > 2 && <FrequentlyAskedQuestions {...props} />}
             </main>
-            <Footer {...props} />
+            {phase > 2 && <Footer {...props} />}
+            {phase > 2 && <FloatingActionButtons />}
         </div>
     );
 };

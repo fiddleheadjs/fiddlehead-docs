@@ -8,3 +8,5 @@ export * from './RobotSmile';
 export * from './StudentLaptop';
 export * from './CircleFeatures';
 export * from './Wave';
+export * from './Messenger';
+export * from './Zalo';

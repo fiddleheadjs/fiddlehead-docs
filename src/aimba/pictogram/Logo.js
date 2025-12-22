@@ -5,7 +5,7 @@ export let Logo = ({ monochrome, x, y }) => {
     let colorMBA = monochrome ?? '#1E459D';
 
     return (
-        <svg class="Logo" x={x} y={y} width="150" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg x={x} y={y} width="150" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill={colorA1} d="M43.51 22.15 37.57 32H14.86l5.1-8.4a3.03 3.03 0 0 1 2.6-1.45H43.5Z"/>
             <path fill={colorA1} d="M0 32h10.17c1.06 0 2.05-.55 2.6-1.46l11.96-19.82L18.79.87 0 32Z"/>
             <path fill={colorA1} d="M43.51 22.15 30.67.87l-5.94 9.85L37.57 32l5.94-9.85Z"/>
