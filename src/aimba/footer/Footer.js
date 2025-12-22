@@ -52,6 +52,7 @@ export let Footer = ({
                                 </li>
                             </ul>
                             <a
+                                title={qrCode.title}
                                 href={qrCode.data}
                                 role="button"
                                 class="qrcode x-button"
@@ -60,7 +61,7 @@ export let Footer = ({
                                 rel="noopener noreferrer"
                             >
                                 <ImageView>
-                                    <img src={qrCode.image.src} alt={qrCode.image.alt} loading="lazy" />
+                                    <img src={qrCode.image.src} alt="QR code" loading="lazy" />
                                 </ImageView>
                             </a>
                         </div>

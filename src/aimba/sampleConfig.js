@@ -205,10 +205,10 @@ export let sampleConfig = {
         },
         footer: {
             qrCode: {
+                title: 'Tacasoft',
                 data: 'https://tacasoft.vn',
                 image: {
-                    src: '/aimba/img/qrcode-tacasoft.png',
-                    alt: 'Tacasoft QR code'
+                    src: '/aimba/img/qrcode-tacasoft.png'
                 }
             }
         }
