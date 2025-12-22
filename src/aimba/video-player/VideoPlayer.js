@@ -29,7 +29,7 @@ export let VideoPlayer = ({src, poster, active}) => {
     }, [active, inViewport]);
 
     useIntersectionObserver(rootRef, {
-        threshold: [0.01, 0.8],
+        threshold: [0, 0.8],
         callback: ({intersectionRatio}) => {
             if (intersectionRatio > 0) {
                 setRendersVideo(true);

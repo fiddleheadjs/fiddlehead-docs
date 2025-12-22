@@ -1,9 +1,9 @@
 import {Messenger, Zalo} from '../pictogram';
 import './FloatingActionButtons.less';
 
-export let FloatingActionButtons = () => {
+export let FloatingActionButtons = ({hidden}) => {
     return (
-        <div class="FloatingActionButtons">
+        <div class={['FloatingActionButtons', hidden && 'hidden']}>
             <a
                 title="Messenger chat"
                 href="https://m.me/aimba.vn"

@@ -4,6 +4,7 @@
 // themeColor: white
 // inlinesJs: prod
 // inlinesCss: prod
+// cssClassPrefix: lP-
 
 import {render} from 'fiddlehead';
 import {AiMBA} from '../aimba/AiMBA';

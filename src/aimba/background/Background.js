@@ -12,14 +12,14 @@ export let Background = ({image, lazy}) => {
 
     useIntersectionObserver(rootRef, {
         threshold: [0.1, 0.3, 0.5, 0.7],
-        callback: ({ intersectionRatio, target }) => {
+        callback: ({intersectionRatio, target}) => {
             let appliedThreshold;
             let t = target.offsetHeight;
             let w = window.innerHeight;
             if (t > 2 * w) {
                 appliedThreshold = 0.1;
             } else if (t > w) {
-                appliedThreshold = 0.3;  
+                appliedThreshold = 0.3;
             } else if (t > w / 2) {
                 appliedThreshold = 0.5;
             } else {
@@ -39,7 +39,7 @@ export let Background = ({image, lazy}) => {
                 lazy && 'lazy',
                 loaded && 'loaded',
                 inViewport && 'in-viewport'
-            ].filter(Boolean).join(' ')}
+            ]}
         >
             {failed || (
                 <picture>
