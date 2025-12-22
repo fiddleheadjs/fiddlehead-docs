@@ -38,6 +38,8 @@ export let VideoPlayer = ({src, poster, active}) => {
         }
     });
 
+    let showsCover = !controls && !ongoing;
+
     return (
         <div
             ref={rootRef}
@@ -50,12 +52,6 @@ export let VideoPlayer = ({src, poster, active}) => {
             }}
         >
             <Aspect>
-                <img
-                    src={poster}
-                    alt="video poster"
-                    loading="lazy"
-                    aria-hidden="true"
-                />
                 {rendersVideo && (
                     <video
                         ref={videoRef}
@@ -72,7 +68,14 @@ export let VideoPlayer = ({src, poster, active}) => {
                         <source src={src} poster={poster} />
                     </video>
                 )}
-                {!controls && !ongoing && (
+                {showsCover && (
+                    <img
+                        src={poster}
+                        alt="video poster"
+                        loading="lazy"
+                    />
+                )}
+                {showsCover && (
                     <div class="overlay">
                         <Play />
                     </div>
