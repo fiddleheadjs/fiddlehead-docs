@@ -44,8 +44,8 @@ export let AiMBA = (props) => {
                 {phase > 2 && <Registration {...props} />}
                 {phase > 2 && <FrequentlyAskedQuestions {...props} />}
             </main>
-            <Footer {...props} />
-            <FloatingActionButtons />
+            {phase > 2 && <Footer {...props} />}
+            {phase > 2 && <FloatingActionButtons />}
         </div>
     );
 };

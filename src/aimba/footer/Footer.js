@@ -5,7 +5,7 @@ import {Logo, Wave} from '../pictogram';
 
 export let Footer = ({
     contents: {
-        footer: {qrCodeImage}
+        footer: {qrCode}
     }
 }) => {
     return (
@@ -51,11 +51,18 @@ export let Footer = ({
                                     <a href="tel:0948.088.586">0948.088.586</a>
                                 </li>
                             </ul>
-                            <div class="qrcode">
+                            <a
+                                href={qrCode.data}
+                                role="button"
+                                class="qrcode x-button"
+                                tabIndex="0"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <ImageView>
-                                    <img src={qrCodeImage.src} alt={qrCodeImage.alt} loading="lazy" />
+                                    <img src={qrCode.image.src} alt={qrCode.image.alt} loading="lazy" />
                                 </ImageView>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
