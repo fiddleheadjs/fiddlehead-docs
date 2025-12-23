@@ -1,7 +1,7 @@
 import './FrequentlyAskedQuestions.less';
 import {useState} from 'fiddlehead';
-import {Minus, Plus} from '../icons';
 import {sampleConfig} from '../sampleConfig';
+import {QuestionAnswer} from './QuestionAnswer';
 
 export let FrequentlyAskedQuestions = ({
     contents: {
@@ -31,28 +31,15 @@ export let FrequentlyAskedQuestions = ({
                 <h2 class="title">Câu hỏi thường gặp</h2>
                 <div class="content">
                     <ul>
-                        {questionsAndAnswers.map(({question, answer}) => {
-                            let expanded = expandedQuestions.includes(question);
-                            return (
-                                <li class={expanded ? 'expanded' : 'collapsed'} key={question}>
-                                    <button
-                                        class="heading x-touchable"
-                                        type="button"
-                                        tabIndex="0"
-                                        aria-expanded={String(expanded)}
-                                        onClick={() => toggleExpanded(question)}
-                                    >
-                                        <div class="question">{question}</div>
-                                        <div class="indicator">
-                                            {expanded ? <Minus /> : <Plus />}
-                                        </div>
-                                    </button>
-                                    <div class="body">
-                                        <div class="answer">{answer}</div>
-                                    </div>
-                                </li>
-                            );
-                        })}
+                        {questionsAndAnswers.map(({question, answer}) => (
+                            <QuestionAnswer
+                                key={question}
+                                question={question}
+                                answer={answer}
+                                expanded={expandedQuestions.includes(question)}
+                                toggleExpanded={() => toggleExpanded(question)}
+                            />
+                        ))}
                     </ul>
                 </div>
             </div>
