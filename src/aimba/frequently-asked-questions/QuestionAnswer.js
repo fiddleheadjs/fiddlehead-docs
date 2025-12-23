@@ -8,7 +8,7 @@ export let QuestionAnswer = ({question, answer, expanded, toggleExpanded}) => {
     let answerRef = useRef(null);
 
     useResizeObserver(answerRef, {
-        callback: ({ target }) => {
+        callback: ({target}) => {
             setAnswerHeight(target.offsetHeight);
         }
     });
