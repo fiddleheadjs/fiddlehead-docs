@@ -49,10 +49,10 @@ export let Modules = ({
             </div>
             <div class="videos">
                 <Slider
-                    slideItems={slideVideos.map(({src, poster}) => ({
+                    slideItems={slideVideos.map(({src, poster, muted}) => ({
                         id: src,
                         render: ({ active }) => (
-                            <VideoPlayer src={src} poster={poster} active={active} />
+                            <VideoPlayer src={src} poster={poster} muted={muted} active={active} />
                         )
                     }))}
                 />

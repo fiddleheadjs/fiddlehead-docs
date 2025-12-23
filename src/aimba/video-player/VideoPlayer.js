@@ -4,9 +4,9 @@ import {Aspect} from '../aspect';
 import {useClickAwayListener, useIntersectionObserver} from '../utils';
 import {Play} from '../icons';
 
-export let VideoPlayer = ({src, poster, active}) => {
+export let VideoPlayer = ({src, poster, muted, active}) => {
     let rootRef = useRef(null);
-    let videoRef = useRef(null);
+    let targetRef = useRef(null);
     let [rendersVideo, setRendersVideo] = useState(false);
     let [inViewport, setInViewport] = useState(false);
     let [controls, setControls] = useState(false);
@@ -17,14 +17,24 @@ export let VideoPlayer = ({src, poster, active}) => {
     });
 
     useEffect(() => {
-        let video = videoRef.current;
-        if (video == null) {
+        let target = targetRef.current;
+        if (target == null) {
             return;
         }
+        let video = target instanceof HTMLVideoElement ? target : null;
+        let iframe = target instanceof HTMLIFrameElement ? target : null;
         if (active && inViewport) {
-            video.play();
+            video?.play();
+            iframe?.contentWindow.postMessage(
+                '{"event":"command","func":"playVideo","args":[]}',
+                'https://www.youtube.com/'
+            );
         } else {
-            video.pause();
+            video?.pause();
+            iframe?.contentWindow.postMessage(
+                '{"event":"command","func":"pauseVideo","args":[]}',
+                'https://www.youtube.com/'
+            );
         }
     }, [active, inViewport]);
 
@@ -38,7 +48,8 @@ export let VideoPlayer = ({src, poster, active}) => {
         }
     });
 
-    let showsCover = !controls && !ongoing;
+    let fromYoutube = src.startsWith('https://www.youtube.com/');
+    let showsCover = !controls && !ongoing && !fromYoutube;
 
     return (
         <div
@@ -52,12 +63,12 @@ export let VideoPlayer = ({src, poster, active}) => {
             }}
         >
             <Aspect>
-                {rendersVideo && (
+                {rendersVideo && !fromYoutube && (
                     <video
-                        ref={videoRef}
+                        ref={targetRef}
                         controls={controls}
                         playsinline
-                        tabIndex="0"
+                        muted={muted}
                         onPlaying={() => {
                             setOngoing(true);
                         }}
@@ -67,6 +78,17 @@ export let VideoPlayer = ({src, poster, active}) => {
                     >
                         <source src={src} poster={poster} />
                     </video>
+                )}
+                {rendersVideo && fromYoutube && (
+                    <iframe
+                        ref={targetRef}
+                        src={src}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                    />
                 )}
                 {showsCover && (
                     <img

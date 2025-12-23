@@ -61,7 +61,7 @@
         <script>
             // Landing page config
             let imgAttrs = ([src, alt]) => ({src, alt});
-            let videoAttrs = ([src, poster]) => ({src, poster});
+
             let landingPageConfig = {
                 onRegistrationRequest() {
                     location.href = '#Registration';
@@ -151,8 +151,12 @@
                             src: '/aimba/img/background-02.jpg'
                         },
                         slideVideos: [
-                            ['/aimba/uploaded/video_AiMBA.mp4', '/aimba/uploaded/video_AiMBA.jpg'],
-                        ].map(videoAttrs)
+                            {
+                                src: '/aimba/uploaded/video_AiMBA.mp4',
+                                poster: '/aimba/uploaded/video_AiMBA.jpg',
+                                muted: true
+                            },
+                        ]
                     },
                     coreValues: {
                         backgroundImage: {
