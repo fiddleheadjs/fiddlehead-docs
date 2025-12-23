@@ -1,12 +1,13 @@
 import './FrequentlyAskedQuestions.less';
 import {useState} from 'fiddlehead';
 import {Minus, Plus} from '../icons';
+import {sampleConfig} from '../sampleConfig';
 
 export let FrequentlyAskedQuestions = ({
     contents: {
         frequentlyAskedQuestions: {
             questionsAndAnswers
-        }
+        } = sampleConfig.contents.frequentlyAskedQuestions
     }
 }) => {
     let [expandedQuestions, setExpandedQuestions] = useState(() => {
