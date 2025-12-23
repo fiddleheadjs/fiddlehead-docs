@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
 import './Slider.less';
+import {useResizeObserver} from '../utils/useResizeObserver';
 
 export let Slider = ({
     slideItems,
@@ -86,34 +87,9 @@ export let Slider = ({
         refreshSlideFlags();
     });
 
-    useEffect(() => {
-        if (typeof ResizeObserver === 'undefined') {
-            return;
-        }
-        let scrollView = scrollViewRef.current;
-        if (scrollView == null) {
-            return;
-        }
-        let previousWidth = 0;
-        let previousHeight = 0;
-        let observer = new ResizeObserver(([ entry ]) => {
-            if (entry.contentRect) {
-                let {width, height} = entry.contentRect;
-                let widthChange = Math.abs(width - previousWidth);
-                let heightChange = Math.abs(height - previousHeight);
-                let threshold = 2;
-                if (widthChange > threshold || heightChange > threshold) {
-                    refreshSlideFlags();
-                    previousWidth = width;
-                    previousHeight = height;
-                }
-            }
-        });
-        observer.observe(scrollView);
-        return () => {
-            observer.unobserve(scrollView);
-        };
-    }, []);
+    useResizeObserver(scrollViewRef, {
+        callback: refreshSlideFlags
+    });
 
     let [scrolling, setScrolling] = useState(false);
 
