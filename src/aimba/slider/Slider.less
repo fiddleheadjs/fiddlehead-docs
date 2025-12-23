@@ -72,13 +72,6 @@
         z-index: 1;
     }
 
-    &[data-scrollable="false"] {
-        .SliderBackButton,
-        .SliderNextButton {
-            display: none;
-        }
-    }
-
     .SliderBackButton {
         left: 0;
     }
@@ -110,6 +103,14 @@
             &[data-active="true"] i {
                 background: #848181;
             }
+        }
+    }
+
+    &[data-scrollable="false"] {
+        .SliderDotNavigation,
+        .SliderBackButton,
+        .SliderNextButton {
+            display: none;
         }
     }
 }

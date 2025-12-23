@@ -151,8 +151,12 @@
                             src: '/aimba/img/background-02.jpg'
                         },
                         slideVideos: [
-                            ['/aimba/uploaded/video_AiMBA.mp4', '/aimba/uploaded/video_AiMBA.jpg'],
-                        ].map(videoAttrs)
+                            {
+                                src: '/aimba/uploaded/video_AiMBA.mp4',
+                                poster: '/aimba/uploaded/video_AiMBA.jpg',
+                                muted: true
+                            },
+                        ]
                     },
                     coreValues: {
                         backgroundImage: {

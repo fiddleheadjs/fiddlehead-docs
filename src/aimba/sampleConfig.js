@@ -1,8 +1,6 @@
 
 let imgAttrs = ([src, alt]) => ({src, alt});
 
-let videoAttrs = ([src, poster]) => ({src, poster});
-
 export let sampleConfig = {
     onRegistrationRequest() {
         location.href = '#Registration';
@@ -92,10 +90,25 @@ export let sampleConfig = {
                 src: '/aimba/img/background-02.jpg'
             },
             slideVideos: [
-                ['/aimba/video/modules-video-01.mp4', '/aimba/img/modules-poster-01.jpg'],
-                ['/aimba/video/modules-video-02.mp4', '/aimba/img/modules-poster-02.jpg'],
-                ['/aimba/video/modules-video-03.mp4', '/aimba/img/modules-poster-03.jpg'],
-            ].map(videoAttrs)
+                {
+                    src: 'https://www.youtube.com/embed/LBOfgX9wFXE?si=FMZD6gqycLZRGL15&autoplay=1&mute=1'
+                },
+                {
+                    src: '/aimba/video/modules-video-01.mp4',
+                    poster: '/aimba/img/modules-poster-01.jpg',
+                    muted: true
+                },
+                {
+                    src: '/aimba/video/modules-video-02.mp4',
+                    poster: '/aimba/img/modules-poster-02.jpg',
+                    muted: false
+                },
+                {
+                    src: '/aimba/video/modules-video-03.mp4',
+                    poster: '/aimba/img/modules-poster-03.jpg',
+                    muted: false
+                },
+            ]
         },
         coreValues: {
             backgroundImage: {

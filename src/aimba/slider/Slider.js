@@ -13,7 +13,7 @@ export let Slider = ({
 
     let getSlideMargin = () => {
         let style = getComputedStyle(scrollViewRef.current);
-        return parseFloat(style.getPropertyValue('--slide-margin'));
+        return parseFloat(style.paddingLeft);
     };
 
     let getScrollViewData = () => {
