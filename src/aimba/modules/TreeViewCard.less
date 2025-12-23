@@ -1,0 +1,120 @@
+@import '../media.less';
+
+.TreeViewCard {
+    display: flex;
+    flex-direction: column;
+    --focus-color: #04A9FB88;
+
+    .heading {
+        z-index: 1;
+        transition: all 200ms;
+
+        .content {
+            background: #04A9FB;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            padding: 12px 15px 12px 25px;
+            min-height: 70px;
+            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            text-align: left;
+            transition: border-radius 200ms;
+
+            .title {
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            .indicator {}
+        }
+
+        .milestone-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .milestone {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+
+            i {
+                display: block;
+                background: #04A9FB;
+                width: 14px;
+                height: 14px;
+                border-radius: 7px;
+            }
+        }
+    }
+
+    .body {
+        flex-grow: 1;
+        border-radius: 6px;
+        background: white;
+        overflow: hidden;
+        transition: height 200ms, opacity 100ms 100ms;
+
+        .description {
+            color: #474747;
+            font-size: 15px;
+            padding: 15px 25px;
+        }
+    }
+
+    &.collapsed {
+        .body {
+            height: 0;
+            opacity: 0;
+        }
+    }
+
+    &.expanded {
+        .heading {
+            .content {
+                border-radius: 6px 6px 0 0;
+            }
+        }
+
+        .body {
+            border-radius: 0 0 6px 6px;
+            transition: height 200ms, opacity 100ms;
+        }
+    }
+
+    .media-current-min(1001px, {
+        &:nth-child(odd) .milestone {
+            right: -64px;
+        }
+    });
+
+.media-current-between(601px, 1000px, {
+    &:nth-child(odd) .milestone {
+        right: -40px;
+    }
+});
+
+.media-current-min(601px, {
+    &:nth-child(even) .milestone {
+        display: none;
+    }
+});
+
+.media-current-max(600px, {
+    .milestone {
+        left: -48px;
+    }
+});
+}
