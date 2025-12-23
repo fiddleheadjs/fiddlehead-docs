@@ -1,7 +1,7 @@
+import './Slider.less';
 import {useEffect, useRef, useState} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
-import './Slider.less';
-import {useResizeObserver} from '../utils/useResizeObserver';
+import {useResizeObserver} from '../utils';
 
 export let Slider = ({
     slideItems,

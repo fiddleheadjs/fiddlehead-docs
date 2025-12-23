@@ -1,7 +1,7 @@
 import './QuestionAnswer.less';
 import {useRef, useState} from 'fiddlehead';
 import {Minus, Plus} from '../icons';
-import {useResizeObserver} from '../utils/useResizeObserver';
+import {useResizeObserver} from '../utils';
 
 export let QuestionAnswer = ({question, answer, expanded, toggleExpanded}) => {
     let [answerHeight, setAnswerHeight] = useState(null);
