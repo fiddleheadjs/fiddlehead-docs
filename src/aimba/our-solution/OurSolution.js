@@ -43,7 +43,7 @@ export let OurSolution = ({
                         </div>
                         <div class="solution">
                             <i><TriangleRight /></i>
-                            <span>Và AIMBA - Nền tảng học MBA theo case thực chiến với AI Coach deep research chính là giải pháp được TACA thiết kế để đồng hành cùng bạn.</span>
+                            <span>Và AiMBA - Nền tảng học MBA theo case thực chiến với AI Coach deep research chính là giải pháp được thiết kế để đồng hành cùng bạn.</span>
                         </div>
                     </div>
                     <div class="photos">
