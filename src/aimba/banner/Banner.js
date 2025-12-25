@@ -20,7 +20,7 @@ export let Banner = ({
                     ]}
                 />
                 <picture class="illustration">
-                    <source media="(min-width: 1201px)" srcset={coverImage.src} />
+                    <source media="(min-width: 1201px)" srcSet={coverImage.src} />
                     <img src={onePixel} alt={coverImage.alt} aria-hidden="true" />
                 </picture>
                 <div class="container">
