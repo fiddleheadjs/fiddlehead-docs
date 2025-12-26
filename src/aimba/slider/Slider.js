@@ -8,8 +8,20 @@ export let Slider = ({
     children = renderContent
 }) => {
     let scrollViewRef = useRef(null);
-    let dotNavigationRef = useRef(null);
+
     let [scrollable, setScrollable] = useState(false);
+
+    let [slideStates, setSlideStates] = useState(() => {
+        let states = {};
+        for (let item of slideItems) {
+            states[item.id] = {
+                active: false,
+                inView: false
+            };
+        }
+        return states;
+    });
+
     let buffer = 2;
 
     let getSlideMargin = () => {
@@ -24,7 +36,7 @@ export let Slider = ({
         let start = padX + scrollLeft;
         let end = start + innerWidth;
         let midpoint = start + innerWidth / 2;
-        return { scrollLeft, innerWidth, start, end, midpoint };
+        return {scrollLeft, innerWidth, start, end, midpoint};
     };
 
     let isSlideActive = (slide) => {
@@ -64,28 +76,26 @@ export let Slider = ({
     };
 
     let refreshSlideFlags = () => {
+        if (scrollViewRef.current != null) {
+            let {scrollWidth, clientWidth} = scrollViewRef.current;
+            setScrollable(scrollWidth > clientWidth);
+        }
+        let stateChanges = {};
         for (let item of slideItems) {
             let slide = getSlideById(item.id);
             let active = isSlideActive(slide);
-            if (slide != null) {
-                slide.dataset.active = String(active);
-                slide.dataset.inView = String(isSlideInView(slide));
-            }
-            let dot = getDotById(item.id);
-            if (dot != null) {
-                dot.dataset.active = String(active);
+            let inView = isSlideInView(slide);
+            let current = slideStates[item.id];
+            if (active !== current.active || inView !== current.inView) {
+                stateChanges[item.id] = {active, inView};
             }
         }
-
-        if (scrollViewRef.current != null) {
-            let { scrollWidth, clientWidth } = scrollViewRef.current;
-            setScrollable(scrollWidth > clientWidth);
+        if (Object.keys(stateChanges).length > 0) {
+            setSlideStates({...slideStates, ...stateChanges});
         }
     };
 
-    useEffect(() => {
-        refreshSlideFlags();
-    });
+    useEffect(refreshSlideFlags, [slideItems]);
 
     useResizeObserver(scrollViewRef, {
         callback: refreshSlideFlags
@@ -96,6 +106,7 @@ export let Slider = ({
     let scrollingEndDebounceRef = useRef(null);
 
     let onScroll = () => {
+        refreshSlideFlags();
         setScrolling(true);
         clearTimeout(scrollingEndDebounceRef.current);
         scrollingEndDebounceRef.current = setTimeout(() => {
@@ -108,13 +119,6 @@ export let Slider = ({
             return null;
         }
         return scrollViewRef.current.querySelector(`slider-slide[data-id="${slideId}"]`);
-    };
-
-    let getDotById = (slideId) => {
-        if (dotNavigationRef.current == null) {
-            return null;
-        }
-        return dotNavigationRef.current.querySelector(`button[data-id="${slideId}"]`);
     };
 
     let findNextSlide = () => {
@@ -187,9 +191,7 @@ export let Slider = ({
                 onScroll={onScroll}
             >
                 {slideItems.map(item => {
-                    let slide = getSlideById(item.id);
-                    let active = isSlideActive(slide);
-                    let inView = isSlideInView(slide);
+                    let {active, inView} = slideStates[item.id];
                     return (
                         <slider-slide
                             key={item.id}
@@ -198,7 +200,7 @@ export let Slider = ({
                             data-active={String(active)}
                             data-in-view={String(inView)}
                         >
-                            {item.render({ active, inView })}
+                            {item.render({active, inView})}
                         </slider-slide>
                     );
                 })}
@@ -234,23 +236,26 @@ export let Slider = ({
     );
 
     let dotNavigation = () => (
-        <div ref={dotNavigationRef} class="SliderDotNavigation">
-            {slideItems.map(item => (
-                <button
-                    key={item.id}
-                    type="button"
-                    tabIndex="0"
-                    class="x-button"
-                    aria-label={`Scroll to ${item.id}`}
-                    data-id={item.id}
-                    data-active={String(isSlideActive(getSlideById(item.id)))}
-                    onClick={() => {
-                        scrollToSlide(getSlideById(item.id));
-                    }}
-                >
-                    <i />
-                </button>
-            ))}
+        <div class="SliderDotNavigation">
+            {slideItems.map(item => {
+                let {active} = slideStates[item.id];
+                return (
+                    <button
+                        key={item.id}
+                        type="button"
+                        tabIndex="0"
+                        class="x-button"
+                        aria-label={`Scroll to ${item.id}`}
+                        data-id={item.id}
+                        data-active={String(active)}
+                        onClick={() => {
+                            scrollToSlide(getSlideById(item.id));
+                        }}
+                    >
+                        <i />
+                    </button>
+                );
+            })}
         </div>
     );
 

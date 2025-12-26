@@ -36,7 +36,7 @@ export let Banner = ({
                             </div>
                         </div>
                         <div class="group">
-                            <div class="description">Học MBA thực chiến với AI qua mô phỏng hàng nghìn tình huống thật.</div>
+                            <div class="description">Nền tảng huấn luyện tư duy quản trị MBA qua hàng nghìn tình huống mô phỏng thực tiễn với AI.</div>
                         </div>
                         <div class="group">
                             <ul class="checklist">
@@ -46,19 +46,19 @@ export let Banner = ({
                                 </li>
                                 <li>
                                     <i><SquareCheck /></i>
-                                    <span>Mài sắc tư duy quản lý</span>
-                                </li>
-                                <li>
-                                    <i><SquareCheck /></i>
                                     <span>Kỹ năng và công cụ quản trị</span>
                                 </li>
                                 <li>
                                     <i><SquareCheck /></i>
-                                    <span>Trợ lý AI giải quyết nhanh công việc</span>
+                                    <span>Năng lực quản trị chuẩn quốc tế</span>
                                 </li>
                                 <li>
                                     <i><SquareCheck /></i>
-                                    <span>Năng lực quản trị chuẩn quốc tế</span>
+                                    <span>Nhập vai sâu, phán đoán & giải quyết vấn đề như nhà quản trị thực thụ</span>
+                                </li>
+                                <li>
+                                    <i><SquareCheck /></i>
+                                    <span>Trợ lý AI deep research nâng cấp hiệu quả công việc</span>
                                 </li>
                             </ul>
                         </div>
