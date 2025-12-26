@@ -92,9 +92,6 @@ export let sampleConfig = {
             },
             slideVideos: [
                 {
-                    src: 'https://www.youtube.com/embed/LBOfgX9wFXE?si=FMZD6gqycLZRGL15&autoplay=1&mute=1'
-                },
-                {
                     src: '/aimba/video/modules-video-01.mp4',
                     poster: '/aimba/img/modules-poster-01.jpg',
                     muted: true
@@ -108,6 +105,9 @@ export let sampleConfig = {
                     src: '/aimba/video/modules-video-03.mp4',
                     poster: '/aimba/img/modules-poster-03.jpg',
                     muted: false
+                },
+                {
+                    src: 'https://www.youtube.com/embed/LBOfgX9wFXE?si=FMZD6gqycLZRGL15&autoplay=1&mute=1'
                 },
             ]
         },
