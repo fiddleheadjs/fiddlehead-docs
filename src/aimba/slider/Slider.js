@@ -118,7 +118,7 @@ export let Slider = ({
         if (scrollViewRef.current == null) {
             return null;
         }
-        return scrollViewRef.current.querySelector(`slider-slide[data-id="${slideId}"]`);
+        return scrollViewRef.current.querySelector(`[data-slide="${slideId}"]`);
     };
 
     let findNextSlide = () => {
@@ -193,15 +193,15 @@ export let Slider = ({
                 {slideItems.map(item => {
                     let {active, inView} = slideStates[item.id];
                     return (
-                        <slider-slide
+                        <div
                             key={item.id}
                             class="SliderSlide"
-                            data-id={item.id}
+                            data-slide={item.id}
                             data-active={String(active)}
                             data-in-view={String(inView)}
                         >
                             {item.render({active, inView})}
-                        </slider-slide>
+                        </div>
                     );
                 })}
             </div>
@@ -246,7 +246,6 @@ export let Slider = ({
                         tabIndex="0"
                         class="x-button"
                         aria-label={`Scroll to ${item.id}`}
-                        data-id={item.id}
                         data-active={String(active)}
                         onClick={() => {
                             scrollToSlide(getSlideById(item.id));
