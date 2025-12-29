@@ -43,6 +43,8 @@ export let EcoSystem = ({
                             </ImageView>
                         )
                     }))}
+                    interval
+                    infinite
                 >
                     {({ slideShow, backButton, nextButton, dotNavigation }) => (
                         <>

@@ -101,6 +101,8 @@ export let Resources = ({
                                         id: src,
                                         render: () => <img src={src} alt={alt} loading="lazy" />
                                     }))}
+                                    interval
+                                    infinite
                                 />
                             </div>
                         </div>

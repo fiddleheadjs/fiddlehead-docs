@@ -5,7 +5,7 @@ import {useResizeObserver} from '../utils';
 
 export let Slider = ({
     slideItems,
-    interval = null,
+    interval = false,
     infinite = false,
     children = renderContent
 }) => {
@@ -221,8 +221,11 @@ export let Slider = ({
     }, [infinite, scrolling, slideStates]);
 
     useEffect(() => {
-        if (interval == null || paused) {
+        if (!interval || paused) {
             return;
+        }
+        if (interval === true) {
+            interval = 5000;
         }
         let timer = setInterval(() => {
             scrollToSlide(findNextSlide());

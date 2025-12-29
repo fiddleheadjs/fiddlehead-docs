@@ -34,6 +34,8 @@ export let BeingTrusted = ({
                             </div>
                         )
                     }))}
+                    interval
+                    infinite
                 />
             </div>
         </section>
