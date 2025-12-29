@@ -5,9 +5,11 @@ import {useResizeObserver} from '../utils';
 
 export let Slider = ({
     slideItems,
+    interval = null,
+    infinite = false,
     children = renderContent
 }) => {
-    let slideAreas = ['head', 'body', 'tail'];
+    let slideAreas = infinite ? ['head', 'body', 'tail'] : ['body'];
 
     let [slideStates, setSlideStates] = useState(() => {
         let states = {};
@@ -28,6 +30,8 @@ export let Slider = ({
     let [scrollable, setScrollable] = useState(false);
 
     let [scrolling, setScrolling] = useState(false);
+
+    let [paused, setPaused] = useState(false);
 
     let scrollingEndDebounceRef = useRef(null);
 
@@ -109,6 +113,7 @@ export let Slider = ({
                 }
             }
         }
+        console.log({hasChanges});
         if (hasChanges) {
             setSlideStates(newStates);
         }
@@ -129,9 +134,12 @@ export let Slider = ({
         }, 100);
     };
 
-    let querySlide = (slideItem, area = 'body') => {
+    let querySlide = (slideItem, area = null) => {
         if (slideItem == null || scrollViewRef.current == null) {
             return null;
+        }
+        if (!slideAreas.includes(area)) {
+            area = 'body';
         }
         let selector = `[data-slide="${slideItem.id}"][data-area="${area}"]`;
         return scrollViewRef.current.querySelector(selector);
@@ -194,7 +202,10 @@ export let Slider = ({
         });
     };
 
-    let scrollToBodyIfNeeded = () => {
+    useEffect(() => {
+        if (!infinite || scrolling) {
+            return;
+        }
         for (let area of ['body', 'head', 'tail']) {
             for (let item of slideItems) {
                 let state = slideStates[area][item.id];
@@ -207,13 +218,19 @@ export let Slider = ({
                 }
             }
         }
-    };
+    }, [infinite, scrolling, slideStates]);
 
     useEffect(() => {
-        if (!scrolling) {
-            scrollToBodyIfNeeded();
+        if (interval == null || paused) {
+            return;
         }
-    }, [scrolling, slideStates]);
+        let timer = setInterval(() => {
+            scrollToSlide(findNextSlide());
+        }, interval);
+        return () => {
+            clearInterval(timer);
+        };
+    }, [interval, paused]);
 
     let onBack = () => {
         scrollToSlide(findPreviousSlide());
@@ -293,9 +310,7 @@ export let Slider = ({
                         class="x-button"
                         aria-label={`Scroll to ${item.id}`}
                         data-active={String(active)}
-                        onClick={() => {
-                            scrollToSlide(querySlide(item));
-                        }}
+                        onClick={() => scrollToSlide(querySlide(item))}
                     >
                         <i />
                     </button>
@@ -305,8 +320,20 @@ export let Slider = ({
     );
 
     return (
-        <div class="Slider" data-scrollable={String(scrollable)} data-scrolling={String(scrolling)}>
-            {children({slideShow, backButton, nextButton, dotNavigation})}
+        <div
+            class="Slider"
+            data-scrollable={String(scrollable)}
+            data-scrolling={String(scrolling)}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onTouchEnd={() => setPaused(true)}
+        >
+            {children({
+                slideShow,
+                backButton,
+                nextButton,
+                dotNavigation
+            })}
         </div>
     );
 };
