@@ -235,7 +235,12 @@
                     min-width: 152px;
                     color: white;
                     background: linear-gradient(to right, #1E459D, #28A8E0);
+                    transition: box-shadow 200ms;
                     --focus-color: #28A8E088;
+
+                    &:not(:focus):hover {
+                        box-shadow: 0 0 0 5px #28A8E044;
+                    }
                 }
             }
         }

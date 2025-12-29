@@ -59,7 +59,12 @@
             padding: 6px 12px;
             min-height: 40px;
             border-radius: 6px;
+            transition: box-shadow 200ms;
             --focus-color: #28A8E088;
+
+            &:not(:focus):hover {
+                box-shadow: 0 0 0 3px #28A8E044;
+            }
         }
 
         a {
@@ -100,6 +105,10 @@
         button.register {
             color: white;
             background: linear-gradient(to right, #1E459D, #28A8E0);
+
+            &:not(:focus):hover {
+                box-shadow: 0 0 0 4px #28A8E044;
+            }
         }
 
         .media-current-max(1000px, {
