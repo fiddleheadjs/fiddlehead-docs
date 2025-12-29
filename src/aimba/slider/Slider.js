@@ -113,7 +113,6 @@ export let Slider = ({
                 }
             }
         }
-        console.log({hasChanges});
         if (hasChanges) {
             setSlideStates(newStates);
         }
@@ -329,7 +328,7 @@ export let Slider = ({
             data-scrolling={String(scrolling)}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            onTouchEnd={() => setPaused(true)}
+            onTouchStart={() => setPaused(true)}
         >
             {children({
                 slideShow,

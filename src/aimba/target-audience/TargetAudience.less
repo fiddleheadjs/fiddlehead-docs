@@ -29,88 +29,8 @@
         max-width: 1230px;
         padding: 0 30px;
 
-        ul {
+        .AudienceList {
             margin-top: 60px;
-            display: grid;
-            grid-template: "left central right" / 1fr 1fr 1fr;
-            gap: 30px;
-
-            .media-current-max(800px, {
-                max-width: 500px;
-                margin-left: auto;
-                margin-right: auto;
-                grid-template: "central" "left" "right";
-            });
-
-            li {
-                padding: 16px 16px 37px 32px;
-                border-radius: 14px;
-                box-shadow: 0 16px 32px #0C0C0D1A;
-                
-                .icons {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    .arrow-pie {
-                        width: 47px;
-                        height: 47px;
-                        border-radius: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                }
-
-                .title {
-                    margin-top: 27px;
-                    font-size: 21px;
-                    font-weight: 700;
-                }
-
-                .description {
-                    margin-top: 15px;
-                    font-size: 16px;
-                    line-height: 25px;
-                }
-
-                &.central {
-                    grid-area: central;
-                }
-
-                &.left {
-                    grid-area: left;
-                }
-
-                &.right {
-                    grid-area: right;
-                }
-
-                &.central {
-                    background: linear-gradient(to right, #1E469E, #25A5DE);
-                    color: white;
-
-                    .arrow-pie {
-                        background: white;
-                        color: #1F49A0;
-                    }
-                }
-
-                &.left,
-                &.right {
-                    background: white;
-
-                    .arrow-pie {
-                        background: #1F49A0;
-                        color: white;
-                    }
-
-                    .description {
-                        color: #474747;
-                    }
-                }
-            }
         }
     }
 
