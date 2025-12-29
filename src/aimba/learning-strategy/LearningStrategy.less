@@ -58,11 +58,20 @@
                     font-weight: 700;
                     white-space: nowrap;
                     border: 1px solid white;
+                    background: transparent;
+                    color: white;
+                    transition: color 200ms, background-color 200ms;
                     --focus-color: #FFFFFFAA;
 
                     .media-current-max(600px, {
                         min-width: 0;
                     });
+
+                    &:hover,
+                    &:focus {
+                        background: white;
+                        color: #1273C2;
+                    }
                 }
             }
 
