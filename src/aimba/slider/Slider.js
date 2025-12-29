@@ -95,7 +95,7 @@ export let Slider = ({
         for (let area of slideAreas) {
             newStates[area] = {...slideStates[area]};
             for (let item of slideItems) {
-                let slide = findSlide(item, area);
+                let slide = querySlide(item, area);
                 let active = isSlideActive(slide);
                 let inView = isSlideInView(slide);
                 let current = slideStates[area][item.id];
@@ -125,7 +125,7 @@ export let Slider = ({
         }, 200);
     };
 
-    let findSlide = (slideItem, area = 'body') => {
+    let querySlide = (slideItem, area = 'body') => {
         if (slideItem == null || scrollViewRef.current == null) {
             return null;
         }
@@ -135,24 +135,30 @@ export let Slider = ({
 
     let findNextSlide = () => {
         let activeSlideCount = 0;
-        for (let item of slideItems) {
-            let slide = findSlide(item);
+        let iMax = slideItems.length - 1;
+        for (let i = 0; i <= iMax; i++) {
+            let slide = querySlide(slideItems[i]);
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
             } else if (activeSlideCount > 0) {
-                return slide;
+                let lastCycleStartIndex = slideItems.length - activeSlideCount;
+                if (i <= lastCycleStartIndex) {
+                    return slide;
+                }
+                return querySlide(slideItems[lastCycleStartIndex]);
             }
         }
-        return findSlide(slideItems[0], 'tail');
+        return querySlide(slideItems[0], 'tail');
     };
 
     let findPreviousSlide = () => {
         let activeSlideCount = 0;
         let pickedCount = 0;
         let previousSlide = null;
-        for (let i = slideItems.length - 1; i >= 0; i--) {
-            let slide = findSlide(slideItems[i]);
+        let iMax = slideItems.length - 1;
+        for (let i = iMax; i >= 0; i--) {
+            let slide = querySlide(slideItems[i]);
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
@@ -164,10 +170,11 @@ export let Slider = ({
         if (previousSlide != null) {
             return previousSlide;
         }
-        return findSlide(slideItems[slideItems.length - 1], 'head');
+        let lastCycleStartIndex = slideItems.length - activeSlideCount;
+        return querySlide(slideItems[lastCycleStartIndex], 'head');
     };
 
-    let scrollToSlide = (slide) => {
+    let scrollToSlide = (slide, behavior = 'auto') => {
         if (slide == null) {
             return;
         }
@@ -182,9 +189,30 @@ export let Slider = ({
         }
         scrollView.scrollTo({
             left: scrollLeft,
-            behavior: 'auto'
+            behavior
         });
     };
+
+    let scrollToBodyIfNeeded = () => {
+        for (let area of slideAreas) {
+            for (let item of slideItems) {
+                let state = slideStates[area][item.id];
+                if (state.active) {
+                    if (area !== 'body') {
+                        let slide = querySlide(item, 'body');
+                        scrollToSlide(slide, 'instant');
+                    }
+                    return;
+                }
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (!scrolling) {
+            scrollToBodyIfNeeded();
+        }
+    }, [scrolling, slideStates]);
 
     let onBack = () => {
         scrollToSlide(findPreviousSlide());
@@ -265,7 +293,7 @@ export let Slider = ({
                         aria-label={`Scroll to ${item.id}`}
                         data-active={String(active)}
                         onClick={() => {
-                            scrollToSlide(findSlide(item));
+                            scrollToSlide(querySlide(item));
                         }}
                     >
                         <i />
