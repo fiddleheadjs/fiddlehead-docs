@@ -244,7 +244,7 @@ export let Slider = ({
                                     data-active={String(active)}
                                     data-in-view={String(inView)}
                                 >
-                                    {item.render({active, inView})}
+                                    {item.render({area, active, inView})}
                                 </div>
                             );
                         })}
