@@ -44,7 +44,6 @@ export let EcoSystem = ({
                         )
                     }))}
                     interval
-                    infinite
                 >
                     {({ slideShow, backButton, nextButton, dotNavigation }) => (
                         <>
