@@ -34,8 +34,12 @@ export let Slider = ({
     let buffer = 2;
 
     let getSlideMargin = () => {
-        let style = getComputedStyle(scrollViewRef.current);
-        return parseFloat(style.paddingLeft);
+        let scrollView = scrollViewRef.current;
+        if (scrollView == null) {
+            return 0;
+        }
+        let style = getComputedStyle(scrollView);
+        return parseFloat(style.paddingLeft) || 0;
     };
 
     let getScrollViewData = () => {
@@ -122,7 +126,7 @@ export let Slider = ({
         clearTimeout(scrollingEndDebounceRef.current);
         scrollingEndDebounceRef.current = setTimeout(() => {
             setScrolling(false);
-        }, 200);
+        }, 100);
     };
 
     let querySlide = (slideItem, area = 'body') => {
@@ -141,7 +145,9 @@ export let Slider = ({
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
-            } else if (activeSlideCount > 0) {
+                continue;
+            }
+            if (activeSlideCount > 0) {
                 let lastCycleStartIndex = slideItems.length - activeSlideCount;
                 if (i <= lastCycleStartIndex) {
                     return slide;
@@ -162,7 +168,9 @@ export let Slider = ({
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
-            } else if (pickedCount < activeSlideCount) {
+                continue;
+            }
+            if (pickedCount < activeSlideCount) {
                 previousSlide = slide;
                 pickedCount++;
             }
@@ -179,14 +187,7 @@ export let Slider = ({
             return;
         }
         let scrollView = scrollViewRef.current;
-        let snapAlign = getComputedStyle(slide).scrollSnapAlign;
-        let surrounding = scrollView.clientWidth - slide.offsetWidth - 2 * getSlideMargin();
         let scrollLeft = slide.offsetLeft - getSlideMargin();
-        if (snapAlign === 'center') {
-            scrollLeft -= surrounding / 2;
-        } else if (snapAlign === 'end') {
-            scrollLeft -= surrounding;
-        }
         scrollView.scrollTo({
             left: scrollLeft,
             behavior
@@ -194,7 +195,7 @@ export let Slider = ({
     };
 
     let scrollToBodyIfNeeded = () => {
-        for (let area of slideAreas) {
+        for (let area of ['body', 'head', 'tail']) {
             for (let item of slideItems) {
                 let state = slideStates[area][item.id];
                 if (state.active) {

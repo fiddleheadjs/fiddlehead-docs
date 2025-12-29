@@ -32,8 +32,8 @@
         overflow-x: scroll;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
-        -ms-overflow-style: none;
         scrollbar-width: none;
+        -ms-overflow-style: none;
 
         &::-webkit-scrollbar {
             display: none;
@@ -46,7 +46,7 @@
 
     .SliderSlide {
         flex: none;
-        scroll-snap-align: var(--slide-align, start);
+        scroll-snap-align: start;
         scroll-margin: var(--slide-margin, 0);
         display: flex;
         justify-content: center;
