@@ -1,5 +1,5 @@
 import './Slider.less';
-import {useEffect, useRef, useState} from 'fiddlehead';
+import {Fragment, useEffect, useRef, useState} from 'fiddlehead';
 import {ArrowLeft, ArrowRight} from '../icons';
 import {useResizeObserver} from '../utils';
 
@@ -7,20 +7,29 @@ export let Slider = ({
     slideItems,
     children = renderContent
 }) => {
+    let slideAreas = ['head', 'body', 'tail'];
+
+    let [slideStates, setSlideStates] = useState(() => {
+        let states = {};
+        for (let area of slideAreas) {
+            states[area] = {};
+            for (let item of slideItems) {
+                states[area][item.id] = {
+                    active: false,
+                    inView: false,
+                };
+            }
+        }
+        return states;
+    });
+
     let scrollViewRef = useRef(null);
 
     let [scrollable, setScrollable] = useState(false);
 
-    let [slideStates, setSlideStates] = useState(() => {
-        let states = {};
-        for (let item of slideItems) {
-            states[item.id] = {
-                active: false,
-                inView: false
-            };
-        }
-        return states;
-    });
+    let [scrolling, setScrolling] = useState(false);
+
+    let scrollingEndDebounceRef = useRef(null);
 
     let buffer = 2;
 
@@ -80,18 +89,24 @@ export let Slider = ({
             let {scrollWidth, clientWidth} = scrollViewRef.current;
             setScrollable(scrollWidth > clientWidth);
         }
-        let stateChanges = {};
-        for (let item of slideItems) {
-            let slide = getSlideById(item.id);
-            let active = isSlideActive(slide);
-            let inView = isSlideInView(slide);
-            let current = slideStates[item.id];
-            if (active !== current.active || inView !== current.inView) {
-                stateChanges[item.id] = {active, inView};
+
+        let newStates = {};
+        let hasChanges = false;
+        for (let area of slideAreas) {
+            newStates[area] = {...slideStates[area]};
+            for (let item of slideItems) {
+                let slide = findSlide(item, area);
+                let active = isSlideActive(slide);
+                let inView = isSlideInView(slide);
+                let current = slideStates[area][item.id];
+                if (active !== current.active || inView !== current.inView) {
+                    newStates[area][item.id] = {active, inView};
+                    hasChanges = true;
+                }
             }
         }
-        if (Object.keys(stateChanges).length > 0) {
-            setSlideStates({...slideStates, ...stateChanges});
+        if (hasChanges) {
+            setSlideStates(newStates);
         }
     };
 
@@ -100,10 +115,6 @@ export let Slider = ({
     useResizeObserver(scrollViewRef, {
         callback: refreshSlideFlags
     });
-
-    let [scrolling, setScrolling] = useState(false);
-
-    let scrollingEndDebounceRef = useRef(null);
 
     let onScroll = () => {
         refreshSlideFlags();
@@ -114,17 +125,18 @@ export let Slider = ({
         }, 200);
     };
 
-    let getSlideById = (slideId) => {
-        if (scrollViewRef.current == null) {
+    let findSlide = (slideItem, area = 'body') => {
+        if (slideItem == null || scrollViewRef.current == null) {
             return null;
         }
-        return scrollViewRef.current.querySelector(`[data-slide="${slideId}"]`);
+        let selector = `[data-slide="${slideItem.id}"][data-area="${area}"]`;
+        return scrollViewRef.current.querySelector(selector);
     };
 
     let findNextSlide = () => {
         let activeSlideCount = 0;
         for (let item of slideItems) {
-            let slide = getSlideById(item.id);
+            let slide = findSlide(item);
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
@@ -132,7 +144,7 @@ export let Slider = ({
                 return slide;
             }
         }
-        return getSlideById(slideItems[0]?.id);
+        return findSlide(slideItems[0], 'tail');
     };
 
     let findPreviousSlide = () => {
@@ -140,7 +152,7 @@ export let Slider = ({
         let pickedCount = 0;
         let previousSlide = null;
         for (let i = slideItems.length - 1; i >= 0; i--) {
-            let slide = getSlideById(slideItems[i].id);
+            let slide = findSlide(slideItems[i]);
             let active = isSlideActive(slide);
             if (active) {
                 activeSlideCount++;
@@ -152,7 +164,7 @@ export let Slider = ({
         if (previousSlide != null) {
             return previousSlide;
         }
-        return getSlideById(slideItems[slideItems.length - 1]?.id);
+        return findSlide(slideItems[slideItems.length - 1], 'head');
     };
 
     let scrollToSlide = (slide) => {
@@ -190,20 +202,25 @@ export let Slider = ({
                 tabIndex="0"
                 onScroll={onScroll}
             >
-                {slideItems.map(item => {
-                    let {active, inView} = slideStates[item.id];
-                    return (
-                        <div
-                            key={item.id}
-                            class="SliderSlide"
-                            data-slide={item.id}
-                            data-active={String(active)}
-                            data-in-view={String(inView)}
-                        >
-                            {item.render({active, inView})}
-                        </div>
-                    );
-                })}
+                {slideAreas.map(area => (
+                    <Fragment key={area}>
+                        {slideItems.map(item => {
+                            let {active, inView} = slideStates[area][item.id];
+                            return (
+                                <div
+                                    key={item.id}
+                                    class="SliderSlide"
+                                    data-slide={item.id}
+                                    data-area={area}
+                                    data-active={String(active)}
+                                    data-in-view={String(inView)}
+                                >
+                                    {item.render({active, inView})}
+                                </div>
+                            );
+                        })}
+                    </Fragment>
+                ))}
             </div>
             <div class="aspect">
                 <div class="ratio" />
@@ -238,7 +255,7 @@ export let Slider = ({
     let dotNavigation = () => (
         <div class="SliderDotNavigation">
             {slideItems.map(item => {
-                let {active} = slideStates[item.id];
+                let {active} = slideStates['body'][item.id];
                 return (
                     <button
                         key={item.id}
@@ -248,7 +265,7 @@ export let Slider = ({
                         aria-label={`Scroll to ${item.id}`}
                         data-active={String(active)}
                         onClick={() => {
-                            scrollToSlide(getSlideById(item.id));
+                            scrollToSlide(findSlide(item));
                         }}
                     >
                         <i />
