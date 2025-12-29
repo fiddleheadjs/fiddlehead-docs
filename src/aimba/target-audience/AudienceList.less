@@ -1,0 +1,130 @@
+@import '../media.less';
+
+.AudienceList {
+    display: grid;
+    grid-template: "left central right" / 1fr 1fr 1fr;
+    gap: 30px;
+
+    .media-current-max(800px, {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        grid-template: "central" "left" "right";
+    });
+
+    li {
+        padding: 16px 16px 37px 32px;
+        border-radius: 14px;
+        box-shadow: 0 16px 32px #0C0C0D1A;
+        background: white;
+        cursor: default;
+
+        .background {
+            background: linear-gradient(to right, #1E469E, #25A5DE);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 14px;
+            transition: opacity 200ms;
+        }
+        
+        .icons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon {
+                transition: color 200ms;
+            }
+
+            .arrow-pie {
+                width: 47px;
+                height: 47px;
+                border-radius: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: color 200ms, background-color 200ms;
+            }
+        }
+
+        .title {
+            margin-top: 27px;
+            font-size: 21px;
+            font-weight: 700;
+            transition: color 200ms;
+        }
+
+        .description {
+            margin-top: 15px;
+            font-size: 16px;
+            line-height: 25px;
+            transition: color 200ms;
+        }
+
+        &.central {
+            grid-area: central;
+        }
+
+        &.left {
+            grid-area: left;
+        }
+
+        &.right {
+            grid-area: right;
+        }
+
+        &.focused {
+            .background {
+                opacity: 1;
+            }
+
+            .icons {
+                .icon {
+                    color: white;
+                }
+
+                .arrow-pie {
+                    background: white;
+                    color: #1F49A0;
+                }
+            }
+
+            .title {
+                color: white;
+            }
+
+            .description {
+                color: white;
+            }
+        }
+        
+        &:not(.focused) {
+            .background {
+                opacity: 0;
+            }
+
+            .icons {
+                .icon {
+                    color: #1F1F1F;
+                }
+
+                .arrow-pie {
+                    background: #1F49A0;
+                    color: white;
+                }
+            }
+
+            .title {
+                color: #1F1F1F;
+            }
+
+            .description {
+                color: #474747;
+            }
+        }
+    }
+}
