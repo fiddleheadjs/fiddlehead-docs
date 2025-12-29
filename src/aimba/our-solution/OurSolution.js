@@ -81,12 +81,12 @@ export let OurSolution = ({
                             <div class="checklist">
                                 <ul>
                                     {[
-                                        'Tăng thăng tiến khi học quản trị chuẩn MBA',
+                                        'Tăng thăng tiến với tư duy quản trị chuẩn MBA',
                                         'Sẵn kho tài liệu lớn, cung cấp các thông tin',
                                         'Không lo về chi phí khi học AiMBA',
-                                        'Tiềm năng tăng thu nhập lâu dài',
+                                        'Gia tăng giá trị bản thân, mở rộng trần thu nhập dài hạn',
                                         'Không cần nghỉ việc - Không lo mất lương - Không bỏ lỡ cơ hội',
-                                        'Vừa học vừa tăng hiệu quả công việc'
+                                        'Ứng dụng được ngay vào công việc hiện tại tạo giá trị'
                                     ].map(text => (
                                         <li key={text}>
                                             <i><CircleCheck /></i>

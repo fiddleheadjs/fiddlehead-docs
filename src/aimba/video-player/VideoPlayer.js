@@ -4,7 +4,7 @@ import {Aspect} from '../aspect';
 import {useClickAwayListener, useIntersectionObserver} from '../utils';
 import {Play} from '../icons';
 
-export let VideoPlayer = ({src, poster, muted, active}) => {
+export let VideoPlayer = ({src, poster, muted, active, rendersContent}) => {
     let rootRef = useRef(null);
     let targetRef = useRef(null);
     let [rendersVideo, setRendersVideo] = useState(false);
@@ -63,7 +63,7 @@ export let VideoPlayer = ({src, poster, muted, active}) => {
             }}
         >
             <Aspect>
-                {rendersVideo && !fromYoutube && (
+                {rendersContent && rendersVideo && !fromYoutube && (
                     <video
                         ref={targetRef}
                         controls={controls}
@@ -79,7 +79,7 @@ export let VideoPlayer = ({src, poster, muted, active}) => {
                         <source src={src} poster={poster} />
                     </video>
                 )}
-                {rendersVideo && fromYoutube && (
+                {rendersContent && rendersVideo && fromYoutube && (
                     <iframe
                         ref={targetRef}
                         src={src}

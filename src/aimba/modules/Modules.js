@@ -51,8 +51,14 @@ export let Modules = ({
                 <Slider
                     slideItems={slideVideos.map(({src, poster, muted}) => ({
                         id: src,
-                        render: ({ active }) => (
-                            <VideoPlayer src={src} poster={poster} muted={muted} active={active} />
+                        render: ({ active, area }) => (
+                            <VideoPlayer
+                                src={src}
+                                poster={poster}
+                                muted={muted}
+                                active={active}
+                                rendersContent={area === 'body'}
+                            />
                         )
                     }))}
                 />
