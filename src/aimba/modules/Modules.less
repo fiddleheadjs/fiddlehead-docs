@@ -117,9 +117,9 @@
             color: white;
             background: linear-gradient(to bottom, #FAA714, #D37101);
             --focus-color: #D37101DD;
-
-            &:not(:focus):hover {
-                transform: scale(104%);
+            
+            &:not(:focus) {
+                animation: zoom-in-out 1s ease-in-out infinite;
             }
         }
     }
