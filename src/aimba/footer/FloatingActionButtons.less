@@ -5,26 +5,25 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    width: 60px;
+    width: 50px;
     right: 20px;
     bottom: 20px;
     gap: 20px;
     transition: transform 200ms;
 
     &.hidden {
-        transform: translateX(100px);
+        transform: translateX(90px);
     }
     
     .media-current-max(1200px, {
         right: 10px;
 
         &.hidden {
-            transform: translateX(80px);
+            transform: translateX(70px);
         }
     });
     
     .media-current-max(600px, {
-        width: 50px;
         right: 5px;
         bottom: 15px;
         gap: 15px;

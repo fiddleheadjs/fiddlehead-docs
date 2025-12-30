@@ -17,7 +17,6 @@
         a {
             border-radius: 3px;
             padding: 5px;
-            --focus-color: #2898E055;
         }
 
         svg {
@@ -65,7 +64,6 @@
         a {
             font-weight: 600;
             transition: color 200ms;
-            --focus-color: #2898E055;
 
             &:hover,
             &:focus {
@@ -111,37 +109,11 @@
         }
 
         button.register {
-            span {
-                color: white;
-            }
+            color: white;
+            background: linear-gradient(to right, #1E459D, #28A8E0);
 
-            b {
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-            
-            b.g1 {
-                background: linear-gradient(to right, #1E459D, #28A8E0);
-                opacity: 1;
-            }
-            
-            b.g2 {
-                background: linear-gradient(to right, #2E55AD, #48C8FF);
-                opacity: 0;
-            }
-            
             &:not(:focus):hover {
-                b.g1 {
-                    opacity: 0;
-                }
-
-                b.g2 {
-                    opacity: 1;
-                }
+                background: linear-gradient(to right, #2E55AD, #48C8FF);
             }
         }
 
