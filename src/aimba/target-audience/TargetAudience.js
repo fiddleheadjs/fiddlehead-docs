@@ -10,7 +10,8 @@ export let TargetAudience = ({
             backgroundImage,
             certificateImage
         }
-    }
+    },
+    onRegistrationRequest
 }) => {
     let certificateData = [
         'Nhận Chứng nhận Hoàn thành AiMBA khẳng định học viên có tri thức & kĩ năng quản trị chuẩn quốc tế.',
@@ -26,7 +27,7 @@ export let TargetAudience = ({
                 <div class="divider" />
             </div>
             <div class="audience">
-                <AudienceList />
+                <AudienceList onRegistrationRequest={onRegistrationRequest} />
             </div>
             <div class="certificate">
                 <div class="big-card">
