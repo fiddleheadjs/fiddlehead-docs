@@ -60,21 +60,23 @@
             min-height: 40px;
             border-radius: 6px;
             overflow: hidden;
-            --focus-color: #28A8E088;
         }
         
         a {
             font-weight: 600;
-            transition: box-shadow 200ms;
+            transition: color 200ms;
+            --focus-color: #2898E055;
 
-            &:not(:focus):hover {
-                box-shadow: 0 0 0 3px #28A8E044;
+            &:hover,
+            &:focus {
+                color: #2858C0;
             }
         }
 
         button {
             min-width: 120px;
             font-weight: 700;
+            --focus-color: #28A8E088;
 
             .media-current-max(600px, {
                 min-width: auto;
