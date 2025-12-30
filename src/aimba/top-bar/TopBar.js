@@ -20,11 +20,7 @@ export let TopBar = ({onLoginRequest, onRegistrationRequest}) => {
                     </div>
                     <div class="actions">
                         <button type="button" tabIndex="0" class="x-button login" onClick={onLoginRequest}>Đăng nhập</button>
-                        <button type="button" tabIndex="0" class="x-button register" onClick={onRegistrationRequest}>
-                            <b class="g1" aria-hidden="true" />
-                            <b class="g2" aria-hidden="true" />
-                            <span>Đăng ký</span>
-                        </button>
+                        <button type="button" tabIndex="0" class="x-button register" onClick={onRegistrationRequest}>Đăng ký</button>
                     </div>
                 </nav>
             </div>
