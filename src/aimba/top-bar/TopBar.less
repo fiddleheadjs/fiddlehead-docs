@@ -59,16 +59,17 @@
             padding: 6px 12px;
             min-height: 40px;
             border-radius: 6px;
-            transition: box-shadow 200ms;
+            overflow: hidden;
             --focus-color: #28A8E088;
+        }
+        
+        a {
+            font-weight: 600;
+            transition: box-shadow 200ms;
 
             &:not(:focus):hover {
                 box-shadow: 0 0 0 3px #28A8E044;
             }
-        }
-
-        a {
-            font-weight: 600;
         }
 
         button {
@@ -100,14 +101,45 @@
         button.login {
             color: #1E469E;
             background: #E6F1FD;
+            transition: background-color 200ms;
+            
+            &:not(:focus):hover {
+                background: #D0E4FA;
+            }
         }
 
         button.register {
-            color: white;
-            background: linear-gradient(to right, #1E459D, #28A8E0);
+            span {
+                color: white;
+            }
 
+            b {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
+            b.g1 {
+                background: linear-gradient(to right, #1E459D, #28A8E0);
+                opacity: 1;
+            }
+            
+            b.g2 {
+                background: linear-gradient(to right, #2E55AD, #48C8FF);
+                opacity: 0;
+            }
+            
             &:not(:focus):hover {
-                box-shadow: 0 0 0 4px #28A8E044;
+                b.g1 {
+                    opacity: 0;
+                }
+
+                b.g2 {
+                    opacity: 1;
+                }
             }
         }
 

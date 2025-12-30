@@ -58,7 +58,7 @@
 
         &:active,
         &:focus {
-            outline: 3px solid var(--focus-color, transparent);
+            outline: 2px solid var(--focus-color, transparent);
         }
     }
 
@@ -68,6 +68,23 @@
         align-items: center;
         text-align: center;
         user-select: none;
-        .x-touchable();
+        cursor: pointer;
+
+        &:active,
+        &:focus {
+            outline: 3px solid var(--focus-color, transparent);
+        }
+    }
+
+    @keyframes zoom-in-out {
+        0% {
+            transform: scale(100%);
+        }
+        50% {
+            transform: scale(105%);
+        }
+        100% {
+            transform: scale(100%);
+        }
     }
 }

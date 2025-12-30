@@ -2,7 +2,9 @@ import './AudienceList.less';
 import {ArrowTopRight, BachelorCap, FileChart, PeoplePlus} from '../icons';
 import {useState} from 'fiddlehead';
 
-export let AudienceList = () => {
+export let AudienceList = ({
+    onRegistrationRequest
+}) => {
     let icons = {
         PeoplePlus,
         FileChart,
@@ -15,7 +17,7 @@ export let AudienceList = () => {
         right: ['BachelorCap', 'Học viên đã tốt nghiệp MBA', 'Biến kiến thức học thuật thành năng lực thực chiến, phù hợp bối cảnh Việt Nam.'],
     };
 
-    let [focusedPosition, setFocusedPosition] = useState('central');
+    let [highlightedPosition, setHighlightedPosition] = useState('central');
 
     return (
         <ul class="AudienceList">
@@ -25,21 +27,26 @@ export let AudienceList = () => {
                 return (
                     <li
                         key={position}
-                        class={[position, position === focusedPosition && 'focused']}
-                        onMouseOver={() => setFocusedPosition(position)}
-                        onTouchStart={() => setFocusedPosition(position)}
+                        class={[position, position === highlightedPosition && 'highlighted']}
+                        onMouseOver={() => setHighlightedPosition(position)}
+                        onTouchStart={() => setHighlightedPosition(position)}
                     >
                         <div class="background" />
-                        <div class="icons">
+                        <div class="actions">
                             <div>
                                 <div class="icon">
                                     <Icon />
                                 </div>
                             </div>
                             <div>
-                                <div class="arrow-pie">
+                                <button
+                                    type="button"
+                                    class="arrow-pie x-button"
+                                    tabIndex="0"
+                                    onClick={onRegistrationRequest}
+                                >
                                     <ArrowTopRight />
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div class="title">
