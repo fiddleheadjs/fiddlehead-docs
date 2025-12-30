@@ -13,7 +13,7 @@ export let AudienceList = ({
 
     let audienceData = {
         left: ['PeoplePlus', 'Học viên chuẩn bị học MBA', 'Trang bị nền tảng thực tiễn để học sâu và hiệu quả hơn.'],
-        central: ['FileChart', 'Học viên tìm kiếm giải pháp tinh gọn', 'Sở hữu năng lực quản trị ứng dụng ngay, không tốn nhiều thời gian và chi phí.'],
+        central: ['FileChart', 'Học viên tìm kiếm giải pháp <com-word>tinh gọn</com-word>', 'Sở hữu năng lực quản trị ứng dụng ngay, không tốn nhiều thời gian và chi phí.'],
         right: ['BachelorCap', 'Học viên đã tốt nghiệp MBA', 'Biến kiến thức học thuật thành năng lực thực chiến, phù hợp bối cảnh Việt Nam.'],
     };
 
@@ -49,9 +49,7 @@ export let AudienceList = ({
                                 </button>
                             </div>
                         </div>
-                        <div class="title">
-                            {title}
-                        </div>
+                        <div class="title" innerHTML={title} />
                         <div class="description">
                             {description}
                         </div>
