@@ -43,7 +43,7 @@ export let OurSolution = ({
                         </div>
                         <div class="solution">
                             <i><TriangleRight /></i>
-                            <span>Và AiMBA - Nền tảng học MBA theo case thực chiến với AI Coach deep research chính là giải pháp được thiết kế để đồng hành cùng bạn.</span>
+                            <span>Và AiMBA - Nền tảng huấn luyện tư duy quản trị MBA thông qua các case mô phỏng thực chiến và nhập vai sâu với AI Coach chính là giải pháp được thiết kế để đồng hành cùng bạn.</span>
                         </div>
                     </div>
                     <div class="photos">
@@ -82,8 +82,8 @@ export let OurSolution = ({
                                 <ul>
                                     {[
                                         'Tăng thăng tiến với tư duy quản trị chuẩn MBA',
-                                        'Sẵn kho tài liệu lớn, cung cấp các thông tin',
-                                        'Không lo về chi phí khi học AiMBA',
+                                        'Sẵn kho tài liệu lớn, cung cấp lợi thế thông tin',
+                                        'X2 năng suất & hiệu quả quản trị ngay khi học',
                                         'Gia tăng giá trị bản thân, mở rộng trần thu nhập dài hạn',
                                         'Không cần nghỉ việc - Không lo mất lương - Không bỏ lỡ cơ hội',
                                         'Ứng dụng được ngay vào công việc hiện tại tạo giá trị'
