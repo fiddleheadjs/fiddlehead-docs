@@ -1,7 +1,16 @@
-import {Logo} from '../pictogram';
 import './TopBar.less';
+import {Logo} from '../pictogram';
+import {Registration} from '../registration';
 
-export let TopBar = ({onLoginRequest, onRegistrationRequest}) => {
+export let TopBar = (props) => {
+    let {onLoginRequest, setDialog} = props;
+
+    let requestRegistrationDialog = () => {
+        setDialog({
+            renderContent: () => <Registration {...props} />
+        });
+    };
+
     return (
         <header class="TopBar">
             <div class="container">
@@ -19,8 +28,22 @@ export let TopBar = ({onLoginRequest, onRegistrationRequest}) => {
                         <a role="button" tabIndex="0" class="x-button" href="#Registration">Ưu đãi</a>
                     </div>
                     <div class="actions">
-                        <button type="button" tabIndex="0" class="x-button login" onClick={onLoginRequest}>Đăng nhập</button>
-                        <button type="button" tabIndex="0" class="x-button register" onClick={onRegistrationRequest}>Đăng ký</button>
+                        <button
+                            type="button"
+                            tabIndex="0"
+                            class="x-button login"
+                            onClick={onLoginRequest}
+                        >
+                            Đăng nhập
+                        </button>
+                        <button
+                            type="button"
+                            tabIndex="0"
+                            class="x-button register"
+                            onClick={requestRegistrationDialog}
+                        >
+                            Đăng ký
+                        </button>
                     </div>
                 </nav>
             </div>
