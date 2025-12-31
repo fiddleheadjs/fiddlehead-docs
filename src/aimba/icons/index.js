@@ -20,3 +20,4 @@ export * from './Clock';
 export * from './Envelop';
 export * from './PhoneCall';
 export * from './Play';
+export * from './Times';

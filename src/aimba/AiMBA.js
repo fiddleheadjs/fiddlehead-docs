@@ -1,4 +1,5 @@
 import './AiMBA.less';
+import {useEffect, useState} from 'fiddlehead';
 import {TopBar} from './top-bar';
 import {Banner} from './banner';
 import {EcoSystem} from './eco-system';
@@ -13,9 +14,10 @@ import {Registration} from './registration';
 import {FrequentlyAskedQuestions} from './frequently-asked-questions';
 import {Footer} from './footer';
 import {BeingTrusted} from './being-trusted';
-import {useEffect, useState} from 'fiddlehead';
+import {DialogPortal} from './dialog-portal';
+import {Dialog} from './dialog';
 
-export let AiMBA = (props) => {
+export let AiMBA = (appProps) => {
     let [phase, setPhase] = useState(3);
 
     useEffect(() => {
@@ -23,6 +25,10 @@ export let AiMBA = (props) => {
             setPhase(phase + 1);
         }
     }, [phase]);
+
+    let [dialog, setDialog] = useState(null);
+
+    let props = {...appProps, setDialog};
 
     return (
         <div class="AiMBA">
@@ -44,6 +50,11 @@ export let AiMBA = (props) => {
                 {phase > 2 && <FrequentlyAskedQuestions {...props} />}
             </main>
             {phase > 2 && <Footer {...props} />}
+            {dialog != null && (
+                <DialogPortal>
+                    <Dialog {...props}>{dialog.renderContent()}</Dialog>
+                </DialogPortal>
+            )}
         </div>
     );
 };

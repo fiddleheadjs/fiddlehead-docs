@@ -1,0 +1,33 @@
+.Dialog {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    
+    > button.dismiss {
+        z-index: 2;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        border-radius: 100%;
+        background: #FFFFFF;
+        color: #474747;
+        opacity: 0.5;
+        transition: opacity 200ms;
+        --focus-color: #28A8E088;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+    }
+    
+    > .content {
+        z-index: 1;
+        border-radius: 16px;
+        overflow: hidden;
+        background: white;
+    }
+}
