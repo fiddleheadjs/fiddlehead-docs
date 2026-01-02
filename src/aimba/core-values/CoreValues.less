@@ -39,7 +39,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
 
-            .media-current-max(600px, {
+            .media-max(600px, {
                 display: flex;
                 flex-direction: column;
             });
@@ -54,12 +54,12 @@
                 align-items: center;
                 justify-content: flex-start;
 
-                .media-current-between(601px, 800px, {
+                .media-between(601px, 800px, {
                     flex-direction: column;
                     text-align: justify;
                 });
 
-                .media-current-max(360px, {
+                .media-max(360px, {
                     flex-direction: column;
                     text-align: justify;
                 });
@@ -82,11 +82,11 @@
                     min-width: 1px;
                     max-width: 1px;
 
-                    .media-current-between(601px, 800px, {
+                    .media-between(601px, 800px, {
                         display: none;
                     });
 
-                    .media-current-max(360px, {
+                    .media-max(360px, {
                         display: none;
                     });
                 }

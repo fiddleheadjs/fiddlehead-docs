@@ -1,3 +1,5 @@
+@import '../media.less';
+
 .DialogPortal {
     z-index: 10000;
     position: fixed;
@@ -13,7 +15,11 @@
     justify-content: flex-start;
     background: #F6F8FBCE;
     backdrop-filter: saturate(180%) blur(20px);
-    padding: 15px;
     overflow: auto;
     scrollbar-width: thin;
+    padding: 30px 15px;
+
+    .media-max(600px, {
+        padding: 30px 0;
+    });
 }
