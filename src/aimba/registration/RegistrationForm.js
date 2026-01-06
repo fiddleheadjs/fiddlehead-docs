@@ -16,6 +16,7 @@ export let RegistrationForm = ({onSubmit}) => {
             }
         };
         onSubmit({formData, onFeedback});
+        fbq('track', 'Lead');
     };
 
     let handleChange = () => {
