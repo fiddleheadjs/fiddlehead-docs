@@ -1,5 +1,6 @@
-import {useState} from 'fiddlehead';
 import './RegistrationForm.less';
+import {useState} from 'fiddlehead';
+import {fbqEmit} from '../tracking';
 
 export let RegistrationForm = ({onSubmit}) => {
     let [feedback, setFeedback] = useState(null);
@@ -16,7 +17,7 @@ export let RegistrationForm = ({onSubmit}) => {
             }
         };
         onSubmit({formData, onFeedback});
-        fbq('track', 'Lead');
+        fbqEmit('track', 'Lead');
     };
 
     let handleChange = () => {
