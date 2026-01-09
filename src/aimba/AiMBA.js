@@ -1,5 +1,4 @@
 import './AiMBA.less';
-import './tracking';
 import {useEffect, useState} from 'fiddlehead';
 import {TopBar} from './top-bar';
 import {Banner} from './banner';
