@@ -2,7 +2,7 @@ import './RegistrationForm.less';
 import {useState} from 'fiddlehead';
 import {fbqEmit} from '../tracking';
 
-export let RegistrationForm = ({onSubmit}) => {
+export let RegistrationForm = ({onSubmit, setDialog}) => {
     let [feedback, setFeedback] = useState(null);
 
     let handleSubmit = (event) => {
@@ -14,10 +14,13 @@ export let RegistrationForm = ({onSubmit}) => {
             setFeedback(feedback);
             if (feedback.type === 'success') {
                 form.reset();
+                fbqEmit('track', 'Lead');
+                setTimeout(() => {
+                    setDialog(null);
+                }, 2000);
             }
         };
         onSubmit({formData, onFeedback});
-        fbqEmit('track', 'Lead');
     };
 
     let handleChange = () => {
