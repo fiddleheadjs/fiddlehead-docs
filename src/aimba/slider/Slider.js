@@ -9,8 +9,13 @@ export let Slider = ({
     infinite = false,
     children = renderContent
 }) => {
+    let buffer = 2;
     let slideAreas = infinite ? ['head', 'body', 'tail'] : ['body'];
-
+    let scrollViewRef = useRef(null);
+    let scrollingEndDebounceRef = useRef(null);
+    let [scrollable, setScrollable] = useState(false);
+    let [scrolling, setScrolling] = useState(false);
+    let [paused, setPaused] = useState(false);
     let [slideStates, setSlideStates] = useState(() => {
         let states = {};
         for (let area of slideAreas) {
@@ -24,18 +29,6 @@ export let Slider = ({
         }
         return states;
     });
-
-    let scrollViewRef = useRef(null);
-
-    let [scrollable, setScrollable] = useState(false);
-
-    let [scrolling, setScrolling] = useState(false);
-
-    let [paused, setPaused] = useState(false);
-
-    let scrollingEndDebounceRef = useRef(null);
-
-    let buffer = 2;
 
     let getSlideMargin = () => {
         let scrollView = scrollViewRef.current;

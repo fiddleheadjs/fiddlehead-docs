@@ -5,6 +5,7 @@ import {PromoCountdown} from './PromoCountdown';
 import {RegistrationForm} from './RegistrationForm';
 
 export let Registration = ({
+    setDialog,
     onRegistrationFormSubmit,
     contents: {
         registration: {backgroundImage}
@@ -63,7 +64,7 @@ export let Registration = ({
                         <div class="description">Ưu đãi có hạn, đăng ký ngay để <com-word>không bỏ lỡ</com-word></div>
                         <PromoCountdown />
                     </div>
-                    <RegistrationForm onSubmit={onRegistrationFormSubmit} />
+                    <RegistrationForm onSubmit={onRegistrationFormSubmit} setDialog={setDialog} />
                 </div>
             </div>
         </section>
