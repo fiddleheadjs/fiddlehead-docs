@@ -11,7 +11,7 @@ export let trackSubscribeEventIfAny = () => {
     // https://aimba.vn/payment-success?payment_success=true&orderCode=3532837057757&package=Pro%20730&amount=600000
     try {
         let url = new URL(location.href);
-        if (url.pathname !== '/payment-success') {
+        if (!(url.pathname === '/payment-success' || url.pathname === '/payment-success/')) {
             return;
         }
         let amount = url.searchParams.get('amount');
