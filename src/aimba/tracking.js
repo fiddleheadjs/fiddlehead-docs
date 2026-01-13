@@ -37,7 +37,6 @@ export let trackSubscribeEventIfAny = () => {
 let fbqEmit = (...args) => {
     if (window.fbq) {
         window.fbq(...args);
-        console.info('fbq', args);
     } else {
         console.info('no.fbq', ...args);
     }
