@@ -7,7 +7,7 @@
 // cssClassPrefix: lP-
 
 import {render} from 'fiddlehead';
-import {AiMBA} from '../aimba/AiMBA';
+import {AiMBA} from '../aimba';
 import {sampleConfig} from '../aimba/sampleConfig';
 import '../aimba/common.less';
 

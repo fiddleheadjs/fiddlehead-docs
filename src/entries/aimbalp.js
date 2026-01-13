@@ -1,7 +1,7 @@
 // cssClassPrefix: lP-
 
 import {render} from 'fiddlehead';
-import {AiMBA} from '../aimba/AiMBA';
+import {AiMBA} from '../aimba';
 
 window.aimbaLP = {
     render(root, props) {

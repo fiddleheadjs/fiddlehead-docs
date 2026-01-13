@@ -1,6 +1,6 @@
 import './RegistrationForm.less';
 import {useState} from 'fiddlehead';
-import {fbqEmit} from '../tracking';
+import {trackLeadEvent} from '../tracking';
 
 export let RegistrationForm = ({onSubmit, setDialog}) => {
     let [feedback, setFeedback] = useState(null);
@@ -14,7 +14,7 @@ export let RegistrationForm = ({onSubmit, setDialog}) => {
             setFeedback(feedback);
             if (feedback.type === 'success') {
                 form.reset();
-                fbqEmit('track', 'Lead');
+                trackLeadEvent();
                 setTimeout(() => {
                     setDialog(null);
                 }, 2000);
